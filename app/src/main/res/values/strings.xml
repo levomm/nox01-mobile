@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Every text Buddy shows, in English. Translations: res/values-<language>/strings.xml (see CONTRIBUTING.md). -->
 <resources>
-    <string name="app_name" translatable="false">Buddy</string>
+    <string name="app_name" translatable="false">NOX01 Mobile</string>
     <string name="service_label">Buddy assistant</string>
     <string name="service_description">Shows the Buddy chat bubble and lets the agent you choose (Claude Code, Codex, OpenCode, Antigravity or Grok), running inside Buddy on this phone, read the screen and tap, type and scroll for you. Nothing leaves the phone except what the agent itself sends to its AI service (Anthropic, OpenAI, Google, xAI or your OpenCode model\'s provider).</string>
 

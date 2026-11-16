@@ -605,7 +605,7 @@ final class Tools {
         if (fdroid) return "This Buddy is from F-Droid, which updates it: the user checks for updates in their F-Droid app.";
         return "This is Buddy's F-Droid build, but no F-Droid app installed it (" + (by == null ? "installed from a file" : "installed by " + by)
                 + "), so nothing updates it. Tell the user: install the latest buddy.apk from "
-                + "https://github.com/ghorbelhamdi/buddy-android/releases/latest over it (chats and settings stay, and that one "
+                + "https://github.com/levomm/nox01-mobile/releases/latest over it (chats and settings stay, and that one "
                 + "updates itself), or get Buddy from F-Droid.";
     }
 

@@ -206,7 +206,7 @@
 
         <provider
             android:name=".FilesProvider"
-            android:authorities="app.buddy.assistant.files"
+            android:authorities="ee.osx01.mobile.files"
             android:exported="false"
             android:grantUriPermissions="true" />
 

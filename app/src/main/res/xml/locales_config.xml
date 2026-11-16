@@ -2,6 +2,7 @@
 <!-- Languages Buddy is translated into, for the per-app language setting (Android 13+). Keep in step with res/values-*. -->
 <locale-config xmlns:android="http://schemas.android.com/apk/res/android">
     <locale android:name="en" />
+    <locale android:name="et" />
     <locale android:name="ar" />
     <locale android:name="de" />
     <locale android:name="es" />
