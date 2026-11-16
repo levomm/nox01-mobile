@@ -110,6 +110,9 @@ jobs:
           path: rebuild-check # a second copy at another path, as F-Droid's build machine would have
 
       - name: Check the F-Droid APK is reproducible
+        # This compares signatures and requires the optional release signing key.
+        # A fork without configured release signing builds unsigned release variants.
+        if: env.BUDDY_KEYSTORE != ''
         run: |
           pip install --quiet apksigcopier
           export PATH="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1):$PATH" # apksigner
