@@ -91,6 +91,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         LinearLayout titles = column(this);
         titles.setPaddingRelative(dp(this, 4), 0, dp(this, 4), 0);
         title = single(title(this, ses.label(), 16));
+        title.setTypeface(mono(this, 600));
         titles.addView(title);
         // the model chip, then Linux tools: in a row only as wide as its chips, the weight just lets the model chip
         // shrink (its text cut short) when a narrow screen has no room for both
@@ -269,7 +270,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         cbp.setMarginStart(dp(this, 2));
         cbp.setMarginEnd(dp(this, 6));
         bar.addView(chipBox, cbp);
-        pill.setBackground(outlined(this, CARD, 28, LINE, 1));
+        pill.setBackground(outlined(this, BG, 8, LINE, 1));
         RichEditText field = new RichEditText(this);
         field.onImages(this::addFiles); // pasted, or from the keyboard's clipboard (issue #6)
         input = field;
@@ -277,7 +278,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         input.setHintTextColor(MUTED);
         input.setTextColor(TEXT);
         input.setTextSize(15);
-        input.setTypeface(sans(this, 400));
+        input.setTypeface(mono(this, 400));
         input.setMaxLines(6);
         input.setBackground(null);
         input.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 14), dp(this, 4));
@@ -2313,8 +2314,9 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
                 TextView tv = text(this, m.text, 15, TEXT);
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackground(corners(this, USER, 20, 20, 6, 20));
-                tv.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 10));
+                tv.setBackgroundColor(BG);
+                tv.setTypeface(mono(this, 400));
+                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
                 copyOnLongPress(tv, m.text);
                 LinearLayout.LayoutParams tp = wrap();
                 tp.gravity = Gravity.END;
@@ -2547,13 +2549,15 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         switch (kind) {
             case USER: {
                 TextView tv = text(this, text, 15, TEXT);
-                tv.setText(Ui.markdown(text, null)); // what the user wrote in Markdown shows as such too (issue #21)
+                tv.setText("> " + text); // NOX01 terminal prompt; user input remains copyable in full
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackground(corners(this, USER, 20, 20, 6, 20));
-                tv.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 10));
+                tv.setBackgroundColor(BG);
+                tv.setTypeface(mono(this, 400));
+                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
                 copyOnLongPress(tv, text);
-                p.gravity = Gravity.END;
+                p.gravity = Gravity.START;
+                p.width = LinearLayout.LayoutParams.MATCH_PARENT;
                 v = tv;
                 break;
             }
@@ -2624,6 +2628,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
     /** A reply's text (or the text between its tables): Markdown, selectable, links tappable. */
     private TextView replyText(String text) {
         TextView tv = text(this, text, 15, TEXT);
+        tv.setTypeface(mono(this, 400));
         tv.setTextIsSelectable(true);
         tv.setText(Ui.markdown(text, null)); // **bold**, lists, `code`, [text](url) as a link…
         links(tv);

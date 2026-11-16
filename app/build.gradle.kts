@@ -18,7 +18,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "app.buddy.assistant"
+        applicationId = "ee.osx01.mobile"
         minSdk = 30
         targetSdk = 36
         versionCode = appVersionCode

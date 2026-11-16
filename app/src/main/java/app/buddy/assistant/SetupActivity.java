@@ -1003,7 +1003,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         help.setOnClickListener(v -> {
             try {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "https://github.com/ghorbelhamdi/buddy-android/blob/main/docs/GUIDE.md")));
+                        "https://github.com/levomm/nox01-mobile/blob/main/docs/GUIDE.md")));
             } catch (Exception ignored) {
             }
         });

@@ -361,7 +361,7 @@ final class Prefs {
 
     /** Appearance: "system", "light" or "dark". */
     static String themeMode(Context c) {
-        return sp(c).getString("theme_mode", "system");
+        return sp(c).getString("theme_mode", "dark");
     }
 
     static void setThemeMode(Context c, String m) {
@@ -427,7 +427,7 @@ final class Prefs {
 
     /** Surface style: "warm", "neutral" or "black" (black applies in dark mode only). */
     static String surface(Context c) {
-        return sp(c).getString("surface", "warm");
+        return sp(c).getString("surface", "black");
     }
 
     static void setSurface(Context c, String s) {
