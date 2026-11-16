@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Test NOX01 configuration
+        run: python3 scripts/test_nox01_fork.py
+
       - name: Test the helper on recorded agent output
         run: bash linux/test/run.sh
 
@@ -58,9 +61,13 @@ jobs:
           BUDDY_KEYSTORE_PASSWORD: ${{ secrets.BUDDY_KEYSTORE_PASSWORD }}
         run: ./gradlew --no-daemon assembleGithubRelease assembleFdroidRelease
 
+      - name: Build installable NOX01 debug APK
+        run: ./gradlew --no-daemon assembleGithubDebug
+
       - name: Collect APK
         run: |
           mkdir -p dist
+          cp app/build/outputs/apk/github/debug/*.apk dist/nox01-mobile-debug.apk
           apk=$(find app/build/outputs/apk/github/release -name '*.apk' | head -1)
           cp "$apk" "dist/buddy-${GITHUB_REF_NAME//\//-}.apk"
           # fixed name too, so releases/latest/download/buddy.apk always gets the newest version
