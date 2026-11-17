@@ -478,7 +478,7 @@
     <string name="nox_wallet_not_connected">Jälgitavat aadressi pole</string>
     <string name="nox_wallet_watch_explain">Kleebi siia Phantomist kopeeritud avalik Solana aadress. Nii saad saldot vaadata, kuid see ei ühenda NOX01 rakendust Phantomiga. Ära sisesta privaatvõtit ega taastefraasi.</string>
     <string name="nox_wallet_watch">Jälgi avalikku aadressi</string>
-    <string name="nox_wallet_phantom_pending">Phantomi turvaline ühendus ja raha saatmine on järgmine arendusetapp. Saatmine pole praegu lubatud.</string>
+    <string name="nox_wallet_phantom_pending">Phantomiga ühendades näed selle konto saldot. Raha saatmine on seni keelatud, kuni eraldi turvatestid on läbitud.</string>
     <string name="nox_wallet_watch_label">Jälgitav aadress · Phantomiga ühendamata</string>
     <string name="nox_wallet_copy">Kopeeri aadress</string>
     <string name="nox_wallet_copied">Aadress kopeeritud</string>
@@ -502,4 +502,9 @@
     <string name="nox_wallet_bad_address">See pole korrektne 32-baidine Solana avalik aadress. Kontrolli, et kopeerisid avaliku aadressi, mitte taastefraasi.</string>
     <string name="nox_wallet_qr_note">Sellele aadressile saada ainult Solana võrgu SOL-i või USDC-d.</string>
     <string name="nox_wallet_qr_error">Vastuvõtu QR-koodi ei õnnestunud luua</string>
+    <string name="nox_wallet_connect_phantom">Ühenda Phantom</string>
+    <string name="nox_wallet_phantom_status">Phantomiga ühendatud (ainult vaatamine)</string>
+    <string name="nox_wallet_phantom_connected">Phantom ühendatud. Saldod on nähtavad.</string>
+    <string name="nox_wallet_phantom_cancelled">Phantomi ühendus jäeti kinnitamata.</string>
+    <string name="nox_wallet_phantom_failed">Phantomiga ei õnnestunud ühendust luua. Kontrolli rakendust ja proovi uuesti.</string>
 </resources>
