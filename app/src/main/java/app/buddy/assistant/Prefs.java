@@ -368,6 +368,19 @@ final class Prefs {
         sp(c).edit().putString("theme_mode", m).apply();
     }
 
+    /** User-facing typography choice. Fixed-width is the default for the terminal-style UI. */
+    static String uiFont(Context c) {
+        return sp(c).getString("ui_font", "geist-mono");
+    }
+
+    static void setUiFont(Context c, String font) {
+        if (!"geist-mono".equals(font) && !"geist-sans".equals(font)
+                && !"system-mono".equals(font) && !"system-sans".equals(font)) {
+            font = "geist-mono";
+        }
+        sp(c).edit().putString("ui_font", font).apply();
+    }
+
     /** Accent colour (opaque ARGB). */
     static int accent(Context c) {
         if (android.os.Build.VERSION.SDK_INT >= 31 && accentFromWallpaper(c)) { // (the check here too: for lint)
