@@ -5,6 +5,8 @@ plugins {
 // ZXing is an Apache-2.0 open-source QR encoder; no camera, wallet keys or hosted QR API.
 dependencies {
     implementation("com.google.zxing:core:3.5.3")
+    // MIT-licensed TweetNaCl XSalsa20-Poly1305/Curve25519 for Phantom deep links.
+    implementation("org.purejava:tweetnacl-java:1.1.4")
 }
 
 // Version lives in BuildInfo.java so the Gradle and on-device (build.sh) builds always agree.
