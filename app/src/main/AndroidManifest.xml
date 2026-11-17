@@ -129,7 +129,28 @@
             android:exported="false" />
 
         <!-- Human-facing, watch-only wallet. Never exported to the agent or other apps. -->
-        <activity android:name=".WalletActivity" android:exported="false" />
+        <activity
+            android:name=".WalletActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
+        <!-- External Phantom callback is explicitly scoped to a single deep link. -->
+        <activity
+            android:name=".WalletCallbackActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:excludeFromRecents="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="nox01"
+                    android:host="phantom"
+                    android:path="/connect" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".SkillsActivity"
