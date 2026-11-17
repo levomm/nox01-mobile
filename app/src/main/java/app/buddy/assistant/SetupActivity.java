@@ -509,11 +509,11 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                 String id = model[0].toLowerCase(java.util.Locale.ROOT);
                 if (!(id.contains("gpt-6") || id.contains("opus") || id.contains("sonnet")
                         || id.contains("gemini-4") || id.contains("grok-4"))) continue;
-                String key = model[0], backend = available.agent;
+                String key = model[0], selectedAgent = available.agent;
                 View pick = navRow(R.drawable.ms_auto_awesome, model[1],
-                        Account.nameOf(backend), true, SetupActivity.class);
+                        Account.nameOf(selectedAgent), true, SetupActivity.class);
                 pick.setOnClickListener(v -> {
-                    Prefs.setAgentDefault(this, backend, key);
+                    Prefs.setAgentDefault(this, selectedAgent, key);
                     Toast.makeText(this, getString(R.string.nox_top_model_selected, model[1]),
                             Toast.LENGTH_SHORT).show();
                     render();
