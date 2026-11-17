@@ -411,6 +411,8 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
             Prefs.setThemeMode(this, v);
             themeChanged();
         }), topGap(8));
+        ap.addView(fieldLabel(getString(R.string.setup_theme_presets), null), topGap(18));
+        ap.addView(themePresets(), topGap(8));
         ap.addView(fieldLabel(getString(R.string.setup_accent), Theme.hex(Prefs.accent(this))), topGap(18));
         ap.addView(swatches(), topGap(10));
         ap.addView(fieldLabel(getString(R.string.setup_surface), null), topGap(18));
@@ -420,6 +422,9 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         }), topGap(8));
         TextView sn = text(this, getString(R.string.setup_surface_note), 13, MUTED);
         ap.addView(sn, topGap(8));
+        ap.addView(fieldLabel(getString(R.string.setup_ui_font), null), topGap(18));
+        ap.addView(fontPicker(), topGap(8));
+        ap.addView(text(this, getString(R.string.setup_ui_font_note), 12, MUTED), topGap(8));
         // Buddy's look: the drawn face, or a picture the user picks (issue #10)
         boolean own = Face.picture(this) != null;
         ap.addView(fieldLabel(getString(R.string.setup_face), null), topGap(18));
@@ -1166,6 +1171,79 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         LinearLayout.LayoutParams p = full();
         p.setMargins(dp(this, 16), dp(this, 14), dp(this, 16), 0);
         list.addView(c, p);
+    }
+
+    /** Four readable typeface choices, previewed in their actual font on small phone screens. */
+    private View fontPicker() {
+        String[] ids = {"geist-mono", "geist-sans", "system-mono", "system-sans"};
+        int[] names = {R.string.font_geist_mono, R.string.font_geist_sans,
+                R.string.font_system_mono, R.string.font_system_sans};
+        String selected = Prefs.uiFont(this);
+        LinearLayout all = column(this);
+        for (int line = 0; line < 2; line++) {
+            LinearLayout row = row(this);
+            for (int cell = 0; cell < 2; cell++) {
+                int i = line * 2 + cell;
+                String id = ids[i];
+                boolean chosen = id.equals(selected);
+                TextView option = text(this, getString(names[i]), 13, chosen ? ACCENT_TEXT : TEXT);
+                option.setTypeface(Ui.previewFont(this, id, chosen ? 600 : 400));
+                option.setGravity(Gravity.CENTER);
+                option.setBackground(outlined(this, chosen ? ACCENT_SOFT : CARD, 10,
+                        chosen ? ACCENT : OUTLINE, 1));
+                option.setOnClickListener(v -> {
+                    Prefs.setUiFont(this, id);
+                    themeChanged();
+                });
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(this, 48), 1);
+                if (cell != 0) lp.setMarginStart(dp(this, 8));
+                row.addView(option, lp);
+            }
+            LinearLayout.LayoutParams rp = full();
+            if (line != 0) rp.topMargin = dp(this, 8);
+            all.addView(row, rp);
+        }
+        return all;
+    }
+
+    /** Fast looks: paired dark surfaces and accent colors, plus the existing custom HEX swatch below. */
+    private View themePresets() {
+        String[][] preset = {
+                {"#D97757", "warm"}, {"#4CD4A0", "black"}, {"#65AFFF", "neutral"},
+                {"#E0A43A", "black"}, {"#AEB7C3", "black"}
+        };
+        int[] labels = {R.string.preset_claude, R.string.preset_terminal, R.string.preset_ice,
+                R.string.preset_amber, R.string.preset_oled};
+        LinearLayout all = column(this);
+        for (int line = 0; line < 2; line++) {
+            LinearLayout row = row(this);
+            int from = line == 0 ? 0 : 3, to = line == 0 ? 3 : 5;
+            for (int i = from; i < to; i++) {
+                int color = Theme.parse(preset[i][0], 0xFFD97757);
+                String surface = preset[i][1];
+                boolean selected = "dark".equals(Prefs.themeMode(this))
+                        && surface.equals(Prefs.surface(this)) && Prefs.accent(this) == color
+                        && !Prefs.accentFromWallpaper(this);
+                TextView t = text(this, getString(labels[i]), 13, selected ? ACCENT_TEXT : TEXT);
+                t.setGravity(Gravity.CENTER);
+                t.setSingleLine(true);
+                t.setBackground(outlined(this, selected ? ACCENT_SOFT : CARD, 10,
+                        selected ? ACCENT : OUTLINE, 1));
+                t.setOnClickListener(v -> {
+                    Prefs.setThemeMode(this, "dark");
+                    Prefs.setAccent(this, color);
+                    Prefs.setSurface(this, surface);
+                    themeChanged();
+                });
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(this, 40), 1);
+                if (i > from) lp.setMarginStart(dp(this, 8));
+                row.addView(t, lp);
+            }
+            LinearLayout.LayoutParams rp = full();
+            if (line > 0) rp.topMargin = dp(this, 8);
+            all.addView(row, rp);
+        }
+        return all;
     }
 
     // ----------------------------------------------------------- appearance

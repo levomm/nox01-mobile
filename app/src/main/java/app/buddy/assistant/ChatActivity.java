@@ -91,7 +91,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         LinearLayout titles = column(this);
         titles.setPaddingRelative(dp(this, 4), 0, dp(this, 4), 0);
         title = single(title(this, ses.label(), 16));
-        title.setTypeface(mono(this, 600));
+        title.setTypeface(sans(this, 600));
         titles.addView(title);
         // the model chip, then Linux tools: in a row only as wide as its chips, the weight just lets the model chip
         // shrink (its text cut short) when a narrow screen has no room for both
@@ -278,7 +278,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         input.setHintTextColor(MUTED);
         input.setTextColor(TEXT);
         input.setTextSize(15);
-        input.setTypeface(mono(this, 400));
+        input.setTypeface(sans(this, 400));
         input.setMaxLines(6);
         input.setBackground(null);
         input.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 14), dp(this, 4));
@@ -2315,7 +2315,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
                 links(tv);
                 tv.setMaxWidth(maxBubble);
                 tv.setBackgroundColor(BG);
-                tv.setTypeface(mono(this, 400));
+                tv.setTypeface(sans(this, 400));
                 tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
                 copyOnLongPress(tv, m.text);
                 LinearLayout.LayoutParams tp = wrap();

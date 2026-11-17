@@ -60,7 +60,7 @@ final class Theme {
         boolean dark = isDark(c);
         int accent = Prefs.accent(c);
         String surface = Prefs.surface(c);
-        String key = dark + "|" + accent + "|" + surface;
+        String key = dark + "|" + accent + "|" + surface + "|" + Prefs.uiFont(c);
         if (key.equals(applied)) return false;
         applied = key;
 

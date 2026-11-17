@@ -2269,4 +2269,18 @@
     <string name="chat_rename_title">Rename chat</string>
     <string name="chat_rename_hint">Empty: its first message</string>
     <string name="chat_rename_save">Save</string>
+
+    <!-- NOX01 Mobile personalization -->
+    <string name="setup_ui_font">Interface font</string>
+    <string name="setup_ui_font_note">Changes apply to all screens. Terminal code and tables always stay monospaced.</string>
+    <string name="font_geist_mono">Geist Mono</string>
+    <string name="font_geist_sans">Geist Sans</string>
+    <string name="font_system_mono">Android Mono</string>
+    <string name="font_system_sans">Android Sans</string>
+    <string name="setup_theme_presets">Theme presets</string>
+    <string name="preset_claude">Claude</string>
+    <string name="preset_terminal">Terminal</string>
+    <string name="preset_ice">Ice</string>
+    <string name="preset_amber">Amber</string>
+    <string name="preset_oled">OLED</string>
 </resources>
