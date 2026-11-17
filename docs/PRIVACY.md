@@ -24,6 +24,14 @@ Rakendus säilitab vestlused, seadistused, ühendused ja tööfailid oma rakendu
 
 Agentide allalaadimiseks, autentimiseks ja kasutamiseks on vajalik võrguühendus teenusepakkujatega. GitHubi väljalasete kontroll võib kasutada GitHubi API-t. Rakenduse paikne MCP-liides kuulab telefoni loopback-aadressil ning nõuab tokenit. See ei taga, et ühendatud väline AI-teenus andmeid ei saa.
 
+## Solana / Phantom rahakott (arendusversioon)
+
+Rahakoti menüüsse saad sisestada Solana **avaliku aadressi**, mille põhjal küsib NOX01 Solana RPC-lt SOL-i ja ametliku Solana USDC saldot ning avalikku tehinguajalugu. RPC teenusepakkuja näeb päringuga seotud avalikku aadressi ja võrgupäringu tehnilisi andmeid.
+
+Kui valid **Ühenda Phantom**, avaneb eraldi Phantomi rakendus, kus kinnitad ühendamise. Phantomi vastus on krüpteeritud ja NOX01 salvestab ühenduse toimimiseks vajaliku sessiooni ning rakenduse X25519 võtme Android Keystore'i kaitstud krüpteeritud salvestusse. NOX01 ei küsi Phantomi rahakoti privaatvõtit ega taastefraasi. Androidi ligipääsetavusteenuse tõttu on rahakotiga seotud ekraanitoimingud erilise riskiga: **agentidel pole siin maksetööriistu ning saatmine pole selle arendusetapi ehituses lubatud**.
+
+Rahakoti lokaalsed andmed saad kustutada nupuga **Eemalda aadress**. Phantomi enda usaldatud rakenduste loendist tuleb ühendus vajadusel eraldi tühistada. Tegemist on testimata arendusfunktsiooniga, mitte valmis makseteenusega.
+
 ## Õigused ja kontroll
 
 NOX01 võib küsida juurdepääsu ekraanile, teavitustele, mikrofonile, alarmidele, taustatööle või pakettide paigaldamisele. Kõigi õiguste andmine pole iga kasutusviisi jaoks vajalik. Androidi seadetes saab antud õigusi hiljem muuta.
