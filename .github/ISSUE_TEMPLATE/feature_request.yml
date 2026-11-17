@@ -1,15 +1,16 @@
-name: Idea or feature request
-description: Something Buddy could do, or do better
+name: Arendusidee
+description: Uus NOX01 funktsioon või täiendus
 labels: [enhancement]
 body:
   - type: textarea
     id: idea
     attributes:
-      label: What would you like?
-      description: Describe what you want to do with Buddy, not only the solution. A real example helps.
+      label: Mida võiks NOX01 teha?
+      description: Too üks konkreetne kasutusnäide.
     validations:
       required: true
   - type: textarea
     id: why
     attributes:
-      label: Why does it matter to you?
+      label: Miks see vajalik on?
+      description: Kirjelda, mis praegu puudu on.

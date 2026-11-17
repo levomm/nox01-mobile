@@ -1,139 +1,131 @@
 <p align="center">
-  <img src="docs/banner.png" alt="Buddy: Claude Code, Codex, OpenCode, Antigravity and Grok in a bubble on your Android phone" width="100%">
+  <img src="docs/graphics/nox01-hero.svg" alt="NOX01 Mobile. Tehisintellekti agent sinu Androidis." width="100%">
 </p>
 
 <p align="center">
-  <a href="https://github.com/ghorbelhamdi/buddy-android/releases/latest"><img src="https://img.shields.io/github/v/release/ghorbelhamdi/buddy-android?style=for-the-badge&label=release" alt="Latest release"></a>
-  <a href="https://github.com/ghorbelhamdi/buddy-android/releases"><img src="https://img.shields.io/github/downloads/ghorbelhamdi/buddy-android/total?style=for-the-badge" alt="Downloads"></a>
-  <a href="https://f-droid.org/packages/app.buddy.assistant/"><img src="https://img.shields.io/f-droid/v/app.buddy.assistant?style=for-the-badge&logo=fdroid&logoColor=white" alt="Buddy on F-Droid"></a>
-  <img src="https://img.shields.io/badge/Android-11%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 11+">
-  <a href="https://www.producthunt.com/products/buddy-20"><img src="https://img.shields.io/badge/Product_Hunt-Buddy-DA552F?style=for-the-badge&logo=producthunt&logoColor=white" alt="Buddy on Product Hunt"></a>
-  <a href="https://glama.ai/mcp/servers/ghorbelhamdi/buddy-android"><img src="https://glama.ai/mcp/servers/ghorbelhamdi/buddy-android/badges/score.svg" alt="Buddy MCP server on Glama" height="28"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache_2.0-blue?style=for-the-badge" alt="License: Apache-2.0"></a>
+  <a href="https://github.com/levomm/nox01-mobile/releases/latest"><img src="https://img.shields.io/github/v/release/levomm/nox01-mobile?style=flat-square&label=VERSIOON&color=F37656" alt="Viimane NOX01 versioon"></a>
+  <a href="https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk"><img src="https://img.shields.io/badge/LAADI_ALLA-APK-F37656?style=flat-square" alt="Laadi alla APK"></a>
+  <img src="https://img.shields.io/badge/ANDROID-11%2B-5CC08A?style=flat-square" alt="Android 11 või uuem">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LITSENTS-Apache--2.0-737B89?style=flat-square" alt="Apache 2.0 litsents"></a>
 </p>
 
-# Buddy
+# NOX01 Mobile
 
-**A floating chat bubble that lets Claude Code, Codex, OpenCode, Antigravity or Grok use your Android phone.**
+**Anna ülesanne. Agent kasutab sinu telefoni rakendusi ja teeb vajalikud sammud.**
 
-Type or say what you want, like "reply to Sam that I'm running late" or "add a Switch 2 to my Amazon cart". Buddy reads the screen, taps and types to get it done, and asks you before anything is sent, posted, bought or deleted.
+NOX01 on Androidi AI-agent, mis ühendab vestluse, telefonis töötavad tehisintellekti tööriistad ja ekraani juhtimise. Agent saab sinu juhendamisel avada rakendusi, lugeda nähtavat sisu, puudutada nuppe, sisestada teksti, kerida ning anda tulemustest ülevaate.
 
-It runs inside the app, on your own plan: [Claude Code](https://docs.claude.com/en/docs/claude-code) with your Claude plan, Codex with your ChatGPT plan, Google's [Antigravity CLI](https://antigravity.google) with your Google account, xAI's [Grok Build](https://x.ai/build) with your Google or X account, or [OpenCode](https://opencode.ai) with its free models and no account at all. No PC, no adb, no root, and no API key needed (you can add keys for other services, such as DeepSeek or OpenRouter, and use them with Claude Code, Codex or OpenCode).
+Rakendus pakub **eestikeelset kasutajaliidest**, tumedat **Tactical Neu-Dark** kujundust, valitavaid fonte ja aktsentvärve ning eraldi elavat pikseltegelasega ujuvmulli. Peamise rakenduse tunnus on **[01]**. Mulli tegelane ei ole vestlusakna logo.
 
-<p align="center"><a href="https://github.com/ghorbelhamdi/buddy-android/releases/latest/download/buddy.apk"><b>Download the APK</b></a> · <a href="https://f-droid.org/packages/app.buddy.assistant/">F-Droid</a> · <a href="https://ghorbelhamdi.github.io/buddy-android/">Website</a> · Android 11+, 64-bit</p>
+<p align="center">
+  <a href="https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk"><strong>LAADI ALLA NOX01 APK</strong></a>
+  &nbsp;·&nbsp;
+  <a href="docs/GUIDE.md">KASUTUSJUHEND</a>
+  &nbsp;·&nbsp;
+  <a href="docs/PRIVACY.md">PRIVAATSUS</a>
+</p>
 
-<div align="center">
+> **Staatus:** arenduses olev Androidi rakendus. Toimingute võimalused sõltuvad Androidi õigustest, valitud agendist, selle mudelist ja teiste rakenduste piirangutest. Tähtsad tegevused kontrolli alati üle.
 
-https://github.com/user-attachments/assets/d07936fc-4788-4ab5-a105-31b3e9aeba4f
-
-<sub>Codex turns on the lights while OpenCode's free model adds a Switch 2 to the Amazon cart (real recordings, waiting sped up)</sub>
-</div>
+## Mida NOX01-ga teha saab?
 
 <table>
   <tr>
-    <td width="33%" align="center"><img src="docs/screens/chats.jpg" alt="Chats with different agents"><br><sub>Chats with any agent</sub></td>
-    <td width="33%" align="center"><img src="docs/screens/chat.jpg" alt="A chat with grouped tool calls"><br><sub>Tool calls fold into one line</sub></td>
-    <td width="33%" align="center"><img src="docs/screens/settings.jpg" alt="Settings"><br><sub>Setup guide and themes</sub></td>
+    <td width="50%"><img src="docs/graphics/nox01-app-control.svg" alt="Rakenduste juhtimise töövoog" width="100%"></td>
+    <td width="50%"><img src="docs/graphics/nox01-automation.svg" alt="Teavituste ja ajastuse töövoog" width="100%"></td>
+  </tr>
+  <tr>
+    <td><strong>Telefonirakenduste kasutamine</strong><br>Vestlused, veebilehed, otsingud, vormid ja seadete muutmine.</td>
+    <td><strong>Automaatika ja ajastamine</strong><br>Teavitusreeglid, korduvad ülesanded ja kontrolli ootavad vastused.</td>
   </tr>
 </table>
 
-## What it can do
-
-| | |
+| Võimalus | Mida see tähendab |
 |---|---|
-| **Uses your apps** | Messages, shopping, smart home, settings: anything on screen. Add instructions while it works. |
-| **Asks first** | Approve, Deny or Change before anything is sent, posted, bought or deleted. |
-| **Shows you how** | "Show me how to turn on dark mode": it points at each step and waits for your tap. |
-| **Acts on notifications** | "When a customer asks on WhatsApp, reply with our opening hours", with your OK, a countdown you can stop, or right away. |
-| **Voice** | Talk to it and have replies read aloud. |
-| **Background mode** | The agent works in your apps on a screen of its own that you don't see, while you keep using your phone. Set up once with the phone's own Wireless debugging, no computer; watch it live in the chat. Optional: let it run `adb shell` commands on the phone, each one approved by you. |
-| **Sub-agents** | "Compare this on eBay, Amazon and AliExpress": the agent starts sub-agents that each work in an app on a hidden screen of their own, at the same time, and report back. They only look things up; you see every screen in the chat. |
-| **Background browser** | Web pages in a browser inside Buddy, without taking over your screen, even while the phone is locked. Watch and use it live in the chat; it marks what you need to do (sign in, a captcha) and never types your passwords. |
-| **Builds apps** | Turn on Linux tools in a chat and "make me a calculator app" builds a real APK on the phone; the GitHub version also installs it for you. |
-| **Phone tools anywhere** | The same tools as a local MCP server for your own Claude Code, Codex, OpenCode, Antigravity or Grok sessions, or over stdio with [mcp-bridge](mcp-bridge) for clients that start servers as commands. |
+| **Rakenduste juhtimine** | Androidi ekraani lugemine, vajutamine, kirjutamine, kerimine ja rakenduste avamine. |
+| **AI-agendid** | Claude Code, Codex, OpenCode, Antigravity ja Grok. Mudeli valik ja sisselogimine sõltuvad teenusest. |
+| **Sõnumid** | Agent võib koostada vastuseid ja kasutada näiteks Telegrami või teisi sõnumirakendusi. Saatmine sõltub õigustest ja kinnituse seadistusest. |
+| **Teavitusreeglid** | Vali rakendus, saatja või märksõnad ning määra, mida saabunud teavituse korral teha. |
+| **Ajastatud ülesanded** | Korduv ülesanne kindlal kellaajal või päeval. Vajalikud kinnitused jäävad kehtima. |
+| **Hääl** | Häälkäsklused ja vastuste ettelugemine, kui vastav häälmootor on seadistatud. |
+| **Taustal töötamine** | Toetatud seadmetes ja lubadega võib agent kasutada eraldi töövaadet või taustabrauserit. |
+| **Mitme agendi töö** | Osa võrdlus- ja otsinguülesandeid saab jagada abistavate agentide vahel. |
+| **Linux ja arendus** | Rakenduses olev Alpine Linuxi keskkond võimaldab käskude täitmist, failidega töötamist ja arendustööriistu. |
+| **MCP** | Telefonitööriistade kasutamine ka väliste MCP-klientide ning enda arendusvoogude kaudu. |
+| **Isiklik mudel** | OpenCode'i kaudu saab ühendada sobiva Ollama, LM Studio või llama.cpp serveri. |
+| **Kohandatav välimus** | Tumeda/hele režiimi, värvide, fondi ja ujuvmulli tegelase valik. |
 
-<p align="center">
-  <a href="https://youtube.com/shorts/wPZvwy08BTE"><img src="docs/screens/sub-agents.gif" alt="Three sub-agents comparing a price on eBay, Amazon and AliExpress at the same time" width="320"></a><br>
-  <sub>Three sub-agents, three shops, at the same time (<a href="https://youtube.com/shorts/wPZvwy08BTE">30 s video</a>)</sub>
-</p>
+## Näidisülesanded
 
-> **Status: 2.3, early.** It works well day to day but has rough edges. Tested most on a OnePlus 12 (Android 16). Buddy is an independent project, not made by or affiliated with Anthropic, OpenAI, Google or xAI.
+Need on **näited juhistest**, mitte lubadus, et kõik kolmandate osapoolte rakendused lubavad alati automaatset juhtimist.
 
-## How it works
+```text
+ava Telegram ja kirjuta mulle viimase vestluse vastuse mustand.
+näita seda enne saatmist.
 
-```
-Buddy app / bubble ──► Buddy's Linux (Alpine via proot): claude, codex, opencode, agy or grok
-        ▲                                                     │
-        └──────────── streamed replies ◄──────────────────────┤
-                                                              ▼
-Buddy accessibility service ◄──── MCP on 127.0.0.1 (phone tools)
-```
+otsi brauserist kolme toote hinnad ning tee võrdlustabel.
 
-Buddy is a normal Android app with an accessibility service, the kind of permission screen readers use. The agent runs in a small Linux inside the app and uses Buddy's phone tools (read the screen, tap, type, scroll, open apps) over a local MCP server. No adb or Wireless debugging, and it works without Wi-Fi.
+ava telefoni Wi-Fi seaded ja näita, kust saan võrku vahetada.
 
-## Setup
+vaata üle tänased teavitused ja võta oluline kokku.
 
-You need a 64-bit Android 11+ phone, plus a Claude, ChatGPT or Google account for those agents (Grok: a Google or X account). OpenCode's free models need no account.
+kontrolli igal hommikul valitud infot ning teavita ainult muutustest.
 
-1. **Install Buddy:** [download buddy.apk](https://github.com/ghorbelhamdi/buddy-android/releases/latest/download/buddy.apk) and open it, or get it from [F-Droid](https://f-droid.org/packages/app.buddy.assistant/). The APK updates itself; on F-Droid each version arrives a few days later, and F-Droid updates it for you. Both are the same app with the same signature, so you can switch between them without reinstalling. Buddy also installs the apps it builds for you. (Google Play turned Buddy down for production: its policy doesn't allow apps that use accessibility to carry out tasks.)
-2. **Follow the setup guide** that opens on first launch: pick your agent, turn on the accessibility service, install and sign in, and try a first task.
+tee ekraanil oleva vormi täitmise sammud, aga küsi enne kinnitamist.
 
-**Install blocked or "Restricted setting"?** See [Setup in detail](docs/GUIDE.md#setup-in-detail).
-
-## Local models
-
-Run the model on your own computer and nothing goes to an AI company. Start [Ollama](https://ollama.com), LM Studio or llama.cpp's server on a PC (for Ollama, set `OLLAMA_HOST=0.0.0.0` and a context of at least 24k tokens, e.g. `OLLAMA_CONTEXT_LENGTH=24576`, since the phone tools take about 7k). In Buddy, pick **Local model** in the setup guide (Settings → the setup card → *Open the step-by-step guide* opens it again later): it sets up OpenCode, asks for your server and makes it the default for OpenCode's chats. Or add it by hand: Settings → Agents and models → API keys → Add API key → **Ollama** (or LM Studio, llama.cpp). Either way, put the PC's address on your Wi-Fi instead of `localhost` and leave the key empty. Plain `http://` works on your own network and over Tailscale.
-
-What to expect, from tests on an RTX 2060 Super (8 GB): Qwen3 8B and Qwen3 4B handle simple one-step requests, like the battery level or the phone's status. Multi-step tasks on the screen are another matter: in a calculator test the 4B tapped the wrong buttons and then said it had worked. For real tasks, use a bigger model that's good at tool calling. The first answer of a chat takes longest, since the model first reads about 13k tokens of instructions and tool descriptions. A model running on the phone itself works too, but it's slow and makes the phone lag.
-
-## Updating
-
-Install the new APK over the old one: chats, settings and sign-ins stay (don't uninstall first). You can also ask Buddy to *"update yourself"*, or let [Obtainium](https://obtainium.imranr.dev) or F-Droid do it ([how](docs/GUIDE.md#updating)).
-
-## Security
-
-An accessibility service is powerful, so please read this.
-
-- **Local only.** The phone tools listen on `127.0.0.1` with a random per-install token.
-- **Buddy enforces the approvals, not the agent.** Messaging, shopping and money apps start on a hard limit: Buddy itself stops on buttons like Send, Pay and Delete until you OK them.
-- **Prompt injection is the main risk.** A message or web page could try to give the agent orders. On-screen text is treated as content, and the approval card is the backstop, so read it.
-- **No passwords.** Buddy never types passwords, codes or payment details; it hands those to you.
-- **What leaves the phone:** only what the agent sends to its provider (Anthropic, OpenAI, Google, xAI, OpenCode's service or the provider you connected) to answer you.
-
-More in [Security in detail](docs/GUIDE.md#security-in-detail). Found a problem? Please open a private security advisory instead of a public issue.
-
-## FAQ
-
-**What does it cost?** Buddy is free. The agent uses your plan's limits, or nothing at all with OpenCode's free models (no account) or Antigravity's free plan (Google account).
-
-**iPhone?** No. iOS doesn't let apps operate other apps.
-
-**Which phones?** 64-bit Android 11 or newer. On some brands, set Buddy's battery use to *Unrestricted*.
-
-**Does it need a computer, adb or root?** No.
-
-## Learn more
-
-- [User guide](docs/GUIDE.md): chats, models, voice, notification rules, the bubble, Remote Control, SSH and Linux tools
-- [Benchmark](benchmark/README.md): which model uses a phone best
-- [Privacy policy](docs/PRIVACY.md)
-
-**In the press:** [ProPakistani](https://propakistani.pk/2026/10/12/this-free-android-app-lets-claude-code-use-your-phone/), [The Neutral](https://theneutral.pk/this-free-android-app-lets-ai-control-your-phone-without-a-pc/), [Trendshift](https://trendshift.io/repositories/289557) (October 2026)
-
-## Contributing
-
-Bug reports, ideas and translation fixes are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). If Buddy is useful to you, a ⭐ helps other people find it.
-
-## For developers
-
-```
-git clone --recurse-submodules https://github.com/ghorbelhamdi/buddy-android.git
-./gradlew assembleRelease     # Android Studio / Gradle
-./build.sh                    # on the phone in Termux, no Gradle → build/buddy-release.apk
+loo Linuxi tööriistadega väike Androidi utiliit ja näita tulemust.
 ```
 
-proot and libandroid-shmem are git submodules in `third_party/` (`git submodule update --init` in an existing clone). `build.sh` needs `pkg install openjdk-17 aapt2 d8 apksigner python clang make` and android.jar from platform-36 at `~/android-sdk/android-36/android.jar`. It creates a signing key at `~/.buddy-keys/release.jks` on first run: back it up, since updates must be signed with the same key. Gradle release signing reads `BUDDY_KEYSTORE` and `BUDDY_KEYSTORE_PASSWORD` (optionally `BUDDY_KEY_ALIAS`, `BUDDY_KEY_PASSWORD`). The version lives in `BuildInfo.java`, and the project layout is in [CONTRIBUTING.md](CONTRIBUTING.md#project-layout).
+## Kuidas see töötab?
 
-## License
+<p align="center"><img src="docs/graphics/nox01-architecture.svg" alt="NOX01 Mobile arhitektuuri skeem" width="100%"></p>
 
-[Apache-2.0](LICENSE). Geist fonts: SIL Open Font License. Icons: Material Symbols (Apache-2.0). Bundled proot (GPL-2.0), talloc (LGPL-3.0) and libandroid-shmem (BSD-3-Clause): see [third_party](third_party/README.md) for licences and source.
+NOX01 kasutab Androidi juurdepääsetavusteenust ekraani toiminguteks. AI-agent töötab rakenduse enda Linuxi keskkonnas ja kasutab telefoni tööriistu kohaliku MCP-liidese kaudu. Tööriistade teenus on lokaalne ning vajab autentimist. Pilve-AI korral liigub ülesandega seotud teave valitud mudeli teenusepakkujale. See ei ole automaatselt täielikult võrguühenduseta lahendus.
+
+**Turvakontroll:** saatmine, ostmine, kustutamine ja teised tundlikud tegevused on seotud kinnitusreeglitega. Kasutaja võib teatud automaatikareeglitele anda eraldi õigusi. Enne automaatset vastamist või maksetega seotud toiminguid vaata seaded ja õigused üle.
+
+## Paigaldamine Androidis
+
+1. Laadi **[NOX01 viimane APK](https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk)** siit hoidlast. Vajalik on **64-bitine Android 11 või uuem**.
+2. Ava APK Androidi paketipaigaldajaga. Anna paigaldusluba ainult usaldatud allikast.
+3. Vali rakenduses sobiv AI-agent ja logi vajaduse korral selle teenusesse sisse.
+4. Luba ainult vajalikud Androidi õigused. Rakenduste juhtimiseks on tarvis juurdepääsetavusteenust.
+5. Proovi esimesena lihtsat ülesannet, näiteks „ava seaded”.
+
+**Uuendamine:** paigalda uus ametlik NOX01 APK olemasoleva peale. Alates püsiva allkirjaga väljalaskest sobib sama allkirjaga uus versioon tavaliselt kohapealseks uuenduseks. **Ära desinstalli rakendust enne andmete varundamist**, sest see võib vestlused ja seadistused kustutada. Teise allkirjaga või teist päritolu APK-d ei saa alati otse üle paigaldada.
+
+APK **ei ole sama asi** mis mujal avaldatud F-Droidi pakett; allkirju ja uuenduskanaleid ei tohi segamini ajada.
+
+## Välimus ja kasutamine
+
+**Tactical Neu-Dark** kasutab tumedaid reljeefseid kaarte, süvistatud aktiivseid juhtelemente ja lühikest elastset vajutusanimatsiooni. Seadetes saad vahetada kujundust, fonti ja aktsentvärvi. DOOM-stiilis pikseltegelase ilmed võivad muutuda vastavalt agendi olekule. Täpne väljanägemine sõltub versioonist ja telefoni ekraanist.
+
+*Päris ekraanipildid lisame pärast konkreetsel Androidi seadmel kontrollimist; selle lehe graafika on teadlikult selgitavad skeemid, mitte väljamõeldud kasutajaliidese kuvatõmmised.*
+
+## Arendajale
+
+```bash
+git clone --recurse-submodules https://github.com/levomm/nox01-mobile.git
+cd nox01-mobile
+./gradlew assembleRelease
+```
+
+Täpsemad sõltuvused ja ehitamise juhised: [CONTRIBUTING.md](CONTRIBUTING.md). GitHub Actionsi väljalaske APK ehitatakse ametliku püsiva allkirjastusega. Enda kohalik build võib kasutada teist allkirja ega pruugi olemasolevat NOX01 installi uuendada.
+
+## Privaatsus ja vastutus
+
+- AI kasutab ainult neid telefoni funktsioone, millele on antud vajalikud õigused.
+- Ekraanitekst võib sisaldada isikuandmeid; pilvemudeli kasutamisel võib asjakohane sisu jõuda valitud teenusepakkujani.
+- Veebilehed, vestlused ja teavitused võivad sisaldada eksitavaid juhiseid. Agentide tegevust peab jälgima.
+- Rakenduse juurdepääsetavusteenuse saad Androidi seadetes igal ajal välja lülitada.
+- Ära anna agendile paroole, ühekordseid koode ega maksekaardiandmeid.
+
+Loe [privaatsuspõhimõtteid](docs/PRIVACY.md), [turvateavet](SECURITY.md) ja [täpsemat juhendit](docs/GUIDE.md).
+
+## Projekt
+
+**NOX01 Mobile** on avatud lähtekoodiga Androidi projekt, mida arendatakse edasi eraldi identiteedi ja funktsioonidega. Projekti tehniline alus pärineb Hamdi Ghorbeli avatud lähtekoodist; autoriõiguse ja litsentsiteated säilivad vastavalt lähtekoodi litsentsile. NOX01 ei ole Anthropic, OpenAI, Google ega xAI ametlik rakendus.
+
+**Litsents:** [Apache 2.0](LICENSE). Kolmandate osapoolte komponentidel võivad olla eraldi litsentsid. Animeeritud pikseltegelase originaalmängu visuaali kasutusõigusi tuleb hinnata enne avalikku kommertskasutust.
+
+<p align="center"><strong>NOX01 / [01] · Android AI agent</strong></p>

@@ -1,0 +1,17 @@
+NOX01 Mobile on Androidi AI-agent. Kirjelda ülesanne ja lubatud õigustega agent saab kasutada telefoni rakendusi: lugeda ekraani, vajutada, kerida, kirjutada ja avada rakendusi.
+
+Toetatud on Claude Code, Codex, OpenCode, Antigravity ja Grok. Nende sisselogimis- ja mudelinõuded sõltuvad teenusepakkujast.
+
+Võimalused:
+• Elava pikseltegelasega ujuvmull
+• Vestlused, häälkäsklused ja ettelugemine
+• Androidi rakenduste juhtimine ja kinnitusreeglid
+• Teavitusautomaatika ja ajastatud ülesanded
+• Valikuline taustabrauser, abistavad agendid ja Linuxi tööriistad
+• Kohalik MCP-liides ja võimalus ühendada isiklik AI-mudel
+• Tactical Neu-Dark kujundus, valitavad fondid ja värvid
+
+NOX01 on sõltumatu avatud lähtekoodiga projekt, mitte mõne AI-teenusepakkuja ametlik rakendus. Tundlike tegevuste korral kasuta kinnitusreegleid ning kontrolli toimingu sisu.
+
+Ametlikud väljalasked:
+https://github.com/levomm/nox01-mobile

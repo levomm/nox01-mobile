@@ -1,22 +1,28 @@
-# Security
+# NOX01 Mobile turvalisus
 
-Buddy lets AI agents use your phone, so its approval rules are its most important part: an agent must not send, post, buy, pay or delete anything without your OK on Buddy's card.
+NOX01 saab Androidi juurdepääsetavusteenuse kaudu töötada teiste rakendustega. See õigus on võimas ning selle kasutamine nõuab kontrollitud kinnitamisreegleid.
 
-## Reporting a vulnerability
+## Turvaaugust teatamine
 
-Found a way for an agent to act without your approval, to approve for you, or to reach Buddy's phone tools without its token? Please don't post it publicly. Use [private vulnerability reporting](https://github.com/ghorbelhamdi/buddy-android/security/advisories/new) instead.
+Kui avastad viisi, kuidas agent saab kasutaja kinnitust vältida, varastada MCP-tokeni või pääseda ligi andmetele väljaspool lubatud tööulatust, **ära postita ekspluateerimisjuhiseid avalikku issue'sse**.
 
-Helpful details: your Buddy version (GitHub or Play), the agent and model, what you asked, and the steps that let the agent get around the approval.
+Saada teade privaatselt: [GitHub Security Advisory](https://github.com/levomm/nox01-mobile/security/advisories/new).
 
-## What counts
+Lisa versioon, Androidi versioon, kasutatud agent, kordamise sammud ning oodatud ja tegelik tulemus. Ära saada päris paroole ega API-võtmeid.
 
-- An agent (or a web page, message or notification it reads) gets a risky action done without an approval card, or with an approval meant for something else.
-- Another app on the phone uses Buddy's phone tools server (127.0.0.1:8765) or its events without the per-install token.
-- A notification rule's run acts outside what its rule allows.
-- Private data (chats, screen text, sign-ins) leaves the phone other than to the AI service you chose.
+## Riskikohad
 
-The files that decide what an agent may do without asking are `Guard.java`, `Reviewer.java`, the approval cards in `Bubble.java`, and `linux/system-prompt.md`.
+- Veebilehtedelt, sõnumitest ja teavitustest pärit pahatahtlikud juhised.
+- Tegevused, mille juures nõutav kasutaja kinnitus jääb esitamata.
+- Liiga lai teavitusreegel, mis lubab automaatset vastamist.
+- Lokaalse MCP-liidese tokeni või ühendatud teenuste võtmete lekkimine.
+- Kolmanda osapoole AI-mudeli ekslikud ekraanitoimingud.
+- Tundlike andmete edastamine pilveteenusepakkujale.
 
-## Supported versions
+## Soovitused
 
-Only the latest release, on GitHub and on Google Play.
+Kasuta ainult usaldusväärset, sama püsiallkirjaga NOX01 APK-d. Hoia Android ja agendid uuendatud. Anna minimaalsed õigused. Loe automaatikareeglid üle ning kontrolli saajat ja sisu enne saatmist. Ära avalda MCP-porti ega tokeneid avalikku võrku.
+
+## Toetatud versioon
+
+Turvaparandused keskenduvad [viimasele GitHubi väljalaskele](https://github.com/levomm/nox01-mobile/releases/latest). Varasemaid APK-sid ei pruugita parandada.

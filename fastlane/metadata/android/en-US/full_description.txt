@@ -1,18 +1,18 @@
-Buddy lets AI coding agents use your Android phone: Claude Code with your Claude plan, Codex with your ChatGPT plan, Antigravity with your Google account, Grok, or OpenCode's free models with no account at all.
+NOX01 Mobile helps you use Android with an AI agent. Describe a task and a supported agent can read the screen, tap, scroll, enter text and open apps through Android's accessibility features.
 
-Type or say what you want in the floating chat bubble. Buddy reads the screen, taps and types to get it done, and asks you before anything is sent, posted, bought or deleted. Passwords and payment details are handed to you.
+Available agents include Claude Code, Codex, OpenCode, Antigravity and Grok. Account requirements vary by service. Android 11+ and a 64-bit device are required.
 
-How it works: the agent runs in a small Alpine Linux inside the app (via proot), and Buddy gives it phone tools through its accessibility service and a local MCP server on 127.0.0.1. No root, no adb, no PC, no API keys.
+Features include:
+• Floating assistant bubble with expressive pixel-art character
+• Chats, voice requests and optional text-to-speech
+• App control with permission and approval settings
+• Notification rules and scheduled tasks
+• Optional background browser, sub-agents and Linux development tools
+• Local MCP phone tools and optional private-model connections
+• Tactical Neu-Dark theme, adjustable colors and fonts
+• Estonian interface and documentation
 
-Also:
-• acts on your notifications with rules you write
-• guides you step by step ("show me how…")
-• builds apps on the phone (Linux tools)
-• a background browser for web pages
-• live voice and scheduled tasks
-• its phone tools work from your own Claude Code or Codex sessions in Termux
-• 18 languages
+NOX01 is independently developed open-source software. It is not an official app of Anthropic, OpenAI, Google or xAI. What information reaches an AI service depends on your selected model and task. Use approval controls for sensitive actions.
 
-What Buddy downloads: Alpine Linux (from alpinelinux.org, checked by SHA-256) when you set it up, and each agent's official CLI when you pick it. Chromium for the background browser only if you turn it on.
-
-Buddy is an independent project, not made by or affiliated with Anthropic, OpenAI, Google or xAI.
+Official releases and documentation:
+https://github.com/levomm/nox01-mobile
