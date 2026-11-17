@@ -1,6 +1,5 @@
 package app.buddy.assistant;
 
-import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -9,7 +8,6 @@ import javax.crypto.spec.GCMParameterSpec;
 
 /** AES-256-GCM envelope; persistent keys must be supplied by Android Keystore. */
 final class PhantomSecretBox {
-    private static final SecureRandom RANDOM = new SecureRandom();
     private static final int IV_LEN = 12;
     private static final int TAG_LEN = 16;
     private static final int MAX_PLAINTEXT = 16 * 1024;
@@ -21,10 +19,14 @@ final class PhantomSecretBox {
             throw new IllegalArgumentException("Invalid secret payload size");
         }
         try {
-            byte[] iv = new byte[IV_LEN];
-            RANDOM.nextBytes(iv);
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            cipher.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(TAG_LEN * 8, iv));
+            // Android Keystore with randomizedEncryptionRequired=true rejects
+            // any caller-provided IV. Always let the provider generate it.
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] iv = cipher.getIV();
+            if (iv == null || iv.length != IV_LEN) {
+                throw new IllegalStateException("Unexpected AES-GCM IV size");
+            }
             byte[] encrypted = cipher.doFinal(plaintext);
             byte[] payload = new byte[iv.length + encrypted.length];
             System.arraycopy(iv, 0, payload, 0, iv.length);
