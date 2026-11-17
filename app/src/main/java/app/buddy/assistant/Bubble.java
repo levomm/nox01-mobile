@@ -78,6 +78,7 @@ final class Bubble implements ChatHub.Listener {
     private final java.util.Random doomRandom = new java.util.Random();
     private boolean doomRunning;
     private int doomFrame = DoomFaces.NEUTRAL;
+    private boolean doomEyebrowSide; // alternate eyebrow tilt left/right
     private int doomRenderedFrame = -1;
     private long doomNextIdle, doomGlanceUntil, doomAnnoyedUntil, doomBloodUntil;
     private long doomLastStep, doomLastBlood;
@@ -92,7 +93,7 @@ final class Bubble implements ChatHub.Listener {
             } else if (faceDragging()) {
                 wait = 450;
             } else if (svc.paused() || pendingConfirm != null) {
-                setDoomFrame(DoomFaces.EYEBROW);
+                setDoomFrame(doomEyebrowSide ? DoomFaces.EYEBROW_RIGHT : DoomFaces.EYEBROW_LEFT);
             } else if (now < doomBloodUntil) {
                 setDoomFrame(DoomFaces.BLOODY);
                 wait = doomBloodUntil - now + 50;
@@ -103,11 +104,13 @@ final class Bubble implements ChatHub.Listener {
                 wait = doomGlanceUntil - now + 50;
             } else if (now >= doomNextIdle) {
                 // Never sit staring motionless. A glance lasts under a second.
-                int n = doomRandom.nextInt(5);
-                setDoomFrame(n == 0 ? DoomFaces.EYEBROW
-                        : n % 2 == 0 ? DoomFaces.LOOK_RIGHT : DoomFaces.LOOK_LEFT);
-                doomGlanceUntil = now + 650 + doomRandom.nextInt(450);
-                doomNextIdle = doomGlanceUntil + 6000 + doomRandom.nextInt(9000);
+                int n = doomRandom.nextInt(4);
+                doomEyebrowSide = !doomEyebrowSide;
+                // Every other idle expression is a left/right eyebrow reaction.
+                setDoomFrame(n < 2 ? (doomEyebrowSide ? DoomFaces.EYEBROW_LEFT : DoomFaces.EYEBROW_RIGHT)
+                        : n == 2 ? DoomFaces.LOOK_RIGHT : DoomFaces.LOOK_LEFT);
+                doomGlanceUntil = now + 700 + doomRandom.nextInt(500);
+                doomNextIdle = doomGlanceUntil + 4500 + doomRandom.nextInt(3500);
                 wait = doomGlanceUntil - now + 50;
             } else {
                 setDoomFrame(DoomFaces.NEUTRAL);
@@ -242,7 +245,7 @@ final class Bubble implements ChatHub.Listener {
         hub.addListener(this);
         renderCurrent();
         applyEnabled();
-        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
+        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 4500;
         face.post(doomTick);
     }
 
@@ -3279,7 +3282,7 @@ final class Bubble implements ChatHub.Listener {
     void applyFace() {
         doomRenderedFrame = -1;
         doomFrame = DoomFaces.NEUTRAL;
-        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
+        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 4500;
         showFace(faceRes);
         if (!expanded && !showingList) renderCurrent();
     }
@@ -3292,7 +3295,7 @@ final class Bubble implements ChatHub.Listener {
             if (!on) {
                 doomBurstSteps = 0;
                 doomBloodUntil = 0;
-                doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
+                doomNextIdle = android.os.SystemClock.elapsedRealtime() + 4500;
             }
         }
         ring.setSpinning(on);

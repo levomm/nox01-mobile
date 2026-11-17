@@ -2286,4 +2286,12 @@
     <string name="setup_face_doom">DOOM</string>
     <string name="prefs_surface_neu">Tactical Neu-Dark</string>
     <string name="preset_tactical_neu">Neu-Dark</string>
+    <string name="nox_skills_presets">Ready-to-use skills</string>
+    <string name="nox_skills_presets_info">Tap to create an editable SKILL.md.</string>
+    <string name="nox_plugins_presets">Integration templates</string>
+    <string name="nox_plugins_presets_info">Choose a service and enter its actual MCP URL and optional key.</string>
+    <string name="nox_top_models">Top available models</string>
+    <string name="nox_top_models_info">Only verified models of your connected agents. Tap to set a default.</string>
+    <string name="nox_top_models_unavailable">Sign in and refresh agent models to see available models.</string>
+    <string name="nox_top_model_selected">Default model set: %1$s</string>
 </resources>

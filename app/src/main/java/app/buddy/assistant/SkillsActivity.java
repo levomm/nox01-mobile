@@ -79,6 +79,22 @@ public class SkillsActivity extends Screen {
         btns.addView(write, wp);
         body.addView(btns, gap(14));
         body.addView(text(this, getString(R.string.skills_how), 13, MUTED), gap(12));
+        body.addView(title(this, getString(R.string.nox_skills_presets), 16), gap(24));
+        body.addView(text(this, getString(R.string.nox_skills_presets_info), 12, MUTED), gap(4));
+        for (String[] preset : PresetSkills.ALL) {
+            if (Skills.find(this, preset[0]) != null) continue;
+            Button addPreset = button(this, "+  " + preset[1], false);
+            addPreset.setOnClickListener(v -> {
+                try {
+                    Skills.create(this, preset[0], preset[2], preset[3]);
+                    Toast.makeText(this, getString(R.string.skills_added, preset[0]), Toast.LENGTH_SHORT).show();
+                    render();
+                } catch (Exception ex) {
+                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            body.addView(addPreset, gap(8));
+        }
     }
 
     private LinearLayout skillRow(Skills.Skill s) {

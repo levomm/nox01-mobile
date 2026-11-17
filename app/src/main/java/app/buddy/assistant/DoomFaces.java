@@ -25,6 +25,9 @@ final class DoomFaces {
     static final int ANNOYED = 5;
     static final int BLOODY = 6;
     static final int OVERDRIVE = 7;
+    static final int EYEBROW_LEFT = 8;
+    static final int EYEBROW_RIGHT = 9;
+    private static Bitmap mirroredEyebrow;
 
     private static final int CELL_W = 64, CELL_H = 80, COLUMNS = 4;
     private static Bitmap[] frames;
@@ -57,7 +60,22 @@ final class DoomFaces {
     }
 
     static Drawable drawable(Context c, int state) {
-        Bitmap b = frame(c, state);
+        // One eyebrow sprite, two directions. Mirror once rather than storing
+        // duplicate bitmaps or scaling pixels with bilinear filtering.
+        Bitmap b;
+        if (state == EYEBROW_LEFT || state == EYEBROW_RIGHT) {
+            b = frame(c, EYEBROW);
+            if (b != null && state == EYEBROW_RIGHT) {
+                synchronized (DoomFaces.class) {
+                    if (mirroredEyebrow == null) {
+                        android.graphics.Matrix flip = new android.graphics.Matrix();
+                        flip.setScale(-1f, 1f);
+                        mirroredEyebrow = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), flip, false);
+                    }
+                    b = mirroredEyebrow;
+                }
+            }
+        } else b = frame(c, state);
         if (b == null) return null;
         BitmapDrawable sprite = new BitmapDrawable(c.getResources(), b);
         sprite.setFilterBitmap(false);

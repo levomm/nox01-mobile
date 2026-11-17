@@ -52,5 +52,5 @@ for lang in ("values","values-et"):
     strings=(RES/lang/"strings.xml").read_text(encoding="utf-8")
     check(f"{lang} Tactical Neu-Dark localized", 'name="prefs_surface_neu"' in strings
           and 'name="preset_tactical_neu"' in strings)
-check("Next Android version allows in-place update", 'VERSION_CODE = 212' in read("BuildInfo.java"))
+check("Next Android version allows in-place update", int(__import__('re').search(r'VERSION_CODE\s*=\s*(\d+)', read("BuildInfo.java")).group(1)) >= 212)
 print("PASS: tactile home, new [01] logo, selectable neu dark and accessibility-safe animations")
