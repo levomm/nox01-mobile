@@ -82,7 +82,7 @@ jobs:
           apk=$(find app/build/outputs/apk/github/release -name '*.apk' | head -1)
           tools=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1)
           "$tools/apksigner" verify --verbose --print-certs "$apk"
-          actual=$("$tools/apksigner" verify --print-certs "$apk" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p' | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')
+          actual=$("$tools/apksigner" verify --print-certs "$apk" | sed -nE 's/^(Signer #1|V[0-9]+ Signer): certificate SHA-256 digest: //p' | head -n 1 | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')
           expected=$(printf '%s' "$EXPECTED_CERT" | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')
           test -n "$actual" && test "$actual" = "$expected" || { echo "::error::NOX01 signing certificate changed. Update rejected."; exit 1; }
           echo "NOX01 signing identity verified."
