@@ -67,7 +67,9 @@ public class MainActivity extends Screen implements ChatHub.Listener, Account.Li
         // "New chat" extended FAB above the nav
         LinearLayout fab = row(this);
         fab.setPaddingRelative(dp(this, 18), 0, dp(this, 22), 0);
-        fab.setBackground(rounded(this, ACCENT, 20));
+        fab.setBackground(neu(this) ? neuAccentSurface(this, 20, ACCENT)
+                : rounded(this, ACCENT, 20));
+        if (neu(this)) elasticPress(fab);
         fab.setElevation(dp(this, 8));
         fab.addView(icon(this, R.drawable.ms_add, ON_ACCENT, 24));
         TextView ft = title(this, getString(R.string.main_new_chat), 15);
@@ -134,7 +136,8 @@ public class MainActivity extends Screen implements ChatHub.Listener, Account.Li
         LinearLayout top = row(this);
         top.setPaddingRelative(dp(this, 20), dp(this, 12), dp(this, 20), 0);
         FrameLayout tile = new FrameLayout(this);
-        tile.setBackgroundResource(R.drawable.ic_launcher_background);
+        tile.setBackground(neu(this) ? neuSurface(this, 12)
+                : rounded(this, 0xFF111418, 12));
         tile.setClipToOutline(true);
         tile.setOutlineProvider(new android.view.ViewOutlineProvider() {
             @Override
@@ -143,8 +146,9 @@ public class MainActivity extends Screen implements ChatHub.Listener, Account.Li
             }
         });
         ImageView face = new ImageView(this);
-        Face.set(face, R.drawable.bubble_face);
-        int fs = dp(this, Face.size(this, 26, 32));
+        face.setImageResource(R.drawable.ic_nox01_mark);
+        face.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        int fs = dp(this, 32);
         tile.addView(face, new FrameLayout.LayoutParams(fs, fs, Gravity.CENTER));
         top.addView(tile, new LinearLayout.LayoutParams(dp(this, 36), dp(this, 36)));
         LinearLayout name = column(this);
@@ -313,8 +317,22 @@ public class MainActivity extends Screen implements ChatHub.Listener, Account.Li
         return r;
     }
 
-    /** Chats in one rounded card, a hairline between them. */
+    /** On Neu-Dark each conversation is its own raised tactile plate.
+     * Legacy themes retain the compact grouped list without changing behavior.
+     */
     private LinearLayout chatGroup(List<Sessions.Session> chats) {
+        if (neu(this)) {
+            LinearLayout g = column(this);
+            for (Sessions.Session s : chats) {
+                View r = chatRow(s);
+                r.setBackground(neuSurface(this, 22));
+                elasticPress(r);
+                LinearLayout.LayoutParams lp = full();
+                lp.bottomMargin = dp(this, 11);
+                g.addView(r, lp);
+            }
+            return g;
+        }
         LinearLayout g = group(this);
         for (Sessions.Session s : chats) addToGroup(this, g, chatRow(s));
         return g;
