@@ -22,6 +22,12 @@ jobs:
       - name: Test approved [01] launcher assets
         run: python3 scripts/test_nox01_launcher.py
 
+      - name: Check permanent NOX01 signing policy
+        run: python3 scripts/test_release_signing.py
+
+      - name: Check signing setup script syntax
+        run: bash -n scripts/setup_release_signing.sh
+
       - name: Test the helper on recorded agent output
         run: bash linux/test/run.sh
 
@@ -47,34 +53,45 @@ jobs:
         env:
           NDK_VERSION: 27.2.12479018
 
-      # Release signing is optional: add the BUDDY_KEYSTORE_BASE64 and BUDDY_KEYSTORE_PASSWORD
-      # repository secrets to get a signed APK; otherwise the APK is unsigned.
-      - name: Decode signing key
+      # Never upload an ephemeral debug-signed package. The signing identity must be
+      # configured once and preserved for all future Android updates.
+      - name: Require persistent signing identity
         env:
           KEYSTORE_BASE64: ${{ secrets.BUDDY_KEYSTORE_BASE64 }}
-        if: env.KEYSTORE_BASE64 != ''
+          SIGNING_PASSWORD: ${{ secrets.BUDDY_KEYSTORE_PASSWORD }}
+          NOX01_SIGNING_CERT_SHA256: ${{ secrets.NOX01_SIGNING_CERT_SHA256 }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
-          echo "BUDDY_KEYSTORE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+          if [[ -z "$KEYSTORE_BASE64" ]] || [[ -z "$SIGNING_PASSWORD" ]] || [[ -z "$NOX01_SIGNING_CERT_SHA256" ]]; then
+            echo "::error::NOX01 permanent release signing secrets missing. Refusing to publish an update-incompatible APK."
+            exit 1
+          fi
+          printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/nox01-release.p12"
+          chmod 600 "$RUNNER_TEMP/nox01-release.p12"
+          echo "BUDDY_KEYSTORE=$RUNNER_TEMP/nox01-release.p12" >> "$GITHUB_ENV"
 
-      # github: the release here. fdroid: F-Droid builds it from this source too, and ships this signed copy when its
-      # own build comes out identical (reproducible builds), so users can switch between the two.
-      - name: Build release APKs (GitHub and F-Droid)
+      - name: Build signed release APKs
         env:
           BUDDY_KEYSTORE_PASSWORD: ${{ secrets.BUDDY_KEYSTORE_PASSWORD }}
+          BUDDY_KEY_ALIAS: ${{ secrets.BUDDY_KEY_ALIAS }}
         run: ./gradlew --no-daemon assembleGithubRelease assembleFdroidRelease
 
-      - name: Build installable NOX01 debug APK
-        run: ./gradlew --no-daemon assembleGithubDebug
+      - name: Verify signed release and pinned certificate
+        env:
+          EXPECTED_CERT: ${{ secrets.NOX01_SIGNING_CERT_SHA256 }}
+        run: |
+          apk=$(find app/build/outputs/apk/github/release -name '*.apk' | head -1)
+          tools=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -n 1)
+          "$tools/apksigner" verify --verbose --print-certs "$apk"
+          actual=$("$tools/apksigner" verify --print-certs "$apk" | sed -nE 's/^(Signer #1|V[0-9]+ Signer): certificate SHA-256 digest: //p' | head -n 1 | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')
+          expected=$(printf '%s' "$EXPECTED_CERT" | tr -d ':[:space:]' | tr '[:upper:]' '[:lower:]')
+          test -n "$actual" && test "$actual" = "$expected" || { echo "::error::NOX01 signing certificate changed. Update rejected."; exit 1; }
+          echo "NOX01 signing identity verified."
 
       - name: Collect APK
         run: |
           mkdir -p dist
-          cp app/build/outputs/apk/github/debug/*.apk dist/nox01-mobile-debug.apk
           apk=$(find app/build/outputs/apk/github/release -name '*.apk' | head -1)
-          cp "$apk" "dist/buddy-${GITHUB_REF_NAME//\//-}.apk"
-          # fixed name too, so releases/latest/download/buddy.apk always gets the newest version
-          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then cp "$apk" dist/buddy.apk; fi
+          cp "$apk" dist/nox01-mobile.apk
           fd=$(find app/build/outputs/apk/fdroid/release -name '*.apk' | head -1)
           # named so nobody picks it by mistake: it doesn't update itself (F-Droid's Binaries line must match this name)
           cp "$fd" "dist/fdroid-check-only-${GITHUB_REF_NAME//\//-}.apk"
@@ -95,16 +112,8 @@ jobs:
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" dist/*.apk --clobber
           else
-            gh release create "$GITHUB_REF_NAME" dist/*.apk --title "Buddy $GITHUB_REF_NAME" --generate-notes
+            gh release create "$GITHUB_REF_NAME" dist/*.apk --title "NOX01 Mobile $GITHUB_REF_NAME" --generate-notes
           fi
-          # which of the APKs to download, at the end of the notes (once)
-          notes=$(gh release view "$GITHUB_REF_NAME" --json body -q .body)
-          case "$notes" in
-            *"Which file?"*) ;;
-            *) printf '%s\n\n%s\n' "$notes" "**Which file?** Download \`buddy.apk\`: it updates itself. Buddy is also on [F-Droid](https://f-droid.org/packages/app.buddy.assistant/), where each version arrives a few days after it is released here. \`fdroid-check-only-$GITHUB_REF_NAME.apk\` is only there for F-Droid's reproducible-build check, and doesn't update itself." \
-                 | gh release edit "$GITHUB_REF_NAME" --notes-file - ;;
-          esac
-
       # What F-Droid will do: build the fdroid APK again, unsigned, somewhere else, and check it matches the signed one
       # above but for the signature. After publishing, so a mismatch shows up red without holding the release back.
       - uses: actions/checkout@v7
