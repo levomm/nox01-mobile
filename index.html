@@ -1,162 +1,149 @@
 <!doctype html>
-<html lang="en">
+<html lang="et">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buddy – an AI assistant that uses your Android phone (Claude Code, Codex, Gemini)</title>
-<meta name="description" content="Buddy is a free, open-source Android app: a floating chat bubble where Claude Code, Codex, OpenCode or Gemini (Antigravity CLI) read your screen, tap and type to get things done. Runs on your own plan. No root, no adb, no PC.">
-<link rel="canonical" href="https://ghorbelhamdi.github.io/buddy-android/">
-<meta name="theme-color" content="#16161d">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101216">
+<meta name="description" content="NOX01 Mobile on Androidi AI-agent. Vestlused, rakenduste juhtimine, teavituste automaatika, häälega toimingud ja MCP. Eestikeelne avatud lähtekoodiga rakendus.">
+<title>NOX01 Mobile | AI-agent sinu Androidis</title>
+<link rel="canonical" href="https://levomm.github.io/nox01-mobile/">
+<link rel="icon" type="image/svg+xml" href="img/nox01-icon.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Buddy – let Claude Code, Codex or Gemini use your Android phone">
-<meta property="og:description" content="A floating chat bubble: tell it what you want and an AI agent reads the screen, taps and types. Asks before anything is sent, posted, bought or deleted. Open source, no root, no adb.">
-<meta property="og:url" content="https://ghorbelhamdi.github.io/buddy-android/">
-<meta property="og:image" content="https://ghorbelhamdi.github.io/buddy-android/img/banner.png">
+<meta property="og:locale" content="et_EE">
+<meta property="og:site_name" content="NOX01 Mobile">
+<meta property="og:title" content="NOX01 Mobile | AI-agent sinu Androidis">
+<meta property="og:description" content="Anna ülesanne. Agent kasutab sinu telefoni rakendusi ja teeb vajalikud sammud.">
+<meta property="og:url" content="https://levomm.github.io/nox01-mobile/">
+<meta property="og:image" content="https://levomm.github.io/nox01-mobile/img/nox01-hero.svg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Buddy",
-  "alternateName": "Buddy for Android",
-  "applicationCategory": "UtilitiesApplication",
+  "name": "NOX01 Mobile",
   "operatingSystem": "Android 11+",
-  "description": "An open-source Android app where AI coding agents (Claude Code, Codex, OpenCode, Antigravity CLI, Grok) use your phone through a floating chat bubble: they read the screen, tap, type and open apps, and ask before anything is sent, posted, bought or deleted.",
-  "url": "https://ghorbelhamdi.github.io/buddy-android/",
-  "downloadUrl": "https://github.com/ghorbelhamdi/buddy-android/releases/latest/download/buddy.apk",
-  "installUrl": "https://github.com/ghorbelhamdi/buddy-android/releases/latest/download/buddy.apk",
-  "softwareHelp": "https://github.com/ghorbelhamdi/buddy-android/blob/main/docs/GUIDE.md",
+  "applicationCategory": "UtilitiesApplication",
+  "description": "Eestikeelne AI-agent Androidi rakenduste juhtimiseks, teavituste automaatikaks ja MCP tööriistadeks.",
+  "url": "https://levomm.github.io/nox01-mobile/",
+  "downloadUrl": "https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk",
+  "softwareHelp": "https://github.com/levomm/nox01-mobile/blob/main/docs/GUIDE.md",
   "license": "https://www.apache.org/licenses/LICENSE-2.0",
-  "image": "https://ghorbelhamdi.github.io/buddy-android/img/banner.png",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "sameAs": ["https://github.com/ghorbelhamdi/buddy-android", "https://www.producthunt.com/products/buddy-20"]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {"@type": "Question", "name": "Can Claude Code control my Android phone?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Yes, with Buddy. Buddy runs Claude Code inside the app, in a small Linux, and gives it phone tools (read the screen, tap, type, scroll, open apps) through a local MCP server. You use your own Claude plan; no PC, adb or root is needed."}},
-    {"@type": "Question", "name": "Does it need root, adb or a computer?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. Buddy is a normal app with an accessibility service, the permission screen readers use. The agents run inside the app, so there is no root, Shizuku or PC involved. One optional feature, background mode, pairs with the phone's own Wireless debugging, which Buddy sets up by itself on the phone."}},
-    {"@type": "Question", "name": "Can I keep using my phone while the AI works?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Yes, in two ways. Web tasks run in a background browser inside Buddy. And with background mode the agent works in your apps on a screen of its own that you don't see, also while the phone is locked; approvals come as notifications you can answer from the lock screen."}},
-    {"@type": "Question", "name": "Do I need an API key?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. Claude Code uses your Claude plan, Codex your ChatGPT plan, the Antigravity CLI your Google account and Grok your Google or X account. OpenCode's free models need no account at all. You can add API keys for other services, or a local model server, if you want."}},
-    {"@type": "Question", "name": "Can the AI send messages or buy things without asking?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Buddy itself stops on buttons like Send, Post, Pay and Delete and shows an approval card. The agent never types passwords, one-time codes or payment details; it hands those steps to you."}},
-    {"@type": "Question", "name": "Can I use Buddy's phone tools from my own agent?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Yes. The same phone tools are a local MCP server on the phone, which your own Claude Code, Codex, OpenCode, Antigravity or Grok sessions (for example in Termux) can connect to."}},
-    {"@type": "Question", "name": "Is Buddy free and open source?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Yes. Buddy is free and open source under the Apache 2.0 license, with no Buddy servers and no paid tiers."}}
-  ]
+  "offers": {"@type":"Offer", "price":"0", "priceCurrency":"EUR"}
 }
 </script>
 <style>
-:root{--bg:#f7f7fa;--card:#fff;--text:#16161d;--muted:#5d5d6e;--line:#e3e3ea;--accent:#d97757;--accent-ink:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#121218;--card:#1c1c24;--text:#ececf1;--muted:#a3a3b3;--line:#2c2c37;--accent:#e38a6b;--accent-ink:#16161d}}
+:root{color-scheme:dark;--bg:#101216;--card:#202329;--card2:#171a1f;--line:#363c45;--text:#f5f4f0;--muted:#b7b9be;--coral:#f37656;--green:#5cc08a}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-a{color:var(--accent)}
-.wrap{max-width:960px;margin:0 auto;padding:0 16px}
-header{padding:48px 0 24px;text-align:center}
-h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin:0 0 12px}
-.lead{font-size:clamp(17px,2.6vw,20px);color:var(--muted);max-width:720px;margin:0 auto 24px}
-.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-block;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:600;border:1px solid var(--line);color:var(--text);background:var(--card)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.small{font-size:14px;color:var(--muted);margin-top:10px}
-.hero{width:100%;height:auto;border-radius:16px;margin:24px 0 8px;display:block}
-video{width:100%;max-width:420px;border-radius:16px;display:block;margin:0 auto}
-section{padding:32px 0;border-top:1px solid var(--line)}
-h2{font-size:26px;margin:0 0 16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.card h3{margin:0 0 6px;font-size:17px}
-.card p{margin:0;color:var(--muted);font-size:15px}
-.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.shots img{width:100%;border-radius:12px;border:1px solid var(--line)}
-.shots figcaption{font-size:13px;color:var(--muted);text-align:center}
-@media (max-width:560px){.shots{grid-template-columns:1fr 1fr}}
-details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600}
-details p{margin:8px 0 0;color:var(--muted)}
-pre{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;overflow-x:auto;font-size:13px}
-footer{padding:32px 0 48px;color:var(--muted);font-size:14px;text-align:center;border-top:1px solid var(--line)}
+html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.65;overflow-wrap:anywhere}
+a{color:inherit}.wrap{width:min(1140px,calc(100% - 42px));margin:0 auto}
+header{position:sticky;top:0;z-index:20;background:#101216e8;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff1c}
+.topbar{height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font:800 20px/1 monospace;letter-spacing:1px}
+.brand img{width:42px;height:42px}
+.toplinks{display:flex;align-items:center;gap:12px}
+.toplinks a{text-decoration:none;font-size:14px;padding:9px 13px;border-radius:11px;color:var(--muted)}
+.toplinks a:hover{background:#25282e;color:var(--text)}
+.toplinks .smallbtn{border:1px solid var(--line);color:var(--text)}
+.hero{padding:74px 0 55px}
+.eyebrow{color:var(--green);font:600 13px/1.4 monospace;letter-spacing:2px;text-transform:uppercase}
+h1{font-size:clamp(34px,6vw,68px);line-height:1.11;letter-spacing:-.03em;margin:14px 0 22px;max-width:880px}
+.lead{max-width:770px;color:var(--muted);font-size:clamp(17px,2vw,21px);margin:0 0 30px}
+.buttons{display:flex;flex-wrap:wrap;gap:12px;margin:25px 0 32px}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:49px;padding:12px 21px;border-radius:14px;border:1px solid #4a4f57;background:linear-gradient(135deg,#2c3036,#202329);box-shadow:3px 5px 0 #090b0e;text-decoration:none;font-weight:700;transition:transform .18s,box-shadow .18s}
+.button:hover,.button:focus-visible{transform:translateY(-2px);box-shadow:4px 7px 0 #090b0e}
+.button:active{transform:translateY(3px) scale(.975);box-shadow:0 1px 0 #090b0e}
+.button.primary{border-color:#fe9d83;background:var(--coral);color:#171719}
+.panelimg{width:100%;height:auto;border-radius:22px;display:block;border:1px solid #383d46;box-shadow:0 22px 60px #0008}
+section{padding:68px 0;border-top:1px solid #2f333a}
+h2{font-size:clamp(27px,4vw,42px);margin:0 0 15px;line-height:1.2;letter-spacing:-.02em}
+.sectionlead{color:var(--muted);max-width:740px;margin:0 0 30px}
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.feature{border:1px solid #41464e;border-radius:22px;background:linear-gradient(145deg,#2a2e35,#1c1f25);box-shadow:4px 6px 0 #080a0d;padding:22px;min-height:183px}
+.feature h3{margin:0 0 9px;font-size:18px}
+.feature p{margin:0;color:var(--muted);font-size:15px}
+.num{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;border:1px solid #504942;border-radius:11px;color:var(--coral);font:700 15px monospace;margin-bottom:15px}
+.infographics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.infographics img{width:100%;border-radius:16px;border:1px solid #464b52}
+.examples{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));}
+.example{padding:18px 20px;background:#1b1e24;border:1px solid #3d424a;border-radius:16px;font:400 15px/1.6 'DejaVu Sans Mono',monospace;color:#efeee9}
+.example:before{content:'> ';color:var(--green);font-weight:bold}
+.notice{border-left:3px solid var(--coral);background:#221f20;padding:17px 20px;border-radius:0 12px 12px 0;color:#d1c9c7}
+.steps{counter-reset:steps;list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.steps li{background:var(--card);border-radius:16px;border:1px solid #3f464f;padding:20px}
+.steps li:before{counter-increment:steps;content:'0' counter(steps);display:block;font:700 18px monospace;color:var(--coral);margin-bottom:10px}
+footer{padding:42px 0 60px;color:var(--muted);font-size:14px}
+footer a{color:#d1d2d4}
+@media(max-width:750px){.features{grid-template-columns:repeat(2,minmax(0,1fr))}.infographics,.examples{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.toplinks a:not(.smallbtn){display:none}.hero{padding-top:46px}section{padding:50px 0}}
+@media(max-width:510px){.features{grid-template-columns:1fr}.wrap{width:min(100% - 28px,1140px)}.topbar{height:66px}.toplinks .smallbtn{padding:8px 10px}.brand{font-size:18px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>Let Claude Code, Codex or Gemini use your Android phone</h1>
-  <p class="lead">Buddy is a floating chat bubble. Type or say what you want, like “reply to Sam that I'm running late”, and an AI agent reads the screen, taps and types to get it done. It asks you before anything is sent, posted, bought or deleted.</p>
-  <div class="cta">
-    <a class="btn primary" href="https://github.com/ghorbelhamdi/buddy-android/releases/latest/download/buddy.apk">Download the APK</a>
-    <a class="btn" href="https://f-droid.org/packages/app.buddy.assistant/">Get it on F-Droid</a>
-    <a class="btn" href="https://github.com/ghorbelhamdi/buddy-android">Source on GitHub</a>
-  </div>
-  <p class="small">Free and open source (Apache 2.0) · Android 11+, 64-bit · No root, no adb, no PC, no API key</p>
-  <img class="hero" src="img/banner.png" alt="Buddy: Claude Code, Codex, OpenCode, Antigravity and Grok in a bubble on your Android phone" width="1600" height="560">
-</header>
-
-<section>
-  <h2>See it work</h2>
-  <video src="img/buddy-demo.mp4" controls muted playsinline preload="metadata" poster="img/chats.jpg"></video>
-  <p class="small" style="text-align:center">Codex turns on the lights while OpenCode's free model adds a Switch 2 to the Amazon cart (real recordings, waiting sped up).</p>
-</section>
-
-<section>
-  <h2>Your own AI agent, on the phone</h2>
-  <p>Buddy runs the agent inside the app, in a small Linux, on the plan you already have: <strong>Claude Code</strong> with your Claude plan, <strong>Codex</strong> with your ChatGPT plan, Google's <strong>Antigravity CLI</strong> (Gemini) with your Google account, xAI's <strong>Grok</strong> with your Google or X account, or <strong>OpenCode</strong> with its free models and no account at all. You can also add API keys for other services, or a model server on your own network.</p>
-  <div class="grid">
-    <div class="card"><h3>Uses your apps</h3><p>Messages, shopping, smart home, settings: anything on screen. Add instructions while it works.</p></div>
-    <div class="card"><h3>Asks first</h3><p>Approve, Deny or Change before anything is sent, posted, bought or deleted, from the lock screen too. Buddy enforces it, not the agent.</p></div>
-    <div class="card"><h3>Shows you how</h3><p>“Show me how to turn on dark mode”: it points at each step and waits for your tap.</p></div>
-    <div class="card"><h3>Acts on notifications</h3><p>“When a customer asks on WhatsApp, reply with our opening hours”, with your OK or a countdown you can stop.</p></div>
-    <div class="card"><h3>Voice</h3><p>Talk to it and have replies read aloud.</p></div>
-    <div class="card"><h3>Background mode</h3><p>The agent works in your apps on a screen of its own that you don't see, while you keep using your phone. Set up once on the phone itself; watch it live in the chat.</p></div>
-    <div class="card"><h3>Background browser</h3><p>Web pages in a browser inside Buddy, without taking over your screen, even while the phone is locked.</p></div>
-    <div class="card"><h3>Builds apps</h3><p>Turn on Linux tools in a chat and “make me a calculator app” builds and installs a real APK on the phone.</p></div>
-    <div class="card"><h3>Phone tools as MCP</h3><p>The same tools as a local MCP server for your own Claude Code, Codex, OpenCode, Antigravity or Grok sessions.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2>Screens</h2>
-  <div class="shots">
-    <figure style="margin:0"><img src="img/chats.jpg" alt="Buddy's chats with different AI agents" loading="lazy"><figcaption>Chats with any agent</figcaption></figure>
-    <figure style="margin:0"><img src="img/chat.jpg" alt="A Buddy chat with grouped phone tool calls" loading="lazy"><figcaption>Tool calls fold into one line</figcaption></figure>
-    <figure style="margin:0"><img src="img/settings.jpg" alt="Buddy's settings and setup guide" loading="lazy"><figcaption>Setup guide and themes</figcaption></figure>
-  </div>
-</section>
-
-<section>
-  <h2>How it works</h2>
-  <p>Buddy is a normal Android app with an accessibility service, the kind of permission screen readers use. The agent runs in a small Alpine Linux inside the app and uses Buddy's phone tools (read the screen, tap, type, scroll, open apps) over a local MCP server on 127.0.0.1. No adb or Wireless debugging needed, and it works without Wi-Fi. Background mode, which is optional, pairs once with the phone's own Wireless debugging so the agent can have a screen of its own.</p>
-<pre>Buddy app / bubble ──► Buddy's Linux (Alpine via proot): claude, codex, opencode, agy or grok
-        ▲                                                     │
-        └──────────── streamed replies ◄──────────────────────┤
-                                                              ▼
-Buddy accessibility service ◄──── MCP on 127.0.0.1 (phone tools)</pre>
-</section>
-
-<section>
-  <h2>Questions</h2>
-  <details><summary>Can Claude Code control my Android phone?</summary><p>Yes, with Buddy. Buddy runs Claude Code inside the app and gives it phone tools (read the screen, tap, type, scroll, open apps) through a local MCP server. You use your own Claude plan; no PC, adb or root is needed.</p></details>
-  <details><summary>Does it need root, adb or a computer?</summary><p>No. Buddy is a normal app with an accessibility service. The agents run inside the app, so there is no root, Shizuku or PC involved. One optional feature, background mode, pairs with the phone's own Wireless debugging, which Buddy sets up by itself on the phone.</p></details>
-  <details><summary>Can I keep using my phone while the AI works?</summary><p>Yes, in two ways. Web tasks run in a background browser inside Buddy. And with background mode the agent works in your apps on a screen of its own that you don't see, also while the phone is locked; approvals come as notifications you can answer from the lock screen.</p></details>
-  <details><summary>Do I need an API key?</summary><p>No. Claude Code uses your Claude plan, Codex your ChatGPT plan, the Antigravity CLI your Google account and Grok your Google or X account. OpenCode's free models need no account at all. You can add API keys for other services, or a local model server, if you want.</p></details>
-  <details><summary>Can the AI send messages or buy things without asking?</summary><p>Buddy itself stops on buttons like Send, Post, Pay and Delete and shows an approval card. The agent never types passwords, one-time codes or payment details; it hands those steps to you.</p></details>
-  <details><summary>Can I use Buddy's phone tools from my own agent?</summary><p>Yes. The same phone tools are a local MCP server on the phone, which your own Claude Code, Codex, OpenCode, Antigravity or Grok sessions (for example in Termux) can connect to.</p></details>
-  <details><summary>Is Buddy free and open source?</summary><p>Yes. Apache 2.0, with no Buddy servers and no paid tiers. Buddy is an independent project, not made by or affiliated with Anthropic, OpenAI, Google or xAI.</p></details>
-</section>
-
-<footer>
-  <p><a href="https://github.com/ghorbelhamdi/buddy-android">GitHub</a> · <a href="https://github.com/ghorbelhamdi/buddy-android/blob/main/docs/GUIDE.md">Guide</a> · <a href="https://github.com/ghorbelhamdi/buddy-android/releases">Releases</a> · <a href="https://github.com/ghorbelhamdi/buddy-android/blob/main/docs/PRIVACY.md">Privacy</a></p>
-  <p>Buddy is an independent open-source project, not affiliated with Anthropic, OpenAI, Google or xAI.</p>
-</footer>
+<header><div class="wrap topbar">
+<a class="brand" href="#avaleht"><img src="img/nox01-icon.svg" width="42" height="42" alt="NOX01 märk">NOX01</a>
+<nav class="toplinks" aria-label="Peamenüü">
+<a href="#voimalused">Võimalused</a><a href="#naited">Näited</a><a href="#paigaldus">Paigaldus</a>
+<a class="smallbtn" href="https://github.com/levomm/nox01-mobile">GitHub</a>
+</nav></div></header>
+<main id="avaleht">
+<div class="wrap hero">
+<p class="eyebrow">[01] / Android / AI-agent</p>
+<h1>Telefon ei pea ootama sinu järgmist puudutust.</h1>
+<p class="lead">Ütle, mida soovid teha. NOX01 saab sinu juhendamisel avada Androidi rakendusi, lugeda ekraani, sisestada teksti, käivitada automaatikat ja anda tulemustest ülevaate.</p>
+<div class="buttons">
+<a class="button primary" href="https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk">Laadi alla NOX01 APK</a>
+<a class="button" href="https://github.com/levomm/nox01-mobile/blob/main/docs/GUIDE.md">Loe kasutusjuhendit</a>
 </div>
-</body>
-</html>
+<img class="panelimg" src="img/nox01-hero.svg" alt="NOX01 Mobile [01] brändigraafika. AI sinu Androidis." width="1200" height="420">
+</div>
+<section id="voimalused"><div class="wrap">
+<p class="eyebrow">Võimekus / Tööriistad</p>
+<h2>Vestlusest päris tegevuseni</h2>
+<p class="sectionlead">Ühe nupu asemel töövoog: agent, telefonitööriistad, vajalikud õigused ja kontrollitavad tulemused.</p>
+<div class="features">
+<article class="feature"><span class="num">01</span><h3>Kasuta rakendusi</h3><p>Ava, puuduta, kirjuta, keri ja otsi. Toimingud sõltuvad telefoni õigustest.</p></article>
+<article class="feature"><span class="num">02</span><h3>AI-agendid</h3><p>Claude Code, Codex, OpenCode, Antigravity ja Grok vastavalt sinu kontole või mudelitele.</p></article>
+<article class="feature"><span class="num">03</span><h3>Teavituste automaatika</h3><p>Käivita juhiseid valitud rakenduse, märksõna või saatja teavituse peale.</p></article>
+<article class="feature"><span class="num">04</span><h3>Ajastatud ülesanded</h3><p>Korduv kontroll või tegevus sobival päeval ja ajal.</p></article>
+<article class="feature"><span class="num">05</span><h3>Hääl, Linux ja MCP</h3><p>Hääljuhtimine, arendustööriistad ja telefoni funktsioonide kasutamine MCP kaudu.</p></article>
+<article class="feature"><span class="num">06</span><h3>Neu-Dark ja ujuvmull</h3><p>Reljeefne tume UI, muudetavad värvid ja elav pikseltegelane eraldi mullis.</p></article>
+</div>
+</div></section>
+<section><div class="wrap">
+<p class="eyebrow">Süsteem / Toimimine</p><h2>Selge töövoog. Sinu kontroll.</h2>
+<div class="infographics">
+<img loading="lazy" src="img/nox01-app-control.svg" alt="Rakenduse juhtimise töövoog">
+<img loading="lazy" src="img/nox01-automation.svg" alt="Teavituse automaatika ja kinnitamise töövoog">
+</div>
+<p class="sectionlead" style="margin-top:25px">Graafika kirjeldab päris funktsioonide loogikat. See ei ole rakenduse ekraanitõmmis.</p>
+</div></section>
+<section id="naited"><div class="wrap">
+<p class="eyebrow">Näited / Käsklused</p><h2>Mida võiksid NOX01-lt küsida?</h2>
+<div class="examples">
+<div class="example">ava Telegram ja koosta viimasele sõnumile vastus. enne saatmist näita mulle.</div>
+<div class="example">otsi kolmest poest sama toote hind ja võrdle tulemusi.</div>
+<div class="example">näita, kuidas ma telefonis Wi-Fi võrku vahetan.</div>
+<div class="example">kontrolli hommikuti valitud infot ja anna teada ainult muudatustest.</div>
+</div>
+<p class="sectionlead" style="margin-top:22px">Näited sõltuvad valitud mudelist, õigustest ja kolmandate osapoolte rakenduste võimalustest.</p>
+</div></section>
+<section id="paigaldus"><div class="wrap">
+<p class="eyebrow">Alustamine / Android 11+</p><h2>Paigalda ja katseta</h2>
+<ol class="steps">
+<li><strong>Laadi APK.</strong><br>Kasuta selle projekti ametlikku GitHub Releases väljalaset.</li>
+<li><strong>Vali agent.</strong><br>Seadista soovitud AI-mudel ja vajalik sisselogimine.</li>
+<li><strong>Anna õigused.</strong><br>Luba juurdepääsetavusteenus ning katseta lihtsa ülesandega.</li>
+</ol>
+<div class="buttons"><a class="button primary" href="https://github.com/levomm/nox01-mobile/releases/latest/download/nox01-mobile.apk">Viimane APK</a><a class="button" href="https://github.com/levomm/nox01-mobile/releases/latest">Väljalaske märkmed</a></div>
+<div class="notice">NOX01 võib kasutada tundlikke Androidi õigusi. Kontrolli kinnitamisreegleid, API-võtmete kasutust ja isikuandmete edastamist valitud AI-teenusele. Ära jaga agentidega paroole ega ühekordseid koode.</div>
+</div></section>
+<section><div class="wrap">
+<p class="eyebrow">Arhitektuur</p><h2>Telefon, lokaalne MCP ja sinu valitud AI</h2>
+<img class="panelimg" loading="lazy" src="img/nox01-architecture.svg" alt="NOX01 Androidi, MCP ja AI-agendi arhitektuuri skeem" width="1200" height="400">
+</div></section>
+</main>
+<footer><div class="wrap">
+<p><strong>NOX01 MOBILE / [01]</strong></p>
+<p><a href="https://github.com/levomm/nox01-mobile">Lähtekood</a> · <a href="https://github.com/levomm/nox01-mobile/blob/main/docs/PRIVACY.md">Privaatsus</a> · <a href="https://github.com/levomm/nox01-mobile/blob/main/SECURITY.md">Turvalisus</a> · <a href="https://github.com/levomm/nox01-mobile/blob/main/LICENSE">Apache 2.0</a></p>
+<p>Sõltumatu avatud lähtekoodiga projekt. Ei ole seotud Anthropic, OpenAI, Google ega xAI ametlike rakendustega.</p>
+</div></footer>
+</body></html>
