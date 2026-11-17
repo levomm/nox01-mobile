@@ -74,6 +74,74 @@ final class Bubble implements ChatHub.Listener {
     private TextView badge, pill;
     private ValueAnimator breathing;
     private RingView ring;
+    // DOOM bubble animation affects only the floating character, never the main chat.
+    private final java.util.Random doomRandom = new java.util.Random();
+    private boolean doomRunning;
+    private int doomFrame = DoomFaces.NEUTRAL;
+    private int doomRenderedFrame = -1;
+    private long doomNextIdle, doomGlanceUntil, doomAnnoyedUntil, doomBloodUntil;
+    private long doomLastStep, doomLastBlood;
+    private int doomBurstSteps;
+    private final Runnable doomTick = new Runnable() {
+        @Override public void run() {
+            if (root == null || face == null) return;
+            long now = android.os.SystemClock.elapsedRealtime();
+            long wait = 900;
+            if (!"doom".equals(Prefs.face(svc)) || locked || root.getVisibility() != View.VISIBLE) {
+                wait = 3000; // no wasted redraw when hidden or a custom image is selected
+            } else if (faceDragging()) {
+                wait = 450;
+            } else if (svc.paused() || pendingConfirm != null) {
+                setDoomFrame(DoomFaces.EYEBROW);
+            } else if (now < doomBloodUntil) {
+                setDoomFrame(DoomFaces.BLOODY);
+                wait = doomBloodUntil - now + 50;
+            } else if (doomRunning) {
+                setDoomFrame(now < doomAnnoyedUntil ? DoomFaces.ANNOYED : DoomFaces.WORKING);
+                wait = 700;
+            } else if (now < doomGlanceUntil) {
+                wait = doomGlanceUntil - now + 50;
+            } else if (now >= doomNextIdle) {
+                // Never sit staring motionless. A glance lasts under a second.
+                int n = doomRandom.nextInt(5);
+                setDoomFrame(n == 0 ? DoomFaces.EYEBROW
+                        : n % 2 == 0 ? DoomFaces.LOOK_RIGHT : DoomFaces.LOOK_LEFT);
+                doomGlanceUntil = now + 650 + doomRandom.nextInt(450);
+                doomNextIdle = doomGlanceUntil + 6000 + doomRandom.nextInt(9000);
+                wait = doomGlanceUntil - now + 50;
+            } else {
+                setDoomFrame(DoomFaces.NEUTRAL);
+                wait = Math.min(3000, doomNextIdle - now);
+            }
+            face.postDelayed(this, Math.max(250, wait));
+        }
+    };
+
+    private void setDoomFrame(int state) {
+        if (doomFrame == state) return;
+        doomFrame = state;
+        if (face != null && !faceDragging()) showFace(faceRes);
+    }
+
+    private void doomStep() {
+        if (!"doom".equals(Prefs.face(svc))) return;
+        long now = android.os.SystemClock.elapsedRealtime();
+        // Phone tool callbacks and status updates for the same step may arrive together.
+        if (now - doomLastStep < 350) return;
+        if (now - doomLastStep > 15_000) doomBurstSteps = 0;
+        doomLastStep = now;
+        doomBurstSteps++;
+        doomAnnoyedUntil = now + 1200;
+        if (doomBurstSteps >= 7 && now - doomLastBlood > 90_000) {
+            // A rare, short overdrive joke. Never a constant flashing/bloody UI.
+            doomBloodUntil = now + 800;
+            doomLastBlood = now;
+            doomBurstSteps = 0;
+            setDoomFrame(DoomFaces.BLOODY);
+        } else {
+            setDoomFrame(DoomFaces.ANNOYED);
+        }
+    }
     private boolean noteListening;
     // expanded
     private LinearLayout panel, messages, confirmCard;
@@ -174,6 +242,8 @@ final class Bubble implements ChatHub.Listener {
         hub.addListener(this);
         renderCurrent();
         applyEnabled();
+        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
+        face.post(doomTick);
     }
 
     void remove() {
@@ -200,6 +270,7 @@ final class Bubble implements ChatHub.Listener {
             }
         }
         if (breathing != null) breathing.cancel();
+        face.removeCallbacks(doomTick);
         try {
             wm.removeView(root);
         } catch (Exception ignored) {
@@ -900,7 +971,7 @@ final class Bubble implements ChatHub.Listener {
         LinearLayout col = new LinearLayout(svc);
         col.setOrientation(LinearLayout.VERTICAL);
         ImageView head = new ImageView(svc);
-        Face.set(head, R.drawable.bubble_face);
+        Face.set(head, R.drawable.ic_launcher_foreground);
         head.setContentDescription(svc.getString(R.string.bubble_close));
         head.setOnClickListener(v -> collapse());
         LinearLayout.LayoutParams hp = new LinearLayout.LayoutParams(dp(52), dp(52));
@@ -2678,6 +2749,7 @@ final class Bubble implements ChatHub.Listener {
 
     void onToolActivity(String tool) {
         hub.onToolActivity();
+        doomStep();
     }
 
     // --------------------------------------------------------------- views
@@ -2705,6 +2777,7 @@ final class Bubble implements ChatHub.Listener {
         activityBrowser = browserTab != null;
         activityTab = browserTab;
         activityAt = android.os.SystemClock.elapsedRealtime();
+        doomStep();
         if (browserTab != null) screenSeen.put(browserTab, activityAt);
         svc.mainHandler().removeCallbacks(activityExpired);
         svc.mainHandler().postDelayed(activityExpired, ACTIVITY_MS + 100);
@@ -3177,23 +3250,51 @@ final class Bubble implements ChatHub.Listener {
         }
     };
 
-    /** Shows the drawing for this state, or the user's picture (issue #10) in every state, with its own shadow. */
+    /** Floating bubble: pixel DOOM sprite by default, saved custom picture when selected. */
     private void showFace(int res) {
         faceRes = res;
         android.graphics.drawable.Drawable own = Face.bubble(svc);
-        if (own == null) face.setImageResource(res);
-        else if (face.getDrawable() != own) face.setImageDrawable(own);
-        android.view.ViewOutlineProvider outline = own != null ? null : BODY;
+        boolean doom = own == null && "doom".equals(Prefs.face(svc));
+        if (own != null) {
+            if (face.getDrawable() != own) face.setImageDrawable(own);
+            doomRenderedFrame = -1;
+        } else if (doom) {
+            int frame = res == R.drawable.bubble_face_brace ? DoomFaces.ANNOYED
+                    : res == R.drawable.bubble_face_fired ? DoomFaces.OVERDRIVE : doomFrame;
+            if (doomRenderedFrame != frame || face.getDrawable() == null) {
+                android.graphics.drawable.Drawable sprite = DoomFaces.drawable(svc, frame);
+                if (sprite != null) face.setImageDrawable(sprite);
+                else face.setImageResource(R.drawable.ic_launcher_foreground);
+                doomRenderedFrame = frame;
+            }
+        } else {
+            face.setImageResource(res);
+            doomRenderedFrame = -1;
+        }
+        android.view.ViewOutlineProvider outline = own != null || doom ? null : BODY;
         if (face.getOutlineProvider() != outline) face.setOutlineProvider(outline);
     }
 
     /** Buddy's look changed in Settings: the new face now, and in the chat panel's replies. */
     void applyFace() {
+        doomRenderedFrame = -1;
+        doomFrame = DoomFaces.NEUTRAL;
+        doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
         showFace(faceRes);
         if (!expanded && !showingList) renderCurrent();
     }
 
     private void setWorking(boolean on, boolean force) {
+        if (doomRunning != on) {
+            doomRunning = on;
+            doomFrame = on ? DoomFaces.WORKING : DoomFaces.NEUTRAL;
+            doomRenderedFrame = -1;
+            if (!on) {
+                doomBurstSteps = 0;
+                doomBloodUntil = 0;
+                doomNextIdle = android.os.SystemClock.elapsedRealtime() + 6500;
+            }
+        }
         ring.setSpinning(on);
         // keep the fired-up / bracing face while the bubble is being dragged
         if (force || !faceDragging()) showFace(on ? R.drawable.bubble_face_thinking

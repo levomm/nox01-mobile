@@ -342,4 +342,5 @@
     <string name="rules_approval">Enne tegutsemist</string>
     <string name="rules_approval_ask">Küsi minult</string>
     <string name="rules_approval_countdown">Loendus</string>
+    <string name="setup_face_doom">DOOM</string>
 </resources>

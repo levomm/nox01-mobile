@@ -296,7 +296,10 @@ final class Prefs {
 
     /** Buddy's face on the bubble and in the chats: "buddy" (the drawn one) or "picture" (one the user picked). */
     static String face(Context c) {
-        return sp(c).getString("face", "buddy");
+        // Previously installed NOX01 builds stored "buddy" explicitly.
+        // Treat that legacy choice as DOOM without touching custom pictures.
+        String value = sp(c).getString("face", "doom");
+        return "buddy".equals(value) ? "doom" : value;
     }
 
     static void setFace(Context c, String face) {

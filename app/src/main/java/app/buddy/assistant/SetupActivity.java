@@ -433,17 +433,18 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         FrameLayout ft = new FrameLayout(this);
         ft.setBackground(oval(ACCENT_SOFT));
         ImageView fv = new ImageView(this);
-        Face.set(fv, R.drawable.bubble_face);
+        if (own) Face.set(fv, R.drawable.bubble_face);
+        else DoomFaces.show(fv, DoomFaces.NEUTRAL);
         int fs = dp(this, Face.size(this, 30, 36));
         ft.addView(fv, new FrameLayout.LayoutParams(fs, fs, Gravity.CENTER));
         fr.addView(ft, new LinearLayout.LayoutParams(dp(this, 38), dp(this, 38)));
         LinearLayout.LayoutParams fp = weight1();
         fp.setMarginStart(dp(this, 12));
-        fr.addView(segmented(this, new String[][]{{"buddy", getString(R.string.setup_face_buddy)},
-                {"picture", getString(R.string.setup_face_picture)}}, own ? "picture" : "buddy", false, v -> {
+        fr.addView(segmented(this, new String[][]{{"doom", getString(R.string.setup_face_doom)},
+                {"picture", getString(R.string.setup_face_picture)}}, own ? "picture" : "doom", false, v -> {
             Prefs.setFace(this, v);
             if ("picture".equals(v) && Face.picture(this) == null) { // none saved yet, or it can't be read
-                Prefs.setFace(this, "buddy");
+                Prefs.setFace(this, "doom");
                 pickFace();
             } else {
                 faceChanged();

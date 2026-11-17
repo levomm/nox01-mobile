@@ -27,7 +27,7 @@ for name,strings in expect.items():
     code=(ROOT/'app/src/main/java/app/buddy/assistant'/name).read_text()
     for term in strings:
         assert term in code, f'{name}: missing {term}'
-assert 'static final int VERSION_CODE = 210' in (ROOT/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()
+assert int(re.search(r'VERSION_CODE\s*=\s*(\d+)', (ROOT/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()).group(1)) >= 210, 'Android version code must never go backwards'
 assert 'Buddy.pull(6400)' in (ROOT/'app/src/main/java/app/buddy/assistant/CodexLive.java').read_text(), 'do not rename JavaScript bridge contract'
 assert 'Buddy.pull(6400)' in (ROOT/'app/src/main/java/app/buddy/assistant/CodexDictation.java').read_text(), 'do not rename JavaScript bridge contract'
 assert 'root/.buddy/' in (ROOT/'app/src/main/java/app/buddy/assistant/Helper.java').read_text(), 'do not migrate internal files'
