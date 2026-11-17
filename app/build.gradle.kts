@@ -2,6 +2,13 @@ plugins {
     id("com.android.application")
 }
 
+// ZXing is an Apache-2.0 open-source QR encoder; no camera, wallet keys or hosted QR API.
+dependencies {
+    implementation("com.google.zxing:core:3.5.3")
+    // MIT-licensed TweetNaCl XSalsa20-Poly1305/Curve25519 for Phantom deep links.
+    implementation("org.purejava:tweetnacl-java:1.1.3")
+}
+
 // Version lives in BuildInfo.java so the Gradle and on-device (build.sh) builds always agree.
 val buildInfo = file("src/main/java/app/buddy/assistant/BuildInfo.java").readText()
 val appVersionName = Regex("""VERSION = "([^"]+)"""").find(buildInfo)!!.groupValues[1]

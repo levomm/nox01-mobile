@@ -62,6 +62,14 @@ MCP võimaldab ühendatud klientidel küsida NOX01 telefoni tööriistadelt andm
 
 Kui sul on Ollama, LM Studio või llama.cpp server, saad sobiva mudeli OpenCode'i kaudu ühendada. Telefonist vaadates ei ole arvutis olev server aadressil `127.0.0.1`, vaid selle tegelikul võrgu-IP-l või turvalisel tunneliaadressil. Väiksemad mudelid võivad keerukate mitmeetapiliste ekraaniülesannetega eksida.
 
+## Rahakott (arendusharus, mitte avalikus APK-s)
+
+NOX01 arendusharu `feature/phantom-wallet-implementation` lisab **Seaded → Rahakott**. Saad avalikku Solana aadressi jälgida, vaadata SOL-i ja ainult Circle'i ametlikku Solana USDC saldot, kopeerida aadressi ning näidata vastuvõtu QR-koodi. **Ühenda Phantom** avab Phantomi mobiilirakenduse ja palub ühendamiseks sinu luba. Seejärel kontrollib NOX01 krüpteeritud vastust, enne kui märgib aadressi ühendatuks.
+
+**Ettevaatust:** Phantomi ühendamist pole veel sinu telefonis kontrollitud. **Raha saatmine on siin keelatud.** Ära sisesta NOX01 rahakoti vaatesse privaatvõtit ega taastefraasi. Kui ühendus ebaõnnestub, saad avalikku aadressi ainult lugemiseks jälgida. Käsitsi lisatud aadressi ei esitata Phantomiga ühendatud kontona.
+
+See osa ei ole veel osa avalikust `v2.3.14` väljalaskest.
+
 ## Uuendamine
 
 Kasuta alati [selle projekti viimast väljalaset](https://github.com/levomm/nox01-mobile/releases/latest). Paigalda APK olemasoleva peale, kui allkiri ühildub. Ära eemalda rakendust enne varundamist.
