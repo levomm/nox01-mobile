@@ -128,6 +128,9 @@
             android:name=".ApiKeysActivity"
             android:exported="false" />
 
+        <!-- Human-facing, watch-only wallet. Never exported to the agent or other apps. -->
+        <activity android:name=".WalletActivity" android:exported="false" />
+
         <activity
             android:name=".SkillsActivity"
             android:exported="false" />
