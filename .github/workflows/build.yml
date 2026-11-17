@@ -25,6 +25,9 @@ jobs:
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
+      - name: Check signing setup script syntax
+        run: bash -n scripts/setup_release_signing.sh
+
       - name: Test the helper on recorded agent output
         run: bash linux/test/run.sh
 
