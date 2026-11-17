@@ -89,6 +89,21 @@ with tempfile.TemporaryDirectory() as temporary:
     subprocess.run(["java", "-cp", str(p), "app.buddy.assistant.PhantomWireTest"],
                    check=True)
 
+# Regression for Android Keystore AES-GCM: IND-CPA forbids caller-provided IVs.
+# The desktop JVM allows an explicit random IV, so the regression needs to check
+# the Android-specific encryption initialization path in addition to JCE round trips.
+envelope_source = (APP / "PhantomSecretBox.java").read_text()
+encrypt_section = envelope_source.split("static String seal(", 1)[1].split("static byte[] open(", 1)[0]
+assert "cipher.init(Cipher.ENCRYPT_MODE, key);" in encrypt_section, (
+    "Android Keystore rejects caller-specified IV when randomizedEncryptionRequired=true"
+)
+assert "cipher.getIV()" in encrypt_section, "Read Android Keystore-generated IV for the envelope"
+assert "new GCMParameterSpec(" not in encrypt_section, (
+    "Do not pass a nonce to Android Keystore on encryption"
+)
+assert "new GCMParameterSpec(" in envelope_source.split("static byte[] open(", 1)[1]
+print("PASS: Android Keystore-compatible generated GCM IV and authenticated decrypt")
+
 link = (APP / "PhantomLink.java").read_text()
 store = (APP / "WalletStore.java").read_text()
 ui = (APP / "WalletActivity.java").read_text()
