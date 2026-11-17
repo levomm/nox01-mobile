@@ -502,7 +502,8 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         int shown = 0;
         for (Account available : Account.ALL) {
             if (shown >= 8) break;
-            if (!SetupState.ownModels(this, available.agent)) continue;
+            // Models.options already filters agent plans and includes configured API key models.
+            // Do not hide available provider models just because the plan itself is signed out.
             for (String[] model : Models.options(available.agent, true)) {
                 if (shown >= 8) break;
                 if (model == null || model.length < 2 || model[0] == null || model[0].isEmpty()) continue;

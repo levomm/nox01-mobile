@@ -470,4 +470,6 @@
     <string name="nox_top_models_info">Kuvatakse ainult sinu ühendatud agendi kinnitatud mudelid. Puuduta, et muuta selle agendi vaikimisi mudelit.</string>
     <string name="nox_top_models_unavailable">Tippmudelite valik ilmub pärast sobiva agendi sisselogimist ja mudelite laadimist.</string>
     <string name="nox_top_model_selected">Vaikimisi mudel määratud: %1$s</string>
+    <string name="github_row_none">Luba agentidel sinu hoidlates muudatusi teha</string>
+    <string name="live_option">Reaalajas hääl</string>
 </resources>
