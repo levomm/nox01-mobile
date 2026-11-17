@@ -1,15 +1,12 @@
-# NOX01 Mobile brand mark B
+# NOX01 identiteet
 
-Approved mark: custom terminal-style `[01]` emblem.
-Android adaptive launcher uses `ic_launcher_background.xml`, `ic_launcher_foreground.xml`, and `ic_launcher_monochrome.xml`.
+**Põhimärk:** [01] graafiline terminaliembleem.
 
-- Background `#101216`
-- Brackets/accent `#F37656`
-- Digits `#F5F4F0`
-- Foreground scale: `0.78`, centered in the launcher safe zone
-- `NOX01-icon.svg`: full square brand artwork
-- `NOX01-wordmark.svg`: NOX01 MOBILE lockup
-- `NOX01-monochrome.svg`: single-color mark
+- Tume alus: `#101216`
+- Korallpunane aktsent: `#F37656`
+- Hele märk: `#F5F4F0`
+- Valikuline aktiivne roheline: `#5CC08A`
 
-The animated character bubble is **not** the launcher identity and is not modified by these assets.
-The logos are project-specific vector source files. See the repository's license and upstream attribution for source-code licensing.
+**Originaalsed vektorid:** [NOX01-icon.svg](NOX01-icon.svg), [NOX01-wordmark.svg](NOX01-wordmark.svg), [NOX01-monochrome.svg](NOX01-monochrome.svg).
+
+Androidi avakuva ikoon, GitHubi identiteet ja dokumentatsiooni graafika kasutavad sama märki. Pikseltegelane kuulub ainult ujuvmulli juurde, mitte projekti põhibrändi.

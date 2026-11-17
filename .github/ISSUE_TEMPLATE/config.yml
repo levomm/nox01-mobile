@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Security issue (an agent acting without approval)
-    url: https://github.com/ghorbelhamdi/buddy-android/security/advisories/new
-    about: Please report these privately, not as a public issue.
-  - name: How to help
-    url: https://github.com/ghorbelhamdi/buddy-android/blob/main/CONTRIBUTING.md
-    about: Reporting bugs, ideas, translations and building Buddy yourself.
+  - name: Turvahaavatavuse privaatne teade
+    url: https://github.com/levomm/nox01-mobile/security/advisories/new
+    about: Kinnitamise, õiguste või andmelekkega seotud vead saada siia.
+  - name: Kaastöö ja ehitamine
+    url: https://github.com/levomm/nox01-mobile/blob/main/CONTRIBUTING.md
+    about: Veateated, tõlked ja arendaja juhised.

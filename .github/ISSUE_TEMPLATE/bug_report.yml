@@ -1,60 +1,42 @@
-name: Bug report
-description: Something doesn't work as it should
+name: Veateade
+description: NOX01 ei tee seda, mida peaks
 labels: [bug]
 body:
   - type: textarea
     id: what
     attributes:
-      label: What happened?
-      description: What you asked Buddy to do, what you expected, and what happened instead.
+      label: Mis juhtus?
+      description: Kirjelda toimingut, oodatud tulemust ja tegelikku tulemust.
     validations:
       required: true
   - type: input
     id: phone
     attributes:
-      label: Phone and Android version
-      placeholder: OnePlus 12, Android 16
+      label: Telefon ja Androidi versioon
+      placeholder: Samsung Galaxy S24+, Android
     validations:
       required: true
   - type: input
-    id: buddy
+    id: version
     attributes:
-      label: Buddy version
-      description: Settings → Check for updates shows it, or Android's App info for Buddy.
-      placeholder: 2.1.5 (GitHub)
+      label: NOX01 versioon
+      placeholder: v2.3.13
     validations:
       required: true
   - type: dropdown
     id: agent
     attributes:
-      label: Agent
-      options:
-        - Claude Code
-        - Codex
-        - OpenCode
-        - Antigravity
-        - Grok
-        - Not about an agent
+      label: AI-agent
+      options: [Claude Code, Codex, OpenCode, Antigravity, Grok, "Ei puuduta agenti"]
     validations:
       required: true
   - type: input
     id: model
     attributes:
-      label: Model
-      description: The model chip under the chat's title.
-      placeholder: Opus 5.5, Big Pickle, …
-  - type: dropdown
-    id: mode
-    attributes:
-      label: Approval mode of the app involved
-      description: Settings → App permissions.
-      options:
-        - Trust
-        - Hard
-        - Smart
-        - Don't know / not relevant
+      label: Mudel
+      placeholder: Agendi kasutatud mudel
   - type: textarea
-    id: extra
+    id: steps
     attributes:
-      label: Screenshots or anything else
-      description: A screenshot of the chat with its tool calls open helps a lot. Hide anything private.
+      label: Kordamise sammud ja lisainfo
+      description: Eemalda logidest, piltidelt ja tekstitest isikuandmed ning API-võtmed.
