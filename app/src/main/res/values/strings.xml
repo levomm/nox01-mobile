@@ -2300,7 +2300,7 @@
     <string name="nox_wallet_not_connected">No address being watched</string>
     <string name="nox_wallet_watch_explain">Paste the public Solana address from Phantom to view its balance. This is watch-only access, not a Phantom-authorized connection. Never paste a secret key or recovery phrase.</string>
     <string name="nox_wallet_watch">Watch public address</string>
-    <string name="nox_wallet_phantom_pending">Secure Phantom connection and sending are separate features under development. Sending is not enabled.</string>
+    <string name="nox_wallet_phantom_pending">A Phantom connection lets you view its balance; sending is disabled until separate security checks pass.</string>
     <string name="nox_wallet_watch_label">Watch-only address · not connected to Phantom</string>
     <string name="nox_wallet_copy">Copy address</string>
     <string name="nox_wallet_copied">Address copied</string>
@@ -2324,4 +2324,9 @@
     <string name="nox_wallet_bad_address">Not a valid 32-byte Solana public address. Check that you copied the public address, not a recovery phrase.</string>
     <string name="nox_wallet_qr_note">Only send Solana-network SOL or USDC to this address.</string>
     <string name="nox_wallet_qr_error">Could not generate receiving QR code</string>
+    <string name="nox_wallet_connect_phantom">Connect Phantom</string>
+    <string name="nox_wallet_phantom_status">Phantom connected (read-only)</string>
+    <string name="nox_wallet_phantom_connected">Phantom connected. You can view on-chain balances.</string>
+    <string name="nox_wallet_phantom_cancelled">Phantom connection was declined.</string>
+    <string name="nox_wallet_phantom_failed">Could not connect Phantom. Check the Phantom app and retry.</string>
 </resources>
