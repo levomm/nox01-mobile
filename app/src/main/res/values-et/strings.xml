@@ -216,4 +216,21 @@
     <string name="waiting_sent">Saadetud rakendusse %1$s</string>
     <string name="waiting_copied">Kopeeritud. Kleebi see rakenduses %1$s.</string>
     <string name="waiting_note_sent">✓ Saadetud ootenimekirjast: %1$s</string>
+    <string name="setup_settings_title">Seaded</string>
+    <string name="setup_settings_subtitle">NOX01 kasutab sinu valitud AI-agenti otse Androidis.</string>
+    <string name="setup_appearance">Välimus</string>
+    <string name="setup_theme_mode">Režiim</string>
+    <string name="setup_accent">Aktsentvärv</string>
+    <string name="setup_surface">Taustapind</string>
+    <string name="setup_surface_note">Soe on algne taustatoon. Puhas must toimib tumedas režiimis.</string>
+    <string name="setup_face">Ujuvmulli nägu</string>
+    <string name="setup_face_buddy">Originaal</string>
+    <string name="setup_face_picture">Minu pilt</string>
+    <string name="setup_face_note">Läbipaistva taustaga PNG või WebP sobib kõige paremini.</string>
+    <string name="setup_face_change">Vali teine pilt</string>
+    <string name="setup_face_unreadable">Pilti ei õnnestunud lugeda. Proovi PNG- või WebP-faili.</string>
+    <string name="setup_custom_colour">Oma värv</string>
+    <string name="setup_custom_accent_title">Oma aktsentvärv</string>
+    <string name="setup_custom_accent_hint">Sisesta HEX-värv, näiteks #4F8BFF.</string>
+    <string name="setup_apply">Rakenda</string>
 </resources>
