@@ -16,7 +16,7 @@ final class Theme {
             {"#D97757", "Coral"}, {"#4F8BFF", "Ocean"}, {"#3FB98A", "Mint"},
             {"#9A7CFF", "Violet"}, {"#E5678F", "Rose"}, {"#E0A43A", "Amber"},
     };
-    static final String[][] SURFACES = {{"warm", "Warm"}, {"neutral", "Neutral"}, {"black", "Black"}};
+    static final String[][] SURFACES = {{"neu", "Tactical Neu-Dark"}, {"warm", "Warm"}, {"neutral", "Neutral"}, {"black", "Black"}};
     static final String[][] MODES = {{"system", "System"}, {"light", "Light"}, {"dark", "Dark"}};
 
     private static String applied = "";
@@ -32,7 +32,7 @@ final class Theme {
 
     /** {@link #SURFACES} with labels in the user's language. */
     static String[][] surfaces(Context c) {
-        return labeled(c, SURFACES, R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
+        return labeled(c, SURFACES, R.string.prefs_surface_neu, R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
     }
 
     /** {@link #MODES} with labels in the user's language. */
@@ -67,6 +67,9 @@ final class Theme {
         if (dark) {
             // Buddy 3: soft layered surfaces (BG < CARD < CARD2); NAV is the floating nav pill
             switch (surface) {
+                case "neu":
+                    set(0xFF1B1D21, 0xFF25282E, 0xFF30343B, 0xFF22252A, 0xFF111419);
+                    break;
                 case "neutral":
                     set(0xFF121212, 0xFF1D1D1C, 0xFF2A2A29, 0xFF242423, 0xFF0B0B0B);
                     break;

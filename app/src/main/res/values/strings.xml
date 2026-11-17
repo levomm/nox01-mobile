@@ -2284,4 +2284,6 @@
     <string name="preset_amber">Amber</string>
     <string name="preset_oled">OLED</string>
     <string name="setup_face_doom">DOOM</string>
+    <string name="prefs_surface_neu">Tactical Neu-Dark</string>
+    <string name="preset_tactical_neu">Neu-Dark</string>
 </resources>

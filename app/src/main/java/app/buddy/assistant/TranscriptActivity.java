@@ -143,16 +143,9 @@ public class TranscriptActivity extends Screen implements ChatHub.MonitorListene
             } else {
                 LinearLayout r = row(this);
                 r.setGravity(Gravity.BOTTOM);
-                FrameLayout av = new FrameLayout(this);
-                av.setBackground(oval(ACCENT_SOFT));
-                ImageView face = new ImageView(this);
-                Face.set(face, R.drawable.bubble_face);
-                int fs = dp(this, Face.size(this, 20, 24));
-                av.addView(face, new FrameLayout.LayoutParams(fs, fs, Gravity.CENTER));
-                LinearLayout.LayoutParams avp = new LinearLayout.LayoutParams(dp(this, 24), dp(this, 24));
-                avp.setMarginEnd(dp(this, 8));
-                r.addView(av, avp);
-                tv.setMaxWidth(maxBubble - dp(this, 32));
+                // A transcript is text, not an avatar gallery. DOOM lives only
+                // in the independent floating agent bubble.
+                tv.setMaxWidth(maxBubble);
                 tv.setBackground(corners(this, CARD, 20, 20, 20, 6));
                 r.addView(tv);
                 messages.addView(r, p);

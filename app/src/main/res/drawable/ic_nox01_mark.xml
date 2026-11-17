@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="256" android:viewportHeight="256">
+    <!-- NOX01 [01] custom monogram. Used inside Android UI instead of the old Buddy face. -->
+    <path android:fillColor="#FF101216"
+        android:pathData="M0,36 Q0,0 36,0 L220,0 Q256,0 256,36 L256,220 Q256,256 220,256 L36,256 Q0,256 0,220 Z" />
+    <path android:fillColor="#FFF37656"
+        android:pathData="M69,51 L47,51 L30,68 L30,188 L47,205 L69,205 L69,188 L57,188 L48,179 L48,77 L57,68 L69,68 Z" />
+    <path android:fillColor="#FFF37656"
+        android:pathData="M187,51 L209,51 L226,68 L226,188 L209,205 L187,205 L187,188 L199,188 L208,179 L208,77 L199,68 L187,68 Z" />
+    <path android:fillColor="#FFF5F4F0" android:fillType="evenOdd"
+        android:pathData="M90,89 L120,89 L132,101 L132,155 L120,167 L90,167 L77,155 L77,101 Z M94,105 L91,108 L91,147 L94,151 L116,151 L119,147 L119,108 L116,105 Z" />
+    <path android:fillColor="#FFF5F4F0"
+        android:pathData="M141,106 L159,89 L173,89 L173,152 L182,152 L182,167 L139,167 L139,152 L157,152 L157,111 L141,122 Z" />
+</vector>
