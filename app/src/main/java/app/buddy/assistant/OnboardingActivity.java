@@ -236,7 +236,8 @@ public class OnboardingActivity extends Screen implements Account.Listener {
         c.setGravity(Gravity.CENTER_HORIZONTAL);
         c.setPaddingRelative(0, dp(this, 40), 0, 0);
         FrameLayout tile = new FrameLayout(this);
-        tile.setBackgroundResource(R.drawable.ic_launcher_background);
+        tile.setBackground(neu(this) ? neuSurface(this, 24)
+                : rounded(this, 0xFF101216, 24));
         tile.setClipToOutline(true);
         tile.setOutlineProvider(new android.view.ViewOutlineProvider() {
             @Override
@@ -245,7 +246,8 @@ public class OnboardingActivity extends Screen implements Account.Listener {
             }
         });
         ImageView face = new ImageView(this);
-        face.setImageResource(R.drawable.bubble_face);
+        face.setImageResource(R.drawable.ic_nox01_mark);
+        face.setScaleType(ImageView.ScaleType.FIT_CENTER);
         tile.addView(face, new FrameLayout.LayoutParams(dp(this, 64), dp(this, 64), Gravity.CENTER));
         c.addView(tile, new LinearLayout.LayoutParams(dp(this, 88), dp(this, 88)));
         TextView t = title(this, getString(R.string.onboarding_welcome_title), 28);
