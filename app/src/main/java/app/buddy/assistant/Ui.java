@@ -60,13 +60,30 @@ final class Ui {
         return c.getResources().getConfiguration().getLocales().get(0);
     }
 
-    /** Geist at a weight (400…700); falls back to the system font. */
+    /** Typeface to use for UI copy and chat; keeping code spans strictly monospaced. */
     static Typeface sans(Context c, int weight) {
-        return font(c, "fonts/Geist.ttf", weight, weight >= 600 ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+        return previewFont(c, Prefs.uiFont(c), weight);
     }
 
-    /** Geist Mono at a weight; falls back to the system monospace. */
+    static Typeface previewFont(Context c, String family, int weight) {
+        switch (family) {
+            case "geist-mono":
+                return font(c, "fonts/GeistMono.ttf", weight, Typeface.MONOSPACE);
+            case "system-mono":
+                return Typeface.create(Typeface.MONOSPACE, weight, false);
+            case "system-sans":
+                return Typeface.create(Typeface.DEFAULT, weight, false);
+            default:
+                return font(c, "fonts/Geist.ttf", weight,
+                        weight >= 600 ? Typeface.DEFAULT_BOLD : Typeface.DEFAULT);
+        }
+    }
+
+    /** Code, tables and terminal blocks always use a monospaced face. */
     static Typeface mono(Context c, int weight) {
+        if ("system-mono".equals(Prefs.uiFont(c))) {
+            return Typeface.create(Typeface.MONOSPACE, weight, false);
+        }
         return font(c, "fonts/GeistMono.ttf", weight, Typeface.MONOSPACE);
     }
 
