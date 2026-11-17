@@ -24,9 +24,9 @@ check("Estonian registered", 'android:name="et"' in src("app/src/main/res/xml/lo
 et = ET.parse(ROOT / "app/src/main/res/values-et/strings.xml").getroot()
 check("Estonian basic chat strings", {"chat_send", "chat_input_hint", "main_new_chat", "bubble_face_description", "onboarding_welcome_title"} <= {x.attrib["name"] for x in et if x.tag == "string"})
 check("dark default", 'getString("theme_mode", "dark")' in prefs and 'getString("surface", "black")' in prefs)
-check("terminal composer", 'input.setTypeface(mono(this, 400));' in chat and 'pill.setBackground(outlined(this, BG, 8, LINE, 1));' in chat)
+check("terminal composer", 'input.setTypeface(sans(this, 400));' in chat and 'pill.setBackground(outlined(this, BG, 8, LINE, 1));' in chat)
 check("terminal user prompt", '"> " + text' in chat and 'setBackgroundColor(BG)' in chat)
-check("terminal assistant content", 'tv.setTypeface(mono(this, 400));' in chat)
+check("terminal assistant content", 'tv.setTypeface(sans(this, 400));' in chat)
 check("no avatar in chat", 'R.drawable.bubble_face' not in chat and 'Face.set(' not in chat)
 check("fork update endpoint", 'https://api.github.com/repos/levomm/nox01-mobile/releases/latest' in src("app/src/main/java/app/buddy/assistant/Updates.java"))
 
