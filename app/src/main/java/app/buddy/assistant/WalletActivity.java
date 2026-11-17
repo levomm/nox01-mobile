@@ -47,10 +47,17 @@ public final class WalletActivity extends Activity {
     private Button refresh;
     private String shownAddress;
     private boolean loading;
+    private int renderGeneration;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
         Theme.apply(this);
+        render();
+    }
+
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
         render();
     }
 
@@ -75,7 +82,10 @@ public final class WalletActivity extends Activity {
     }
 
     private void render() {
+        renderGeneration++;
+        loading = false;
         shownAddress = WalletStore.address(this);
+        boolean phantomConnected = WalletStore.isPhantomConnected(this);
         ScrollView scroll = new ScrollView(this);
         scroll.setFillViewport(true);
         scroll.setBackgroundColor(Ui.BG);
@@ -99,7 +109,10 @@ public final class WalletActivity extends Activity {
                     block(this, 9));
             panel.addView(Ui.text(this, getString(R.string.nox_wallet_watch_explain),
                     14, Ui.TEXT2), block(this, 14));
-            Button manual = Ui.button(this, getString(R.string.nox_wallet_watch), true);
+            Button phantom = Ui.button(this, getString(R.string.nox_wallet_connect_phantom), true);
+            phantom.setOnClickListener(v -> connectPhantom());
+            panel.addView(phantom, block(this, 11));
+            Button manual = Ui.button(this, getString(R.string.nox_wallet_watch), false);
             manual.setOnClickListener(v -> importAddress());
             panel.addView(manual, block(this, 11));
             panel.addView(Ui.text(this, getString(R.string.nox_wallet_phantom_pending),
@@ -109,7 +122,9 @@ public final class WalletActivity extends Activity {
         }
 
         LinearLayout panel = card();
-        panel.addView(Ui.title(this, getString(R.string.nox_wallet_watch_label), 18),
+        panel.addView(Ui.title(this, getString(phantomConnected
+                        ? R.string.nox_wallet_phantom_status
+                        : R.string.nox_wallet_watch_label), 18),
                 block(this, 8));
         TextView addr = Ui.monoText(this, shownAddress, 13, Ui.TEXT);
         addr.setTextIsSelectable(true);
@@ -128,6 +143,11 @@ public final class WalletActivity extends Activity {
         qp.leftMargin = Ui.dp(this, 8);
         buttons.addView(qr, qp);
         panel.addView(buttons, block(this, 13));
+        if (!phantomConnected) {
+            Button phantom = Ui.button(this, getString(R.string.nox_wallet_connect_phantom), true);
+            phantom.setOnClickListener(v -> connectPhantom());
+            panel.addView(phantom, block(this, 12));
+        }
         Button unlink = Ui.outlinedButton(this, getString(R.string.nox_wallet_remove), Ui.MUTED);
         unlink.setOnClickListener(v -> new AlertDialog.Builder(this)
                 .setTitle(R.string.nox_wallet_remove)
@@ -171,6 +191,14 @@ public final class WalletActivity extends Activity {
         loadBalances();
     }
 
+    private void connectPhantom() {
+        try {
+            PhantomLink.beginConnect(this);
+        } catch (RuntimeException error) {
+            Toast.makeText(this, R.string.nox_wallet_phantom_failed, Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void importAddress() {
         final EditText input = new EditText(this);
         input.setHint(R.string.nox_wallet_address_hint);
@@ -201,6 +229,7 @@ public final class WalletActivity extends Activity {
     private void loadBalances() {
         if (loading || shownAddress == null || shownAddress.isEmpty()) return;
         final String requested = shownAddress;
+        final int generation = renderGeneration;
         loading = true;
         solValue.setText("—");
         usdcValue.setText("—");
@@ -218,7 +247,7 @@ public final class WalletActivity extends Activity {
                 final List<SolanaRpc.History> records = recent;
                 final String note = historyError;
                 runOnUiThread(() -> {
-                    if (!alive(requested)) return;
+                    if (!alive(requested, generation)) return;
                     loading = false;
                     refresh.setEnabled(true);
                     solValue.setText(new BigDecimal(balance.solLamports).movePointLeft(9)
@@ -233,7 +262,7 @@ public final class WalletActivity extends Activity {
             } catch (Exception error) {
                 final String detail = error.getMessage();
                 runOnUiThread(() -> {
-                    if (!alive(requested)) return;
+                    if (!alive(requested, generation)) return;
                     loading = false;
                     refresh.setEnabled(true);
                     solValue.setText("—");
@@ -246,8 +275,8 @@ public final class WalletActivity extends Activity {
         });
     }
 
-    private boolean alive(String requested) {
-        return !isFinishing() && !isDestroyed() && requested.equals(shownAddress)
+    private boolean alive(String requested, int generation) {
+        return generation == renderGeneration && !isFinishing() && !isDestroyed() && requested.equals(shownAddress)
                 && refresh != null && status != null;
     }
 
