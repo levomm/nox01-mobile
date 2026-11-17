@@ -25,7 +25,7 @@ assert 'Skills.create(this, preset[0]' in skillui
 mcp=(base/'app/src/main/java/app/buddy/assistant/McpServersActivity.java').read_text()
 assert 'editor(null, integration[0])' in mcp and 'suggestedName' in mcp
 setup=(base/'app/src/main/java/app/buddy/assistant/SetupActivity.java').read_text()
-assert 'Models.options(available.agent, true)' in setup and 'Prefs.setAgentDefault(this, backend, key)' in setup
+assert 'Models.options(available.agent, true)' in setup and 'Prefs.setAgentDefault(this, selectedAgent, key)' in setup
 assert not any(fake in setup for fake in ['Prefs.setAgentDefault(this, backend, "gemini-4-carbon")'])
 assert 'VERSION_CODE = 213' in (base/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()
 print('PASS: dynamic models, editable skills, MCP templates, version 213')
