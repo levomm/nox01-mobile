@@ -11,7 +11,7 @@ import java.util.List;
 import static app.buddy.assistant.Ui.*;
 
 /**
- * "Share to Buddy" from any app: a photo, a file, a link or text. The user picks a new chat or a recent one; the files
+ * "Share to NOX01" from any app: a photo, a file, a link or text. The user picks a new chat or a recent one; the files
  * are copied into Buddy's storage at once (the share's read access ends with this screen) and the chat opens with them
  * attached and the text in its message box, to send when they're ready. Nothing is sent on its own.
  */

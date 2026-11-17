@@ -182,7 +182,7 @@ final class McpServers {
         JSONObject init = rpc(url, header, session, new JSONObject().put("jsonrpc", "2.0").put("id", 1)
                 .put("method", "initialize").put("params", new JSONObject().put("protocolVersion", "2025-06-18")
                         .put("capabilities", new JSONObject())
-                        .put("clientInfo", new JSONObject().put("name", "Buddy").put("version", BuildInfo.VERSION))));
+                        .put("clientInfo", new JSONObject().put("name", "NOX01").put("version", BuildInfo.VERSION))));
         if (init == null || !init.has("result")) throw new Exception(said(init, "The server didn't answer \"initialize\"."));
         rpc(url, header, session, new JSONObject().put("jsonrpc", "2.0").put("method", "notifications/initialized"));
         JSONArray out = new JSONArray();
@@ -311,8 +311,8 @@ final class McpServers {
         if (cut >= 0) id = id.substring(0, cut);
         S s = find(id);
         if (s == null || !s.on) {
-            error(out, 404, s == null ? "No MCP server named \"" + id + "\" is set up in Buddy (Settings → MCP servers)."
-                    : "The MCP server \"" + id + "\" is switched off in Buddy (Settings → MCP servers).");
+            error(out, 404, s == null ? "No MCP server named \"" + id + "\" is set up in NOX01 (Settings → MCP servers)."
+                    : "The MCP server \"" + id + "\" is switched off in NOX01 (Settings → MCP servers).");
             return;
         }
         String[] key = header(c, s.id);
@@ -341,7 +341,7 @@ final class McpServers {
         try {
             code = con.getResponseCode();
         } catch (java.io.IOException e) {
-            error(out, 502, "Buddy couldn't reach the MCP server \"" + id + "\": " + e.getMessage());
+            error(out, 502, "NOX01 couldn't reach the MCP server \"" + id + "\": " + e.getMessage());
             return;
         }
         StringBuilder h = new StringBuilder("HTTP/1.1 ").append(code).append(" Relayed\r\n");

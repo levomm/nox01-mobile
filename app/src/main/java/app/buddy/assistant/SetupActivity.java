@@ -552,7 +552,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         copy.setCompoundDrawablePadding(dp(this, 8));
         copy.setOnClickListener(v -> {
             ClipboardManager cm = getSystemService(ClipboardManager.class);
-            cm.setPrimaryClip(ClipData.newPlainText("Buddy MCP", cmd));
+            cm.setPrimaryClip(ClipData.newPlainText("NOX01 MCP", cmd));
             Toast.makeText(this, R.string.setup_command_copied, Toast.LENGTH_SHORT).show();
         });
         LinearLayout.LayoutParams cpp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(this, 44));
@@ -786,7 +786,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                 sshCopy.setCompoundDrawablePadding(dp(this, 8));
                 sshCopy.setOnClickListener(v -> {
                     ClipboardManager cm = getSystemService(ClipboardManager.class);
-                    cm.setPrimaryClip(ClipData.newPlainText("Buddy SSH", sshCommand(SshServer.newCode())));
+                    cm.setPrimaryClip(ClipData.newPlainText("NOX01 SSH", sshCommand(SshServer.newCode())));
                     Toast.makeText(this, R.string.setup_command_copied, Toast.LENGTH_SHORT).show();
                 });
                 LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, dp(this, 44));
@@ -1028,7 +1028,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
 
     /** The version, the licences and the privacy policy. */
     private void footer() {
-        TextView ver = monoText(this, "buddy " + BuildInfo.VERSION + " · " + getPackageName(), 12, MUTED);
+        TextView ver = monoText(this, "NOX01 " + BuildInfo.VERSION + " · " + getPackageName(), 12, MUTED);
         ver.setGravity(Gravity.CENTER);
         ver.setPaddingRelative(0, dp(this, 24), 0, 0);
         list.addView(ver, full());

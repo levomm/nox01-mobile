@@ -50,8 +50,8 @@ final class CodexLive {
     private static final long CONNECT_MS = 30_000, IDLE_MS = 5 * 60_000;
     /** No new words for this long after the user spoke: they're done, even if the call hasn't said so yet. */
     private static final long PAUSE_MS = 2_500;
-    private static final String PROMPT = "You are only the voice of Buddy, an assistant that operates the user's "
-            + "Android phone. You don't decide or do anything yourself: everything the user says goes to Buddy's phone "
+    private static final String PROMPT = "You are only the voice of NOX01, an assistant that operates the user's "
+            + "Android phone. You don't decide or do anything yourself: everything the user says goes to NOX01's phone "
             + "agent automatically, and the agent does the work and gives the answers. So when the user asks for "
             + "something, don't answer it and never say it's done; call remain_silent, or say only a very short "
             + "acknowledgement such as \"On it\" or \"Okay\". Messages starting with " + AGENT.trim() + " are the agent "
@@ -59,7 +59,7 @@ final class CodexLive {
             + "keeping the meaning exactly; don't read out long lists, code or links, and never add anything the agent "
             + "didn't say. When the agent waits for the user to approve something or to answer a question, say what it "
             + "is in a sentence and ask them to answer out loud (yes or no, or one of the choices) or on the screen. "
-            + "Buddy takes their spoken answer itself: never say something is approved or chosen unless a "
+            + "NOX01 takes their spoken answer itself: never say something is approved or chosen unless a "
             + AGENT.trim() + " message says so.";
 
     /** The chat screen showing the live bar. */
@@ -165,7 +165,7 @@ final class CodexLive {
                 File f = logFile();
                 f.getParentFile().mkdirs();
                 try (FileOutputStream o = new FileOutputStream(f, false)) {
-                    o.write(("live voice call, " + new java.util.Date() + ", Buddy " + BuildInfo.VERSION + "\n")
+                    o.write(("live voice call, " + new java.util.Date() + ", NOX01 " + BuildInfo.VERSION + "\n")
                             .getBytes(StandardCharsets.UTF_8));
                 }
             } catch (Exception ignored) {
@@ -649,7 +649,7 @@ final class CodexLive {
             @JavascriptInterface
             public boolean ownMic() {
                 boolean ok = web == mine && startCapture();
-                CodexLive.log("Buddy's own recording (fallback): " + (ok ? "on" : "failed"));
+                CodexLive.log("NOX01's own recording (fallback): " + (ok ? "on" : "failed"));
                 return ok;
             }
 

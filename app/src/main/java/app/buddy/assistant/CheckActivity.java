@@ -244,7 +244,7 @@ public class CheckActivity extends Screen {
         body.addView(card, full());
         Button copy = button(this, getString(R.string.check_copy), false);
         copy.setOnClickListener(v -> {
-            getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("Buddy", report()));
+            getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("NOX01", report()));
             Toast.makeText(this, R.string.check_copied, Toast.LENGTH_SHORT).show();
         });
         body.addView(copy, topGap(16));
@@ -302,7 +302,7 @@ public class CheckActivity extends Screen {
 
     /** Plain text, no personal content: versions, the phone, the default agent and the results. */
     private String report() {
-        StringBuilder b = new StringBuilder("Buddy " + buddy() + "\n" + phone() + "\nDefault agent: "
+        StringBuilder b = new StringBuilder("NOX01 " + buddy() + "\n" + phone() + "\nDefault agent: "
                 + Account.nameOf(Prefs.backend(this)) + "\nAgents: " + agents() + "\n\n");
         for (Result r : results) {
             b.append(r.ok ? "OK    " : "FAIL  ").append(r.name).append(r.detail == null ? "" : ": " + r.detail).append('\n');
@@ -313,8 +313,8 @@ public class CheckActivity extends Screen {
     /** A new GitHub issue with the form's fields filled in, after showing exactly what goes in them. */
     private void reportBug() {
         String extra = "Default agent: " + Account.nameOf(Prefs.backend(this)) + "\nAgents: " + agents()
-                + "\n\nCheck Buddy:\n" + failures();
-        String shown = getString(R.string.check_report_text) + "\n\n" + phone() + "\nBuddy " + buddy() + "\n" + extra;
+                + "\n\nCheck NOX01:\n" + failures();
+        String shown = getString(R.string.check_report_text) + "\n\n" + phone() + "\nNOX01 " + buddy() + "\n" + extra;
         confirmSheet(this, getString(R.string.check_report_title), shown, getString(R.string.check_report_open), false, () -> {
             Uri u = Uri.parse(ISSUES).buildUpon()
                     .appendQueryParameter("phone", phone())

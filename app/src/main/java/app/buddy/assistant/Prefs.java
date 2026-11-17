@@ -639,7 +639,7 @@ final class Prefs {
 
     /** Its name in the Claude app. */
     static String remoteName(Context c) {
-        return sp(c).getString("remote_name", "Buddy");
+        return sp(c).getString("remote_name", "NOX01");
     }
 
     /** Keep a Codex session with remote control running inside Buddy's Linux, for the ChatGPT app (CodexRemote). */

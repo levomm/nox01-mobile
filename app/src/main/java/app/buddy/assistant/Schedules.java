@@ -451,10 +451,10 @@ public final class Schedules extends BroadcastReceiver {
         boolean locked = Triggers.locked(app);
         StringBuilder prompt = new StringBuilder(l != null
                 ? "[BUDDY_SCHEDULED] Earlier in this chat you scheduled the message below for " + english(l.at)
-                + " (schedule_message), and Buddy sent it now: the user may not be watching. Do what it says; approval "
+                + " (schedule_message), and NOX01 sent it now: the user may not be watching. Do what it says; approval "
                 + "cards still wait for them.\n"
                 : "[BUDDY_SCHEDULED] The user set this chat to send the message below " + s.schedule.english()
-                + ", and Buddy sent it now on its own: they may not be watching. Do it as if they had just typed it; "
+                + ", and NOX01 sent it now on its own: they may not be watching. Do it as if they had just typed it; "
                 + "approval cards still wait for them.\n");
         if (locked && Background.on(app, s.id)) {
             // this chat works on a screen of its own: the lock doesn't stop its phone tools (issue #35: told
@@ -470,7 +470,7 @@ public final class Schedules extends BroadcastReceiver {
         if (quiet) {
             prompt.append("Only tell the user when there's news: if this run finds nothing they need to hear about ")
                     .append("(nothing new or changed, nothing they must do), end your last reply with the line ")
-                    .append(ChatHub.QUIET).append(", and Buddy won't notify them. Leave it out whenever there's news, ")
+                    .append(ChatHub.QUIET).append(", and NOX01 won't notify them. Leave it out whenever there's news, ")
                     .append("a problem, or something for them to do.\n");
         }
         prompt.append('\n').append(text);
@@ -572,7 +572,7 @@ public final class Schedules extends BroadcastReceiver {
             return null;
         }
         if (SystemClock.elapsedRealtime() < until) {
-            return "LOCKED: this is a scheduled task and the phone is locked, so the screen can't be used. Buddy asked "
+            return "LOCKED: this is a scheduled task and the phone is locked, so the screen can't be used. NOX01 asked "
                     + "the user to unlock it. Nothing was done. Call " + tool + " again to keep waiting for them, or "
                     + "finish what you can without the screen.";
         }
@@ -625,7 +625,7 @@ public final class Schedules extends BroadcastReceiver {
      * chat's list changes on the main thread.
      */
     static String agentTool(Context c, String chat, String name, JSONObject a) throws Exception {
-        if (chat == null) return "Only in Buddy's own chats.";
+        if (chat == null) return "Only in NOX01's own chats.";
         if (Triggers.ruleRun(chat)) return "Not available in a notification rule's run.";
         java.util.concurrent.FutureTask<String> t = new java.util.concurrent.FutureTask<>(() -> {
             Sessions.Session s = ChatHub.get(c).sessions.find(chat);
@@ -671,10 +671,10 @@ public final class Schedules extends BroadcastReceiver {
         ChatHub.get(c).sessions.save(s);
         setLater(c, s, l);
         ChatHub.get(c).changed();
-        return "Scheduled " + l.id + " for " + english(at) + (l.remind ? ". It's a reminder: Buddy shows it to the user "
-                + "then as a notification, without running you." : ". Buddy sends it into this chat then, as a new message "
+        return "Scheduled " + l.id + " for " + english(at) + (l.remind ? ". It's a reminder: NOX01 shows it to the user "
+                + "then as a notification, without running you." : ". NOX01 sends it into this chat then, as a new message "
                 + "to you, also with the phone locked; the user sees it above the chat and can cancel it.")
-                + (exact(c) ? "" : " Android allows Buddy no exact alarms, so it may come a few minutes late.");
+                + (exact(c) ? "" : " Android allows NOX01 no exact alarms, so it may come a few minutes late.");
     }
 
     private static String list(Sessions.Session s) {

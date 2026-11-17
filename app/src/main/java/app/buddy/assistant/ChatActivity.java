@@ -51,7 +51,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
     private LinearLayout laterList;
     /** The skills offered while the message starts with "/". */
     private LinearLayout slashList;
-    /** "Android closed Buddy while this chat was working": Continue or Dismiss. */
+    /** "Android closed NOX01 while this chat was working": Continue or Dismiss. */
     private LinearLayout interruptedBox;
     private EditText input;
     private int maxBubble;
@@ -2599,7 +2599,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
                 copy.setPadding(dp(this, 9), dp(this, 9), dp(this, 9), dp(this, 9)); // a 16dp icon in a 34dp target
                 copy.setBackgroundResource(Ui.ripple(this, true));
                 copy.setOnClickListener(x -> {
-                    getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("Buddy", text));
+                    getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("NOX01", text));
                     Toast.makeText(this, R.string.chat_copied, Toast.LENGTH_SHORT).show();
                 });
                 LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(dp(this, 34), dp(this, 34));
@@ -2647,7 +2647,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
 
     private void copyOnLongPress(View v, String text) {
         v.setOnLongClickListener(x -> {
-            getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("Buddy", text));
+            getSystemService(ClipboardManager.class).setPrimaryClip(ClipData.newPlainText("NOX01", text));
             Toast.makeText(this, R.string.chat_copied, Toast.LENGTH_SHORT).show();
             return true;
         });

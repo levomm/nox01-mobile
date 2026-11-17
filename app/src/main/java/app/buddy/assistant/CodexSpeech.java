@@ -18,7 +18,7 @@ import java.util.ArrayDeque;
  */
 final class CodexSpeech {
     static final String[][] VOICES = {{"juniper", "Juniper"}, {"maple", "Maple"}, {"ember", "Ember"}, {"cove", "Cove"}};
-    private static final String PROMPT = "You are the voice of Buddy, a phone assistant. You only read text aloud. "
+    private static final String PROMPT = "You are the voice of NOX01, a phone assistant. You only read text aloud. "
             + "Each time you're given text, read it exactly as written, word for word, in the language it is in, "
             + "naturally and warmly. Never add, answer, comment, ask, or hand anything off. Say nothing else.";
 
@@ -105,7 +105,7 @@ final class CodexSpeech {
                     if (web == mine) fail();
                 });
             }
-        }, "Buddy");
+        }, "NOX01");
         web.loadDataWithBaseURL("https://buddy.local/", PAGE, "text/html", "utf-8", null);
         main.postDelayed(watchdog, 1000);
     }

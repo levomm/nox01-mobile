@@ -273,13 +273,13 @@ final class Relay {
         String key = p == null ? null : Secrets.get(c, Providers.secretName(p.id));
         if (p != null && p.off) { // the user switched this service off (Settings → API keys): nothing goes to it
             if (body == null) drain(from, length);
-            error(out, 403, "permission_error", p.name + " is switched off in Buddy. Switch it on in Buddy's Settings, "
+            error(out, 403, "permission_error", p.name + " is switched off in NOX01. Switch it on in NOX01's Settings, "
                     + "under API keys, or pick another model for this chat.");
             return;
         }
         if (key == null || base.isEmpty()) {
             if (body == null) drain(from, length); // the caller reads the answer only once its request is through
-            error(out, 401, "No API key saved in Buddy for this service. Add one in Buddy's Settings, under API keys.");
+            error(out, 401, "No API key saved in NOX01 for this service. Add one in NOX01's Settings, under API keys.");
             return;
         }
         String rest = parts.length == 3 ? "/" + parts[2] : "";
@@ -480,7 +480,7 @@ final class Relay {
      * the user as its own API error, so it says what helps.
      */
     static void tooLarge(OutputStream out, long size, int max) throws Exception {
-        error(out, 413, "request_too_large", "This request is " + (size >> 20) + " MB; Buddy has to rewrite requests to this "
+        error(out, 413, "request_too_large", "This request is " + (size >> 20) + " MB; NOX01 has to rewrite requests to this "
                 + "service and can do that up to " + (max >> 20) + " MB. A chat's pictures travel with every request: "
                 + "use Compact now in the chat, or start a new chat.");
     }

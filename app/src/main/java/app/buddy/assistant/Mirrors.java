@@ -127,7 +127,7 @@ final class Mirrors {
                 Prefs.setMirrorDns(c, m.id.isEmpty() ? "" : dns);
             }
         } catch (Exception e) {
-            android.util.Log.w("Buddy", "download server not applied", e);
+            android.util.Log.w("NOX01", "download server not applied", e);
         }
     }
 
