@@ -401,12 +401,23 @@ final class Ui {
         return DARK ? 0xFFE89A7C : 0xFFB4532F;
     }
 
-    /** 40×40 tile with "CC" (Claude Code), "CX" (Codex), "OC" (OpenCode), "AG" (Antigravity) or "GK" (Grok), in the agent's color. */
+    /** Provider's actual vector logo, in the same 40dp tile as before. */
     static TextView agentTile(Context c, String backend) {
-        TextView t = text(c, "codex".equals(backend) ? "CX" : "opencode".equals(backend) ? "OC"
-                : "agy".equals(backend) ? "AG" : "grok".equals(backend) ? "GK" : "CC", 13, agentColor(backend));
-        t.setTypeface(sans(c, 700));
+        int res = "codex".equals(backend) ? R.drawable.nox_brand_openai
+                : "opencode".equals(backend) ? R.drawable.nox_brand_opencode
+                : "agy".equals(backend) ? R.drawable.nox_brand_google
+                : "grok".equals(backend) ? R.drawable.nox_brand_xai : R.drawable.nox_brand_anthropic;
+        TextView t = text(c, "", 13, agentColor(backend));
         t.setGravity(Gravity.CENTER);
+        android.graphics.drawable.Drawable logo = c.getDrawable(res);
+        if (logo != null) {
+            int size = dp(c, 24);
+            logo.setBounds(0, 0, size, size);
+            logo.setTint(agentColor(backend));
+            t.setCompoundDrawables(logo, null, null, null);
+            t.setPaddingRelative(dp(c, 8), 0, 0, 0);
+        }
+        t.setContentDescription(Account.nameOf(backend));
         t.setBackground(rounded(c, Theme.withAlpha(agentColor(backend), 0x29), 14));
         t.setLayoutParams(new LinearLayout.LayoutParams(dp(c, 40), dp(c, 40)));
         return t;

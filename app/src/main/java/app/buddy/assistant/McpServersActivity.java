@@ -84,6 +84,16 @@ public class McpServersActivity extends Screen {
             });
             body.addView(out, tall(8));
         }
+        body.addView(title(this, getString(R.string.nox_plugins_presets), 16), gap(20));
+        body.addView(text(this, getString(R.string.nox_plugins_presets_info), 12, MUTED), gap(6));
+        String[][] integrations = {{"github", "GitHub"}, {"gmail", "Gmail"},
+                {"calendar", "Google Calendar"}, {"drive", "Google Drive"},
+                {"browser", "Brauser"}, {"custom", "Kohandatud MCP"}};
+        for (String[] integration : integrations) {
+            Button preset = button(this, "+  " + integration[1], false);
+            preset.setOnClickListener(v -> editor(null, integration[0]));
+            body.addView(preset, gap(7));
+        }
         body.addView(text(this, getString(R.string.mcp_note), 12, MUTED), gap(18));
     }
 
@@ -133,10 +143,16 @@ public class McpServersActivity extends Screen {
 
     /** Add a server, or change one: its tools are asked for before it's saved, so what's saved is known to work. */
     private void editor(final McpServers.S s) {
+        editor(s, "");
+    }
+
+    /** Integration templates prefill only a label; the user's real HTTPS MCP endpoint is required. */
+    private void editor(final McpServers.S s, String suggestedName) {
         final boolean adding = s == null;
         LinearLayout c = column(this);
         c.addView(title(this, adding ? getString(R.string.mcp_add) : s.id, 18));
         final EditText name = field(getString(R.string.mcp_name_hint), false);
+        if (adding && !suggestedName.isEmpty()) name.setText(suggestedName);
         final EditText url = field(getString(R.string.mcp_url_hint), false);
         final EditText key = field(getString(adding || !Secrets.has(this, McpServers.secretName(s.id))
                 ? R.string.mcp_key_hint : R.string.api_keys_key_keep_hint), true);

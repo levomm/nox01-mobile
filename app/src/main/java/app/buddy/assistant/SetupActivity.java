@@ -495,6 +495,36 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                 SetupActivity.class);
         dm.setOnClickListener(v -> defaultsSheet(this)); // a sheet, not a screen
         ag.addView(dm, topGap(4));
+        // Only show real, currently reported models: no fictitious model buttons.
+        LinearLayout topModels = column(this);
+        topModels.addView(title(this, getString(R.string.nox_top_models), 15));
+        topModels.addView(text(this, getString(R.string.nox_top_models_info), 12, MUTED));
+        int shown = 0;
+        for (Account available : Account.ALL) {
+            if (shown >= 8) break;
+            // Models.options already filters agent plans and includes configured API key models.
+            // Do not hide available provider models just because the plan itself is signed out.
+            for (String[] model : Models.options(available.agent, true)) {
+                if (shown >= 8) break;
+                if (model == null || model.length < 2 || model[0] == null || model[0].isEmpty()) continue;
+                String id = model[0].toLowerCase(java.util.Locale.ROOT);
+                if (!(id.contains("gpt-6") || id.contains("opus") || id.contains("sonnet")
+                        || id.contains("gemini-4") || id.contains("grok-4"))) continue;
+                String key = model[0], selectedAgent = available.agent;
+                View pick = navRow(R.drawable.ms_auto_awesome, model[1],
+                        Account.nameOf(selectedAgent), true, SetupActivity.class);
+                pick.setOnClickListener(v -> {
+                    Prefs.setAgentDefault(this, selectedAgent, key);
+                    Toast.makeText(this, getString(R.string.nox_top_model_selected, model[1]),
+                            Toast.LENGTH_SHORT).show();
+                    render();
+                });
+                topModels.addView(pick);
+                shown++;
+            }
+        }
+        if (shown == 0) topModels.addView(text(this, getString(R.string.nox_top_models_unavailable), 12, MUTED));
+        ag.addView(topModels, topGap(18));
         ag.addView(navRow(R.drawable.ms_terminal, "GitHub", GitHub.login == null || GitHub.login.isEmpty()
                 ? getString(R.string.github_row_none) : "@" + GitHub.login, GitHub.login != null && !GitHub.login.isEmpty(),
                 GitHubActivity.class), topGap(4));
