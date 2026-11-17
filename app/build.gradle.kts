@@ -31,6 +31,7 @@ android {
     signingConfigs {
         if (keystorePath != null) {
             create("release") {
+                storeType = "pkcs12"
                 storeFile = file(keystorePath)
                 storePassword = System.getenv("BUDDY_KEYSTORE_PASSWORD")
                 keyAlias = System.getenv("BUDDY_KEY_ALIAS") ?: "buddy"
