@@ -37,6 +37,9 @@ jobs:
       - name: Test Solana wallet address, RPC and safety limits
         run: python3 scripts/test_nox01_wallet.py
 
+      - name: Test Phantom connect callback and Keystore envelope
+        run: python3 scripts/test_nox01_phantom_connect.py
+
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
