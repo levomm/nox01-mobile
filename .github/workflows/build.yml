@@ -19,6 +19,9 @@ jobs:
       - name: Test NOX01 configuration
         run: python3 scripts/test_nox01_fork.py
 
+      - name: Test approved [01] launcher assets
+        run: python3 scripts/test_nox01_launcher.py
+
       - name: Test the helper on recorded agent output
         run: bash linux/test/run.sh
 
