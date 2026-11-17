@@ -22,6 +22,9 @@ jobs:
       - name: Test approved [01] launcher assets
         run: python3 scripts/test_nox01_launcher.py
 
+      - name: Check permanent NOX01 signing policy
+        run: python3 scripts/test_release_signing.py
+
       - name: Test the helper on recorded agent output
         run: bash linux/test/run.sh
 
