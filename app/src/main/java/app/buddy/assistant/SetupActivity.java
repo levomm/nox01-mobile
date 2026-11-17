@@ -240,6 +240,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                 {"safety", R.drawable.ms_shield_person, R.string.settings_safety, R.string.settings_safety_sub},
                 {"background", R.drawable.ms_layers, R.string.settings_background, R.string.settings_background_sub},
                 {"tools", R.drawable.ms_terminal, R.string.settings_tools, R.string.settings_tools_sub},
+                {"wallet", R.drawable.ms_key, R.string.nox_wallet_title, R.string.nox_wallet_setting_sub},
                 {"appearance", R.drawable.ms_image, R.string.setup_appearance, R.string.settings_appearance_sub},
                 {"about", R.drawable.ms_backup, R.string.settings_about, R.string.settings_about_sub},
         };
@@ -287,7 +288,9 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
             t.addView(what);
             r.addView(t, weight1());
             r.addView(icon(this, R.drawable.ms_chevron_right, MUTED, 22));
-            r.setOnClickListener(v -> startActivity(new Intent(this, SetupActivity.class).putExtra("page", id)));
+            r.setOnClickListener(v -> startActivity("wallet".equals(id)
+                    ? new Intent(this, WalletActivity.class)
+                    : new Intent(this, SetupActivity.class).putExtra("page", id)));
             m.addView(r, full());
         }
         addCard(m);
