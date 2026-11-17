@@ -28,6 +28,9 @@ jobs:
       - name: Test animated DOOM bubble
         run: python3 scripts/test_doom_bubble.py
 
+      - name: Test real Tactical Neu-Dark Android UI
+        run: python3 scripts/test_neu_dark_ui.py
+
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
