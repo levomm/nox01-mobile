@@ -389,7 +389,7 @@ final class Prefs {
         if (android.os.Build.VERSION.SDK_INT >= 31 && accentFromWallpaper(c)) { // (the check here too: for lint)
             return c.getColor(android.R.color.system_accent1_500) | 0xFF000000;
         }
-        return sp(c).getInt("accent", 0xFFD97757);
+        return sp(c).getInt("accent", "neu".equals(surface(c)) ? 0xFF5CC08A : 0xFFD97757);
     }
 
     static void setAccent(Context c, int color) {
@@ -443,7 +443,22 @@ final class Prefs {
 
     /** Surface style: "warm", "neutral" or "black" (black applies in dark mode only). */
     static String surface(Context c) {
-        return sp(c).getString("surface", "black");
+        android.content.SharedPreferences prefs = sp(c);
+        // One-time migration of the previous all-black default. Explicitly chosen
+        // warm and neutral themes are retained; font and custom accent are untouched.
+        if (!prefs.getBoolean("neu_2026_migrated", false)) {
+            String previous = prefs.getString("surface", "black");
+            android.content.SharedPreferences.Editor edit = prefs.edit()
+                    .putBoolean("neu_2026_migrated", true);
+            if ("black".equals(previous)) {
+                edit.putString("surface", "neu");
+                edit.apply();
+                return "neu";
+            }
+            edit.apply();
+            return previous;
+        }
+        return prefs.getString("surface", "neu");
     }
 
     static void setSurface(Context c, String s) {
