@@ -1210,15 +1210,15 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
     /** Fast looks: paired dark surfaces and accent colors, plus the existing custom HEX swatch below. */
     private View themePresets() {
         String[][] preset = {
-                {"#D97757", "warm"}, {"#4CD4A0", "black"}, {"#65AFFF", "neutral"},
-                {"#E0A43A", "black"}, {"#AEB7C3", "black"}
+                {"#5CC08A", "neu"}, {"#D97757", "warm"}, {"#4CD4A0", "black"},
+                {"#65AFFF", "neutral"}, {"#E0A43A", "black"}, {"#AEB7C3", "black"}
         };
-        int[] labels = {R.string.preset_claude, R.string.preset_terminal, R.string.preset_ice,
-                R.string.preset_amber, R.string.preset_oled};
+        int[] labels = {R.string.preset_tactical_neu, R.string.preset_claude, R.string.preset_terminal,
+                R.string.preset_ice, R.string.preset_amber, R.string.preset_oled};
         LinearLayout all = column(this);
         for (int line = 0; line < 2; line++) {
             LinearLayout row = row(this);
-            int from = line == 0 ? 0 : 3, to = line == 0 ? 3 : 5;
+            int from = line == 0 ? 0 : 3, to = line == 0 ? 3 : 6;
             for (int i = from; i < to; i++) {
                 int color = Theme.parse(preset[i][0], 0xFFD97757);
                 String surface = preset[i][1];
