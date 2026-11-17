@@ -8,6 +8,11 @@ import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.Color;
+import android.view.MotionEvent;
+import android.view.animation.OvershootInterpolator;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -183,6 +188,81 @@ final class Ui {
         return v;
     }
 
+    /** Tactile Neu-Dark is opt-in via Appearance and the new dark default. */
+    static boolean neu(Context c) {
+        return DARK && "neu".equals(Prefs.surface(c));
+    }
+
+    /** Raised, three-layer graphite surface with highlight and recessed lower edge.
+     * All layers are native drawables and respect accessibility text scaling.
+     */
+    static Drawable neuSurface(Context c, int radiusDp) {
+        GradientDrawable low = rounded(c, 0xFF0E1014, radiusDp);
+        GradientDrawable rim = rounded(c, 0xFF434951, radiusDp);
+        GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                new int[]{0xFF2D3036, 0xFF22252B, 0xFF1E2127});
+        face.setCornerRadius(dp(c, radiusDp));
+        face.setStroke(dp(c, 1), 0x66555B64);
+        LayerDrawable layers = new LayerDrawable(new Drawable[]{low, rim, face});
+        layers.setLayerInset(0, dp(c, 3), dp(c, 5), dp(c, 1), 0);
+        layers.setLayerInset(1, dp(c, 1), 0, dp(c, 3), dp(c, 4));
+        layers.setLayerInset(2, dp(c, 2), dp(c, 2), dp(c, 2), dp(c, 3));
+        return layers;
+    }
+
+    /** Inside-pressed counterpart for selected tabs and active controls. */
+    static Drawable neuInsetSurface(Context c, int radiusDp) {
+        GradientDrawable back = rounded(c, 0xFF15181C, radiusDp);
+        GradientDrawable edge = rounded(c, 0xFF32373D, radiusDp);
+        GradientDrawable inset = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                new int[]{0xFF1B201C, 0xFF242D25});
+        inset.setCornerRadius(dp(c, radiusDp));
+        inset.setStroke(dp(c, 1), 0x77434F40);
+        LayerDrawable layers = new LayerDrawable(new Drawable[]{back, edge, inset});
+        layers.setLayerInset(0, dp(c, 1), dp(c, 1), dp(c, 1), dp(c, 1));
+        layers.setLayerInset(1, dp(c, 3), dp(c, 4), dp(c, 1), dp(c, 1));
+        layers.setLayerInset(2, dp(c, 3), dp(c, 3), dp(c, 3), dp(c, 3));
+        return layers;
+    }
+
+    /** Slightly luminous green tactile FAB. Other accent choices remain supported. */
+    static Drawable neuAccentSurface(Context c, int radiusDp, int accent) {
+        GradientDrawable shadow = rounded(c, 0xFF0E1010, radiusDp);
+        GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.28f), radiusDp);
+        GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
+                new int[]{Theme.blend(accent, Color.WHITE, 0.16f), accent,
+                        Theme.darken(accent, 0.72f)});
+        face.setCornerRadius(dp(c, radiusDp));
+        face.setStroke(dp(c, 1), Theme.withAlpha(Color.WHITE, 0x5C));
+        LayerDrawable layers = new LayerDrawable(new Drawable[]{shadow, glow, face});
+        layers.setLayerInset(0, dp(c, 3), dp(c, 5), 0, 0);
+        layers.setLayerInset(1, dp(c, 1), 0, dp(c, 2), dp(c, 4));
+        layers.setLayerInset(2, dp(c, 2), dp(c, 2), dp(c, 2), dp(c, 3));
+        return layers;
+    }
+
+    /** A real touch-driven dip and rubber-band rebound, not a delayed click animation.
+     * Returning false preserves the click listener and TalkBack semantics.
+     */
+    static void elasticPress(View v) {
+        v.setOnTouchListener((view, event) -> {
+            int action = event.getActionMasked();
+            if (action != MotionEvent.ACTION_DOWN && action != MotionEvent.ACTION_UP
+                    && action != MotionEvent.ACTION_CANCEL) return false;
+            if (!android.animation.ValueAnimator.areAnimatorsEnabled()) return false;
+            view.animate().cancel();
+            if (action == MotionEvent.ACTION_DOWN) {
+                view.animate().scaleX(0.945f).scaleY(0.945f)
+                        .setDuration(85).setInterpolator(new android.view.animation.DecelerateInterpolator())
+                        .start();
+            } else {
+                view.animate().scaleX(1f).scaleY(1f).setDuration(250)
+                        .setInterpolator(new OvershootInterpolator(1.45f)).start();
+            }
+            return false;
+        });
+    }
+
     static int ripple(Context c, boolean borderless) {
         TypedValue tv = new TypedValue();
         c.getTheme().resolveAttribute(borderless ? android.R.attr.selectableItemBackgroundBorderless
@@ -220,7 +300,9 @@ final class Ui {
         b.setMinWidth(0);
         b.setMinimumWidth(0);
         b.setStateListAnimator(null);
-        b.setBackground(rounded(c, primary ? ACCENT : CARD2, 14));
+        b.setBackground(neu(c) ? (primary ? neuAccentSurface(c, 14, ACCENT)
+                : neuSurface(c, 14)) : rounded(c, primary ? ACCENT : CARD2, 14));
+        if (neu(c)) elasticPress(b);
         return b;
     }
 
@@ -1273,7 +1355,8 @@ final class Ui {
         LinearLayout bar = row(a);
         bar.setGravity(Gravity.CENTER);
         bar.setPaddingRelative(dp(a, 6), dp(a, 6), dp(a, 6), dp(a, 6));
-        bar.setBackground(DARK ? rounded(a, NAV, 34) : outlined(a, NAV, 34, LINE, 1));
+        bar.setBackground(neu(a) ? neuSurface(a, 34)
+                : DARK ? rounded(a, NAV, 34) : outlined(a, NAV, 34, LINE, 1));
         bar.setElevation(dp(a, DARK ? 8 : 4));
         Object[][] items = {
                 {R.drawable.ms_chat_bubble, a.getString(R.string.ui_nav_chats), MainActivity.class},
@@ -1285,17 +1368,21 @@ final class Ui {
             boolean on = i == active;
             LinearLayout it = row(a);
             it.setGravity(Gravity.CENTER);
-            it.setPaddingRelative(dp(a, 8), 0, dp(a, 8), 0);
+            it.setPaddingRelative(dp(a, neu(a) ? 4 : 8), 0, dp(a, neu(a) ? 4 : 8), 0);
             it.setMinimumHeight(dp(a, 56));
-            if (on) it.setBackground(rounded(a, Theme.withAlpha(ACCENT, 0x29), 28));
+            if (on) it.setBackground(neu(a) ? neuInsetSurface(a, 28)
+                    : rounded(a, Theme.withAlpha(ACCENT, 0x29), 28));
+            else if (neu(a)) it.setBackground(rounded(a, NAV, 28));
             else it.setBackgroundResource(ripple(a, true));
+            if (neu(a)) elasticPress(it);
             FrameLayout iconBox = new FrameLayout(a);
             iconBox.addView(icon(a, (Integer) items[i][0], on ? TEXT : MUTED, 20),
                     new FrameLayout.LayoutParams(dp(a, 20), dp(a, 20), Gravity.CENTER));
-            it.addView(iconBox, new LinearLayout.LayoutParams(dp(a, 28), dp(a, 28)));
-            TextView label = single(text(a, (String) items[i][1], 14, on ? TEXT : MUTED));
+            it.addView(iconBox, new LinearLayout.LayoutParams(dp(a, neu(a) ? 23 : 28),
+                    dp(a, neu(a) ? 23 : 28)));
+            TextView label = single(text(a, (String) items[i][1], neu(a) ? 12 : 14, on ? TEXT : MUTED));
             label.setTypeface(sans(a, on ? 600 : 500));
-            label.setPaddingRelative(dp(a, 6), 0, 0, 0);
+            label.setPaddingRelative(dp(a, neu(a) ? 3 : 6), 0, 0, 0);
             it.addView(label);
             if (i == NAV_SESSIONS && sessionsBadge > 0) {
                 TextView b = text(a, String.valueOf(sessionsBadge), 11, ON_ACCENT);
