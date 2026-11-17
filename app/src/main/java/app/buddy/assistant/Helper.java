@@ -81,13 +81,13 @@ final class Helper {
                         int n;
                         while ((n = in.read(buf)) > 0) out.write(buf, 0, n);
                     } catch (IOException e) { // the log can't be written (no room): the helper works on, its output is dropped
-                        android.util.Log.w("Buddy", "helper log", e);
+                        android.util.Log.w("NOX01", "helper log", e);
                         while (in.read(buf) > 0) continue;
                     }
                 }
                 p.waitFor();
             } catch (Exception e) {
-                android.util.Log.w("Buddy", "helper failed", e);
+                android.util.Log.w("NOX01", "helper failed", e);
             } finally {
                 // only a helper that has really ended (or never started) is reported as gone
                 if (gone != null && (p == null || !p.isAlive())) gone.accept(p == null ? -1 : p.exitValue());
@@ -122,8 +122,8 @@ final class Helper {
                     + "when the task calls for it):\n" + never;
         }
         if (Prefs.agentsTapBuddy(c)) {
-            text += (text.isEmpty() ? "" : "\n") + "The user switched on \"Let agents tap Buddy's screens\" in Buddy's "
-                    + "Settings. So, unlike the rule above, you may open Buddy and use its screens when the user asks: "
+            text += (text.isEmpty() ? "" : "\n") + "The user switched on \"Let agents tap NOX01's screens\" in NOX01's "
+                    + "Settings. So, unlike the rule above, you may open NOX01 and use its screens when the user asks: "
                     + "the Chats list, a chat, and the main Settings screen. These parts stay the user's own, and a tap "
                     + "there answers BLOCKED: the bubble and its cards, approval cards, a chat's Linux tools chip and "
                     + "Chat options (with its scheduled task), and the screens for App permissions, API keys, MCP "
@@ -141,7 +141,7 @@ final class Helper {
                 }
             }
         } catch (IOException e) {
-            android.util.Log.w("Buddy", "permissions not written", e);
+            android.util.Log.w("NOX01", "permissions not written", e);
         }
     }
 

@@ -879,7 +879,7 @@ public class BuddyService extends AccessibilityService implements McpServer.Hand
      */
     static final String NOT_NOW = "NOT ANSWERED: the user isn't answering right now, and a notification rule's run doesn't "
             + "wait for them. Don't do it; say in your last reply what you wanted to do. For a message, use "
-            + "reply_notification instead: Buddy keeps the reply for them.";
+            + "reply_notification instead: NOX01 keeps the reply for them.";
 
     /** askRuleReply: the user didn't answer in time, so the reply goes to their Waiting list (the rest: why). */
     static final String LATER = "LATER:";
@@ -1043,7 +1043,7 @@ public class BuddyService extends AccessibilityService implements McpServer.Hand
             main.post(() -> bubble.cancelConfirm(cb));
             String step = stepDone == null ? null : stepDone.get();
             if (step != null) {
-                return step + " Buddy saw it and closed the question for them. Call read_screen before going on.";
+                return step + " NOX01 saw it and closed the question for them. Call read_screen before going on.";
             }
             return "NO ANSWER: the user did not answer within " + (rule ? "a minute" : "5 minutes")
                     + ". Don't guess; stop and ask in your reply.";

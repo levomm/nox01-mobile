@@ -300,7 +300,7 @@ final class Background {
         synchronized (starting) {
             if (alive(c)) return null;
             if (!setUp(c)) return "background mode isn't set up (Settings → Background mode)";
-            if (!Linux.installed(c)) return "background mode needs Buddy's Linux, which isn't installed";
+            if (!Linux.installed(c)) return "background mode needs NOX01's Linux, which isn't installed";
             int known = Prefs.backgroundAdbPort(c);
             if (known > 0 && listening(known)) { // the port it had last time, or the one Settings just showed
                 launch(c, Collections.singletonList(known));
@@ -334,7 +334,7 @@ final class Background {
             }
             if (ports.isEmpty()) {
                 return "Wireless debugging is off, and background mode needs it once after a restart of the phone: the "
-                        + "user opens Buddy → Settings → Background mode and taps Start now (Wi-Fi must be connected)";
+                        + "user opens NOX01 → Settings → Background mode and taps Start now (Wi-Fi must be connected)";
             }
             String out = launch(c, ports);
             for (int i = 0; i < 20; i++) {
@@ -345,7 +345,7 @@ final class Background {
                 sleep(300);
             }
             return out.contains("PORT=") ? "its helper didn't start" + said(out)
-                    : "Buddy isn't paired with this phone's Wireless debugging any more (Settings → Background mode → Set up)";
+                    : "NOX01 isn't paired with this phone's Wireless debugging any more (Settings → Background mode → Set up)";
         }
     }
 

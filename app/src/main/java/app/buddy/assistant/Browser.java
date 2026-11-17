@@ -275,7 +275,7 @@ final class Browser {
                     try {
                         onMessage(new JSONObject(text));
                     } catch (Exception e) {
-                        android.util.Log.w("BuddyBrowser", "bad message", e);
+                        android.util.Log.w("NOX01Browser", "bad message", e);
                     }
                 }
                 msg.write(buf, from, n - from);
@@ -870,7 +870,7 @@ final class Browser {
             deliver(key, BitmapFactory.decodeByteArray(jpg, 0, jpg.length));
             changed();
         } catch (Exception e) {
-            android.util.Log.w("BuddyBrowser", "screencast", e);
+            android.util.Log.w("NOX01Browser", "screencast", e);
         }
     }
 
@@ -913,7 +913,7 @@ final class Browser {
             try {
                 r.run();
             } catch (Exception e) {
-                android.util.Log.w("BuddyBrowser", "live view action", e);
+                android.util.Log.w("NOX01Browser", "live view action", e);
             }
         });
     }

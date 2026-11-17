@@ -176,14 +176,14 @@ final class Tools {
                         .put("max_scrolls", intProp("Default 10, max 30")),
                 "text"));
         t.put(tool("confirm",
-                "Ask the user to approve an action in the Buddy bubble and wait for the answer. "
+                "Ask the user to approve an action in the NOX01 bubble and wait for the answer. "
                         + "REQUIRED before sending messages, posting, buying, deleting, or changing settings. "
                         + "Show the exact text or action. Returns APPROVED, DENIED, or CHANGES REQUESTED with "
                         + "what the user wants changed: then make those changes and call confirm again.",
                 props().put("summary", strProp("Exactly what you are about to do, including any text to be sent")),
                 "summary"));
         t.put(tool("ask",
-                "Ask the user a question in the Buddy bubble and wait for the answer: 2 to 4 answer buttons, and "
+                "Ask the user a question in the NOX01 bubble and wait for the answer: 2 to 4 answer buttons, and "
                         + "the user can always type their own answer instead. Use it when you need the user to choose "
                         + "or decide (which reply, which item, which time) instead of guessing. With highlight, it also "
                         + "hands a step over to the user (a password or code, their details in a form, a file picker, a "
@@ -195,9 +195,9 @@ final class Tools {
                                 .put("items", new JSONObject().put("type", "string"))
                                 .put("description", "2 to 4 short answers, one per button"))
                         .put("highlight", marksProp("Optional: what the user has to do on the screen before answering "
-                                + "(as in point_out), e.g. the fields to fill in. Buddy marks them, and the question waits "
+                                + "(as in point_out), e.g. the fields to fill in. NOX01 marks them, and the question waits "
                                 + "next to the bubble instead of covering the screen; the marks go once they answer. When "
-                                + "every mark is a button or a switch, Buddy closes the question itself once it sees "
+                                + "every mark is a button or a switch, NOX01 closes the question itself once it sees "
                                 + "them done (the result starts with DONE).")),
                 "question", "options"));
         JSONObject item = new JSONObject().put("type", "object").put("properties", props()
@@ -206,7 +206,7 @@ final class Tools {
         t.getJSONObject(t.length() - 1).getJSONObject("inputSchema").getJSONObject("properties").put("browser_highlight",
                 new JSONObject().put("type", "array").put("maxItems", 6).put("items", item).put("description",
                         "Optional, instead of highlight: items in the background browser the user has to use (a "
-                                + "sign-in, a captcha, their details). Buddy opens the browser full screen with them "
+                                + "sign-in, a captcha, their details). NOX01 opens the browser full screen with them "
                                 + "marked, and closes it once the user answers."));
         t.put(tool("point_out",
                 "Show the user where to look or what to do on the screen: a box, circle or arrow with a short label "
@@ -223,12 +223,12 @@ final class Tools {
                         .put("wait", boolProp("Wait until the user has done what the marks point at, or until they can't anymore"))
                         .put("seconds", intProp("How long the marks stay at most: default 60 (180 with wait), max 300")),
                 "marks"));
-        t.put(tool("notify", "Show a short status line in the Buddy bubble without stopping.",
+        t.put(tool("notify", "Show a short status line in the NOX01 bubble without stopping.",
                 props().put("text", strProp("Status text")), "text"));
         t.put(tool("reply_notification",
                 "Answer the notification that started this chat through its own reply field, without opening the app. "
                         + "Only in chats started by one of the user's notification rules, when the notification has a reply "
-                        + "field. Buddy shows the user an approval card with the text first, unless you called confirm "
+                        + "field. NOX01 shows the user an approval card with the text first, unless you called confirm "
                         + "with it just before.",
                 props().put("text", strProp("The reply, exactly as it should be sent")), "text"));
         t.put(tool("delegate",
@@ -264,14 +264,14 @@ final class Tools {
         t.put(tool("schedule_message",
                 "Schedule a message to yourself in this chat, sent once at a later time: to check something again, "
                         + "remind the user, or go on with a task later (\"check the price again tomorrow at 9\"). At its time "
-                        + "Buddy sends it into this chat as a new message to you, also with the phone locked, and you work "
+                        + "NOX01 sends it into this chat as a new message to you, also with the phone locked, and you work "
                         + "as usual. The user sees it above the chat and can cancel it. For something every day, tell "
                         + "the user about Chat options > Schedule instead.",
                 props().put("message", strProp("What to do then, as a message to yourself with everything you'll need"))
                         .put("in_minutes", intProp("In this many minutes"))
                         .put("at", strProp("Or at this time, the phone's: \"2026-10-28 09:00\", or \"09:00\" for the next one"))
                         .put("remind", boolProp("A plain reminder for the user (\"remind me at 6 to call mom\"): at that "
-                                + "time Buddy shows the message to them as a notification and in this chat, without "
+                                + "time NOX01 shows the message to them as a notification and in this chat, without "
                                 + "running you, so it uses none of their plan. The message is then for the user."))
                         .put("quiet", boolProp("For a check you'll run then (\"tell me if the price drops\"): you may "
                                 + "end that run without notifying the user when there's no news")),
@@ -284,25 +284,25 @@ final class Tools {
                         + "command line on the phone itself, as Android's shell user (what `adb shell` gives): pm, am, "
                         + "settings, dumpsys, logcat -d, getprop, files under /sdcard. Returns its exit code and output "
                         + "(the last 20,000 characters). The user approves each command on a card first, unless they "
-                        + "turned that off. This is not Buddy's Linux: your own shell is for files there. To use the "
+                        + "turned that off. This is not NOX01's Linux: your own shell is for files there. To use the "
                         + "screen, use the phone tools (tap, type_text, ...), not `input`. Never use it to get around "
                         + "an approval card, a BLOCKED answer or a step the user has to do themselves.",
                 props().put("command", strProp("The command line (run by sh -c)"))
                         .put("timeout_s", intProp("Default 60, max 300")), "command"));
         t.put(tool("install_apk",
-                "(Needs Linux tools) Open Android's installer for an APK built in Buddy's Linux, e.g. "
+                "(Needs Linux tools) Open Android's installer for an APK built in NOX01's Linux, e.g. "
                         + "/root/.buddy/work/myapp/build/app.apk, or served by another app on this phone at a local URL "
                         + "(http://127.0.0.1:<port>/app.apk, e.g. from Termux). The user taps Install/Update themselves; "
                         + "call wait_for_install next.",
-                props().put("path", strProp("Full path of the .apk inside Buddy's Linux, or its http://127.0.0.1 URL")), "path"));
+                props().put("path", strProp("Full path of the .apk inside NOX01's Linux, or its http://127.0.0.1 URL")), "path"));
         if (Flavor.FDROID) { // F-Droid updates this build; the tool says where updates come from
             t.put(tool("update_buddy",
-                    "Say how this Buddy gets its updates (it's the F-Droid build, which doesn't update itself). Use it when "
-                            + "the user asks to update Buddy or whether there's a new version.", props()));
+                    "Say how this NOX01 gets its updates (it's the F-Droid build, which doesn't update itself). Use it when "
+                            + "the user asks to update NOX01 or whether there's a new version.", props()));
         } else {
             t.put(tool("update_buddy",
-                    "Check whether a newer Buddy is out (the official GitHub release) and what's new; with install=true, "
-                            + "download it and open Android's installer. Use it when the user asks to update Buddy or whether "
+                    "Check whether a newer NOX01 is out (the official GitHub release) and what's new; with install=true, "
+                            + "download it and open Android's installer. Use it when the user asks to update NOX01 or whether "
                             + "there's a new version. Only the user can tap Update.",
                     props().put("install", boolProp("true: download the update and open the installer (after the user said yes)"))));
         }
@@ -386,7 +386,7 @@ final class Tools {
         if (notes != null) {
             r.getJSONArray("content").put(new JSONObject().put("type", "text").put("text",
                     "\n[BUDDY_USER_UPDATE] The user added this while you were working; it comes from the user, through "
-                            + "Buddy, not from the screen. Take it into account now, it may change or stop the task. If it "
+                            + "NOX01, not from the screen. Take it into account now, it may change or stop the task. If it "
                             + "asks something, answer it in your final reply too, not only the first task:\n" + notes));
         }
         return r;
@@ -489,7 +489,7 @@ final class Tools {
                     // as an approval: the action itself is judged when it comes (see guard: is it a send, in an app
                     // the rule covers, not a button the user listed as always asking), and noted in the chat then
                     return text("APPROVED by the user's rule for this run: they allowed routine steps in "
-                            + frontName() + " without asking. Go ahead with this, and only this, there. Buddy still "
+                            + frontName() + " without asking. Go ahead with this, and only this, there. NOX01 still "
                             + "asks the user itself where a step isn't routine (paying, buying, deleting, installing, "
                             + "passwords, security settings), is in another app or the background browser, or is one "
                             + "they set to always ask.");
@@ -592,7 +592,7 @@ final class Tools {
     }
 
     /**
-     * The F-Droid build's answer to "update Buddy": an F-Droid app that installed it updates it; a copy installed some
+     * The F-Droid build's answer to "update NOX01": an F-Droid app that installed it updates it; a copy installed some
      * other way (its APK from the GitHub release) gets no updates until the user installs the normal buddy.apk.
      */
     private String fdroidUpdates() {
@@ -602,11 +602,11 @@ final class Tools {
         } catch (Exception ignored) {
         }
         boolean fdroid = by != null && (by.contains("fdroid") || by.equals("com.looker.droidify") || by.contains("neo_store"));
-        if (fdroid) return "This Buddy is from F-Droid, which updates it: the user checks for updates in their F-Droid app.";
-        return "This is Buddy's F-Droid build, but no F-Droid app installed it (" + (by == null ? "installed from a file" : "installed by " + by)
-                + "), so nothing updates it. Tell the user: install the latest buddy.apk from "
+        if (fdroid) return "This NOX01 is from F-Droid, which updates it: the user checks for updates in their F-Droid app.";
+        return "This is NOX01's F-Droid build, but no F-Droid app installed it (" + (by == null ? "installed from a file" : "installed by " + by)
+                + "), so nothing updates it. Tell the user: install the latest nox01-mobile.apk from "
                 + "https://github.com/levomm/nox01-mobile/releases/latest over it (chats and settings stay, and that one "
-                + "updates itself), or get Buddy from F-Droid.";
+                + "updates itself), or get NOX01 from F-Droid.";
     }
 
     /**
@@ -635,8 +635,8 @@ final class Tools {
         if (cmd.isEmpty()) return "Give the command.";
         if (cmd.length() > 4000) return "That command is too long (4,000 characters at most). Put a script in a file under /sdcard and run that.";
         if (SHELL_NO.matcher(cmd).find()) {
-            return "BLOCKED: phone commands don't touch the screen or Buddy itself. For taps, typing and swipes use the "
-                    + "phone tools, which ask the user where they should; Buddy's own settings are the user's.";
+            return "BLOCKED: phone commands don't touch the screen or NOX01 itself. For taps, typing and swipes use the "
+                    + "phone tools, which ask the user where they should; NOX01's own settings are the user's.";
         }
         int secs = Math.max(1, Math.min(300, a.optInt("timeout_s", 60)));
         if (Prefs.phoneShellAsk(svc) && !Guard.takeApproval(false, cmd)) {
@@ -692,7 +692,7 @@ final class Tools {
         }
         boolean watchable = false;
         for (Marks.Mark m : marks) watchable |= m.detectable();
-        if (!watchable) return "Can't wait on these: Buddy can only see the user do it on elements from read_screen, not on bare points.";
+        if (!watchable) return "Can't wait on these: NOX01 can only see the user do it on elements from read_screen, not on bare points.";
         CountDownLatch over = new CountDownLatch(1);
         AtomicReference<String> how = new AtomicReference<>();
         svc.runOnMain(() -> svc.marks().show(marks, shape, ms, r -> {
@@ -703,13 +703,13 @@ final class Tools {
         long end = System.currentTimeMillis() + ms + 3000;
         while (!over.await(1, TimeUnit.SECONDS)) {
             if ((gone != null && gone.getAsBoolean()) || System.currentTimeMillis() > end) {
-                svc.runOnMain(() -> svc.marks().clear("NOT DONE: Buddy stopped waiting."));
+                svc.runOnMain(() -> svc.marks().clear("NOT DONE: NOX01 stopped waiting."));
                 over.await(2, TimeUnit.SECONDS);
                 break;
             }
         }
         svc.screenChangedByUser();
-        String r = how.get() == null ? "NOT DONE: Buddy stopped waiting." : how.get();
+        String r = how.get() == null ? "NOT DONE: NOX01 stopped waiting." : how.get();
         return r + (r.startsWith("DONE") ? " Call read_screen to see where they are now."
                 : " Call read_screen, then point it out again or ask the user.");
     }
@@ -782,7 +782,7 @@ final class Tools {
         return null;
     }
 
-    private static final String STOPPED = "STOPPED by Buddy: the same action " + MAX_REPEATS + " times in a row looks"
+    private static final String STOPPED = "STOPPED by NOX01: the same action " + MAX_REPEATS + " times in a row looks"
             + " like a loop. Don't try more actions; tell the user what's done and what's left. They can tell you to go on.";
 
     /** Whether a package has an icon to open (App permissions lists those): asked of the system once each. */
@@ -900,7 +900,7 @@ final class Tools {
             if (answer.startsWith(BuddyService.LATER)) {
                 Triggers.later(svc, chat, text, answer.substring(BuddyService.LATER.length()));
                 noteInChat(chat, svc.getString(R.string.card_note_later));
-                return "Not sent yet: the user didn't answer in time, so Buddy keeps your reply in their Waiting list, "
+                return "Not sent yet: the user didn't answer in time, so NOX01 keeps your reply in their Waiting list, "
                         + "where they'll send, change or skip it. Don't call reply_notification again; end the run and say "
                         + "in one line that your reply is waiting for them.";
             }
@@ -923,7 +923,7 @@ final class Tools {
     private String wroteAgain(String chat, Triggers.Note n) {
         Triggers.carryOver(chat);
         return "Not sent: " + n.who() + " wrote again in " + n.app + " since this run began, so your reply would answer "
-                + "old messages only. Buddy starts a new run for everything together; stop here and say so in one line.";
+                + "old messages only. NOX01 starts a new run for everything together; stop here and say so in one line.";
     }
 
     /** A line in the run's chat (main thread). */
@@ -982,7 +982,7 @@ final class Tools {
         } catch (InterruptedException ignored) {
         }
         noteInChat(ses.id, svc.getString(R.string.background_brought));
-        return "This chat was working in the background, on a screen the user can't see, and " + why + ". So Buddy moved "
+        return "This chat was working in the background, on a screen the user can't see, and " + why + ". So NOX01 moved "
                 + (app[0] == null ? "the chat" : app[0]) + " to the user's real screen and turned background mode off for "
                 + "this chat: from now on you work on the real screen. Element ids changed: call read_screen, then do "
                 + "this step again.";
@@ -1016,7 +1016,7 @@ final class Tools {
                     if (w.getType() == AccessibilityWindowInfo.TYPE_APPLICATION) {
                         sb.append("\n## App window").append(title != null ? " \"" + title + "\"" : "")
                                 .append(w.isActive() ? " (active)" : "")
-                                .append(": Buddy can't read this window (the app hides its screen, or it's still"
+                                .append(": NOX01 can't read this window (the app hides its screen, or it's still"
                                         + " loading). Use screenshot to see it. Taps may not work here; if they"
                                         + " don't, ask the user to do this step.\n");
                     }
@@ -1588,7 +1588,7 @@ final class Tools {
         if (toast != null) return " A toast showed: \"" + clip(toast) + "\".";
         if (before == null || !before.equals(screenPrint())) return "";
         return " " + NOTHING_CHANGED + ": the screen reads the same as before. It may have missed, the app may be slow, or it "
-                + "draws something Buddy can't read. Look with read_screen or screenshot before trying again, and try "
+                + "draws something NOX01 can't read. Look with read_screen or screenshot before trying again, and try "
                 + "something different rather than repeating this.";
     }
 
@@ -1727,20 +1727,20 @@ final class Tools {
         String answer = svc.askConfirm(summary, send);
         if (answer.startsWith("APPROVED")) return null;
         if (answer.startsWith("CHANGES")) return "Not tapped: the user wants changes first. " + answer;
-        return "BLOCKED by Buddy's safety rule: the user did not approve “" + what + "”. Don't retry it; "
+        return "BLOCKED by NOX01's safety rule: the user did not approve “" + what + "”. Don't retry it; "
                 + "ask the user what they want.";
     }
 
     /**
-     * Why a touch on Buddy itself didn't happen. With "Let agents tap Buddy's screens" on, only some parts are still
+     * Why a touch on Buddy itself didn't happen. With "Let agents tap NOX01's screens" on, only some parts are still
      * the user's: the answer says so, or the agent takes the whole of Buddy for forbidden (issue #33).
      */
     private String ownScreen(String verb) {
-        if (!Prefs.agentsTapBuddy(svc)) return "BLOCKED: that's one of Buddy's own screens. Only the user " + verb + " those.";
-        return "BLOCKED: this part of Buddy stays the user's own, also with \"Let agents tap Buddy's screens\" on: the "
+        if (!Prefs.agentsTapBuddy(svc)) return "BLOCKED: that's one of NOX01's own screens. Only the user " + verb + " those.";
+        return "BLOCKED: this part of NOX01 stays the user's own, also with \"Let agents tap NOX01's screens\" on: the "
                 + "bubble, approval cards, the Linux tools chip, Chat options and schedules, and the settings screens for "
                 + "permissions, keys, rules, skills, background mode and backup. Only the user " + verb + " those. Other "
-                + "parts of Buddy (the Chats list, a chat, the main Settings screen) are open to you.";
+                + "parts of NOX01 (the Chats list, a chat, the main Settings screen) are open to you.";
     }
 
     /**
@@ -1879,7 +1879,7 @@ final class Tools {
         sel.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, append ? len : 0);
         sel.putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, len);
         target.performAction(AccessibilityNodeInfo.ACTION_SET_SELECTION, sel);
-        cm.setPrimaryClip(ClipData.newPlainText("Buddy", text));
+        cm.setPrimaryClip(ClipData.newPlainText("NOX01", text));
         return target.performAction(AccessibilityNodeInfo.ACTION_PASTE);
     }
 
@@ -2086,7 +2086,7 @@ final class Tools {
         String bestLabel = top.get(0)[1];
         // Buddy's own screens hold the safety settings: only the user opens them (unless they let agents in)
         if (best.equals(svc.getPackageName()) && !Prefs.agentsTapBuddy(svc))
-            return "BLOCKED: agents can't open Buddy itself. Only the user uses Buddy's screens.";
+            return "BLOCKED: agents can't open NOX01 itself. Only the user uses NOX01's screens.";
         Intent launch = pm.getLaunchIntentForPackage(best);
         if (launch == null) return "App " + bestLabel + " cannot be launched.";
         if (background()) {
@@ -2157,8 +2157,8 @@ final class Tools {
             return chat != null ? "Installing apps needs Linux tools in this chat. Ask the user to turn them on in the "
                     + "chat's header (the Linux tools chip under its title), wait until they say it's done, then call "
                     + "install_apk again."
-                    : "Installing apps needs Linux tools. Ask the user to turn on 'Linux tools in new chats' in Buddy's "
-                    + "Settings (it also covers sessions outside Buddy's chats, like this one), wait until they say it's "
+                    : "Installing apps needs Linux tools. Ask the user to turn on 'Linux tools in new chats' in NOX01's "
+                    + "Settings (it also covers sessions outside NOX01's chats, like this one), wait until they say it's "
                     + "done, then call install_apk again.";
         }
         java.io.File out = FilesProvider.apkFile(svc);
@@ -2187,8 +2187,8 @@ final class Tools {
         if (!svc.getPackageManager().canRequestPackageInstalls()) {
             svc.startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
                     android.net.Uri.parse("package:" + svc.getPackageName())).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-            return "Buddy isn't allowed to install apps yet. Android's settings page for that is open now: ask the user to "
-                    + "turn on 'Allow from this source' for Buddy, wait until they say it's done, then call install_apk again.";
+            return "NOX01 isn't allowed to install apps yet. Android's settings page for that is open now: ask the user to "
+                    + "turn on 'Allow from this source' for NOX01, wait until they say it's done, then call install_apk again.";
         }
         svc.startActivity(new Intent(Intent.ACTION_VIEW)
                 .setDataAndType(FilesProvider.apkUri(), "application/vnd.android.package-archive")
@@ -2204,8 +2204,8 @@ final class Tools {
         } catch (Exception e) {
             return "Couldn't reach GitHub to check for updates (" + e.getMessage() + "). " + Updates.MANUAL;
         }
-        String head = "Installed: Buddy " + BuildInfo.VERSION + ". Latest release: " + r.version + ".";
-        if (!r.newer()) return head + " Buddy is up to date.";
+        String head = "Installed: NOX01 " + BuildInfo.VERSION + ". Latest release: " + r.version + ".";
+        if (!r.newer()) return head + " NOX01 is up to date.";
         if (!install) {
             return head + " An update is available. What's new:\n" + r.notes + "\n\nAsk the user if they want it now; "
                     + "if yes, call update_buddy with install=true.";
@@ -2213,13 +2213,13 @@ final class Tools {
         svc.showStatus(svc.getString(R.string.tools_status_downloading, r.version));
         String res = Updates.install(svc, r);
         if (Updates.NEEDS_PERMISSION.equals(res)) {
-            return "Downloaded Buddy " + r.version + ", but Buddy isn't allowed to install apps yet. Android's settings page "
-                    + "for that is open now: ask the user to turn on 'Allow from this source' for Buddy, then call "
+            return "Downloaded NOX01 " + r.version + ", but NOX01 isn't allowed to install apps yet. Android's settings page "
+                    + "for that is open now: ask the user to turn on 'Allow from this source' for NOX01, then call "
                     + "update_buddy with install=true again.";
         }
         if (!Updates.OPENED.equals(res)) return res + " " + Updates.MANUAL;
-        return "The installer is open with Buddy " + r.version + ". Tell the user now, in one line, to tap Update (only "
-                + "they can): Buddy restarts once it's installed, which ends this task, and their chats stay. Then stop; "
+        return "The installer is open with NOX01 " + r.version + ". Tell the user now, in one line, to tap Update (only "
+                + "they can): NOX01 restarts once it's installed, which ends this task, and their chats stay. Then stop; "
                 + "don't call wait_for_install.";
     }
 
@@ -2246,7 +2246,7 @@ final class Tools {
         ResolveInfo to = svc.getPackageManager().resolveActivity(i, 0);
         if (to != null && to.activityInfo != null && svc.getPackageName().equals(to.activityInfo.packageName)
                 && !Prefs.agentsTapBuddy(svc))
-            return "BLOCKED: that link opens Buddy itself. Only the user uses Buddy's screens.";
+            return "BLOCKED: that link opens NOX01 itself. Only the user uses NOX01's screens.";
         if (background()) {
             if (url.indexOf('\t') >= 0 || url.indexOf('\n') >= 0) return "That's not a link.";
             try {

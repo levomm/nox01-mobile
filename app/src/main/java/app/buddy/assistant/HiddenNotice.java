@@ -8,7 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/** The "Buddy is hidden" notification shown after the bubble is dragged away, and its actions. */
+/** The "NOX01 is hidden" notification shown after the bubble is dragged away, and its actions. */
 public final class HiddenNotice extends BroadcastReceiver {
     private static final String CHANNEL = "bubble_hidden";
     private static final int ID = 1;

@@ -224,7 +224,7 @@
     <string name="setup_surface">Taustapind</string>
     <string name="setup_surface_note">Soe on algne taustatoon. Puhas must toimib tumedas režiimis.</string>
     <string name="setup_face">Ujuvmulli nägu</string>
-    <string name="setup_face_buddy">Originaal</string>
+    <string name="setup_face_buddy">Vaikimisi nägu</string>
     <string name="setup_face_picture">Minu pilt</string>
     <string name="setup_face_note">Läbipaistva taustaga PNG või WebP sobib kõige paremini.</string>
     <string name="setup_face_change">Vali teine pilt</string>

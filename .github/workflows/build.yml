@@ -22,6 +22,9 @@ jobs:
       - name: Test approved [01] launcher assets
         run: python3 scripts/test_nox01_launcher.py
 
+      - name: Test NOX01 visible branding
+        run: python3 scripts/test_nox01_branding.py
+
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
@@ -110,9 +113,9 @@ jobs:
         # a release made by hand first (with its own notes) just gets the CI-built APKs attached
         run: |
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" dist/*.apk --clobber
+            gh release upload "$GITHUB_REF_NAME" dist/nox01-mobile.apk --clobber
           else
-            gh release create "$GITHUB_REF_NAME" dist/*.apk --title "NOX01 Mobile $GITHUB_REF_NAME" --generate-notes
+            gh release create "$GITHUB_REF_NAME" dist/nox01-mobile.apk --title "NOX01 Mobile $GITHUB_REF_NAME" --generate-notes
           fi
       # What F-Droid will do: build the fdroid APK again, unsigned, somewhere else, and check it matches the signed one
       # above but for the signature. After publishing, so a mismatch shows up red without holding the release back.

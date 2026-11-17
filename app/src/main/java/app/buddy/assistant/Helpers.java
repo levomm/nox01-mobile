@@ -57,7 +57,7 @@ final class Helpers {
     static String delegate(final BuddyService svc, String chat, JSONObject a) throws Exception {
         final ChatHub hub = ChatHub.get(svc);
         final Sessions.Session parent = hub.sessions.find(chat);
-        if (parent == null) return "Sub-agents are for Buddy's own chats.";
+        if (parent == null) return "Sub-agents are for NOX01's own chats.";
         if (!parent.parent.isEmpty()) return "A sub-agent can't start sub-agents. Do your task yourself and report.";
         if (Triggers.ruleRun(chat)) return "Not available in a notification rule's run.";
         JSONArray tasks = a.optJSONArray("tasks");
@@ -204,7 +204,7 @@ final class Helpers {
         return "You are a sub-agent: another chat's agent on this phone gave you one part of a bigger task and waits for "
                 + "your report. Other sub-agents work at the same time, each on a screen of its own.\n"
                 + "- Only look things up. Never send, post, buy, pay, book, delete, install or change settings, and "
-                + "don't sign in anywhere: Buddy refuses those for a sub-agent. If the task needs one, stop and say what "
+                + "don't sign in anywhere: NOX01 refuses those for a sub-agent. If the task needs one, stop and say what "
                 + "should be done.\n"
                 + "- You can't ask the user. Where something is unclear, decide sensibly and say what you assumed.\n"
                 + "- Stay in the app or site your task names: another sub-agent may be using the others, and an app can "

@@ -71,7 +71,7 @@ final class ChatHub {
     private ChatHub(Context app) {
         this.app = app;
         sessions = new Sessions(app);
-        // a chat still marked working when Buddy starts was cut off: Android closed Buddy (an update, low memory), and
+        // a chat still marked working when Buddy starts was cut off: Android closed NOX01 (an update, low memory), and
         // its agent with it
         for (String id : Prefs.busyChats(app)) {
             Sessions.Session s = sessions.find(id);
@@ -160,7 +160,7 @@ final class ChatHub {
 
     /** After a cut-off run: the agent checks what's done and goes on. */
     String resume(Sessions.Session ses) {
-        return send(ses, app.getString(R.string.hub_resume_message), null, "(From Buddy, not the user) Android closed Buddy "
+        return send(ses, app.getString(R.string.hub_resume_message), null, "(From NOX01, not the user) Android closed NOX01 "
                 + "in the middle of your last task, and stopped you with it. Check what is already done (the screen, the "
                 + "files, the conversation so far), then carry on from where you stopped. Don't redo steps that already "
                 + "happened, such as sending a message again.", false, false);

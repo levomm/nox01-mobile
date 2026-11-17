@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Turkish translation of Buddy's UI. Source: res/values/strings.xml. -->
 <resources>
-    <string name="service_label">Buddy asistanı</string>
-    <string name="service_description">Buddy sohbet baloncuğunu gösterir; bu telefonda Buddy içinde çalışan, seçtiğiniz ajanın (Claude Code, Codex, OpenCode, Antigravity veya Grok) ekranı okumasını ve sizin yerinize dokunmasını, yazmasını ve kaydırmasını sağlar. Ajanın kendisinin yapay zeka hizmetine (Anthropic, OpenAI, Google, xAI veya OpenCode modelinizin sağlayıcısı) gönderdikleri dışında hiçbir şey telefondan çıkmaz.</string>
+    <string name="service_label">NOX01 asistanı</string>
+    <string name="service_description">NOX01 sohbet baloncuğunu gösterir; bu telefonda NOX01 içinde çalışan, seçtiğiniz ajanın (Claude Code, Codex, OpenCode, Antigravity veya Grok) ekranı okumasını ve sizin yerinize dokunmasını, yazmasını ve kaydırmasını sağlar. Ajanın kendisinin yapay zeka hizmetine (Anthropic, OpenAI, Google, xAI veya OpenCode modelinizin sağlayıcısı) gönderdikleri dışında hiçbir şey telefondan çıkmaz.</string>
 
     <!-- ===== First run (OnboardingActivity), the Chats home screen (MainActivity), updates, appearance ===== -->
 
@@ -16,7 +16,7 @@
     <string name="onboarding_stuck">Takıldınız mı?</string>
 
     <!-- Guide, welcome screen. -->
-    <string name="onboarding_welcome_title">Buddy ile tanışın</string>
+    <string name="onboarding_welcome_title">NOX01 ile tanışın</string>
     <string name="onboarding_welcome_text">Telefonunuzu sizin yerinize kullanabilen bir sohbet baloncuğu.</string>
     <string name="onboarding_welcome_ask_title">Gündelik bir dille isteyin</string>
     <string name="onboarding_welcome_ask_text">“Ayşe\'ye geç kalacağımı yaz”, “sepetime süt ekle”.</string>
@@ -47,13 +47,13 @@
     <string name="onboarding_recommended">önerilen</string>
 
     <!-- Guide, step: turn on Buddy's accessibility service. -->
-    <string name="onboarding_access_title">Buddy\'nin görmesine ve dokunmasına izin verin</string>
+    <string name="onboarding_access_title">NOX01\'nin görmesine ve dokunmasına izin verin</string>
     <string name="onboarding_access_done">Erişilebilirlik hizmeti açık.</string>
-    <string name="onboarding_access_text">Buddy\'nin erişilebilirlik hizmeti baloncuğu gösterir ve ajanın ekranı okumasına, dokunmasına ve yazmasına yalnızca siz bir şey istediğinizde izin verir.</string>
+    <string name="onboarding_access_text">NOX01\'nin erişilebilirlik hizmeti baloncuğu gösterir ve ajanın ekranı okumasına, dokunmasına ve yazmasına yalnızca siz bir şey istediğinizde izin verir.</string>
     <string name="onboarding_access_privacy">Size yanıt vermek için %1$s tarafından %2$s şirketine gönderilenler dışında hiçbir şey telefondan çıkmaz. Gönderme, paylaşma, satın alma ve silme işlemleri için her zaman önce onayınız istenir.</string>
     <string name="onboarding_access_privacy_both">Size yanıt vermek için Claude Code ve Codex tarafından Anthropic ve OpenAI\'a gönderilenler dışında hiçbir şey telefondan çıkmaz. Gönderme, paylaşma, satın alma ve silme işlemleri için her zaman önce onayınız istenir.</string>
     <string name="onboarding_access_privacy_opencode">Size yanıt vermek için %1$s tarafından modelin sağlayıcısına gönderilenler dışında hiçbir şey telefondan çıkmaz. Gönderme, paylaşma, satın alma ve silme işlemleri için her zaman önce onayınız istenir.</string>
-    <string name="onboarding_access_list_hint">Listede: İndirilen uygulamalar → Buddy asistanı → açın.</string>
+    <string name="onboarding_access_list_hint">Listede: İndirilen uygulamalar → NOX01 asistanı → açın.</string>
     <string name="onboarding_access_open">Erişilebilirlik ayarlarını aç</string>
     <string name="onboarding_access_greyed_title">Anahtar gri mi görünüyor?</string>
     <string name="onboarding_access_greyed_text">Android, dosyadan yüklenen uygulamalarda bunu engeller. Aşağıdaki Uygulama bilgileri düğmesine, ardından sağ üstteki ⋮ → Kısıtlanmış ayarlara izin ver seçeneğine dokunun ve tekrar deneyin.</string>
@@ -65,7 +65,7 @@
     <string name="onboarding_agents_done_title">Hazır</string>
     <string name="onboarding_agents_done">%1$s yüklendi ve giriş yapıldı.</string>
     <string name="onboarding_agents_done_both">Claude Code ve Codex yüklendi ve giriş yapıldı.</string>
-    <string name="onboarding_agents_text">%1$s, Buddy tarafından uygulamanın içine yüklenir; ardından bir kez giriş yaparsınız. Termux gerekmez.</string>
+    <string name="onboarding_agents_text">%1$s, NOX01 tarafından uygulamanın içine yüklenir; ardından bir kez giriş yaparsınız. Termux gerekmez.</string>
     <string name="onboarding_agent_names_both">Claude Code ve Codex</string>
     <!-- Agent card status lines: small lowercase mono text, one line. -->
     <string name="onboarding_agent_ready">hazır · %1$s</string>
@@ -76,16 +76,16 @@
     <string name="onboarding_agent_installed">yüklü · giriş yapılmadı</string>
     <string name="onboarding_agent_not_installed">yüklü değil</string>
     <!-- Agent card help text. -->
-    <string name="onboarding_agent_sign_in_claude">Claude hesabınızla giriş yapın. Tarayıcınız açılır; Yetkilendir düğmesine dokunun, Buddy kendiliğinden geri döner.</string>
+    <string name="onboarding_agent_sign_in_claude">Claude hesabınızla giriş yapın. Tarayıcınız açılır; Yetkilendir düğmesine dokunun, NOX01 kendiliğinden geri döner.</string>
     <string name="onboarding_agent_checking_opencode">OpenCode kontrol ediliyor…</string>
     <string name="onboarding_agent_sign_in_codex">Tarayıcıda ChatGPT hesabınızla giriş yapın, sonra geri dönün.</string>
-    <string name="onboarding_agent_sign_in_agy">Google hesabınızla giriş yapın. Tarayıcınız açılır; orada giriş yapın, Buddy kodu kendiliğinden alır.</string>
-    <string name="onboarding_agent_sign_in_grok">Grok hesabınızla giriş yapın. Tarayıcınız açılır; orada kodu onaylayın, Buddy kendiliğinden geri döner.</string>
-    <string name="onboarding_agent_download_claude">Bir kerelik yaklaşık 235 MB indirir (Buddy\'nin Linux\'u ve Anthropic\'ten Claude Code).</string>
-    <string name="onboarding_agent_download_opencode">Bir kerelik yaklaşık 230 MB indirir (Buddy\'nin Linux\'u, Node.js ve OpenCode). Hesap gerekmez.</string>
-    <string name="onboarding_agent_download_codex">Bir kerelik yaklaşık 150 MB indirir (Buddy\'nin Linux\'u, Node.js ve OpenAI\'dan Codex).</string>
-    <string name="onboarding_agent_download_agy">Bir kerelik yaklaşık 200 MB indirir (Buddy\'nin Linux\'u ve Google\'dan Antigravity CLI).</string>
-    <string name="onboarding_agent_download_grok">Bir kerelik yaklaşık 170 MB indirir (Buddy\'nin Linux\'u ve xAI\'dan Grok Build).</string>
+    <string name="onboarding_agent_sign_in_agy">Google hesabınızla giriş yapın. Tarayıcınız açılır; orada giriş yapın, NOX01 kodu kendiliğinden alır.</string>
+    <string name="onboarding_agent_sign_in_grok">Grok hesabınızla giriş yapın. Tarayıcınız açılır; orada kodu onaylayın, NOX01 kendiliğinden geri döner.</string>
+    <string name="onboarding_agent_download_claude">Bir kerelik yaklaşık 235 MB indirir (NOX01\'nin Linux\'u ve Anthropic\'ten Claude Code).</string>
+    <string name="onboarding_agent_download_opencode">Bir kerelik yaklaşık 230 MB indirir (NOX01\'nin Linux\'u, Node.js ve OpenCode). Hesap gerekmez.</string>
+    <string name="onboarding_agent_download_codex">Bir kerelik yaklaşık 150 MB indirir (NOX01\'nin Linux\'u, Node.js ve OpenAI\'dan Codex).</string>
+    <string name="onboarding_agent_download_agy">Bir kerelik yaklaşık 200 MB indirir (NOX01\'nin Linux\'u ve Google\'dan Antigravity CLI).</string>
+    <string name="onboarding_agent_download_grok">Bir kerelik yaklaşık 170 MB indirir (NOX01\'nin Linux\'u ve xAI\'dan Grok Build).</string>
     <!-- Buttons on the agent card. -->
     <string name="onboarding_sign_in_claude">Claude ile giriş yap</string>
     <string name="onboarding_sign_in_chatgpt">ChatGPT ile giriş yap</string>
@@ -95,29 +95,29 @@
     <string name="onboarding_agents_wifi">Mümkünse Wi-Fi kullanın. Yükleme sürerken bu ekrandan çıkabilirsiniz.</string>
     <!-- Help questions and answers under "Stuck?". -->
     <string name="onboarding_stuck_sign_in_q">Giriş yaptıktan sonra geri dönmedi mi?</string>
-    <string name="onboarding_stuck_sign_in_a">Claude: Claude sayfasında Kodu kopyala düğmesine dokunun, sonra Buddy\'ye dönün; kodu panodan kendisi alır.</string>
+    <string name="onboarding_stuck_sign_in_a">Claude: Claude sayfasında Kodu kopyala düğmesine dokunun, sonra NOX01\'ye dönün; kodu panodan kendisi alır.</string>
     <string name="onboarding_stuck_install_q">Yükleme başarısız mı oldu?</string>
     <string name="onboarding_stuck_install_a">Bağlantınızı kontrol edip yükleme düğmesine tekrar dokunun; kaldığı yerden devam eder.</string>
 
     <!-- Guide, step: let Buddy run in the background (Android's battery optimization). -->
     <string name="onboarding_background_title">Arka planda çalışsın</string>
-    <string name="onboarding_background_done">Buddy arka planda çalışabilir.</string>
-    <string name="onboarding_background_text">Böylece ajan çalışırken telefonunuz pil tasarrufu için Buddy\'yi durdurmaz.</string>
+    <string name="onboarding_background_done">NOX01 arka planda çalışabilir.</string>
+    <string name="onboarding_background_text">Böylece ajan çalışırken telefonunuz pil tasarrufu için NOX01\'yi durdurmaz.</string>
     <string name="onboarding_allow">İzin ver</string>
     <string name="onboarding_skip_for_now">Şimdilik atla</string>
 
     <!-- Guide, step: how much the agent asks before acting. -->
     <string name="onboarding_safety_title">Ne kadar sık sorsun?</string>
-    <string name="onboarding_safety_text">Mesajlaşma, sosyal medya, alışveriş, ödeme ve bankacılık uygulamalarında Buddy bir şey göndermeden, paylaşmadan, satın almadan veya silmeden önce her zaman onayınızı ister. Diğer uygulamalarınız için:</string>
+    <string name="onboarding_safety_text">Mesajlaşma, sosyal medya, alışveriş, ödeme ve bankacılık uygulamalarında NOX01 bir şey göndermeden, paylaşmadan, satın almadan veya silmeden önce her zaman onayınızı ister. Diğer uygulamalarınız için:</string>
     <string name="onboarding_safety_ask_title">Önce bana sor</string>
     <string name="onboarding_safety_ask_text">Ajan, bir ayarı değiştirmek gibi riskli her şeyden önce sorar. Daha güvenli ama daha çok açılır pencere çıkar.</string>
     <string name="onboarding_safety_auto_title">Kendi başına çalış</string>
     <string name="onboarding_safety_auto_text">Açılır pencere yok: ajan, bir kamerayı veya ışığı açmak gibi istediğiniz şeyi doğrudan yapar.</string>
-    <string name="onboarding_safety_note">Bunu istediğiniz zaman uygulama bazında değiştirebilirsiniz: Ayarlar → Güvenlik ve onaylar → Uygulama izinleri. Ajanın bir uygulamada açılır pencere olmadan çalışması için Güven modunu, Buddy\'nin size kendisinin sorması için Katı modu seçin.</string>
+    <string name="onboarding_safety_note">Bunu istediğiniz zaman uygulama bazında değiştirebilirsiniz: Ayarlar → Güvenlik ve onaylar → Uygulama izinleri. Ajanın bir uygulamada açılır pencere olmadan çalışması için Güven modunu, NOX01\'nin size kendisinin sorması için Katı modu seçin.</string>
 
     <!-- Guide, last step: try a first task. -->
     <string name="onboarding_try_title">Her şey hazır</string>
-    <string name="onboarding_try_text">İlk görevi deneyin. Buddy, Ayarlar\'ı açıp sizin için okuyacak.</string>
+    <string name="onboarding_try_text">İlk görevi deneyin. NOX01, Ayarlar\'ı açıp sizin için okuyacak.</string>
     <string name="onboarding_try_prompt">Ayarlar\'ı aç ve Android sürümümü söyle</string>
     <string name="onboarding_try_prompt_quoted">“%1$s”</string>
     <string name="onboarding_try_tip">İpucu: baloncuk diğer uygulamaların üzerinde durur. Gizlemek için ✕ işaretine sürükleyin.</string>
@@ -130,7 +130,7 @@
     <string name="main_status_setup">kurulum %1$d/%2$d</string>
     <string name="main_setup_title">Sohbetleri çalıştırmak için kurulumu tamamlayın</string>
     <string name="main_setup_next">Sıradaki: %1$s</string>
-    <string name="main_setup_next_accessibility">Sıradaki: Buddy\'nin erişilebilirlik hizmetini açın</string>
+    <string name="main_setup_next_accessibility">Sıradaki: NOX01\'nin erişilebilirlik hizmetini açın</string>
     <string name="main_section_working">Çalışıyor</string>
     <string name="main_section_recent">Son sohbetler</string>
     <string name="main_empty_title">Henüz sohbet yok</string>
@@ -161,28 +161,28 @@
 
     <!-- Notification shown after the bubble is dragged away to hide it. -->
     <string name="notice_channel_name">Gizli baloncuk</string>
-    <string name="notice_hidden_title">Buddy gizlendi</string>
+    <string name="notice_hidden_title">NOX01 gizlendi</string>
     <string name="notice_hidden_text">Baloncuğu yeniden göstermek için dokunun.</string>
     <string name="notice_open_chats">Sohbetleri aç</string>
 
     <!-- Buddy's own updates (GitHub version): notification, update sheet and messages. -->
-    <string name="update_channel_name">Buddy güncellemeleri</string>
-    <string name="update_available_title">Buddy %1$s kullanıma sunuldu</string>
+    <string name="update_channel_name">NOX01 güncellemeleri</string>
+    <string name="update_available_title">NOX01 %1$s kullanıma sunuldu</string>
     <string name="update_notification_text">Sizdeki sürüm: %1$s. Yenilikleri görüp güncellemek için dokunun; sohbetleriniz korunur.</string>
     <string name="update_action">Güncelle</string>
     <string name="update_mute">Bildirme</string>
     <string name="update_muted">Artık güncelleme bildirimi gelmeyecek. Ayarlar\'dan yeniden açabilirsiniz.</string>
     <string name="update_checking">Güncellemeler kontrol ediliyor…</string>
     <string name="update_check_failed">GitHub\'a ulaşılamadı. Daha sonra tekrar deneyin.</string>
-    <string name="update_up_to_date">Buddy %1$s güncel.</string>
+    <string name="update_up_to_date">NOX01 %1$s güncel.</string>
     <string name="update_sheet_text">Sizdeki sürüm: %1$s. Güncelleme sohbetlerinizi, ayarlarınızı ve hesap girişlerinizi korur.</string>
     <string name="update_later">Sonra</string>
     <string name="update_downloading">İndiriliyor…</string>
-    <string name="update_needs_permission">Buddy\'nin uygulama yüklemesine izin verin, ardından Güncelle düğmesine tekrar dokunun.</string>
-    <string name="update_error_no_apk">Bu sürümde henüz buddy.apk yok.</string>
+    <string name="update_needs_permission">NOX01\'nin uygulama yüklemesine izin verin, ardından Güncelle düğmesine tekrar dokunun.</string>
+    <string name="update_error_no_apk">Bu sürümde henüz nox01-mobile.apk yok.</string>
     <string name="update_error_download">İndirme başarısız oldu (%1$s).</string>
-    <string name="update_error_not_newer">İndirilen dosya daha yeni bir Buddy sürümü değil, bu yüzden açılmadı.</string>
-    <string name="update_failed_manual">%1$s Uygulamayı %2$s adresinden (buddy.apk) de indirebilir veya otomatik güncellemeler için Obtainium\'u kullanabilirsiniz (bkz. %3$s).</string>
+    <string name="update_error_not_newer">İndirilen dosya daha yeni bir NOX01 sürümü değil, bu yüzden açılmadı.</string>
+    <string name="update_failed_manual">%1$s Uygulamayı %2$s adresinden (nox01-mobile.apk) de indirebilir veya otomatik güncellemeler için Obtainium\'u kullanabilirsiniz (bkz. %3$s).</string>
 
     <!-- Settings, Appearance: option names. -->
     <string name="prefs_theme_system">Sistem</string>
@@ -202,7 +202,7 @@
     <!-- ===== The bubble, its hold menu, chat panel and approval cards (Bubble, RadialMenu, ControlIndicator) ===== -->
 
     <!-- Floating bubble, read by TalkBack. -->
-    <string name="bubble_face_description">Buddy. Açmak için dokunun, işlemler için uzun basın</string>
+    <string name="bubble_face_description">NOX01. Açmak için dokunun, işlemler için uzun basın</string>
     <string name="bubble_show_actions">işlemleri göstermek</string>
 
     <!-- Status pill beside the bubble: at most two lines. -->
@@ -247,10 +247,10 @@
     <string name="bubble_tip_stop_voice">İpucu: sesi durdurmak için baloncuğa uzun basın</string>
     <string name="bubble_tip_hold_menu">İpucu: duraklatmak, durdurmak veya talimat eklemek için baloncuğa uzun basın</string>
     <string name="bubble_stopping">Durduruluyor…</string>
-    <string name="bubble_nothing_running">Buddy sohbetlerinde çalışan bir şey yok.</string>
+    <string name="bubble_nothing_running">NOX01 sohbetlerinde çalışan bir şey yok.</string>
     <string name="bubble_nothing_running_chat">Bu sohbette çalışan bir şey yok.</string>
-    <string name="bubble_allow_mic_tap_mic">Buddy\'de mikrofona izin verin, ardından mikrofona tekrar dokunun.</string>
-    <string name="bubble_allow_mic_tap_bubble">Buddy\'de mikrofona izin verin, ardından baloncuğa tekrar dokunun.</string>
+    <string name="bubble_allow_mic_tap_mic">NOX01\'de mikrofona izin verin, ardından mikrofona tekrar dokunun.</string>
+    <string name="bubble_allow_mic_tap_bubble">NOX01\'de mikrofona izin verin, ardından baloncuğa tekrar dokunun.</string>
     <string name="bubble_note_added">Anlaşıldı: %1$s bunu dikkate alacak</string>
     <string name="bubble_copied">Kopyalandı</string>
 
@@ -319,13 +319,13 @@
     <string name="card_note_skipped">Soru atlandı</string>
 
     <!-- Notification while an agent operates the phone. -->
-    <string name="control_channel_name">Buddy telefonunuzu kullanıyor</string>
+    <string name="control_channel_name">NOX01 telefonunuzu kullanıyor</string>
     <string name="control_channel_description">Bir ajan telefonu kullanırken durum çubuğunda görünür.</string>
-    <string name="control_title">Buddy telefonunuzu kullanıyor</string>
+    <string name="control_title">NOX01 telefonunuzu kullanıyor</string>
     <string name="control_text">İşlem bitene kadar ekrana dokunmayın ya da kontrolü almak için Durdur düğmesine dokunun.</string>
     <string name="control_stop">Durdur</string>
-    <string name="work_title">Buddy arka planda çalışıyor</string>
-    <string name="pause_call_ended_title">Arama bitti · Buddy duraklatıldı</string>
+    <string name="work_title">NOX01 arka planda çalışıyor</string>
+    <string name="pause_call_ended_title">Arama bitti · NOX01 duraklatıldı</string>
     <string name="pause_call_ended_text">Göreve devam etmek için dokunun</string>
 
     <!-- ===== Full-screen chat, agent progress lines, transcripts, shared UI, voice (ChatActivity, ChatHub, Ui, BuddyService, Voice) ===== -->
@@ -338,7 +338,7 @@
 
     <!-- Chat screen: Linux tools, the chip beside the model chip (also in the bubble's panel and the New chat sheets) -->
     <string name="chat_linux_tools">Linux araçları</string>
-    <string name="chat_linux_tools_info">Buddy\'nin Linux\'unda komutlar, dosyalar ve uygulama derleme</string>
+    <string name="chat_linux_tools_info">NOX01\'nin Linux\'unda komutlar, dosyalar ve uygulama derleme</string>
     <string name="chat_linux_tools_title">Linux araçları açılsın mı?</string>
     <string name="chat_linux_tools_what">Ajan bu durumda komut çalıştırabilir, paket yükleyebilir ve ~/.buddy/work içindeki dosyaları düzenleyebilir; böylece uygulama geliştirebilir.</string>
     <string name="chat_linux_tools_when">Yalnızca bu sohbette, bir sonraki mesajınızdan itibaren.</string>
@@ -353,7 +353,7 @@
     <string name="chat_approvals_info">Bu sohbetin, ajanı bir şey yapmadan önce size nasıl sorduğu. Siz değiştirene kadar böyle kalır; yeni sohbetler Sor ile başlar.</string>
     <string name="chat_approvals_ask">Sor</string>
     <string name="chat_approvals_ask_info">Her uygulama, %1$s bölümünde kendisi için belirleneni izler.</string>
-    <string name="chat_approvals_strict_info">%1$s olarak ayarlı uygulamalarda da Buddy göndermeden, paylaşmadan, satın almadan veya silmeden önce sorar.</string>
+    <string name="chat_approvals_strict_info">%1$s olarak ayarlı uygulamalarda da NOX01 göndermeden, paylaşmadan, satın almadan veya silmeden önce sorar.</string>
     <string name="chat_approvals_apps_hint">Ajanın işlem yaptığı yerler ve her uygulamanın %1$s bölümündeki ayarı. Orada değiştirmek için birine dokunun.</string>
     <string name="chat_approvals_routine">Rutin serbest</string>
     <string name="chat_approvals_routine_info">Rutin adımlar her uygulamada kart olmadan ilerler: mesaj göndermek veya denetçinin soracağı bir adım. Her biri sohbete not edilir. Ödeme, satın alma, silme, yükleme, parolalar ve güvenlik ayarları yine size sorar; bankacılık ve ödeme uygulamalarındaki, Ayarlar\'daki ve uygulama mağazalarındaki her şey de öyle.</string>
@@ -370,7 +370,7 @@
     <string name="schedule_title">Zamanlama</string>
     <string name="schedule_set">Zamanlama ayarla</string>
     <string name="schedule_set_info">Bu sohbete belirli saatlerde kendiliğinden mesaj gönderin, örn. her gün 14:00\'te.</string>
-    <string name="schedule_info">Belirlenen saatte Buddy bu mesajı, siz yazmışsınız gibi bu sohbetin aracısı ve seçenekleriyle sohbete gönderir. Onay kartları yine sizi bekler. Telefon kilitliyken ekrana ihtiyaç duyarsa kilidi açmanızı ister.</string>
+    <string name="schedule_info">Belirlenen saatte NOX01 bu mesajı, siz yazmışsınız gibi bu sohbetin aracısı ve seçenekleriyle sohbete gönderir. Onay kartları yine sizi bekler. Telefon kilitliyken ekrana ihtiyaç duyarsa kilidi açmanızı ister.</string>
     <string name="schedule_time">Saat</string>
     <string name="schedule_add_time">Saat ekle</string>
     <string name="schedule_remove_time">%1$s saatini kaldır</string>
@@ -382,7 +382,7 @@
     <string name="schedule_message_hint">Ne gönderilecek, örn. Uygulamayı aç ve bugünkü girişi yap</string>
     <string name="schedule_wake">Bu görev için telefonu uyandır</string>
     <string name="schedule_wake_info">Ekrana ihtiyaç duyduğunda ekran açılır (PIN, desen veya parmak izi olmayan kilit ekranı da açılır). Çalışırken yakındaki herkes ekranı görebilir.</string>
-    <string name="schedule_inexact">Buddy için tam zamanlı alarmlar kapalı, bu yüzden birkaç dakika geç başlayabilir.</string>
+    <string name="schedule_inexact">NOX01 için tam zamanlı alarmlar kapalı, bu yüzden birkaç dakika geç başlayabilir.</string>
     <string name="schedule_allow_exact">Tam zamanlı alarmlara izin ver</string>
     <string name="schedule_save">Kaydet</string>
     <string name="schedule_remove">Kaldır</string>
@@ -398,7 +398,7 @@
     <string name="schedule_skipped_title">Zamanlanmış görev atlandı: %1$s</string>
     <string name="schedule_stopped_title">Zamanlanmış görev durduruldu: %1$s</string>
     <string name="schedule_skip_running">Bu sohbet hâlâ önceki görevi üzerinde çalışıyordu.</string>
-    <string name="schedule_skip_busy">Buddy bir saat boyunca meşguldü (başka bir görev, bir duraklama veya internet yok).</string>
+    <string name="schedule_skip_busy">NOX01 bir saat boyunca meşguldü (başka bir görev, bir duraklama veya internet yok).</string>
     <string name="schedule_skip_screen">Telefon bir saat boyunca kilitli kaldı.</string>
     <string name="schedule_marker">Zamanlandı</string>
 
@@ -436,7 +436,7 @@
     <string name="live_ended">Canlı ses sona erdi.</string>
     <string name="live_ended_why">Canlı ses sona erdi: %1$s</string>
     <string name="live_ended_screen_off">ekran kapandı</string>
-    <string name="live_ended_paused">Buddy duraklatıldı</string>
+    <string name="live_ended_paused">NOX01 duraklatıldı</string>
     <string name="live_ended_idle">5 dakika boyunca hiçbir şey söylenmedi</string>
     <string name="live_notification_title">%1$s ile canlı ses</string>
     <string name="live_mic_busy">Canlı ses mikrofonu kullanıyor. Önce onu bitirin.</string>
@@ -493,15 +493,15 @@
     <string name="hub_still_waiting">Modelin yanıtı hâlâ bekleniyor…</string>
     <string name="hub_still_reading_local">Hâlâ okuyor… Kendi bilgisayarındaki bir model, özellikle ilk yanıtta birkaç dakika sürebilir.</string>
     <string name="hub_no_answer">Model yanıt vermedi. Meşgul olabilir: tekrar deneyin veya sohbetin üst kısmından başka bir model seçin.</string>
-    <string name="hub_helper_gone">Bu çalıştırma yarıda kesildi: Buddy\'nin Linux\'unda ajanı çalıştıran yardımcı durdu. Mesajınızı tekrar gönderin.</string>
+    <string name="hub_helper_gone">Bu çalıştırma yarıda kesildi: NOX01\'nin Linux\'unda ajanı çalıştıran yardımcı durdu. Mesajınızı tekrar gönderin.</string>
     <string name="hub_model_set">Model: %1$s</string>
     <string name="hub_effort_set">Çaba: %1$s</string>
     <string name="hub_effort_default">Çaba: varsayılan</string>
     <string name="hub_stopping">Durduruluyor…</string>
     <string name="hub_stopped">Durduruldu.</string>
-    <string name="hub_interrupted">Ajan çalışırken Android Buddy\'yi kapattı, bu yüzden durdu.</string>
+    <string name="hub_interrupted">Ajan çalışırken Android NOX01\'yi kapattı, bu yüzden durdu.</string>
     <string name="hub_resume_message">Kaldığın yerden devam et</string>
-    <string name="chat_interrupted">%1$s bunun üzerinde çalışırken Android Buddy\'yi kapattı. Devam et, yapılanları kontrol eder ve oradan sürdürür.</string>
+    <string name="chat_interrupted">%1$s bunun üzerinde çalışırken Android NOX01\'yi kapattı. Devam et, yapılanları kontrol eder ve oradan sürdürür.</string>
     <string name="chat_interrupted_continue">Devam et</string>
     <string name="chat_interrupted_dismiss">Kapat</string>
     <string name="hub_agent_stopped">%1$s durdu.</string>
@@ -591,8 +591,8 @@
     <string name="hub_tool_asking">Soruluyor: %1$s</string>
     <string name="hub_tool_point_out">Gösteriyor: %1$s</string>
     <string name="hub_tool_point_out_any">Ekranda bir şey gösteriyor</string>
-    <string name="hub_tool_update_download">Buddy güncellemesi indiriliyor</string>
-    <string name="hub_tool_update_check">Buddy güncellemesi kontrol ediliyor</string>
+    <string name="hub_tool_update_download">NOX01 güncellemesi indiriliyor</string>
+    <string name="hub_tool_update_check">NOX01 güncellemesi kontrol ediliyor</string>
     <string name="hub_tool_web_search">Web\'de aranıyor: %1$s</string>
     <string name="hub_tool_web_fetch">Okunuyor: %1$s</string>
     <string name="hub_tool_command">Çalıştırılıyor: %1$s</string>
@@ -604,7 +604,7 @@
 
     <!-- Transcript of an earlier agent session that isn't a Buddy chat (read-only) -->
     <string name="transcript_loading">Yükleniyor…</string>
-    <string name="transcript_continue">Buddy\'de devam et</string>
+    <string name="transcript_continue">NOX01\'de devam et</string>
     <string name="transcript_empty">Bu oturumda okunabilir mesaj yok.</string>
     <plurals name="transcript_last_messages">
         <item quantity="one">son %1$d mesaj · salt okunur</item>
@@ -615,11 +615,11 @@
     <string name="ui_no_app_for_link">Bu bağlantıyı açabilecek bir uygulama yok</string>
 
     <!-- Accessibility disclosure, shown before Android's accessibility settings open (required by Google Play) -->
-    <string name="ui_a11y_title">Buddy erişilebilirliği nasıl kullanır?</string>
-    <string name="ui_a11y_what">Buddy, diğer uygulamalarda istediklerinizi yapmak için Android\'in erişilebilirlik hizmetini kullanır: ekranda ne olduğunu okur, sizin yerinize dokunur, yazar ve kaydırır. Ayrıca kayan baloncuğu da gösterir.</string>
+    <string name="ui_a11y_title">NOX01 erişilebilirliği nasıl kullanır?</string>
+    <string name="ui_a11y_what">NOX01, diğer uygulamalarda istediklerinizi yapmak için Android\'in erişilebilirlik hizmetini kullanır: ekranda ne olduğunu okur, sizin yerinize dokunur, yazar ve kaydırır. Ayrıca kayan baloncuğu da gösterir.</string>
     <string name="ui_a11y_data">Bir görev çalışırken mesajlar, adlar veya adresler gibi kişisel bilgiler içerebilen ekran içeriği, yalnızca isteğinizi yerine getirmek için seçtiğiniz ajanın yapay zeka hizmetine (Claude Code için Anthropic, Codex için OpenAI, Antigravity için Google, Grok için xAI veya OpenCode modelinizin sağlayıcısı) gönderilir.</string>
-    <string name="ui_a11y_no_servers">Buddy\'nin kendine ait sunucusu yoktur. Bu verileri toplamaz, satmaz, paylaşmaz ve reklamlar için kullanmaz.</string>
-    <string name="ui_a11y_asks">Buddy, bir şey gönderen, paylaşan, satın alan veya silen her işlemden önce onayınızı ister. Hizmeti istediğiniz zaman Android\'in erişilebilirlik ayarlarından kapatabilirsiniz.</string>
+    <string name="ui_a11y_no_servers">NOX01\'nin kendine ait sunucusu yoktur. Bu verileri toplamaz, satmaz, paylaşmaz ve reklamlar için kullanmaz.</string>
+    <string name="ui_a11y_asks">NOX01, bir şey gönderen, paylaşan, satın alan veya silen her işlemden önce onayınızı ister. Hizmeti istediğiniz zaman Android\'in erişilebilirlik ayarlarından kapatabilirsiniz.</string>
     <string name="ui_privacy_policy">Gizlilik politikası</string>
     <string name="ui_no_thanks">Hayır, teşekkürler</string>
     <string name="ui_agree_continue">Kabul et ve devam et</string>
@@ -630,7 +630,7 @@
     <string name="ui_nav_settings">Ayarlar</string>
 
     <!-- Accessibility service: pause from the bubble's hold menu, Stop on the control indicator -->
-    <string name="service_pause_expired">5 dakika duraklatıldığı için Buddy görevi durdurdu.</string>
+    <string name="service_pause_expired">5 dakika duraklatıldığı için NOX01 görevi durdurdu.</string>
     <string name="service_stopped_toast">Durduruldu. Telefonunuz yeniden sizde.</string>
     <string name="service_paused_note">Duraklatıldı: devam ettirene kadar telefon sizde</string>
     <string name="service_paused_toast">Duraklatıldı. Telefonunuzu kullanın, ardından devam etmek için baloncuğun yanındaki “Duraklatıldı” yazısına dokunun.</string>
@@ -639,7 +639,7 @@
     <string name="service_autopaused_call">Bir arama nedeniyle duraklatıldı. Devam etmek için baloncuğun yanındaki “Duraklatıldı” yazısına dokunun.</string>
 
     <!-- Voice input and output -->
-    <string name="voice_mic_needed">Buddy\'nin mikrofona ihtiyacı var. Buddy uygulamasını açın ve izin vermek için bir kez 🎙 simgesine dokunun.</string>
+    <string name="voice_mic_needed">NOX01\'nin mikrofona ihtiyacı var. NOX01 uygulamasını açın ve izin vermek için bir kez 🎙 simgesine dokunun.</string>
     <string name="voice_no_recognizer">Bu telefonda konuşma tanıma hizmeti yok.</string>
     <string name="voice_starting">Başlatılıyor…</string>
     <string name="voice_finishing">Bitiriliyor…</string>
@@ -657,16 +657,16 @@
 
     <!-- Sign-in screen: the agent isn't installed yet. -->
     <string name="signin_install">%1$s ajanını yükle</string>
-    <string name="signin_install_sub_claude">Claude Code\'u Buddy içinde Claude aboneliğinizle çalıştırır.</string>
-    <string name="signin_install_sub_opencode">OpenCode\'u Buddy içinde çalıştırır. Ücretsiz modelleri hesap gerekmeden hemen çalışır; kendi sağlayıcılarınızı (Anthropic, OpenAI, GitHub Copilot…) istediğiniz zaman bağlayabilirsiniz.</string>
-    <string name="signin_install_sub_codex">Codex\'i Buddy içinde ChatGPT planınızla çalıştırır.</string>
-    <string name="signin_install_sub_agy">Google\'ın Antigravity CLI aracını Buddy içinde Google hesabınızla çalıştırır: ücretsiz plan, Google AI Pro veya Ultra.</string>
-    <string name="signin_install_sub_grok">xAI\'ın Grok Build aracını Buddy içinde Grok hesabınızla çalıştırır (Google veya X ile giriş de olur).</string>
-    <string name="signin_install_size_claude">Bir kerelik yaklaşık 235 MB indirir: Buddy\'nin Linux\'u ve Anthropic\'ten Claude Code. Mümkünse Wi-Fi kullanın.</string>
-    <string name="signin_install_size_opencode">Bir kerelik yaklaşık 230 MB indirir: Buddy\'nin Linux\'u, Node.js ve OpenCode. Mümkünse Wi-Fi kullanın.</string>
-    <string name="signin_install_size_codex">Bir kerelik yaklaşık 150 MB indirir: Buddy\'nin Linux\'u, Node.js ve OpenAI\'dan Codex. Mümkünse Wi-Fi kullanın.</string>
-    <string name="signin_install_size_agy">Bir kerelik yaklaşık 200 MB indirir: Buddy\'nin Linux\'u ve Google\'dan Antigravity CLI. Mümkünse Wi-Fi kullanın.</string>
-    <string name="signin_install_size_grok">Bir kerelik yaklaşık 170 MB indirir: Buddy\'nin Linux\'u ve xAI\'dan Grok Build. Mümkünse Wi-Fi kullanın.</string>
+    <string name="signin_install_sub_claude">Claude Code\'u NOX01 içinde Claude aboneliğinizle çalıştırır.</string>
+    <string name="signin_install_sub_opencode">OpenCode\'u NOX01 içinde çalıştırır. Ücretsiz modelleri hesap gerekmeden hemen çalışır; kendi sağlayıcılarınızı (Anthropic, OpenAI, GitHub Copilot…) istediğiniz zaman bağlayabilirsiniz.</string>
+    <string name="signin_install_sub_codex">Codex\'i NOX01 içinde ChatGPT planınızla çalıştırır.</string>
+    <string name="signin_install_sub_agy">Google\'ın Antigravity CLI aracını NOX01 içinde Google hesabınızla çalıştırır: ücretsiz plan, Google AI Pro veya Ultra.</string>
+    <string name="signin_install_sub_grok">xAI\'ın Grok Build aracını NOX01 içinde Grok hesabınızla çalıştırır (Google veya X ile giriş de olur).</string>
+    <string name="signin_install_size_claude">Bir kerelik yaklaşık 235 MB indirir: NOX01\'nin Linux\'u ve Anthropic\'ten Claude Code. Mümkünse Wi-Fi kullanın.</string>
+    <string name="signin_install_size_opencode">Bir kerelik yaklaşık 230 MB indirir: NOX01\'nin Linux\'u, Node.js ve OpenCode. Mümkünse Wi-Fi kullanın.</string>
+    <string name="signin_install_size_codex">Bir kerelik yaklaşık 150 MB indirir: NOX01\'nin Linux\'u, Node.js ve OpenAI\'dan Codex. Mümkünse Wi-Fi kullanın.</string>
+    <string name="signin_install_size_agy">Bir kerelik yaklaşık 200 MB indirir: NOX01\'nin Linux\'u ve Google\'dan Antigravity CLI. Mümkünse Wi-Fi kullanın.</string>
+    <string name="signin_install_size_grok">Bir kerelik yaklaşık 170 MB indirir: NOX01\'nin Linux\'u ve xAI\'dan Grok Build. Mümkünse Wi-Fi kullanın.</string>
 
     <!-- Sign-in screen: install or update in progress (screen titles). -->
     <string name="signin_installing">Yükleniyor</string>
@@ -678,10 +678,10 @@
     <string name="signin_title_chatgpt">ChatGPT\'ye giriş yapın</string>
     <string name="signin_title_google">Google\'a giriş yapın</string>
     <string name="signin_title_grok">Grok\'a giriş yapın</string>
-    <string name="signin_sub_claude">Claude hesabınızı kullanın (Pro veya Max). Tarayıcınız açılır; orada onaylayın, Buddy kendiliğinden geri döner.</string>
-    <string name="signin_sub_chatgpt">ChatGPT hesabınızı kullanın (Plus, Pro veya Business). Tarayıcınız açılır; orada onaylayın, Buddy kendiliğinden geri döner.</string>
-    <string name="signin_sub_agy">Google hesabınızı kullanın. Tarayıcınız açılır; orada giriş yapın, Buddy kodu kendiliğinden alır. Antigravity yaklaşık bir dakika bekler.</string>
-    <string name="signin_sub_grok">Grok hesabınızı kullanın; Google veya X ile giriş de olur. Tarayıcınız bir kodla açılır; orada onaylayın, Buddy kendiliğinden geri döner.</string>
+    <string name="signin_sub_claude">Claude hesabınızı kullanın (Pro veya Max). Tarayıcınız açılır; orada onaylayın, NOX01 kendiliğinden geri döner.</string>
+    <string name="signin_sub_chatgpt">ChatGPT hesabınızı kullanın (Plus, Pro veya Business). Tarayıcınız açılır; orada onaylayın, NOX01 kendiliğinden geri döner.</string>
+    <string name="signin_sub_agy">Google hesabınızı kullanın. Tarayıcınız açılır; orada giriş yapın, NOX01 kodu kendiliğinden alır. Antigravity yaklaşık bir dakika bekler.</string>
+    <string name="signin_sub_grok">Grok hesabınızı kullanın; Google veya X ile giriş de olur. Tarayıcınız bir kodla açılır; orada onaylayın, NOX01 kendiliğinden geri döner.</string>
     <string name="signin_with_claude">Claude ile giriş yap</string>
     <string name="signin_with_chatgpt">ChatGPT ile giriş yap</string>
     <string name="signin_with_google">Google ile giriş yap</string>
@@ -698,10 +698,10 @@
     <string name="signin_sign_in">Giriş yap</string>
     <string name="signin_starting">Giriş başlatılıyor…</string>
     <string name="signin_approve_title">Tarayıcınızda onaylayın</string>
-    <string name="signin_approve_claude">Claude sayfasında Yetkilendir düğmesine dokunun. Buddy kodu alır ve kendiliğinden geri döner.</string>
-    <string name="signin_approve_codex">Giriş yapın ve Codex\'e izin verin. Ardından Buddy\'ye dönün; işlemi kendisi tamamlar.</string>
-    <string name="signin_approve_agy">Giriş yapın ve Antigravity\'ye izin verin. Buddy sayfada görünen kodu alır ve kendiliğinden geri döner. Bir dakikadan uzun sürerse girişi yeniden başlatın.</string>
-    <string name="signin_approve_grok">Sayfada %1$s kodunun göründüğünü kontrol edin, ardından onaylayıp giriş yapın. Buddy kendiliğinden geri döner.</string>
+    <string name="signin_approve_claude">Claude sayfasında Yetkilendir düğmesine dokunun. NOX01 kodu alır ve kendiliğinden geri döner.</string>
+    <string name="signin_approve_codex">Giriş yapın ve Codex\'e izin verin. Ardından NOX01\'ye dönün; işlemi kendisi tamamlar.</string>
+    <string name="signin_approve_agy">Giriş yapın ve Antigravity\'ye izin verin. NOX01 sayfada görünen kodu alır ve kendiliğinden geri döner. Bir dakikadan uzun sürerse girişi yeniden başlatın.</string>
+    <string name="signin_approve_grok">Sayfada %1$s kodunun göründüğünü kontrol edin, ardından onaylayıp giriş yapın. NOX01 kendiliğinden geri döner.</string>
     <string name="signin_open_again">Giriş sayfasını yeniden aç</string>
     <string name="signin_signing_in">Giriş yapılıyor</string>
     <string name="signin_finishing">Giriş tamamlanıyor…</string>
@@ -710,9 +710,9 @@
     <!-- Sign-in screen: signing in from another device. -->
     <string name="signin_remote_claude">Bu bağlantıyı herhangi bir cihazda açıp onaylayın. Ardından sayfada görünen kodu kopyalayıp aşağıya yapıştırın.</string>
     <string name="signin_enter_code">Bu kodu girin</string>
-    <string name="signin_remote_codex">Herhangi bir cihazda aşağıdaki bağlantıyı açın, ChatGPT\'ye giriş yapın ve kodu girin. Buddy işlemi kendisi tamamlar.</string>
+    <string name="signin_remote_codex">Herhangi bir cihazda aşağıdaki bağlantıyı açın, ChatGPT\'ye giriş yapın ve kodu girin. NOX01 işlemi kendisi tamamlar.</string>
     <string name="signin_remote_agy">Bu bağlantıyı herhangi bir cihazda açıp giriş yapın. Ardından sayfada görünen kodu kopyalayıp yaklaşık bir dakika içinde aşağıya yapıştırın.</string>
-    <string name="signin_remote_grok">Herhangi bir cihazda aşağıdaki bağlantıyı açın, Grok\'a giriş yapın ve kodu onaylayın. Buddy işlemi kendisi tamamlar.</string>
+    <string name="signin_remote_grok">Herhangi bir cihazda aşağıdaki bağlantıyı açın, Grok\'a giriş yapın ve kodu onaylayın. NOX01 işlemi kendisi tamamlar.</string>
     <string name="signin_copy_code">Kodu kopyala</string>
     <string name="signin_code_copied">Kod kopyalandı</string>
     <string name="signin_code_expiry">Kod 15 dakika geçerlidir.</string>
@@ -726,8 +726,8 @@
 
     <!-- Sign-in screen: fold-out box for pasting Claude's sign-in code by hand. -->
     <string name="signin_paste_instead">Bunun yerine kodu yapıştırın</string>
-    <string name="signin_paste_help">Buddy kendiliğinden geri dönmezse: Claude sayfasında Kodu kopyala düğmesine dokunun, ardından kodu buraya yapıştırın.</string>
-    <string name="signin_paste_help_agy">Buddy kendiliğinden geri dönmezse: Antigravity sayfasında “Copy to Clipboard” düğmesine dokunun, ardından kodu buraya yapıştırın.</string>
+    <string name="signin_paste_help">NOX01 kendiliğinden geri dönmezse: Claude sayfasında Kodu kopyala düğmesine dokunun, ardından kodu buraya yapıştırın.</string>
+    <string name="signin_paste_help_agy">NOX01 kendiliğinden geri dönmezse: Antigravity sayfasında “Copy to Clipboard” düğmesine dokunun, ardından kodu buraya yapıştırın.</string>
     <string name="signin_code_hint">kod</string>
     <string name="signin_use_code">Kullan</string>
     <string name="signin_start_again">Önce girişi yeniden başlatın.</string>
@@ -738,11 +738,11 @@
     <string name="signin_done">Bitti</string>
     <string name="signin_sign_out">Çıkış yap</string>
     <string name="signin_sign_out_title">%1$s hesabından çıkış yapılsın mı?</string>
-    <string name="signin_sign_out_text">Yeniden giriş yapana kadar Buddy\'deki %1$s çalışmaz.</string>
+    <string name="signin_sign_out_text">Yeniden giriş yapana kadar NOX01\'deki %1$s çalışmaz.</string>
     <string name="signin_opencode_ready">OpenCode hazır</string>
     <string name="signin_opencode_free">OpenCode\'un ücretsiz modelleri kullanılıyor. Model çipiyle her sohbet için birini seçin veya kendi sağlayıcınızı bağlayın.</string>
     <string name="signin_opencode_connected">Bağlı: %1$s. OpenCode\'un ücretsiz modelleri de kullanılabilir olmaya devam eder.</string>
-    <string name="signin_opencode_connect_note">Sağlayıcı bağlamak, Buddy\'nin terminalini %1$s komutuyla açar: bir sağlayıcı seçip adımları izleyin. Daha sonra kaldırmak için orada %2$s komutunu çalıştırın.</string>
+    <string name="signin_opencode_connect_note">Sağlayıcı bağlamak, NOX01\'nin terminalini %1$s komutuyla açar: bir sağlayıcı seçip adımları izleyin. Daha sonra kaldırmak için orada %2$s komutunu çalıştırın.</string>
     <string name="signin_connect_provider">Sağlayıcı bağla</string>
     <string name="signin_version">%1$s %2$s.</string>
     <string name="signin_version_old_opencode">OpenCode %1$s. OpenCode 2 çıktı: yeni sürümleri almaya devam etmek için güncelleyin. Bağlı sağlayıcılarınız korunur.</string>
@@ -760,14 +760,14 @@
     <string name="account_tagline_agy">Google hesabınızı kullanır</string>
     <string name="account_tagline_grok">Grok hesabınızı kullanır</string>
     <string name="agent_tag_free">ücretsiz · sınırlı</string>
-    <string name="account_setting_up_linux">Buddy\'nin Linux\'u hazırlanıyor…</string>
+    <string name="account_setting_up_linux">NOX01\'nin Linux\'u hazırlanıyor…</string>
     <string name="account_installing_tools">Araçlar yükleniyor…</string>
     <string name="account_downloading_claude">Claude Code indiriliyor (yaklaşık 230 MB)…</string>
     <string name="account_downloading">%1$s indiriliyor…</string>
     <string name="account_check_failed">%1$s kontrol edilemedi: %2$s</string>
     <string name="account_install_failed">Yükleme başarısız: %1$s</string>
     <string name="account_install_no_space">Telefonda yeterli boş alan yok. Yaklaşık 1 GB yer aç ve tekrar dene.</string>
-    <string name="account_install_network">Buddy indirme sunucusuna ulaşamadı. Wi-Fi\'yi veya mobil veriyi (ya da onu engelleyen bir VPN veya özel DNS\'i) kontrol et ve tekrar dene.</string>
+    <string name="account_install_network">NOX01 indirme sunucusuna ulaşamadı. Wi-Fi\'yi veya mobil veriyi (ya da onu engelleyen bir VPN veya özel DNS\'i) kontrol et ve tekrar dene.</string>
     <string name="account_install_refused">İndirme sunucusu isteği reddetti veya yavaşlamayı istedi. Birkaç dakika sonra tekrar dene.</string>
     <string name="account_install_space_needed">Yalnızca %1$s boş. Bir ajanı kurmak yaklaşık 1 GB gerektirir: yer aç ve tekrar dene.</string>
     <string name="signin_details">Ayrıntılar</string>
@@ -815,65 +815,65 @@
     <string name="remote_start_failed">Başlatılamadı: %1$s</string>
     <string name="remote_keeps_stopping">Oturum sürekli duruyor. Kapatıp yeniden açın veya Claude Code girişini kontrol edin.</string>
     <string name="codex_pair_getting">Kod alınıyor…</string>
-    <string name="codex_pair_text">Bu kodu ChatGPT\'ye girin: telefonda Codex\'te, bilgisayarda Ayarlar → Bağlantılar → Diğer cihazları kontrol et bölümünde. %1$s saatine kadar bir kez çalışır. Buddy orada “localhost” olarak görünür.</string>
+    <string name="codex_pair_text">Bu kodu ChatGPT\'ye girin: telefonda Codex\'te, bilgisayarda Ayarlar → Bağlantılar → Diğer cihazları kontrol et bölümünde. %1$s saatine kadar bir kez çalışır. NOX01 orada “localhost” olarak görünür.</string>
     <string name="codex_pair_failed">Eşleme kodu alınamadı: %1$s</string>
     <string name="codex_keeps_stopping">Codex oturumu sürekli duruyor: %1$s</string>
     <string name="ssh_keeps_stopping">SSH sunucusu sürekli duruyor: %1$s</string>
-    <string name="ssh_key_added">Tamam. Buddy\'nin Linux\'unu Termux\'tan açmak için ssh buddy yazın.</string>
-    <string name="ssh_code_expired">Bu komut zaten kullanıldı veya 10 dakikadan eski. Buddy\'nin Ayarlar bölümünden yeniden kopyalayın.</string>
+    <string name="ssh_key_added">Tamam. NOX01\'nin Linux\'unu Termux\'tan açmak için ssh buddy yazın.</string>
+    <string name="ssh_code_expired">Bu komut zaten kullanıldı veya 10 dakikadan eski. NOX01\'nin Ayarlar bölümünden yeniden kopyalayın.</string>
 
     <!-- ===== Settings, the built-in Linux, terminal and sessions (SetupActivity, Linux, Terminal*, MonitorActivity) ===== -->
 
     <!-- Settings screen: header. -->
     <string name="setup_settings_title">Ayarlar</string>
-    <string name="setup_settings_subtitle">Buddy; Claude Code, Codex, OpenCode, Antigravity veya Grok\'u uygulamanın içinde, kendi aboneliğinizle (ya da OpenCode\'un ücretsiz modelleriyle ve Antigravity\'nin ücretsiz planıyla) çalıştırır.</string>
+    <string name="setup_settings_subtitle">NOX01; Claude Code, Codex, OpenCode, Antigravity veya Grok\'u uygulamanın içinde, kendi aboneliğinizle (ya da OpenCode\'un ücretsiz modelleriyle ve Antigravity\'nin ücretsiz planıyla) çalıştırır.</string>
     <string name="settings_agents">Ajanlar ve modeller</string>
     <string name="settings_agents_sub">Varsayılan ajan, oturum açma, API anahtarları, varsayılan modeller, GitHub, indirme sunucusu</string>
     <string name="settings_bubble">Balon ve sohbet</string>
     <string name="settings_bubble_sub">Balonu göster, dokunmanın ne yaptığı, panel boyutu</string>
     <string name="settings_voice_sub">Sesli giriş ve çıkış, diller, canlı ses, yanıtları sesli okuma</string>
     <string name="settings_safety">Güvenlik ve onaylar</string>
-    <string name="settings_safety_sub">Uygulama izinleri, bildirim kuralları, Linux araçları, Buddy\'nin kendi ekranları</string>
+    <string name="settings_safety_sub">Uygulama izinleri, bildirim kuralları, Linux araçları, NOX01\'nin kendi ekranları</string>
     <string name="settings_background">Arka plan ve otomasyon</string>
     <string name="settings_background_sub">Arka plan modu, zamanlanmış görevler, arka plan tarayıcısı</string>
     <string name="settings_tools">Araçlar ve bağlantılar</string>
     <string name="settings_tools_sub">MCP sunucuları, beceriler, başka terminaller için telefon araçları, Remote Control, SSH</string>
-    <string name="settings_appearance_sub">Açık veya koyu, vurgu rengi, yüzey, Buddy\'nin görünümü</string>
+    <string name="settings_appearance_sub">Açık veya koyu, vurgu rengi, yüzey, NOX01\'nin görünümü</string>
     <string name="settings_about">Yedekleme ve hakkında</string>
     <string name="settings_about_sub">Yedekleme ve taşıma, güncellemeler, kılavuz, kurulum denetimi</string>
 
     <!-- Settings screen: the setup checklist card (5 steps). -->
     <string name="setup_card_title">Kurulum</string>
     <string name="setup_open_guide">Adım adım rehberi aç</string>
-    <string name="setup_all_set">Her şey tamam. Buddy kullanıma hazır.</string>
+    <string name="setup_all_set">Her şey tamam. NOX01 kullanıma hazır.</string>
     <string name="setup_next_step">Sıradaki: %1$s</string>
-    <string name="setup_step_a11y_title">Buddy erişilebilirlik hizmetini açın</string>
-    <string name="setup_step_a11y_body">Bu, baloncuğu gösterir ve Buddy\'nin sizin için ekranı okumasına, dokunmasına ve yazmasına izin verir.</string>
+    <string name="setup_step_a11y_title">NOX01 erişilebilirlik hizmetini açın</string>
+    <string name="setup_step_a11y_body">Bu, baloncuğu gösterir ve NOX01\'nin sizin için ekranı okumasına, dokunmasına ve yazmasına izin verir.</string>
     <string name="setup_step_a11y_restricted">Anahtar gri mi görünüyor (“Kısıtlanmış ayar”)? Android, dosyadan yüklenen uygulamalarda bunu engeller. Uygulama bilgileri düğmesine, ardından sağ üstteki ⋮ → Kısıtlanmış ayarlara izin ver seçeneğine dokunun ve tekrar deneyin.</string>
     <string name="setup_open_settings">Ayarları aç</string>
     <string name="setup_app_info">Uygulama bilgileri</string>
     <string name="setup_step_install_title">%1$s ajanını yükleyin</string>
-    <string name="setup_step_install_done">%1$s, Buddy\'ye yüklendi.</string>
-    <string name="setup_step_install_claude">Buddy kendi küçük Linux\'unu ve Anthropic\'ten %1$s ajanını indirir (yaklaşık 235 MB).</string>
-    <string name="setup_step_install_opencode">Buddy kendi küçük Linux\'unu ve %1$s ajanını indirir (Node.js ile yaklaşık 230 MB).</string>
-    <string name="setup_step_install_codex">Buddy kendi küçük Linux\'unu ve OpenAI\'dan %1$s ajanını indirir (yaklaşık 150 MB).</string>
-    <string name="setup_step_install_grok">Buddy kendi küçük Linux\'unu ve xAI\'dan %1$s ajanını indirir (yaklaşık 170 MB).</string>
+    <string name="setup_step_install_done">%1$s, NOX01\'ye yüklendi.</string>
+    <string name="setup_step_install_claude">NOX01 kendi küçük Linux\'unu ve Anthropic\'ten %1$s ajanını indirir (yaklaşık 235 MB).</string>
+    <string name="setup_step_install_opencode">NOX01 kendi küçük Linux\'unu ve %1$s ajanını indirir (Node.js ile yaklaşık 230 MB).</string>
+    <string name="setup_step_install_codex">NOX01 kendi küçük Linux\'unu ve OpenAI\'dan %1$s ajanını indirir (yaklaşık 150 MB).</string>
+    <string name="setup_step_install_grok">NOX01 kendi küçük Linux\'unu ve xAI\'dan %1$s ajanını indirir (yaklaşık 170 MB).</string>
     <string name="setup_install">Yükle</string>
     <string name="setup_step_signin_title">Giriş yapın</string>
     <string name="setup_step_signin_opencode_done">Giriş gerekmez: OpenCode\'un ücretsiz modelleri hemen çalışır. Kendi sağlayıcılarınızı istediğiniz zaman bağlayabilirsiniz.</string>
     <string name="setup_step_signin_opencode">OpenCode\'un ücretsiz modelleri için giriş gerekmez.</string>
     <string name="setup_step_signin_done">Giriş yapıldı.</string>
     <string name="setup_step_signin_done_email">%1$s olarak giriş yapıldı.</string>
-    <string name="setup_step_signin_claude">Claude hesabınızla (Pro veya Max). Tarayıcınız açılır; orada onaylayın, Buddy kendiliğinden geri döner.</string>
-    <string name="setup_step_signin_codex">ChatGPT hesabınızla. Tarayıcınız açılır; orada onaylayın, Buddy kendiliğinden geri döner.</string>
-    <string name="setup_step_signin_grok">Grok hesabınızla. Tarayıcınız açılır; orada kodu onaylayın, Buddy kendiliğinden geri döner.</string>
+    <string name="setup_step_signin_claude">Claude hesabınızla (Pro veya Max). Tarayıcınız açılır; orada onaylayın, NOX01 kendiliğinden geri döner.</string>
+    <string name="setup_step_signin_codex">ChatGPT hesabınızla. Tarayıcınız açılır; orada onaylayın, NOX01 kendiliğinden geri döner.</string>
+    <string name="setup_step_signin_grok">Grok hesabınızla. Tarayıcınız açılır; orada kodu onaylayın, NOX01 kendiliğinden geri döner.</string>
     <string name="setup_sign_in">Giriş yap</string>
-    <string name="setup_step_background_title">Buddy\'nin arka planda çalışmasına izin verin</string>
+    <string name="setup_step_background_title">NOX01\'nin arka planda çalışmasına izin verin</string>
     <string name="setup_step_background_done">İzin verildi.</string>
-    <string name="setup_step_background_body">Böylece ajan çalışırken telefonunuz pil tasarrufu için Buddy\'yi durdurmaz.</string>
+    <string name="setup_step_background_body">Böylece ajan çalışırken telefonunuz pil tasarrufu için NOX01\'yi durdurmaz.</string>
     <string name="setup_allow">İzin ver</string>
     <string name="setup_step_try_title">Deneyin</string>
-    <string name="setup_step_try_done">Buddy size yanıt verdi. Daha fazlası için istediğiniz zaman baloncuğa dokunun.</string>
+    <string name="setup_step_try_done">NOX01 size yanıt verdi. Daha fazlası için istediğiniz zaman baloncuğa dokunun.</string>
     <string name="setup_step_try_body">Ekranınızın kenarındaki baloncuğa dokunun ve “Messenger\'ı aç” gibi bir şey isteyin ya da burada bir sohbet başlatın.</string>
     <string name="setup_step_try_wait">Önce yukarıdaki adımları tamamlayın.</string>
     <!-- Short names of the setup steps, shown after "Next:" in the Chats header. -->
@@ -886,17 +886,17 @@
     <string name="setup_theme_mode">Mod</string>
     <string name="setup_accent">Vurgu rengi</string>
     <string name="setup_surface">Yüzey</string>
-    <string name="setup_surface_note">Sıcak, Buddy\'nin orijinal tonudur. Siyah (tam siyah) yalnızca koyu modda uygulanır.</string>
-    <string name="setup_face">Buddy\'nin görünümü</string>
+    <string name="setup_surface_note">Sıcak, NOX01\'nin orijinal tonudur. Siyah (tam siyah) yalnızca koyu modda uygulanır.</string>
+    <string name="setup_face">NOX01\'nin görünümü</string>
     <string name="setup_face_buddy">Orijinal</string>
     <string name="setup_face_picture">Kendi resmin</string>
-    <string name="setup_face_note">En iyi sonucu şeffaf arka planlı bir PNG veya WebP verir. Baloncukta ve Buddy\'nin yanıtlarının yanında görünür.</string>
+    <string name="setup_face_note">En iyi sonucu şeffaf arka planlı bir PNG veya WebP verir. Baloncukta ve NOX01\'nin yanıtlarının yanında görünür.</string>
     <string name="setup_face_change">Başka bir resim seç</string>
     <string name="setup_face_unreadable">Bu resim okunamadı. Bir PNG veya WebP dene.</string>
     <string name="setup_custom_colour">Özel renk</string>
     <string name="setup_mirror">İndirme sunucusu</string>
     <string name="setup_mirror_default">Varsayılan</string>
-    <string name="setup_mirror_info">Buddy\'nin Linux\'unun, paketlerinin ve npm ile kurulan ajanların (Codex, OpenCode) nereden indirileceği. Bulunduğunuz yerde kurulumlar başarısız olmadıkça veya çok yavaş ilerlemedikçe Varsayılan\'da bırakın. Başka bir sunucuyla Buddy\'nin Linux\'u ağınızın kendi DNS sunucularını da kullanır.</string>
+    <string name="setup_mirror_info">NOX01\'nin Linux\'unun, paketlerinin ve npm ile kurulan ajanların (Codex, OpenCode) nereden indirileceği. Bulunduğunuz yerde kurulumlar başarısız olmadıkça veya çok yavaş ilerlemedikçe Varsayılan\'da bırakın. Başka bir sunucuyla NOX01\'nin Linux\'u ağınızın kendi DNS sunucularını da kullanır.</string>
     <string name="setup_mirror_default_sub">Alpine ve npm\'in kendi sunucuları</string>
     <string name="setup_mirror_china">Çin ana karası</string>
     <string name="setup_mirror_russia">Rusya</string>
@@ -930,14 +930,14 @@
 
     <!-- Settings screen: Phone tools in your own sessions (MCP server). -->
     <string name="setup_phone_tools">Kendi oturumlarınızda telefon araçları</string>
-    <string name="setup_phone_tools_info">Buddy\'nin telefon araçları, bu telefonda çalışan sıradan bir MCP sunucusudur. Bunu telefondaki bir terminalde (örneğin Termux\'ta) bir kez çalıştırın; o ajan, baloncuk olmadan bile her oturumda telefon araçlarına sahip olur.</string>
+    <string name="setup_phone_tools_info">NOX01\'nin telefon araçları, bu telefonda çalışan sıradan bir MCP sunucusudur. Bunu telefondaki bir terminalde (örneğin Termux\'ta) bir kez çalıştırın; o ajan, baloncuk olmadan bile her oturumda telefon araçlarına sahip olur.</string>
     <string name="setup_copy_command">Komutu kopyala</string>
     <string name="setup_command_copied">Kopyalandı. Terminalinize yapıştırın.</string>
 
     <!-- Settings screen: Voice. -->
     <string name="setup_voice">Ses</string>
-    <string name="setup_assist">Buddy telefonun asistanı olduğunda</string>
-    <string name="setup_assist_info">Android Ayarları → Uygulamalar → Varsayılan uygulamalar → Dijital asistan uygulaması\'ndan Buddy\'yi seç. Güç tuşuna uzun basınca Buddy başlar: Konuş tek bir istek gönderir, Canlı ses sesli bir sohbet başlatır (Codex\'te oturum açık olmalı, yoksa Konuş).</string>
+    <string name="setup_assist">NOX01 telefonun asistanı olduğunda</string>
+    <string name="setup_assist_info">Android Ayarları → Uygulamalar → Varsayılan uygulamalar → Dijital asistan uygulaması\'ndan NOX01\'yi seç. Güç tuşuna uzun basınca NOX01 başlar: Konuş tek bir istek gönderir, Canlı ses sesli bir sohbet başlatır (Codex\'te oturum açık olmalı, yoksa Konuş).</string>
     <string name="setup_live_agent">Canlı ses şunu kullanır</string>
     <string name="setup_live_agent_default">Varsayılan</string>
     <string name="setup_live_agent_info">Baloncuğa veya güç tuşuna uzun basarak başlatılan canlı ses bu ajanla yeni bir sohbet açar. Varsayılan, varsayılan ajanındır (şu an %1$s).</string>
@@ -945,13 +945,13 @@
     <string name="setup_live_continue_info">Açık: canlı ses o ajanla son sohbetine devam eder. Kapalı: her seferinde yeni sohbet.</string>
     <string name="setup_voice_input">Sesle giriş</string>
     <string name="setup_voice_phone">Telefon</string>
-    <string name="setup_voice_input_claude">Claude planınızla Claude Code\'un dikte özelliği: çok doğru. İngilizce, Fransızca, Almanca, İspanyolca, İtalyanca, Portekizce, Felemenkçe, Türkçe, Rusça, Japonca ve daha fazlasını destekler, ancak Arapçayı desteklemez: Arapça için Buddy telefonun tanıyıcısını kullanır. Siz duraklayınca kelimeler görünür.</string>
+    <string name="setup_voice_input_claude">Claude planınızla Claude Code\'un dikte özelliği: çok doğru. İngilizce, Fransızca, Almanca, İspanyolca, İtalyanca, Portekizce, Felemenkçe, Türkçe, Rusça, Japonca ve daha fazlasını destekler, ancak Arapçayı desteklemez: Arapça için NOX01 telefonun tanıyıcısını kullanır. Siz duraklayınca kelimeler görünür.</string>
     <string name="setup_voice_input_chatgpt">ChatGPT planınızla, Codex üzerinden ChatGPT\'nin sesi. Her dili, hatta tek cümlede karışık dilleri bile anlar. Yalnızca sözleriniz kullanılır: ChatGPT\'nin sesli yanıtları kapalıdır ve hiçbir şey çalıştıramaz.</string>
     <string name="setup_voice_input_phone">Telefonunuzun konuşma tanıması (çoğu telefonda Google). Siz konuşurken metin canlı görünür; dillerinizden hangisini konuştuğunuzu algılar.</string>
     <string name="setup_voice_output">Sesli yanıt</string>
     <string name="setup_voice_output_chatgpt">Yanıtlar ChatGPT\'nin doğal sesiyle okunur (ChatGPT planınızla, Codex üzerinden). ChatGPT ses kullanımınızdan düşülür; kullanılamıyorsa telefonun sesi okur.</string>
     <string name="setup_voice_output_phone">Telefonunuzun metin okuma sesleri, yanıtın dilinde.</string>
-    <string name="setup_voice_sample">Bonjour ! Merhaba, ben Buddy. Sesim böyle.</string>
+    <string name="setup_voice_sample">Bonjour ! Merhaba, ben NOX01. Sesim böyle.</string>
     <string name="setup_languages">Diller</string>
     <string name="setup_languages_hint">Konuştuğunuz dilleri seçmek için dokunun. Varsayılan yapmak için bir dile uzun basın. Sohbette dil değiştirmek için mikrofona uzun basın.</string>
     <string name="setup_sign_in_first">Önce %1$s hesabına giriş yapın</string>
@@ -962,7 +962,7 @@
     <!-- Settings screen: Remote Control (a Claude Code session you continue from the Claude app). -->
     <string name="setup_remote_control">Remote Control</string>
     <string name="setup_remote_session">Claude Code oturumu</string>
-    <string name="setup_remote_session_info">Buddy içinde telefon araçlarıyla çalışan bir Claude Code oturumu. Bu telefondaki veya herhangi bir yerdeki Claude uygulamasından (Code) devam edin.</string>
+    <string name="setup_remote_session_info">NOX01 içinde telefon araçlarıyla çalışan bir Claude Code oturumu. Bu telefondaki veya herhangi bir yerdeki Claude uygulamasından (Code) devam edin.</string>
     <string name="setup_remote_sign_in_first">Önce Claude Code\'a giriş yapın.</string>
     <string name="setup_remote_active">etkin · Claude uygulamasında “%1$s”</string>
     <string name="setup_remote_starting">başlatılıyor…</string>
@@ -970,25 +970,25 @@
     <string name="setup_remote_open">Claude uygulamasında aç</string>
     <string name="setup_remote_open_failed">Açılamadı.</string>
     <string name="setup_codex_session">Codex oturumu</string>
-    <string name="setup_codex_session_info">Buddy içinde telefon araçlarıyla çalışan Codex. Bu telefondaki veya bir bilgisayardaki ChatGPT uygulamasından (Codex) kullanın. Codex\'in korumalı alanı burada çalışamaz, bu yüzden varsayılan izinlerle her komuttan önce sorar.</string>
+    <string name="setup_codex_session_info">NOX01 içinde telefon araçlarıyla çalışan Codex. Bu telefondaki veya bir bilgisayardaki ChatGPT uygulamasından (Codex) kullanın. Codex\'in korumalı alanı burada çalışamaz, bu yüzden varsayılan izinlerle her komuttan önce sorar.</string>
     <string name="setup_codex_active">çalışıyor · ChatGPT\'de “localhost”</string>
     <string name="setup_codex_pair">Cihaz eşle</string>
     <string name="setup_ssh">Termux\'tan SSH</string>
-    <string name="setup_ssh_info">Buddy\'nin Linux\'unu Termux\'tan SSH ile kullanın. Yalnızca bu telefondaki uygulamalar, yalnızca bir anahtarla bağlanabilir.</string>
+    <string name="setup_ssh_info">NOX01\'nin Linux\'unu Termux\'tan SSH ile kullanın. Yalnızca bu telefondaki uygulamalar, yalnızca bir anahtarla bağlanabilir.</string>
     <string name="setup_ssh_active">çalışıyor · port %1$d</string>
-    <string name="setup_ssh_how">Bu komutu kopyalayıp 10 dakika içinde Termux\'ta bir kez çalıştırın. Sonrasında Buddy\'nin Linux\'unu açmak için Termux\'ta ssh buddy yazın.</string>
+    <string name="setup_ssh_how">Bu komutu kopyalayıp 10 dakika içinde Termux\'ta bir kez çalıştırın. Sonrasında NOX01\'nin Linux\'unu açmak için Termux\'ta ssh buddy yazın.</string>
 
     <!-- Settings screen: chats left over from when Buddy ran its agents in Termux. -->
     <string name="setup_old_chats_title">Eski Termux sohbetlerini kaldır</string>
     <plurals name="setup_old_chats_body">
-        <item quantity="one">Buddy\'nin kendi Linux\'u olmadan önceki %1$d sohbet. Ajanlar buna devam edemez.</item>
-        <item quantity="other">Buddy\'nin kendi Linux\'u olmadan önceki %1$d sohbet. Ajanlar bunlara devam edemez.</item>
+        <item quantity="one">NOX01\'nin kendi Linux\'u olmadan önceki %1$d sohbet. Ajanlar buna devam edemez.</item>
+        <item quantity="other">NOX01\'nin kendi Linux\'u olmadan önceki %1$d sohbet. Ajanlar bunlara devam edemez.</item>
     </plurals>
     <plurals name="setup_old_chats_remove">
         <item quantity="one">%1$d eski sohbet kaldırılsın mı?</item>
         <item quantity="other">%1$d eski sohbet kaldırılsın mı?</item>
     </plurals>
-    <string name="setup_old_chats_remove_body">Bunları Buddy\'nin sohbet listesinden kaldırır. Bu işlem geri alınamaz.</string>
+    <string name="setup_old_chats_remove_body">Bunları NOX01\'nin sohbet listesinden kaldırır. Bu işlem geri alınamaz.</string>
     <string name="setup_remove">Kaldır</string>
     <string name="setup_removed">Kaldırıldı.</string>
 
@@ -1000,33 +1000,33 @@
     <string name="setup_tap_talk">Konuş</string>
     <string name="setup_tap_app">Uygulama</string>
     <string name="setup_tap_panel_info">Kayan sohbeti, bulunduğunuz uygulamanın üzerinde açar. Daha fazlası için baloncuğa uzun basın.</string>
-    <string name="setup_tap_app_info">Sohbeti Buddy\'de tam ekran açar. Daha fazlası için baloncuğa uzun basın.</string>
+    <string name="setup_tap_app_info">Sohbeti NOX01\'de tam ekran açar. Daha fazlası için baloncuğa uzun basın.</string>
     <string name="setup_panel_size">Sohbet paneli boyutu</string>
     <string name="setup_panel_full">Tam ekran</string>
     <string name="setup_panel_compact">Kompakt</string>
     <string name="setup_panel_size_info">Tam ekran, kenardan kenara uzanır. Kompakt daha küçüktür ve ekran kenarlarından uzak durur; böylece kenar hareketleri çalışmaya devam eder.</string>
     <string name="setup_tap_to_talk_info">Tek dokunuş mikrofonu açar: ne istediğinizi söyleyin, duraklayınca gönderilir. Sohbet ve daha fazlası için baloncuğa uzun basın.</string>
     <string name="setup_read_aloud">Yanıtları sesli oku</string>
-    <string name="setup_read_aloud_info">Buddy, ajanların yanıtlarını Ses bölümünde seçtiğiniz sesle okur.</string>
+    <string name="setup_read_aloud_info">NOX01, ajanların yanıtlarını Ses bölümünde seçtiğiniz sesle okur.</string>
     <string name="setup_pause_media">Sesli okuma sırasında medyayı duraklat</string>
-    <string name="setup_pause_media_info">Çalan müzik veya video, Buddy bir yanıtı okurken duraklatılır ve sonra devam eder. Buddy yalnızca kendi duraklattığını devam ettirir; bu sırada oynatmayı değiştirdiyseniz dokunmaz. “Yanıtları sesli oku” ve bildirim erişimi gerekir.</string>
+    <string name="setup_pause_media_info">Çalan müzik veya video, NOX01 bir yanıtı okurken duraklatılır ve sonra devam eder. NOX01 yalnızca kendi duraklattığını devam ettirir; bu sırada oynatmayı değiştirdiyseniz dokunmaz. “Yanıtları sesli oku” ve bildirim erişimi gerekir.</string>
     <string name="setup_voice_cards">Kartları sesle yanıtla</string>
-    <string name="setup_voice_cards_info">Bir kart sesli okunduktan sonra Buddy dinler: “onayla” veya “reddet” ya da istediğiniz seçeneği söyleyin. “Yanıtları sesli oku” açık olmalıdır. Telefon kilitliyken çalışmaz. Duyabilecek mesafedeki herkes yanıt verebilir.</string>
-    <string name="voice_card_approval">Buddy onayınızı bekliyor. %1$s</string>
-    <string name="voice_card_question">Buddy soruyor: %1$s Seçenekler: %2$s</string>
+    <string name="setup_voice_cards_info">Bir kart sesli okunduktan sonra NOX01 dinler: “onayla” veya “reddet” ya da istediğiniz seçeneği söyleyin. “Yanıtları sesli oku” açık olmalıdır. Telefon kilitliyken çalışmaz. Duyabilecek mesafedeki herkes yanıt verebilir.</string>
+    <string name="voice_card_approval">NOX01 onayınızı bekliyor. %1$s</string>
+    <string name="voice_card_question">NOX01 soruyor: %1$s Seçenekler: %2$s</string>
     <string name="voice_card_hint">Onayla veya reddet deyin.</string>
     <string name="voice_card_yes">onayla,onaylıyorum,evet,tamam,olur,devam et</string>
     <string name="voice_card_no">reddet,reddediyorum,hayır,dur,iptal</string>
     <string name="setup_update_notices">Güncelleme bildirimleri</string>
-    <string name="setup_update_notices_info">Buddy günde bir kez GitHub\'ı kontrol eder ve yeni bir sürüm çıktığında sizi bilgilendirir.</string>
+    <string name="setup_update_notices_info">NOX01 günde bir kez GitHub\'ı kontrol eder ve yeni bir sürüm çıktığında sizi bilgilendirir.</string>
     <string name="setup_check_updates">Güncellemeleri kontrol et</string>
-    <string name="setup_check_updates_info">Sizdeki sürüm: Buddy %1$s. Ya da herhangi bir ajana şunu söyleyin: “kendini güncelle”.</string>
+    <string name="setup_check_updates_info">Sizdeki sürüm: NOX01 %1$s. Ya da herhangi bir ajana şunu söyleyin: “kendini güncelle”.</string>
     <string name="setup_app_permissions">Uygulama izinleri</string>
-    <string name="setup_app_permissions_info">Uygulama bazında seçin: Güven modunda ajan orada açılır pencere olmadan çalışır; Katı modda ise Gönder, Öde, Sil… öncesinde Buddy size kendisi sorar.</string>
+    <string name="setup_app_permissions_info">Uygulama bazında seçin: Güven modunda ajan orada açılır pencere olmadan çalışır; Katı modda ise Gönder, Öde, Sil… öncesinde NOX01 size kendisi sorar.</string>
     <string name="setup_dev_mode">Yeni sohbetlerde Linux araçları</string>
     <string name="setup_dev_mode_info">Linux araçlarıyla ajan komut çalıştırabilir, paket yükleyebilir ve ~/.buddy/work içindeki dosyaları düzenleyebilir; böylece uygulama geliştirebilir. Yeni sohbetler bu ayarla başlar; her sohbet bunu kendi başlığının altından değiştirebilir.</string>
-    <string name="setup_agents_tap">Ajanların Buddy ekranlarına dokunmasına izin ver</string>
-    <string name="setup_agents_tap_info">Buddy\'yi bir ajanla test etmek için (örneğin Termux\'ta telefon araçlarıyla Claude Code). Ajanlar o zaman sohbet listesini, bir sohbeti ve bu Ayarlar ekranını kullanabilir. Neye izinli olduklarını belirleyen her şey sizde kalır: balon, onay kartları, Linux araçları, sohbet seçenekleri ve zamanlamalar ile uygulama izinleri, anahtarlar, kurallar, beceriler, arka plan modu ve yedekleme ekranları.</string>
+    <string name="setup_agents_tap">Ajanların NOX01 ekranlarına dokunmasına izin ver</string>
+    <string name="setup_agents_tap_info">NOX01\'yi bir ajanla test etmek için (örneğin Termux\'ta telefon araçlarıyla Claude Code). Ajanlar o zaman sohbet listesini, bir sohbeti ve bu Ayarlar ekranını kullanabilir. Neye izinli olduklarını belirleyen her şey sizde kalır: balon, onay kartları, Linux araçları, sohbet seçenekleri ve zamanlamalar ile uygulama izinleri, anahtarlar, kurallar, beceriler, arka plan modu ve yedekleme ekranları.</string>
     <string name="setup_dev_mode_warning">Kapalı tutmanız daha iyi olur: Linux araçlarını yalnızca ihtiyaç duyan sohbetlerde açın. Açıkken ekrandaki kötü amaçlı bir mesaj veya web sayfası, ajanı komut çalıştırmaya kandırmaya çalışabilir. Onay kartları gönderme, paylaşma, satın alma ve silme işlemlerini korumaya devam eder.</string>
 
     <!-- Settings screen: footer links. -->
@@ -1047,15 +1047,15 @@
     <string name="terminal_hide_keyboard">Klavyeyi gizle</string>
     <string name="terminal_menu">Menü</string>
     <plurals name="terminal_sessions_count">
-        <item quantity="one">%1$d oturum · buddy linux</item>
-        <item quantity="other">%1$d oturum · buddy linux</item>
+        <item quantity="one">%1$d oturum · NOX01 Linux</item>
+        <item quantity="other">%1$d oturum · NOX01 Linux</item>
     </plurals>
     <string name="terminal_listening">dinleniyor · mikrofon açık</string>
     <string name="terminal_session_ended">Oturum sona erdi</string>
     <string name="terminal_session_ended_code">Oturum sona erdi · çıkış %1$d</string>
     <string name="terminal_close">Kapat</string>
     <string name="terminal_restart">Yeniden başlat</string>
-    <string name="terminal_needs_linux">Önce Ayarlar\'dan Claude Code, Codex, OpenCode, Antigravity veya Grok\'u yükleyin: bu, Buddy\'nin Linux\'unu kurar.</string>
+    <string name="terminal_needs_linux">Önce Ayarlar\'dan Claude Code, Codex, OpenCode, Antigravity veya Grok\'u yükleyin: bu, NOX01\'nin Linux\'unu kurar.</string>
     <string name="terminal_start_failed">Terminal başlatılamadı: %1$s</string>
     <string name="terminal_close_title">%1$s kapatılsın mı?</string>
     <string name="terminal_close_running">Hâlâ çalışıyor. Kapatmak onu ve başlattığı her şeyi durdurur.</string>
@@ -1079,15 +1079,15 @@
     <string name="monitor_title">Oturumlar</string>
     <string name="monitor_subtitle">Bu telefondaki tüm Claude Code, Codex, OpenCode, Antigravity ve Grok oturumları.</string>
     <string name="monitor_terminal_running">Bir kabuk çalışıyor · dönmek için dokunun</string>
-    <string name="monitor_terminal_idle">Buddy\'nin Linux\'unda bir kabuk</string>
+    <string name="monitor_terminal_idle">NOX01\'nin Linux\'unda bir kabuk</string>
     <string name="monitor_running_now">Şu an çalışanlar</string>
     <string name="monitor_refresh">yenileme 3 sn</string>
     <string name="monitor_checking">Kontrol ediliyor…</string>
     <string name="monitor_recent">Son oturumlar</string>
     <string name="monitor_loading">Yükleniyor…</string>
-    <string name="monitor_service_off">Buddy\'nin erişilebilirlik hizmeti kapalı olduğundan oturumlar kontrol edilemiyor. Hizmeti Ayarlar\'dan açın.</string>
+    <string name="monitor_service_off">NOX01\'nin erişilebilirlik hizmeti kapalı olduğundan oturumlar kontrol edilemiyor. Hizmeti Ayarlar\'dan açın.</string>
     <string name="monitor_nothing_running">Çalışan bir şey yok.</string>
-    <string name="monitor_deleted_chat">Silinmiş Buddy sohbeti</string>
+    <string name="monitor_deleted_chat">Silinmiş NOX01 sohbeti</string>
     <string name="monitor_background_session">Arka plan oturumu</string>
     <string name="monitor_terminal_session">Terminal oturumu</string>
     <string name="monitor_tag_background">arka plan</string>
@@ -1097,8 +1097,8 @@
     <string name="monitor_open_chat">Sohbeti aç</string>
     <string name="monitor_stop">Durdur</string>
     <string name="monitor_stop_title">Bu %1$s oturumu durdurulsun mu?</string>
-    <string name="monitor_stop_background_body">Arka planda çalışıyor; örneğin Claude uygulamasından devam ettiğiniz bir sohbet olabilir. Buddy\'yi kontrol eden oturum bile olabilir. Durdurmak, o konuşmanın mevcut işini sonlandırır.</string>
-    <string name="monitor_stop_terminal_body">Şu anda bir terminalde kullandığınız bir oturum olabilir. Buddy\'yi kontrol eden oturum bile olabilir. Durdurmak, o konuşmanın mevcut işini sonlandırır.</string>
+    <string name="monitor_stop_background_body">Arka planda çalışıyor; örneğin Claude uygulamasından devam ettiğiniz bir sohbet olabilir. NOX01\'yi kontrol eden oturum bile olabilir. Durdurmak, o konuşmanın mevcut işini sonlandırır.</string>
+    <string name="monitor_stop_terminal_body">Şu anda bir terminalde kullandığınız bir oturum olabilir. NOX01\'yi kontrol eden oturum bile olabilir. Durdurmak, o konuşmanın mevcut işini sonlandırır.</string>
     <string name="monitor_stopping">Durduruluyor…</string>
     <string name="monitor_service_title">Claude Code arka plan hizmeti</string>
     <string name="monitor_service_meta">pid %1$d · çalışma süresi %2$s · arka plan oturumlarını barındırır</string>
@@ -1113,7 +1113,7 @@
     <string name="perms_mode_trust">Güven</string>
     <string name="perms_mode_hard">Katı</string>
     <string name="perms_mode_smart">Akıllı</string>
-    <string name="perms_modes_intro">Güven: ajan burada onay pencereleri olmadan kendi başına çalışır.\nKatı: düğme kurallarınız karar verir. Gönder, Öde, Sil… bir kartta onayınızı gerektirir.\nAkıllı: önce kurallar, ardından ayrı bir denetçi yapay zeka diğer her dokunmayı isteğinize göre kontrol eder.\nAjan, Buddy\'nin kendi baloncuğuna, kartlarına veya ayarlarına asla dokunamaz.</string>
+    <string name="perms_modes_intro">Güven: ajan burada onay pencereleri olmadan kendi başına çalışır.\nKatı: düğme kurallarınız karar verir. Gönder, Öde, Sil… bir kartta onayınızı gerektirir.\nAkıllı: önce kurallar, ardından ayrı bir denetçi yapay zeka diğer her dokunmayı isteğinize göre kontrol eder.\nAjan, NOX01\'nin kendi baloncuğuna, kartlarına veya ayarlarına asla dokunamaz.</string>
     <string name="perms_smart_reviewer">Akıllı denetçi</string>
     <string name="perms_reviewer_same">Sohbetle aynı</string>
     <string name="perms_reviewer_sign_in">Önce %1$s hesabına giriş yapın (Ayarlar).</string>
@@ -1130,7 +1130,7 @@
     <!-- Button rules screen: buttons that always or never need the user's OK. -->
     <string name="perms_rules_intro">Katı veya Akıllı moddaki uygulamalar için. Önerilerden seçilen bir kural o uygulamaya, yazılan metin ise tüm uygulamalara uygulanır. Kaldırmak için bir kurala dokunun.</string>
     <string name="perms_builtin_title">Yerleşik riskli kelimeler</string>
-    <string name="perms_builtin_sub">Gönder, Yayınla, Öde, Satın al, Sipariş ver, Sil, Çıkış yap… gibi düğmeler, Buddy\'nin her dilinde her zaman onay ister.</string>
+    <string name="perms_builtin_sub">Gönder, Yayınla, Öde, Satın al, Sipariş ver, Sil, Çıkış yap… gibi düğmeler, NOX01\'nin her dilinde her zaman onay ister.</string>
     <string name="perms_always_ask">Her zaman sor</string>
     <string name="perms_never_ask">Asla sorma</string>
     <string name="perms_ask">Sor</string>
@@ -1157,7 +1157,7 @@
     <string name="tools_card_enter_in">%1$s uygulamasında göndermek için Enter tuşuna bas</string>
     <string name="tools_card_detail">%1$s:\n%2$s</string>
     <string name="tools_card_quote">“%1$s”</string>
-    <string name="tools_card_no_reviewer">Giriş yapmış bir denetçi yok, bu yüzden Buddy size soruyor.</string>
+    <string name="tools_card_no_reviewer">Giriş yapmış bir denetçi yok, bu yüzden NOX01 size soruyor.</string>
     <string name="tools_card_reviewer_block">%1$s bunu önermiyor: %2$s</string>
     <string name="tools_card_reviewer_ask">%1$s size sorulmasını öneriyor: %2$s</string>
 
@@ -1166,7 +1166,7 @@
     <string name="tools_status_tap_install">Yükle düğmesine dokunun, ardından onaylayın</string>
     <string name="tools_status_tap_update">Güncelle düğmesine dokunun, ardından onaylayın</string>
     <string name="tools_status_installed">Yüklendi</string>
-    <string name="tools_status_downloading">Buddy %1$s indiriliyor…</string>
+    <string name="tools_status_downloading">NOX01 %1$s indiriliyor…</string>
 
     <!-- Smart reviewer: its reason when it fails (starts lowercase). -->
     <string name="reviewer_failed">denetçi yanıt veremedi (%1$s)</string>
@@ -1174,7 +1174,7 @@
     <string name="reviewer_timed_out">zaman aşımı</string>
 
     <!-- Error when a chat can't start because Buddy's built-in Linux isn't set up yet. -->
-    <string name="helper_linux_missing">Buddy\'nin Linux\'u henüz yüklü değil. Kurmak için Ayarlar\'ı açın.</string>
+    <string name="helper_linux_missing">NOX01\'nin Linux\'u henüz yüklü değil. Kurmak için Ayarlar\'ı açın.</string>
 
     <!-- Voice input (dictation): "Claude sesi" and "ChatGPT sesi" are the two voice input options. -->
     <string name="dictation_claude_sign_in">Claude sesini kullanmak için Ayarlar\'dan Claude Code\'a giriş yapın.</string>
@@ -1215,11 +1215,11 @@
     <string name="tools_card_clipboard">Ajan en son kopyaladığını okuyabilsin mi?</string>
     <string name="tools_card_location">Bu telefonun konumu ajanla paylaşılsın mı?</string>
     <string name="tools_photo_why">Bir fotoğraf çek: %1$s</string>
-    <string name="rules_service_label">Buddy bildirim kuralları</string>
+    <string name="rules_service_label">NOX01 bildirim kuralları</string>
     <string name="rules_title">Bildirim kuralları</string>
-    <string name="rules_intro">Seçtiğiniz bir bildirim geldiğinde Buddy, talimatınızı kendi yazdığınız bir mesajmış gibi bir ajana iletir. Hiçbir kuralla eşleşmeyen bildirimler yok sayılır.</string>
+    <string name="rules_intro">Seçtiğiniz bir bildirim geldiğinde NOX01, talimatınızı kendi yazdığınız bir mesajmış gibi bir ajana iletir. Hiçbir kuralla eşleşmeyen bildirimler yok sayılır.</string>
     <string name="rules_access_off_title">Bildirim erişimi kapalı</string>
-    <string name="rules_access_off_text">Buddy\'nin, kurallarınızın izlediği bildirimleri görebilmesi için buna ihtiyacı var.</string>
+    <string name="rules_access_off_text">NOX01\'nin, kurallarınızın izlediği bildirimleri görebilmesi için buna ihtiyacı var.</string>
     <string name="rules_access_turn_on">Aç</string>
     <string name="rules_run">Kuralları çalıştır</string>
     <string name="rules_run_info">Tüm kuralları duraklatmak için kapatın.</string>
@@ -1265,12 +1265,12 @@
     <string name="waiting_open_chat">Sohbeti aç</string>
     <string name="waiting_state_wrote_again">%1$s o zamandan beri yeniden yazdı: bu yanıt güncel olmayabilir.</string>
     <string name="waiting_state_answered">%1$s uygulamasında zaten yanıt verdiniz.</string>
-    <string name="waiting_state_gone">Bildirim artık yok: Buddy yanıtı kopyalar ve yapıştırmanız için %1$s uygulamasını açar.</string>
+    <string name="waiting_state_gone">Bildirim artık yok: NOX01 yanıtı kopyalar ve yapıştırmanız için %1$s uygulamasını açar.</string>
     <string name="waiting_sent">Gönderildi: %1$s</string>
     <string name="waiting_copied">Kopyalandı. %1$s uygulamasına yapıştırın.</string>
     <string name="waiting_note_sent">✓ “Sizi bekliyor” listesinden gönderildi: %1$s</string>
     <string name="rules_log_error">Çalıştırılamadı: %1$s</string>
-    <string name="rules_log_no_service">Buddy\'nin erişilebilirlik hizmeti kapalı</string>
+    <string name="rules_log_no_service">NOX01\'nin erişilebilirlik hizmeti kapalı</string>
     <string name="rules_log_not_signed_in">%1$s hesabına giriş yapılmadı</string>
     <string name="rules_new">Yeni kural</string>
     <string name="rules_edit">Kuralı düzenle</string>
@@ -1281,7 +1281,7 @@
     <string name="rules_from_hint">Herkes ya da virgülle ayrılmış adlar</string>
     <string name="rules_words">İçerdiği kelimeler (isteğe bağlı)</string>
     <string name="rules_words_hint">Herhangi bir şey ya da virgülle ayrılmış kelimeler</string>
-    <string name="rules_instruction">Buddy ne yapsın?</string>
+    <string name="rules_instruction">NOX01 ne yapsın?</string>
     <string name="rules_instruction_hint">Örneğin: Benim tarzımda yanıt ver. Saat 8–18 arası açığız, pazar günleri kapalıyız.</string>
     <string name="rules_example_reply">Benim yerime yanıtla</string>
     <string name="rules_example_reply_text">Benim tarzımda kısa ve samimi bir yanıt ver.</string>
@@ -1304,11 +1304,11 @@
     <string name="rules_delete">Sil</string>
     <string name="rules_delete_title">Bu kural silinsin mi?</string>
     <string name="rules_need_app">Önce bir uygulama seçin.</string>
-    <string name="rules_need_instruction">Buddy\'nin ne yapması gerektiğini yazın.</string>
+    <string name="rules_need_instruction">NOX01\'nin ne yapması gerektiğini yazın.</string>
     <string name="rules_access_title">Bildirim erişimine izin verilsin mi?</string>
-    <string name="rules_access_what">Buddy her bildirimi kurallarınızla karşılaştırır. Hiçbir kuralla eşleşmeyen bildirimler hemen yok sayılır: saklanmaz, hiçbir yere gönderilmez.</string>
+    <string name="rules_access_what">NOX01 her bildirimi kurallarınızla karşılaştırır. Hiçbir kuralla eşleşmeyen bildirimler hemen yok sayılır: saklanmaz, hiçbir yere gönderilmez.</string>
     <string name="rules_access_data">Bir bildirim eşleştiğinde uygulaması, göndereni ve metni, talimatınızla birlikte kuralın ajanına (Claude Code, Codex veya OpenCode) gönderilir.</string>
-    <string name="rules_access_reply">Buddy, bir bildirimin Yanıtla düğmesiyle yanıt verebilir. Kurala geri sayım eklemediğiniz sürece önce size sorar.</string>
+    <string name="rules_access_reply">NOX01, bir bildirimin Yanıtla düğmesiyle yanıt verebilir. Kurala geri sayım eklemediğiniz sürece önce size sorar.</string>
     <string name="rules_chat_shown">🔔 %1$s · %2$s: %3$s\n⚡ %4$s</string>
     <string name="rules_status_checking">Kuralınıza göre kontrol ediliyor…</string>
     <string name="rules_channel_results">Bildirim kuralları: sonuçlar</string>
@@ -1320,7 +1320,7 @@
     <!-- Background browser -->
     <string name="browser_section">Arka plan tarayıcısı</string>
     <string name="browser_switch">Arka plan tarayıcısı</string>
-    <string name="browser_switch_info">Buddy içinde, ajanların telefonunuzu ele geçirmeden web sayfaları için kullandığı bir tarayıcı. Sohbette izleyebilir ve kullanabilirsiniz. İlk seferde Buddy, Chromium\'u indirir (yaklaşık 300 MB).</string>
+    <string name="browser_switch_info">NOX01 içinde, ajanların telefonunuzu ele geçirmeden web sayfaları için kullandığı bir tarayıcı. Sohbette izleyebilir ve kullanabilirsiniz. İlk seferde NOX01, Chromium\'u indirir (yaklaşık 300 MB).</string>
     <string name="browser_state_installing">Chromium yükleniyor…</string>
     <string name="browser_state_starting">başlatılıyor…</string>
     <string name="browser_state_running">çalışıyor</string>
@@ -1370,8 +1370,8 @@
     <string name="hub_tool_cancel_scheduled">Planlanmış bir mesajı iptal ediyor</string>
     <string name="later_title">%1$s için ajanın mesajı</string>
     <string name="later_cancel">Mesajı iptal et</string>
-    <string name="share_label">Buddy\'ye sor</string>
-    <string name="share_title">Buddy ile paylaş</string>
+    <string name="share_label">NOX01\'ye sor</string>
+    <string name="share_title">NOX01 ile paylaş</string>
     <string name="share_new_chat">%1$s ile yeni sohbet</string>
     <string name="usage_five">5 saat %%%1$d · sıfırlanır %2$s</string>
     <string name="usage_week">haftalık %%%1$d · sıfırlanır %2$s</string>
@@ -1379,24 +1379,24 @@
     <string name="usage_week_short">hafta %%%1$d</string>
     <string name="usage_warn_five">Planının 5 saatlik limitinin %%%1$d kadarını kullandın. %2$s saatinde sıfırlanır.</string>
     <string name="usage_warn_week">Planının haftalık limitinin %%%1$d kadarını kullandın. %2$s sıfırlanır.</string>
-    <string name="check_title">Buddy\'yi kontrol et</string>
-    <string name="check_info">Buddy\'nin her parçasını şimdi test eder ve sorunları nasıl düzelteceğini söyler</string>
+    <string name="check_title">NOX01\'yi kontrol et</string>
+    <string name="check_info">NOX01\'nin her parçasını şimdi test eder ve sorunları nasıl düzelteceğini söyler</string>
     <string name="check_running">Kontrol ediliyor…</string>
     <string name="check_all_ok">Her şey çalışıyor</string>
     <string name="check_a11y">Erişilebilirlik hizmeti</string>
-    <string name="check_a11y_bad">Çalışmıyor, bu yüzden Buddy ekranı göremez ve kullanamaz. Erişilebilirlik ayarlarında Buddy\'yi aç.</string>
+    <string name="check_a11y_bad">Çalışmıyor, bu yüzden NOX01 ekranı göremez ve kullanamaz. Erişilebilirlik ayarlarında NOX01\'yi aç.</string>
     <string name="check_notifications">Bildirim erişimi</string>
     <string name="check_notifications_bad">Bildirim kuralların buna ihtiyaç duyuyor ve kapalı.</string>
     <string name="check_battery">Pil optimizasyonu</string>
-    <string name="check_battery_bad">Buddy için açık: Android onu arka planda durdurabilir ve zamanlanmış görevler çalışmayabilir.</string>
-    <string name="check_linux">Buddy\'nin Linux\'u</string>
+    <string name="check_battery_bad">NOX01 için açık: Android onu arka planda durdurabilir ve zamanlanmış görevler çalışmayabilir.</string>
+    <string name="check_linux">NOX01\'nin Linux\'u</string>
     <string name="check_linux_ok">%1$.1f sn\'de açılıyor</string>
     <string name="check_linux_bad">Açılmıyor: %1$s</string>
     <string name="check_linux_missing">Henüz kurulmadı. Ayarlar\'dan kur.</string>
-    <string name="check_helper">Buddy\'nin yardımcısı</string>
-    <string name="check_helper_bad">Linux\'taki kopya, Buddy\'nin bu sürümünden eski.</string>
+    <string name="check_helper">NOX01\'nin yardımcısı</string>
+    <string name="check_helper_bad">Linux\'taki kopya, NOX01\'nin bu sürümünden eski.</string>
     <string name="check_server">Telefon araçları sunucusu</string>
-    <string name="check_server_bad">127.0.0.1:%1$d üzerinde yanıt vermiyor. Erişilebilirlik ayarlarında Buddy\'yi kapatıp yeniden aç.</string>
+    <string name="check_server_bad">127.0.0.1:%1$d üzerinde yanıt vermiyor. Erişilebilirlik ayarlarında NOX01\'yi kapatıp yeniden aç.</string>
     <string name="check_agent_version">Sürüm %1$s</string>
     <string name="check_network">İnternet</string>
     <string name="check_network_bad">%1$s bulunamıyor. Wi-Fi\'yi veya mobil veriyi ya da bunu engelleyen bir VPN veya özel DNS\'i kontrol et.</string>
@@ -1420,28 +1420,28 @@
     <string name="background_title">Arka plan modu</string>
     <string name="background_row">Siz telefonunuzu kullanırken ajanlar kendi ekranlarında çalışır</string>
     <string name="background_intro">Arka plan modunda ajan, sizin görmediğiniz kendi ekranında çalışır. Ekranınız, klavyeniz ve Geri tuşunuz sizde kalır; telefon kilitliyken de çalışmaya devam eder.</string>
-    <string name="background_how">Android böyle bir ekranı oluşturmaya yalnızca Kablosuz hata ayıklama ile izin verir; bu yüzden Buddy onunla bir kez, bu telefonun üzerinde eşleşir. Bilgisayar gerekmez.</string>
-    <string name="background_step1">1. Kur\'a dokunun. Buddy, Geliştirici seçenekleri\'ni açar ve Kablosuz hata ayıklama\'yı sizin için bulur.</string>
+    <string name="background_how">Android böyle bir ekranı oluşturmaya yalnızca Kablosuz hata ayıklama ile izin verir; bu yüzden NOX01 onunla bir kez, bu telefonun üzerinde eşleşir. Bilgisayar gerekmez.</string>
+    <string name="background_step1">1. Kur\'a dokunun. NOX01, Geliştirici seçenekleri\'ni açar ve Kablosuz hata ayıklama\'yı sizin için bulur.</string>
     <string name="background_step2">2. Kablosuz hata ayıklama\'yı etkinleştirir (Wi-Fi bağlı olmalı) ve “Eşleme kodu ile cihaz eşle” seçeneğini açar.</string>
-    <string name="background_step3">3. Kodu okur, eşleşir ve sizi buraya geri getirir. Bir yerde durursa o adımı kendiniz yapın, Buddy devam eder.</string>
+    <string name="background_step3">3. Kodu okur, eşleşir ve sizi buraya geri getirir. Bir yerde durursa o adımı kendiniz yapın, NOX01 devam eder.</string>
     <string name="background_setup">Kur</string>
     <string name="background_open_options">Geliştirici seçeneklerini aç</string>
-    <string name="background_installing">Buddy\'nin Linux\'u için adb indiriliyor…</string>
+    <string name="background_installing">NOX01\'nin Linux\'u için adb indiriliyor…</string>
     <string name="background_waiting">Kablosuz hata ayıklama\'da “Eşleme kodu ile cihaz eşle” bekleniyor…</string>
     <string name="background_pairing">Eşleniyor…</string>
     <string name="background_starting">Yardımcı başlatılıyor…</string>
     <string name="background_ready">Hazır</string>
     <string name="background_ready_info">Her sohbet için ayrı açın: Sohbet seçenekleri → Arka planda çalış.</string>
     <string name="background_paired">Eşlendi</string>
-    <string name="background_asleep">Yardımcısı çalışmıyor. İlk arka plan göreviyle birlikte ya da şimdi başlar. Telefon yeniden başlatıldıktan sonra Şimdi başlat\'a dokunun: Buddy bunun için Kablosuz hata ayıklama\'yı açar (Wi-Fi bağlı olmalı).</string>
+    <string name="background_asleep">Yardımcısı çalışmıyor. İlk arka plan göreviyle birlikte ya da şimdi başlar. Telefon yeniden başlatıldıktan sonra Şimdi başlat\'a dokunun: NOX01 bunun için Kablosuz hata ayıklama\'yı açar (Wi-Fi bağlı olmalı).</string>
     <string name="background_start_now">Şimdi başlat</string>
     <string name="background_failed">Olmadı: %1$s</string>
-    <string name="background_needs_linux">Arka plan modu için Buddy\'nin Linux\'u gerekir. Önce bir ajan yükleyin.</string>
+    <string name="background_needs_linux">Arka plan modu için NOX01\'nin Linux\'u gerekir. Önce bir ajan yükleyin.</string>
     <string name="background_needs_dev">Önce Geliştirici seçenekleri\'ni açın: Ayarlar → Cihaz hakkında → Derleme numarası\'na 7 kez dokunun.</string>
-    <string name="background_needs_service">Önce Buddy\'nin erişilebilirlik hizmetini açın.</string>
-    <string name="background_no_dialog">Buddy eşleme penceresini zamanında göremedi. Tekrar deneyin.</string>
+    <string name="background_needs_service">Önce NOX01\'nin erişilebilirlik hizmetini açın.</string>
+    <string name="background_no_dialog">NOX01 eşleme penceresini zamanında göremedi. Tekrar deneyin.</string>
     <string name="background_remove">Kaldır</string>
-    <string name="background_remove_text">Buddy eşlemeyi unutur ve yardımcısını durdurur. Sohbetler yeniden gerçek ekranda çalışır.</string>
+    <string name="background_remove_text">NOX01 eşlemeyi unutur ve yardımcısını durdurur. Sohbetler yeniden gerçek ekranda çalışır.</string>
     <string name="background_default">Yeni sohbetler arka planda çalışır</string>
     <string name="background_default_info">Her sohbetin Sohbet seçenekleri\'nde yine kendi anahtarı vardır.</string>
     <string name="chat_bg_connected">Bağlı</string>
@@ -1461,13 +1461,13 @@
     <string name="helper_stopped">Durduruldu</string>
     <string name="helper_of">“%1$s” için alt ajan</string>
     <string name="helper_this_chat">Bu sohbet</string>
-    <string name="background_security">Kablosuz hata ayıklama, eşlenen cihazların bu telefonu kontrol etmesine izin verir. Buddy yalnızca kendini, bu telefonun üzerinde eşler ve yardımcısı yalnızca burayı dinler.</string>
+    <string name="background_security">Kablosuz hata ayıklama, eşlenen cihazların bu telefonu kontrol etmesine izin verir. NOX01 yalnızca kendini, bu telefonun üzerinde eşler ve yardımcısı yalnızca burayı dinler.</string>
     <string name="background_brought">Ekranınıza taşındı: bu adımı sizin yapmanız gerekiyor. Arka plan modu bu sohbet için artık kapalı.</string>
     <string name="chat_background">Arka planda çalış</string>
     <string name="chat_background_info">Ajan kendi ekranını kullanır, siz de telefonunuzu kullanmaya devam edersiniz. Oturum açma gibi sizin yapmanız gereken bir adım ekranınıza gelir.</string>
     <string name="background_preview">Arka plan ekranı</string>
     <string name="background_show">Ekranımda göster</string>
-    <string name="background_usb_note">Buddy, USB hata ayıklama\'yı da açar. Böylece Wi-Fi kesilip Android Kablosuz hata ayıklama\'yı kapattığında yardımcı çalışmaya devam eder. Açık bırakın.</string>
+    <string name="background_usb_note">NOX01, USB hata ayıklama\'yı da açar. Böylece Wi-Fi kesilip Android Kablosuz hata ayıklama\'yı kapattığında yardımcı çalışmaya devam eder. Açık bırakın.</string>
     <string name="background_shell">Telefon komutları</string>
     <string name="background_shell_switch">Ajanlar telefonda komut çalıştırabilir</string>
     <string name="background_shell_info">Linux araçları açık olan sohbetlerde ajan, “adb shell” gibi doğrudan telefonda komut çalıştırabilir: uygulama yükleyip başlatabilir, ayarları değiştirebilir, günlükleri ve dosyaları okuyabilir. Okuduğu bir mesaj veya web sayfası, onu komut çalıştırmaya kandırmaya çalışabilir.</string>
@@ -1482,7 +1482,7 @@
     <string name="chat_earlier_gone">Daha eski mesajlar artık saklanmıyor: bir sohbet son %1$d mesajını tutar.</string>
     <string name="rules_recheck">Tekrar kontrol et</string>
     <string name="setup_help">Yardım</string>
-    <string name="setup_help_info">GitHub\'da Buddy kullanım kılavuzu. Buddy\'nin nasıl çalıştığını herhangi bir ajana da sorabilirsin.</string>
+    <string name="setup_help_info">GitHub\'da NOX01 kullanım kılavuzu. NOX01\'nin nasıl çalıştığını herhangi bir ajana da sorabilirsin.</string>
     <string name="signin_api_key">Bunun yerine API anahtarı kullan</string>
     <string name="signin_api_base_bad">https:// ile başlayan bir adres gir (bu telefonda veya kendi ağında http:// da olur)</string>
     <string name="account_plan_api_key_at">API anahtarı · %1$s</string>
@@ -1495,7 +1495,7 @@
     <string name="skills_title">Beceriler</string>
     <string name="skills_row_none">Ajanların ortak kullandığı talimatlar</string>
     <string name="skills_intro">Beceriler, bir ajanın belli bir iş türünde izlediği talimatlardır: bir yazım üslubu, bir kontrol listesi, bir uygulamadaki adımlar. Claude Code, Codex ve OpenCode, işe uyduğunda ya da mesaj kutusuna / yazıp seçtiğinde bir beceriyi kullanır. SKILL.md biçimini kullandıkları için Claude veya ChatGPT\'deki beceriler burada da çalışır.</string>
-    <string name="skills_need_linux">Beceriler Buddy\'nin Linux\'unda durur: önce bir ajan kur.</string>
+    <string name="skills_need_linux">Beceriler NOX01\'nin Linux\'unda durur: önce bir ajan kur.</string>
     <string name="skills_none">Henüz beceri yok.</string>
     <string name="skills_import">İçe aktar</string>
     <string name="skills_write">Kendin yaz</string>
@@ -1514,7 +1514,7 @@
     <string name="skills_bad_file">Bu bir beceri değil: adı olan bir SKILL.md gerekiyor.</string>
     <string name="skills_slash_none">Bu adda beceri yok. Beceri eklemek için dokun.</string>
     <string name="github_row_none">Ajanların depolarına push yapmasına izin ver</string>
-    <string name="github_intro">Linux araçları için GitHub\'a giriş yap: Buddy, Linux\'una git ve GitHub CLI\'ı kurar, onları hesabına bağlar ve git\'i adına ve gizli noreply e-postana göre ayarlar.</string>
+    <string name="github_intro">Linux araçları için GitHub\'a giriş yap: NOX01, Linux\'una git ve GitHub CLI\'ı kurar, onları hesabına bağlar ve git\'i adına ve gizli noreply e-postana göre ayarlar.</string>
     <string name="github_risk">Böylece Linux araçları açık sohbetlerdeki ajanlar hesabınla clone, commit ve push yapabilir, issue ve pull request açabilir. Bir şey push etmeden veya paylaşmadan önce sana sormaları söylenir.</string>
     <string name="github_sign_in">GitHub ile giriş yap</string>
     <string name="github_installing">git ve GitHub CLI kuruluyor…</string>
@@ -1526,24 +1526,24 @@
     <string name="github_signed_in">\@%1$s olarak giriş yapıldı</string>
     <string name="github_signed_in_info">Linux araçları açık sohbetlerdeki ajanlar bu hesapla git ve gh kullanabilir.</string>
     <string name="github_sign_out_title">GitHub\'dan çıkış yapılsın mı?</string>
-    <string name="github_sign_out_text">Buddy\'nin Linux\'undaki git ve GitHub CLI hesabına erişimini kaybeder.</string>
+    <string name="github_sign_out_text">NOX01\'nin Linux\'undaki git ve GitHub CLI hesabına erişimini kaybeder.</string>
     <string name="backup_title">Yedekle ve taşı</string>
     <string name="backup_row">Sohbetlerin ve ayarların tek dosyada</string>
-    <string name="backup_intro">Sohbetlerini, ayarlarını, kurallarını, resimlerini, becerilerini, ajanların projelerini ve her sohbetten sakladıklarını Downloads/Buddy içinde tek bir dosyaya kaydeder. Burada ya da başka bir telefonda geri yükle.</string>
+    <string name="backup_intro">Sohbetlerini, ayarlarını, kurallarını, resimlerini, becerilerini, ajanların projelerini ve her sohbetten sakladıklarını Downloads/NOX01 içinde tek bir dosyaya kaydeder. Burada ya da başka bir telefonda geri yükle.</string>
     <string name="backup_left_out">Girişler ve API anahtarları dahil değil: geri yükledikten sonra yeniden giriş yap ve anahtarlarını ekle. Projelerin derleme klasörleri dahil edilmez.</string>
     <string name="backup_now">Şimdi yedekle</string>
     <string name="backup_restore">Yedekten geri yükle</string>
     <string name="backup_restore_title">Bu yedek geri yüklensin mi?</string>
-    <string name="backup_restore_text">Bu telefondaki sohbetlerin ve ayarların yedektekilerle değiştirilir. Bittiğinde Buddy yeniden başlar.</string>
+    <string name="backup_restore_text">Bu telefondaki sohbetlerin ve ayarların yedektekilerle değiştirilir. Bittiğinde NOX01 yeniden başlar.</string>
     <string name="backup_making">Yedekleniyor… (projeler biraz sürebilir)</string>
     <string name="backup_restoring">Geri yükleniyor…</string>
-    <string name="backup_made">Downloads/Buddy/%1$s konumuna kaydedildi.</string>
-    <string name="backup_restored">Geri yüklendi. Buddy şimdi yeniden başlıyor.</string>
-    <string name="backup_restored_no_linux">Sohbetlerin ve ayarların geri yüklendi. Linux kısmı (beceriler, projeler, ajanların kayıtları) Buddy\'nin Linux\'unu gerektirir: bir ajan kur, sonra yeniden geri yükle. Buddy şimdi yeniden başlıyor.</string>
+    <string name="backup_made">Downloads/NOX01/%1$s konumuna kaydedildi.</string>
+    <string name="backup_restored">Geri yüklendi. NOX01 şimdi yeniden başlıyor.</string>
+    <string name="backup_restored_no_linux">Sohbetlerin ve ayarların geri yüklendi. Linux kısmı (beceriler, projeler, ajanların kayıtları) NOX01\'nin Linux\'unu gerektirir: bir ajan kur, sonra yeniden geri yükle. NOX01 şimdi yeniden başlıyor.</string>
     <string name="backup_failed">Olmadı: %1$s</string>
-    <string name="backup_not_one">Bu dosya bir Buddy yedeği değil.</string>
+    <string name="backup_not_one">Bu dosya bir NOX01 yedeği değil.</string>
     <string name="chat_incognito">Gizli</string>
-    <string name="chat_incognito_info">Bu sohbet, ajanının ondan sakladıklarıyla birlikte Buddy yeniden başladığında silinir.</string>
+    <string name="chat_incognito_info">Bu sohbet, ajanının ondan sakladıklarıyla birlikte NOX01 yeniden başladığında silinir.</string>
     <string name="api_keys_remove_title">%1$s kaldırılsın mı?</string>
     <string name="api_keys_remove">Kaldır</string>
     <string name="api_keys_failed">Bu anahtarla bu hizmetin modelleri listelenemedi: %1$s</string>
@@ -1585,13 +1585,13 @@
     <string name="search_messages">Mesajlar: %1$d</string>
     <string name="mcp_title">MCP sunucuları</string>
     <string name="mcp_row_none">Kendi sunucularınızdan araçlar</string>
-    <string name="mcp_intro">Kendi MCP sunucularınızı bağlayın; her ajan, telefonun araçlarının yanında onların araçlarını da alır. Bir sunucuya adresiyle, internet veya kendi ağınız üzerinden ulaşılır. Anahtarlar bu telefonda şifreli saklanır ve ajanlara asla ulaşmaz: Buddy onları her çağrıya ekler.</string>
+    <string name="mcp_intro">Kendi MCP sunucularınızı bağlayın; her ajan, telefonun araçlarının yanında onların araçlarını da alır. Bir sunucuya adresiyle, internet veya kendi ağınız üzerinden ulaşılır. Anahtarlar bu telefonda şifreli saklanır ve ajanlara asla ulaşmaz: NOX01 onları her çağrıya ekler.</string>
     <string name="mcp_none">Henüz sunucu yok.</string>
     <string name="mcp_add">Sunucu ekle</string>
     <string name="mcp_import">Liste içe aktar</string>
     <string name="mcp_export">Listeyi kopyala</string>
     <string name="mcp_exported">Kopyalandı, anahtarlar olmadan.</string>
-    <string name="mcp_note">Bu araçlar telefonunuzun dışında çalışır, bu yüzden Buddy\'nin onay kartları onları kapsamaz: yalnızca güvendiğiniz sunucuları ekleyin. Bir bildirim kuralı çalışırken kullanılmazlar.</string>
+    <string name="mcp_note">Bu araçlar telefonunuzun dışında çalışır, bu yüzden NOX01\'nin onay kartları onları kapsamaz: yalnızca güvendiğiniz sunucuları ekleyin. Bir bildirim kuralı çalışırken kullanılmazlar.</string>
     <string name="mcp_name_hint">Ad (harfler ve rakamlar)</string>
     <string name="mcp_url_hint">Adres (https://…/mcp)</string>
     <string name="mcp_key_hint">Anahtar veya belirteç (isteğe bağlı)</string>
@@ -1610,7 +1610,7 @@
     <string name="api_keys_models">%1$s · %2$d model</string>
     <string name="api_keys_add">API anahtarı ekle</string>
     <string name="api_keys_none">Henüz API anahtarı yok.</string>
-    <string name="api_keys_intro">Claude Code, Codex ve OpenCode ile başka hizmetlerin modellerini kullan; planlarının yanında ya da yerine. Her sohbet modelini kendi model menüsünde seçer. Anahtarla kullanım o anahtarın hesabından ücretlendirilir. Anahtarlar bu telefonda şifreli saklanır ve ajanlara asla ulaşmaz: Buddy onları her isteğe ekler.</string>
+    <string name="api_keys_intro">Claude Code, Codex ve OpenCode ile başka hizmetlerin modellerini kullan; planlarının yanında ya da yerine. Her sohbet modelini kendi model menüsünde seçer. Anahtarla kullanım o anahtarın hesabından ücretlendirilir. Anahtarlar bu telefonda şifreli saklanır ve ajanlara asla ulaşmaz: NOX01 onları her isteğe ekler.</string>
     <string name="api_keys_row_none">Başka hizmetlerin modelleri, kendi anahtarınla</string>
     <string name="api_keys_title">API anahtarları</string>
     <string name="signin_api_keys">API anahtarları</string>
@@ -1624,7 +1624,7 @@
     <string name="hub_compacted">Sohbet sıkıştırıldı: %1$s → %2$s token</string>
     <string name="signin_api_models_none">Hizmet hiç model listelemedi.</string>
     <string name="setup_step_signin_api_key">Ya da API anahtarı kullan: Ayarlar → Ajanlar ve modeller → API anahtarları.</string>
-    <string name="setup_step_signin_others">Varsayılan beynin %1$s, ama şunlar hazır: %2$s. Birini varsayılan yap, Buddy hemen çalışsın.</string>
+    <string name="setup_step_signin_others">Varsayılan beynin %1$s, ama şunlar hazır: %2$s. Birini varsayılan yap, NOX01 hemen çalışsın.</string>
     <string name="setup_switch_default">Varsayılanı değiştir</string>
     <string name="setup_switch_default_title">Varsayılan beyin</string>
     <string name="signin_api_key_on">%1$s API anahtarlarınla çalışıyor: bir sohbetin model menüsünden model seç ya da varsayılanını API anahtarları altında belirle.</string>

@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
- * The hard limit behind "Buddy asks before anything risky", for the apps the user puts on it (Settings →
+ * The hard limit behind "NOX01 asks before anything risky", for the apps the user puts on it (Settings →
  * App permissions; trusted apps leave asking to the agent). Enforced here, in Buddy: before a tap lands on a
  * send / pay / delete / … button (by its text, icon description or id), or text is typed with "submit", the
  * user must have approved it: either through the agent's own confirm call just
@@ -325,8 +325,8 @@ final class Guard {
         boolean search = cls.contains("Search") || SEARCH_ID.matcher(id).find() || word;
         // off unless the phone's owner turns it on (adb shell setprop log.tag.BuddyField DEBUG): how a field describes
         // itself, to see why one was or wasn't taken for a search. Never its text, hint or name
-        if (android.util.Log.isLoggable("BuddyField", android.util.Log.DEBUG)) {
-            android.util.Log.d("BuddyField", "search=" + search + " class=" + cls + " id=" + id + " multiline="
+        if (android.util.Log.isLoggable("NOX01Field", android.util.Log.DEBUG)) {
+            android.util.Log.d("NOX01Field", "search=" + search + " class=" + cls + " id=" + id + " multiline="
                     + n.isMultiLine() + " word=" + word + " pkg=" + n.getPackageName());
         }
         return search;
@@ -544,7 +544,7 @@ final class Guard {
     }
 
     /**
-     * Must the agent keep out of this node? All of Buddy's UI, unless the user turned on "Let agents tap Buddy's
+     * Must the agent keep out of this node? All of Buddy's UI, unless the user turned on "Let agents tap NOX01's
      * screens"; even then the protected parts (Ui.protect: approval cards, App permissions, the developer
      * switches) stay off-limits. The bubble and its card are overlays that taps never land on (see nodeAt).
      */
