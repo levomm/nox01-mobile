@@ -63,4 +63,18 @@
     <string name="chat_attachment_remove">Eemalda</string>
     <string name="chat_copied">Kopeeritud</string>
     <string name="chat_copy_whole_reply">Kopeeri kogu vastus</string>
+
+    <!-- NOX01 Mobile isikupärastamine -->
+    <string name="setup_ui_font">Kasutajaliidese font</string>
+    <string name="setup_ui_font_note">Valitud font kehtib kogu äpis. Kood ja terminalitabelid jäävad monospace-fondiga.</string>
+    <string name="font_geist_mono">Geist Mono</string>
+    <string name="font_geist_sans">Geist Sans</string>
+    <string name="font_system_mono">Android Mono</string>
+    <string name="font_system_sans">Android Sans</string>
+    <string name="setup_theme_presets">Värviteemad</string>
+    <string name="preset_claude">Claude</string>
+    <string name="preset_terminal">Terminal</string>
+    <string name="preset_ice">Jääsinine</string>
+    <string name="preset_amber">Merevaik</string>
+    <string name="preset_oled">OLED</string>
 </resources>
