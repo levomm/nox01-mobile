@@ -163,6 +163,10 @@ public class MainActivity extends Screen implements ChatHub.Listener, Account.Li
         name.addView(status);
         top.addView(name, weight1());
         android.widget.ImageButton search = iconButton(this, R.drawable.ms_search, getString(R.string.search_title));
+        if (neu(this)) {
+            search.setBackground(neuSurface(this, 15));
+            elasticPress(search);
+        }
         search.setOnClickListener(v -> go(SearchActivity.class));
         top.addView(search, new LinearLayout.LayoutParams(dp(this, 44), dp(this, 44)));
         list.addView(top, full());
