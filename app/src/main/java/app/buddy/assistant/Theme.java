@@ -140,7 +140,7 @@ final class Theme {
         }
         Ui.ACCENT = accent;
         Ui.ON_ACCENT = luminance(accent) > 0.45 ? 0xFF1A1714 : 0xFFFFFFFF;
-        Ui.ACCENT_TEXT = dark ? accent : darken(accent, luminance(accent) > 0.45 ? 0.62f : 0.85f);
+        Ui.ACCENT_TEXT = dark ? accent : darken(accent, luminance(accent) > 0.45 ? 0.48f : 0.85f);
         Ui.LINE = withAlpha(Ui.TEXT, 0x10);
         Ui.OUTLINE = withAlpha(Ui.TEXT, 0x22);
         Ui.ACCENT_SOFT = withAlpha(accent, 0x29);
