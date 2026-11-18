@@ -188,21 +188,39 @@ final class Ui {
         return v;
     }
 
-    /** Tactile Neu-Dark is opt-in via Appearance and the new dark default. */
+    /** Raised treatment is an independent global setting, not hard-wired to the Neu-Dark skin. */
     static boolean neu(Context c) {
-        return DARK && "neu".equals(Prefs.surface(c));
+        return "raised".equals(Prefs.cardDepth(c));
+    }
+
+    /** Shared message treatments used by both the full chat and the floating overlay. */
+    static Drawable userMessageSurface(Context c) {
+        return outlined(c, USER, 18, Theme.withAlpha(ACCENT, 0x88), 1);
+    }
+
+    static Drawable agentMessageSurface(Context c) {
+        return outlined(c, CARD, 18, Theme.withAlpha(TEXT2, 0x55), 1);
+    }
+
+    static String userLabel(Context c) {
+        return c.getString(R.string.chat_message_you);
+    }
+
+    static String agentLabel(Context c) {
+        return c.getString(R.string.chat_message_agent);
     }
 
     /** Raised, three-layer graphite surface with highlight and recessed lower edge.
      * All layers are native drawables and respect accessibility text scaling.
      */
     static Drawable neuSurface(Context c, int radiusDp) {
-        GradientDrawable low = rounded(c, 0xFF0E1014, radiusDp);
-        GradientDrawable rim = rounded(c, 0xFF434951, radiusDp);
+        GradientDrawable low = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.40f : 0.08f), radiusDp);
+        GradientDrawable rim = rounded(c, Theme.blend(CARD, Color.WHITE, DARK ? 0.20f : 0.65f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{0xFF2D3036, 0xFF22252B, 0xFF1E2127});
+                new int[]{Theme.blend(CARD, Color.WHITE, DARK ? 0.09f : 0.28f),
+                        CARD, Theme.blend(CARD, Color.BLACK, DARK ? 0.12f : 0.04f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), 0x66555B64);
+        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x55));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{low, rim, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), dp(c, 1), 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 3), dp(c, 4));
@@ -212,12 +230,13 @@ final class Ui {
 
     /** Inside-pressed counterpart for selected tabs and active controls. */
     static Drawable neuInsetSurface(Context c, int radiusDp) {
-        GradientDrawable back = rounded(c, 0xFF15181C, radiusDp);
-        GradientDrawable edge = rounded(c, 0xFF32373D, radiusDp);
+        GradientDrawable back = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.27f : 0.05f), radiusDp);
+        GradientDrawable edge = rounded(c, Theme.blend(CARD2, Color.WHITE, DARK ? 0.09f : 0.33f), radiusDp);
         GradientDrawable inset = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{0xFF1B201C, 0xFF242D25});
+                new int[]{Theme.blend(CARD, Color.BLACK, DARK ? 0.14f : 0.05f),
+                        Theme.blend(CARD2, BG, 0.25f)});
         inset.setCornerRadius(dp(c, radiusDp));
-        inset.setStroke(dp(c, 1), 0x77434F40);
+        inset.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x44));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{back, edge, inset});
         layers.setLayerInset(0, dp(c, 1), dp(c, 1), dp(c, 1), dp(c, 1));
         layers.setLayerInset(1, dp(c, 3), dp(c, 4), dp(c, 1), dp(c, 1));
@@ -227,7 +246,7 @@ final class Ui {
 
     /** Slightly luminous green tactile FAB. Other accent choices remain supported. */
     static Drawable neuAccentSurface(Context c, int radiusDp, int accent) {
-        GradientDrawable shadow = rounded(c, 0xFF0E1010, radiusDp);
+        GradientDrawable shadow = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.40f : 0.08f), radiusDp);
         GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.28f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                 new int[]{Theme.blend(accent, Color.WHITE, 0.16f), accent,
