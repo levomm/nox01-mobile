@@ -46,7 +46,7 @@ class Nox01LiveSkinsTests(unittest.TestCase):
             self.assertIn(func + "(", prefs)
         self.assertIn("Theme.changed(this)", setup)
         self.assertIn("Prefs.cardDepth(c)", ui)
-        self.assertIn("Ui.CARD", ui)
+        self.assertIn("Theme.blend(CARD", ui)
         self.assertNotIn("rounded(c, 0xFF0E1014", ui)
         self.assertIn("Prefs.bubbleFrame(svc)", java("Bubble.java"))
 
