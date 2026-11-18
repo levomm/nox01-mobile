@@ -650,6 +650,10 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
     }
 
     private void chooseModel(boolean advanced) {
+        chooseModel(advanced, false);
+    }
+
+    private void chooseModel(boolean advanced, boolean allPrices) {
         if (!advanced) {
             routePicker(this, ses.backend, Models.effective(ses), true, selected -> {
                 String previous = Models.effective(ses);
@@ -664,10 +668,15 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             return;
         }
         final Dialog[] d = new Dialog[1];
+        ModelPrices.refresh(this, () -> {
+            if (d[0] == null || !d[0].isShowing() || isFinishing()) return;
+            d[0].dismiss();
+            chooseModel(true, allPrices);
+        });
         Models.refresh(this, () -> { // a service's list changed meanwhile (a model just pulled in Ollama): show it
             if (d[0] == null || !d[0].isShowing() || isFinishing()) return;
             d[0].dismiss();
-            chooseModel(true);
+            chooseModel(true, allPrices);
         });
         LinearLayout c = column(this);
         TextView h = title(this, getString(R.string.chat_model_title, ses.brainName()), 18);
@@ -710,8 +719,26 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             ml.setPaddingRelative(0, dp(this, 16), 0, dp(this, 4));
             c.addView(ml);
         }
+        c.addView(sectionLabel(this, getString(R.string.chat_prices_explain)));
+        TextView source = text(this, ModelPrices.lastUpdate(this), 11, MUTED);
+        c.addView(source);
+        Button switchPrices = button(this, getString(allPrices ? R.string.chat_prices_top_ten : R.string.chat_prices_all), false);
+        LinearLayout.LayoutParams swp = full();
+        swp.topMargin = dp(this, 10);
+        swp.bottomMargin = dp(this, 10);
+        c.addView(switchPrices, swp);
+        switchPrices.setOnClickListener(v -> {
+            d[0].dismiss();
+            chooseModel(true, !allPrices);
+        });
+        java.util.List<String[]> list = new java.util.ArrayList<>(Models.pricedOptions(ses.backend, !allPrices));
+        if (!allPrices && list.isEmpty()) {
+            c.addView(text(this, getString(R.string.chat_prices_unavailable), 13, MUTED));
+        }
+        list.add(new String[]{null, getString(R.string.chat_prices_plan)});
+        list.addAll(Models.options(ses.backend, false));
         boolean known = false;
-        for (final String[] o : Models.options(ses.backend, true)) {
+        for (final String[] o : list) {
             if (o[0] == null) { // an API key service's models
                 TextView sl = sectionLabel(this, o[1]);
                 sl.setPaddingRelative(0, dp(this, 14), 0, dp(this, 2));
@@ -727,7 +754,8 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             LinearLayout t = column(this);
             t.setPaddingRelative(dp(this, 14), 0, 0, 0);
             t.addView(title(this, o[1], 15));
-            t.addView(single(monoText(this, Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, MUTED)));
+            t.addView(single(monoText(this, o.length > 2 ? o[2]
+                    : Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, MUTED)));
             r.addView(t, weight1());
             r.setOnClickListener(v -> {
                 d[0].dismiss();
