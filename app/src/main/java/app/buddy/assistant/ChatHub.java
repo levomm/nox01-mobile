@@ -313,7 +313,7 @@ final class ChatHub {
             // a rule's run works for someone else's message: no shell, files or web, even with Linux tools on
             Helper.run(app, code -> main.postDelayed(() -> helperGone(ses, run[0], code), HELPER_GONE_MS),
                     "ask", ses.id, ses.backend, rule ? "rule" : devArg(ses), forAgent,
-                    model(ses), hasFiles ? android.text.TextUtils.join(",", files) : "", ses.effort);
+                    model(ses), hasFiles ? android.text.TextUtils.join(",", files) : "", Models.safeEffort(ses));
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -399,8 +399,15 @@ final class ChatHub {
 
     /** Change a chat's model; the next message uses it, and the conversation continues. */
     void setModel(Sessions.Session ses, String model) {
-        ses.model = model == null ? "" : model.trim();
-        // (no line in the chat: it showed up as "1 tool call", and the chip in the message box says the model and effort)
+        String next = model == null ? "" : model.trim();
+        if (next.equals(ses.model)) return;
+        ses.model = next;
+        // Old plan reasoning levels (e.g. high) may be rejected by API models such as gpt-4.1-mini.
+        ses.effort = "";
+        ses.actualModel = "";
+        ses.ctxUsed = ses.ctxWindow = 0;
+        // The inner Codex provider thread resets in buddy-run if a different provider is selected.
+        // The user's NOX01 message history is never erased here.
         sessions.save(ses);
         changed();
     }
@@ -882,7 +889,7 @@ final class ChatHub {
         try {
             Helper.run(app, code -> main.postDelayed(() -> helperGone(ses, run[0], code), HELPER_GONE_MS),
                     "ask", ses.id, ses.backend, devArg(ses),
-                    "(Added while you were working; if it asks something, answer it:) " + text, model(ses), "", ses.effort);
+                    "(Added while you were working; if it asks something, answer it:) " + text, model(ses), "", Models.safeEffort(ses));
         } catch (Exception e) {
             add(ses, Bubble.Kind.ERROR, e.getMessage());
             return;
