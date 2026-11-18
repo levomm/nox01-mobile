@@ -9,6 +9,8 @@ final class Models {
      */
     private static final java.util.Map<String, String[][]> live = new java.util.concurrent.ConcurrentHashMap<>();
     private static final String[][] NONE = {{"", "Default", ""}};
+    /** Explicitly use the agent's own plan even when the globally selected Default is an API model. */
+    static final String PLAN_DEFAULT = "~plan";
     /** The model Claude Code's own default is right now (an id), "" until it has said. */
     private static volatile String claudeDefault = "";
 
@@ -105,8 +107,27 @@ final class Models {
         return Providers.ref(p, m.isEmpty() ? p.defaultModel() : m);
     }
 
+    /** Cheap, general-purpose API model for one-tap switching. Never auto-pick a Pro model. */
+    static String quickApiModel(String backend) {
+        java.util.List<Providers.P> available = Providers.forAgent(backend);
+        String[] preferred = {"gpt-4.1-mini", "gpt-4o-mini", "gpt-5-mini",
+                "gpt-5.2-mini", "deepseek-chat", "deepseek-v4"};
+        for (String id : preferred) {
+            for (Providers.P p : available) {
+                if (Providers.chatModels(p.offered()).contains(id)) return Providers.ref(p, id);
+            }
+        }
+        // If the configured service offers one chat model, it is unambiguous.
+        for (Providers.P p : available) {
+            java.util.List<String> chat = Providers.chatModels(p.offered());
+            if (chat.size() == 1) return Providers.ref(p, chat.get(0));
+        }
+        return ""; // user picks from the advanced model list; no surprise expensive model
+    }
+
     /** The chat's model as it will run: the one picked, or the agent's default. */
     static String effective(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return "";
         return s.model.isEmpty() ? agentDefault(s.backend) : s.model;
     }
 
@@ -258,6 +279,7 @@ final class Models {
 
     /** The chat's model for display: the one picked, or what "Default" really is when the agent told us. */
     static String shownModel(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return BuddyApp.str(R.string.api_keys_own_default);
         String eff = effective(s);
         Providers.P p = Providers.of(eff);
         if (p != null) return BuddyApp.str(R.string.models_via, serviceModelName(p, Providers.model(eff)), p.name);
@@ -273,6 +295,7 @@ final class Models {
 
     /** What "Default" means for this chat, for the pickers. */
     static String defaultHint(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return defaultHint(s.backend);
         String d = agentDefault(s.backend);
         Providers.P p = Providers.of(d);
         if (p != null) return BuddyApp.str(R.string.models_via, Providers.model(d), p.name);
