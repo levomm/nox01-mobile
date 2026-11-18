@@ -2312,15 +2312,26 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             }
             if (!m.text.isEmpty()) {
                 TextView tv = text(this, m.text, 15, TEXT);
+                tv.setText(Ui.markdown(m.text, null));
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackgroundColor(BG);
-                tv.setTypeface(sans(this, 400));
-                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
+                tv.setTypeface(mono(this, 400));
+                tv.setPaddingRelative(0, dp(this, 7), 0, 0);
                 copyOnLongPress(tv, m.text);
+                LinearLayout card = column(this);
+                card.setBackground(Ui.userMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 12));
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, full());
+                card.addView(tv, wrap());
                 LinearLayout.LayoutParams tp = wrap();
                 tp.gravity = Gravity.END;
-                col.addView(tv, tp);
+                col.addView(card, tp);
+            } else {
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                col.addView(who, wrap());
             }
             LinearLayout.LayoutParams p = full();
             p.topMargin = dp(this, 12);
@@ -2549,16 +2560,22 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         switch (kind) {
             case USER: {
                 TextView tv = text(this, text, 15, TEXT);
-                tv.setText("> " + text); // NOX01 terminal prompt; user input remains copyable in full
+                tv.setText(Ui.markdown(text, null));
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackgroundColor(BG);
                 tv.setTypeface(mono(this, 400));
-                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
+                tv.setPaddingRelative(0, dp(this, 7), 0, 0);
                 copyOnLongPress(tv, text);
-                p.gravity = Gravity.START;
-                p.width = LinearLayout.LayoutParams.MATCH_PARENT;
-                v = tv;
+                LinearLayout card = column(this);
+                card.setBackground(Ui.userMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 12));
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, full());
+                card.addView(tv, wrap());
+                p.gravity = Gravity.END;
+                p.setMarginStart(dp(this, 42));
+                v = card;
                 break;
             }
             case BUDDY: { // Buddy 3: replies read as plain text on the page, no bubble
@@ -2605,8 +2622,18 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
                 LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(dp(this, 34), dp(this, 34));
                 cp.setMarginStart(-dp(this, 5)); // the icon itself in line with the text
                 whole.addView(copy, cp);
-                v = whole;
+                LinearLayout card = column(this);
+                card.setBackground(Ui.agentMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 12), dp(this, 8));
+                card.addView(monoText(this, Ui.agentLabel(this), 10, ACCENT_TEXT), wrap());
+                LinearLayout.LayoutParams contentParams = full();
+                contentParams.topMargin = dp(this, 6);
+                card.addView(whole, contentParams);
+                copyOnLongPress(card, text);
+                v = card;
+                p.gravity = Gravity.START;
                 p.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                p.setMarginEnd(dp(this, 26));
                 p.topMargin = dp(this, 14);
                 break;
             }
