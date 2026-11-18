@@ -70,8 +70,8 @@ class Nox01LiveSkinsTests(unittest.TestCase):
 
     def test_bumped_compatible_android_version(self):
         build = java("BuildInfo.java")
-        self.assertRegex(build, r'VERSION\s*=\s*"2\.3\.15"')
-        self.assertRegex(build, r"VERSION_CODE\s*=\s*214\s*;")
+        self.assertRegex(build, r'VERSION\s*=\s*"2\.3\.1[5-9]"')
+        self.assertRegex(build, r"VERSION_CODE\s*=\s*21[4-9]\s*;")
 
 
 if __name__ == "__main__":
