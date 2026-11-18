@@ -31,6 +31,8 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
     private LinearLayout messages, strip, approval;
     private ScrollView scroll;
     private TextView title, chipText, stripText;
+    /** Small estimated EUR spend meter, aligned with the right edge above the composer. */
+    private TextView spendBadge;
     private UsageGauge usage;
     /** The Linux tools chip beside the model chip. */
     private LinearLayout linux;
@@ -250,6 +252,18 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         trayScroll.setVisibility(View.GONE);
         root.addView(trayScroll, full());
 
+        // Estimated API cost in the chat corner, not a context-window percentage.
+        // A tap opens real token counts and per-chat/day/month estimated EUR totals.
+        LinearLayout spendRow = row(this);
+        spendRow.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        spendRow.setPaddingRelative(dp(this, 12), dp(this, 3), dp(this, 12), 0);
+        spendBadge = single(monoText(this, "", 11, TEXT2));
+        spendBadge.setPaddingRelative(dp(this, 10), dp(this, 6), dp(this, 10), dp(this, 6));
+        spendBadge.setBackground(neu(this) ? neuInsetSurface(this, 12) : outlined(this, CARD, 12, OUTLINE, 1));
+        spendBadge.setOnClickListener(v -> showSpendDetails());
+        spendRow.addView(spendBadge, wrap());
+        root.addView(spendRow, full());
+
         // the message box: the text on top, and under it a bar with attach, the model chip, live voice, the mic and send
         pill = column(this);
         LinearLayout bar = row(this);
@@ -374,6 +388,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         frame.setFitsSystemWindows(true);
         frame.addView(root);
         setContentView(frame);
+        ModelPrices.refresh(this, () -> { if (!isFinishing()) refresh(); });
 
         // from Search: the message that has the words, shown and marked for a moment
         int find = state == null ? getIntent().getIntExtra("find", -1) : -1;
@@ -2059,6 +2074,17 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         }
     }
 
+    private void showSpendDetails() {
+        LinearLayout panel = column(this);
+        panel.setPaddingRelative(dp(this, 10), dp(this, 4), dp(this, 10), dp(this, 4));
+        panel.addView(title(this, getString(R.string.spend_title), 18));
+        TextView detail = text(this, ApiSpend.detail(this, ses), 13, TEXT);
+        detail.setPaddingRelative(0, dp(this, 14), 0, dp(this, 12));
+        panel.addView(detail, full());
+        final Dialog d = bottomSheet(this, panel);
+        d.show();
+    }
+
     private void refresh() {
         if (backgroundPanel != null) backgroundPanel.setShown(resumed);
         if (recheck != null) recheck.setVisibility(Triggers.canRecheck(this, ses) ? View.VISIBLE : View.GONE);
@@ -2067,6 +2093,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         speaker.setImageTintList(ColorStateList.valueOf(speak ? ACCENT : MUTED));
         title.setText(ses.label());
         chipText.setText(Models.chip(ses));
+        if (spendBadge != null) spendBadge.setText(ApiSpend.summary(this, ses));
         int used = Usage.peak(this, ses.backend);
         usage.set(used);
         usage.setContentDescription(Usage.shortLine(this, ses.backend));
