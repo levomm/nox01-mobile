@@ -507,6 +507,7 @@ stream_codex() {
     if [ "$(printf '%s' "$line" | jq -r '.type // empty' 2>/dev/null)" = "turn.completed" ]; then
       local usage_id
       usage_id="$SID:$(date +%s):$RANDOM:$RANDOM"
+      [ -n "${BUDDY_TEST_STREAM:-}" ] && usage_id="$SID:fixture"
       printf '%s' "$line" | jq -c --arg s "$SID" --arg id "$usage_id" --arg model "$MODEL" '
         .usage // empty
         | {type:"buddy_token_usage", id:$id, buddy_session:$s, model:$model,
