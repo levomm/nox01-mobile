@@ -1,4 +1,5 @@
 {"buddy_session":"fixture","message":{"content":[{"text":"I’ll wait one second.","type":"text"}]},"type":"assistant"}
 {"buddy_session":"fixture","message":{"content":[{"input":{"ms":1000},"name":"mcp__phone__wait","type":"tool_use"}]},"type":"assistant"}
 {"buddy_session":"fixture","message":{"content":[{"text":"done","type":"text"}]},"type":"assistant"}
+{"buddy_session":"fixture","cached":44928,"id":"fixture:fixture","input":49796,"model":"","output":80,"type":"buddy_token_usage"}
 {"buddy_session":"fixture","result":"","subtype":"success","type":"result"}
