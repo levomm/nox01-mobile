@@ -107,7 +107,7 @@ final class Theme {
             Ui.MUTED = 0xFFA39D93;
             Ui.OK = 0xFF5CC08A;
             Ui.ERR = 0xFFF0A090;
-            Ui.USER = blend(accent, Ui.BG, 0.32f);
+            Ui.USER = blend(Ui.BG, accent, 0.32f);
         } else {
             switch (surface) {
                 case "terminal":
@@ -133,7 +133,7 @@ final class Theme {
             Ui.MUTED = 0xFF6B635A;
             Ui.OK = 0xFF2F9E66;
             Ui.ERR = 0xFFC5483A;
-            Ui.USER = blend(accent, Ui.CARD, 0.16f);
+            Ui.USER = blend(Ui.CARD, accent, 0.16f);
         }
         Ui.ACCENT = accent;
         Ui.ON_ACCENT = luminance(accent) > 0.45 ? 0xFF1A1714 : 0xFFFFFFFF;
@@ -200,9 +200,9 @@ final class Theme {
 
     static int blend(int a, int b, float t) {
         return Color.rgb(
-                Math.round(Color.red(b) + (Color.red(a) - Color.red(b)) * t),
-                Math.round(Color.green(b) + (Color.green(a) - Color.green(b)) * t),
-                Math.round(Color.blue(b) + (Color.blue(a) - Color.blue(b)) * t));
+                Math.round(Color.red(a) + (Color.red(b) - Color.red(a)) * t),
+                Math.round(Color.green(a) + (Color.green(b) - Color.green(a)) * t),
+                Math.round(Color.blue(a) + (Color.blue(b) - Color.blue(a)) * t));
     }
 
     static int darken(int c, float f) {
