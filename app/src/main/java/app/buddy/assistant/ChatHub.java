@@ -778,6 +778,9 @@ final class ChatHub {
                 if (warning != null) add(ses, Bubble.Kind.STEP, warning);
                 break;
             }
+            case "buddy_token_usage": // actual Codex input/output; unlike context tokens, these are billable
+                ApiSpend.record(app, ses, ev);
+                break;
             case "buddy_context": // Codex, after its turn (see buddy-run): how full the context is, and its size
                 if (ev.optLong("used") > 0) ses.ctxUsed = ev.optLong("used");
                 if (ev.optLong("window") > 0) ses.ctxWindow = ev.optLong("window");
