@@ -1289,7 +1289,6 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                     Prefs.setThemeMode(this, "dark");
                     Prefs.setAccent(this, color);
                     Prefs.setSurface(this, surface);
-                    Prefs.setCardDepth(this, "neu".equals(surface) ? "raised" : "flat");
                     themeChanged();
                 });
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(this, 40), 1);
