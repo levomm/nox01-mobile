@@ -75,20 +75,22 @@ final class Theme {
         if (dark) {
             // Buddy 3: soft layered surfaces (BG < CARD < CARD2); NAV is the floating nav pill
             switch (surface) {
+                // Same charcoal, matte rubber substrate in every skin.
+                // The selected accent controls the identity, not the whole surface tint.
                 case "neu":
                     set(0xFF1B1D21, 0xFF25282E, 0xFF30343B, 0xFF22252A, 0xFF111419);
                     break;
                 case "terminal":
-                    set(0xFF06120B, 0xFF0F2619, 0xFF173523, 0xFF0B2013, 0xFF030B05);
+                    set(0xFF1B1E1C, 0xFF252B28, 0xFF303631, 0xFF222823, 0xFF111814);
                     break;
                 case "alert":
-                    set(0xFF180B0D, 0xFF281217, 0xFF361C21, 0xFF230E12, 0xFF0C0506);
+                    set(0xFF1E1B1C, 0xFF292628, 0xFF343034, 0xFF252224, 0xFF171214);
                     break;
                 case "steel":
-                    set(0xFF111922, 0xFF1C2A34, 0xFF293844, 0xFF162530, 0xFF0C151D);
+                    set(0xFF1B1E22, 0xFF252B30, 0xFF30363B, 0xFF22272C, 0xFF11161B);
                     break;
                 case "mono":
-                    set(0xFF0C0D0E, 0xFF1A1B1C, 0xFF2A2C2E, 0xFF151617, 0xFF060607);
+                    set(0xFF1C1C1E, 0xFF272729, 0xFF323234, 0xFF232325, 0xFF151516);
                     break;
                 case "neutral":
                     set(0xFF121212, 0xFF1D1D1C, 0xFF2A2A29, 0xFF242423, 0xFF0B0B0B);
@@ -99,15 +101,10 @@ final class Theme {
                 default: // warm, the original tone
                     set(0xFF121110, 0xFF1D1B19, 0xFF2A2724, 0xFF24221F, 0xFF0F0E0D);
             }
-            Ui.TEXT = "terminal".equals(surface) ? 0xFFE0F9E8
-                    : "steel".equals(surface) ? 0xFFE7F3FD
-                    : "mono".equals(surface) ? 0xFFF3F3F3 : 0xFFF3EFE8;
-            Ui.TEXT2 = "terminal".equals(surface) ? 0xFFB6D7C0
-                    : "steel".equals(surface) ? 0xFFB9CEDF
-                    : "mono".equals(surface) ? 0xFFCACACA : 0xFFC9C3B9;
-            Ui.MUTED = "terminal".equals(surface) ? 0xFF8DAF96
-                    : "steel".equals(surface) ? 0xFF93ABBC
-                    : "mono".equals(surface) ? 0xFF9FA0A1 : 0xFFA39D93;
+            // All five skins share readable neutral text. No green/red paint wash.
+            Ui.TEXT = 0xFFF3EFE8;
+            Ui.TEXT2 = 0xFFC9C3B9;
+            Ui.MUTED = 0xFFA39D93;
             Ui.OK = 0xFF5CC08A;
             Ui.ERR = 0xFFF0A090;
             Ui.USER = blend(accent, Ui.BG, 0.32f);
