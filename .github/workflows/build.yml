@@ -31,7 +31,7 @@ jobs:
       - name: Test NOX01 2.3.15 live DOOM, global skins and chat
         run: python3 scripts/test_nox01_live_skins.py
 
-      - name: Regression: global tactile rubber in every skin
+      - name: "Regression: global tactile rubber in every skin"
         run: python3 scripts/test_nox01_rubber_skins.py
 
       - name: Test real Tactical Neu-Dark Android UI
