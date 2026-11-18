@@ -84,7 +84,7 @@ public class SchedulesActivity extends Screen implements ChatHub.Listener {
 
     private LinearLayout chatCard(Sessions.Session s) {
         LinearLayout card = column(this);
-        card.setBackground(outlined(this, CARD, 16, OUTLINE, 1));
+        card.setBackground(neu(this) ? neuSurface(this, 16) : outlined(this, CARD, 16, OUTLINE, 1));
         card.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 14), dp(this, 10));
         LinearLayout head = row(this);
         head.setGravity(Gravity.CENTER_VERTICAL);
