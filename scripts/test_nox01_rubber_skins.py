@@ -13,7 +13,7 @@ def read(name):
 
 def dark_color_set(theme, surface):
     match = re.search(
-        r'case "' + re.escape(surface) + r'":\\s*set\\(([^)]*)\\);',
+        r'case "' + re.escape(surface) + r'":\s*set\(([^)]*)\);',
         theme,
     )
     assert match is not None, f"missing dark theme {surface}"
@@ -50,7 +50,7 @@ class RubberSkinsRegression(unittest.TestCase):
     def test_surface_highlights_are_soft_rubber_not_chrome(self):
         ui = read("Ui.java")
         raise_block = ui.split("static Drawable neuSurface(", 1)[1].split("static Drawable neuInsetSurface(", 1)[0]
-        match = re.search(r'blend\\(CARD, Color.WHITE, DARK \\? ([0-9.]+)f', raise_block)
+        match = re.search(r'blend\(CARD, Color.WHITE, DARK \? ([0-9.]+)f', raise_block)
         self.assertIsNotNone(match, "soft rim highlight must be palette-derived")
         self.assertLessEqual(float(match.group(1)), 0.10)
         self.assertIn("LayerDrawable", raise_block)
@@ -73,7 +73,7 @@ class RubberSkinsRegression(unittest.TestCase):
     def test_new_upgrade_version(self):
         build = read("BuildInfo.java")
         self.assertIn('VERSION = "2.3.16"', build)
-        self.assertRegex(build, r"VERSION_CODE\\s*=\\s*215\\s*;")
+        self.assertRegex(build, r"VERSION_CODE\s*=\s*215\s*;")
 
 
 if __name__ == "__main__":
