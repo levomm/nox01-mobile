@@ -215,9 +215,9 @@ final class Ui {
      */
     static Drawable neuSurface(Context c, int radiusDp) {
         GradientDrawable low = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
-        GradientDrawable rim = rounded(c, Theme.blend(CARD, Color.WHITE, DARK ? 0.065f : 0.22f), radiusDp);
+        GradientDrawable rim = rounded(c, Theme.blend(CARD, CARD2, DARK ? 0.16f : 0.22f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{Theme.blend(CARD, Color.WHITE, DARK ? 0.045f : 0.12f),
+                new int[]{Theme.blend(CARD, CARD2, DARK ? 0.11f : 0.12f),
                         CARD, Theme.blend(CARD, Color.BLACK, DARK ? 0.065f : 0.04f)});
         face.setCornerRadius(dp(c, radiusDp));
         face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x26));
@@ -231,7 +231,7 @@ final class Ui {
     /** Inside-pressed counterpart for selected tabs and active controls. */
     static Drawable neuInsetSurface(Context c, int radiusDp) {
         GradientDrawable back = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.27f : 0.05f), radiusDp);
-        GradientDrawable edge = rounded(c, Theme.blend(CARD2, Color.WHITE, DARK ? 0.05f : 0.18f), radiusDp);
+        GradientDrawable edge = rounded(c, Theme.blend(CARD2, CARD, DARK ? 0.25f : 0.18f), radiusDp);
         GradientDrawable inset = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                 new int[]{Theme.blend(CARD, Color.BLACK, DARK ? 0.14f : 0.05f),
                         Theme.blend(CARD2, BG, 0.25f)});
@@ -247,12 +247,12 @@ final class Ui {
     /** Slightly luminous green tactile FAB. Other accent choices remain supported. */
     static Drawable neuAccentSurface(Context c, int radiusDp, int accent) {
         GradientDrawable shadow = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
-        GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.075f), radiusDp);
+        GradientDrawable glow = rounded(c, Theme.blend(accent, CARD2, 0.075f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{Theme.blend(accent, Color.WHITE, 0.075f), accent,
+                new int[]{Theme.blend(accent, CARD2, 0.075f), accent,
                         Theme.darken(accent, 0.88f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), Theme.withAlpha(Color.WHITE, 0x29));
+        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x29));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{shadow, glow, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), 0, 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 2), dp(c, 4));
