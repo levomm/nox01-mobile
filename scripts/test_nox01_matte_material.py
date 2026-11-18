@@ -25,7 +25,7 @@ class MatteMaterialTests(unittest.TestCase):
         inset = ui.split("static Drawable neuInsetSurface(", 1)[1].split("static Drawable neuAccentSurface(", 1)[0]
         for body in (raised, inset):
             self.assertIn("LayerDrawable", body)
-            self.assertNotIn("0xFFFFFFFF", body)
+            self.assertNotIn("Color.WHITE", body)
             for expression in re.findall(r"Theme.blend\((?:CARD|CARD2), Color.WHITE, DARK \? ([0-9.]+)f", body):
                 self.assertLess(float(expression), 0.09)
         selected = ui.split("java.util.Set<String> disabled, Pick whyNot)", 1)[1].split("static View radio(", 1)[0]
