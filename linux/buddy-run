@@ -502,6 +502,17 @@ stream_codex() {
     [ "$line" = "$AGENT_END" ] && break
     tid=$(printf '%s' "$line" | jq -r 'select(.type=="thread.started") | .thread_id // empty' 2>/dev/null)
     [ -n "$tid" ] && printf '%s' "$tid" > "$S/codex-thread"
+    # Each completed Codex turn reports actual request tokens. Input includes cached input.
+    # The unique event id prevents duplicates if a message is delivered more than once.
+    if [ "$(printf '%s' "$line" | jq -r '.type // empty' 2>/dev/null)" = "turn.completed" ]; then
+      local usage_id
+      usage_id="$SID:$(date +%s):$RANDOM:$RANDOM"
+      printf '%s' "$line" | jq -c --arg s "$SID" --arg id "$usage_id" --arg model "$MODEL" '
+        .usage // empty
+        | {type:"buddy_token_usage", id:$id, buddy_session:$s, model:$model,
+           input:(.input_tokens // 0), cached:(.cached_input_tokens // 0),
+           output:(.output_tokens // 0)}' 2>/dev/null | post
+    fi
     # Codex doesn't say which model it used; its session log does (shown when the chat is on "Default")
     if [ "$(printf '%s' "$line" | jq -r '.type // empty' 2>/dev/null)" = turn.completed ] && [ -s "$S/codex-thread" ]; then
       local log model
