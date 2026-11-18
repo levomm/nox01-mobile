@@ -416,15 +416,39 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
         ap.addView(fieldLabel(getString(R.string.setup_accent), Theme.hex(Prefs.accent(this))), topGap(18));
         ap.addView(swatches(), topGap(10));
         ap.addView(fieldLabel(getString(R.string.setup_surface), null), topGap(18));
-        ap.addView(segmented(this, Theme.surfaces(this), Prefs.surface(this), false, v -> {
-            Prefs.setSurface(this, v);
-            themeChanged();
-        }), topGap(8));
+        // Eight surfaces fit as two rows, rather than eight unreadable slivers on a phone.
+        String[][] surfaceOptions = Theme.surfaces(this);
+        LinearLayout surfacePicker = column(this);
+        for (int from = 0; from < surfaceOptions.length; from += 4) {
+            String[][] rowOptions = java.util.Arrays.copyOfRange(surfaceOptions, from,
+                    Math.min(surfaceOptions.length, from + 4));
+            surfacePicker.addView(segmented(this, rowOptions, Prefs.surface(this), false, v -> {
+                Prefs.setSurface(this, v);
+                themeChanged();
+            }), from == 0 ? full() : topGap(6));
+        }
+        ap.addView(surfacePicker, topGap(8));
         TextView sn = text(this, getString(R.string.setup_surface_note), 13, MUTED);
         ap.addView(sn, topGap(8));
         ap.addView(fieldLabel(getString(R.string.setup_ui_font), null), topGap(18));
         ap.addView(fontPicker(), topGap(8));
         ap.addView(text(this, getString(R.string.setup_ui_font_note), 12, MUTED), topGap(8));
+        ap.addView(fieldLabel(getString(R.string.setup_card_depth), null), topGap(18));
+        ap.addView(segmented(this, new String[][]{
+                {"flat", getString(R.string.setup_card_flat)},
+                {"raised", getString(R.string.setup_card_raised)}
+        }, Prefs.cardDepth(this), false, v -> {
+            Prefs.setCardDepth(this, v);
+            themeChanged();
+        }), topGap(8));
+        ap.addView(fieldLabel(getString(R.string.setup_bubble_frame), null), topGap(18));
+        ap.addView(segmented(this, new String[][]{
+                {"normal", getString(R.string.setup_bubble_normal)},
+                {"minimal", getString(R.string.setup_bubble_minimal)}
+        }, Prefs.bubbleFrame(this), false, v -> {
+            Prefs.setBubbleFrame(this, v);
+            themeChanged();
+        }), topGap(8));
         // Buddy's look: the drawn face, or a picture the user picks (issue #10)
         boolean own = Face.picture(this) != null;
         ap.addView(fieldLabel(getString(R.string.setup_face), null), topGap(18));
@@ -1240,15 +1264,16 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
     /** Fast looks: paired dark surfaces and accent colors, plus the existing custom HEX swatch below. */
     private View themePresets() {
         String[][] preset = {
-                {"#5CC08A", "neu"}, {"#D97757", "warm"}, {"#4CD4A0", "black"},
-                {"#65AFFF", "neutral"}, {"#E0A43A", "black"}, {"#AEB7C3", "black"}
+                {"#5CC08A", "neu"}, {"#4CD4A0", "terminal"}, {"#FF5B60", "alert"},
+                {"#8CBBD6", "steel"}, {"#E5E5E5", "mono"}
         };
-        int[] labels = {R.string.preset_tactical_neu, R.string.preset_claude, R.string.preset_terminal,
-                R.string.preset_ice, R.string.preset_amber, R.string.preset_oled};
+        int[] labels = {R.string.preset_tactical_neu, R.string.preset_terminal,
+                R.string.preset_red_alert, R.string.preset_cold_steel,
+                R.string.preset_clean_mono};
         LinearLayout all = column(this);
         for (int line = 0; line < 2; line++) {
             LinearLayout row = row(this);
-            int from = line == 0 ? 0 : 3, to = line == 0 ? 3 : 6;
+            int from = line == 0 ? 0 : 3, to = line == 0 ? 3 : preset.length;
             for (int i = from; i < to; i++) {
                 int color = Theme.parse(preset[i][0], 0xFFD97757);
                 String surface = preset[i][1];
@@ -1264,6 +1289,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
                     Prefs.setThemeMode(this, "dark");
                     Prefs.setAccent(this, color);
                     Prefs.setSurface(this, surface);
+                    Prefs.setCardDepth(this, "neu".equals(surface) ? "raised" : "flat");
                     themeChanged();
                 });
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, dp(this, 40), 1);
