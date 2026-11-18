@@ -644,13 +644,30 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         }
     }
 
-    /** Pick this chat's model; the conversation continues with the new one. */
+    /** A single route choice: ChatGPT subscription or a connected API key. Advanced models are optional. */
     private void chooseModel() {
+        chooseModel(false);
+    }
+
+    private void chooseModel(boolean advanced) {
+        if (!advanced) {
+            routePicker(this, ses.backend, Models.effective(ses), true, selected -> {
+                String previous = Models.effective(ses);
+                boolean oldApi = Providers.of(previous) != null;
+                boolean nextApi = Providers.of(selected) != null;
+                if (!selected.equals(ses.model)) {
+                    hub.setModel(ses, selected);
+                    if ("codex".equals(ses.backend) && oldApi != nextApi)
+                        Toast.makeText(this, R.string.chat_source_new_thread, Toast.LENGTH_LONG).show();
+                }
+            }, () -> chooseModel(true));
+            return;
+        }
         final Dialog[] d = new Dialog[1];
         Models.refresh(this, () -> { // a service's list changed meanwhile (a model just pulled in Ollama): show it
             if (d[0] == null || !d[0].isShowing() || isFinishing()) return;
             d[0].dismiss();
-            chooseModel();
+            chooseModel(true);
         });
         LinearLayout c = column(this);
         TextView h = title(this, getString(R.string.chat_model_title, ses.brainName()), 18);
