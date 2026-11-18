@@ -44,7 +44,7 @@ class ApiSwitchRegression(unittest.TestCase):
         block = chat.split("private void chooseModel()", 1)[1].split("// ------------------------------------------------------ helpers", 1)[0]
         self.assertIn("routePicker(", block)
         self.assertIn("quickApiModel(", read("Ui.java"))
-        self.assertIn("chat_model_more", read("Ui.java"))
+        self.assertIn("chat_prices_top_ten", read("Ui.java"))
         self.assertIn("chooseModel(true)", block)
         self.assertIn("setModel(ses,", block)
 
@@ -53,7 +53,7 @@ class ApiSwitchRegression(unittest.TestCase):
         block = ui.split("static void modelSheet(Activity a, String backend", 1)[1].split("static TextView codeBlock", 1)[0]
         self.assertIn("routePicker(", block)
         self.assertIn("quickApiModel(", block)
-        self.assertIn("chat_model_more", block)
+        self.assertIn("chat_prices_all", block)
 
     def test_model_switch_resets_old_reasoning_effort(self):
         hub = read("ChatHub.java")
