@@ -29,5 +29,5 @@ assert 'Models.options(available.agent, true)' in setup and 'Prefs.setAgentDefau
 assert not any(fake in setup for fake in ['Prefs.setAgentDefault(this, backend, "gemini-4-carbon")'])
 import re
 version = (base/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()
-assert int(re.search(r'VERSION_CODE\\s*=\\s*(\\d+)', version).group(1)) >= 213
+assert int(re.search(r'VERSION_CODE\s*=\s*(\d+)', version).group(1)) >= 213
 print('PASS: dynamic models, editable skills, MCP templates, version >= 213')
