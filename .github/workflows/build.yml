@@ -34,6 +34,9 @@ jobs:
       - name: "Regression: global tactile rubber in every skin"
         run: python3 scripts/test_nox01_rubber_skins.py
 
+      - name: "Regression: prevent white chrome and reversed blending"
+        run: python3 scripts/test_nox01_matte_material.py
+
       - name: Test real Tactical Neu-Dark Android UI
         run: python3 scripts/test_neu_dark_ui.py
 
