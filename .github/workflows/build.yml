@@ -40,6 +40,9 @@ jobs:
       - name: "Regression: one-tap API route and Codex provider switching"
         run: python3 scripts/test_nox01_api_switch.py
 
+      - name: "Regression: honest EUR API spend and model prices"
+        run: python3 scripts/test_nox01_api_spend.py
+
       - name: Test real Tactical Neu-Dark Android UI
         run: python3 scripts/test_neu_dark_ui.py
 
