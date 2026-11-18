@@ -467,7 +467,15 @@ final class Prefs {
 
     /** Global card elevation: explicit user choice, or legacy Neu-Dark's raised default. */
     static String cardDepth(Context c) {
-        return sp(c).getString("card_depth", "neu".equals(surface(c)) ? "raised" : "flat");
+        android.content.SharedPreferences prefs = sp(c);
+        // v2.3.15 selected presets silently saved "flat" for every non-tactical skin.
+        // Repair those persisted values once; later explicit Flat choices remain respected.
+        if (!prefs.getBoolean("rubber_2026_migrated", false)) {
+            prefs.edit().putString("card_depth", "raised")
+                    .putBoolean("rubber_2026_migrated", true).apply();
+            return "raised";
+        }
+        return prefs.getString("card_depth", "raised");
     }
 
     static void setCardDepth(Context c, String value) {
