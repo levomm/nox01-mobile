@@ -98,8 +98,13 @@ final class Bubble implements ChatHub.Listener {
                 setDoomFrame(DoomFaces.BLOODY);
                 wait = doomBloodUntil - now + 50;
             } else if (doomRunning) {
-                setDoomFrame(now < doomAnnoyedUntil ? DoomFaces.ANNOYED : DoomFaces.WORKING);
+                // Real execution keeps the uploaded white-eye frame active through normal tool steps.
+                setDoomFrame(DoomFaces.WORKING);
                 wait = 700;
+            } else if (!ValueAnimator.areAnimatorsEnabled()) {
+                // Reduced-motion: stay neutral while idle, without eyebrow/pupil animation.
+                setDoomFrame(DoomFaces.NEUTRAL);
+                wait = 3000;
             } else if (now < doomGlanceUntil) {
                 wait = doomGlanceUntil - now + 50;
             } else if (now >= doomNextIdle) {
@@ -134,15 +139,16 @@ final class Bubble implements ChatHub.Listener {
         if (now - doomLastStep > 15_000) doomBurstSteps = 0;
         doomLastStep = now;
         doomBurstSteps++;
-        doomAnnoyedUntil = now + 1200;
-        if (doomBurstSteps >= 7 && now - doomLastBlood > 90_000) {
-            // A rare, short overdrive joke. Never a constant flashing/bloody UI.
-            doomBloodUntil = now + 800;
+        // The normal STEP event must never change white-eyed EXECUTING into ANNOYED.
+        // Only unusually sustained heavy activity earns a short overdrive frame.
+        if (doomRunning && doomBurstSteps >= 20
+                && now - doomLastBlood > 120_000 && ValueAnimator.areAnimatorsEnabled()) {
+            doomBloodUntil = now + 650;
             doomLastBlood = now;
             doomBurstSteps = 0;
             setDoomFrame(DoomFaces.BLOODY);
-        } else {
-            setDoomFrame(DoomFaces.ANNOYED);
+        } else if (doomRunning) {
+            setDoomFrame(DoomFaces.WORKING);
         }
     }
     private boolean noteListening;
@@ -3302,7 +3308,7 @@ final class Bubble implements ChatHub.Listener {
         // keep the fired-up / bracing face while the bubble is being dragged
         if (force || !faceDragging()) showFace(on ? R.drawable.bubble_face_thinking
                 : svc.paused() ? R.drawable.bubble_face_paused : R.drawable.bubble_face);
-        if (on && breathing == null) {
+        if (on && breathing == null && ValueAnimator.areAnimatorsEnabled()) {
             breathing = ValueAnimator.ofFloat(1f, 0.9f);
             breathing.setDuration(750);
             breathing.setRepeatMode(ValueAnimator.REVERSE);
