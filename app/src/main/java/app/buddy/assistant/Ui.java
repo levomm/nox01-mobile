@@ -699,13 +699,89 @@ final class Ui {
         modelSheet(a, backend, current, defaultHint, true, l);
     }
 
+    /**
+     * The primary route selector is intentionally two choices, not a 98-model API catalog.
+     * Advanced models remain one tap away and the service key never leaves Android.
+     */
+    static void routePicker(Activity a, String backend, String current, boolean chat, Pick l, Runnable more) {
+        Models.refresh(a);
+        LinearLayout c = column(a);
+        c.addView(title(a, a.getString(R.string.chat_source_title), 18));
+        TextView hint = text(a, a.getString(R.string.chat_source_new_thread), 12, MUTED);
+        hint.setPaddingRelative(0, dp(a, 3), 0, dp(a, 14));
+        c.addView(hint);
+        final Dialog[] d = new Dialog[1];
+        String planName = "codex".equals(backend) ? "ChatGPT"
+                : "claude".equals(backend) ? "Claude" : Account.nameOf(backend);
+        String planLabel = a.getString(R.string.chat_source_plan, planName);
+        boolean apiActive = Providers.of(current) != null;
+        LinearLayout plan = row(a);
+        plan.setGravity(Gravity.CENTER_VERTICAL);
+        plan.setPaddingRelative(dp(a, 8), dp(a, 12), dp(a, 8), dp(a, 12));
+        plan.setBackground(neu(a) ? neuSurface(a, 14) : rounded(a, CARD, 14));
+        plan.addView(radio(a, !apiActive));
+        LinearLayout pText = column(a);
+        pText.setPaddingRelative(dp(a, 12), 0, 0, 0);
+        pText.addView(title(a, planLabel, 16));
+        pText.addView(text(a, a.getString(R.string.chat_source_plan_hint), 12, MUTED));
+        plan.addView(pText, weight1());
+        plan.setOnClickListener(v -> {
+            d[0].dismiss();
+            l.onPick(chat ? Models.PLAN_DEFAULT : "");
+        });
+        c.addView(plan, full());
+
+        // If this chat already uses a particular API model, preserve that choice.
+        String quick = apiActive ? current : Models.quickApiModel(backend);
+        LinearLayout api = row(a);
+        api.setGravity(Gravity.CENTER_VERTICAL);
+        api.setPaddingRelative(dp(a, 8), dp(a, 12), dp(a, 8), dp(a, 12));
+        api.setBackground(neu(a) ? neuSurface(a, 14) : rounded(a, CARD, 14));
+        api.addView(radio(a, apiActive));
+        LinearLayout aText = column(a);
+        aText.setPaddingRelative(dp(a, 12), 0, 0, 0);
+        aText.addView(title(a, a.getString(R.string.chat_source_api), 16));
+        Providers.P provider = Providers.of(quick);
+        String details = provider == null ? a.getString(R.string.chat_source_api_missing)
+                : a.getString(R.string.chat_source_api_hint, provider.name, Providers.model(quick));
+        aText.addView(text(a, details, 12, MUTED));
+        api.addView(aText, weight1());
+        LinearLayout.LayoutParams ap = full();
+        ap.topMargin = dp(a, 8);
+        c.addView(api, ap);
+        api.setOnClickListener(v -> {
+            d[0].dismiss();
+            if (!quick.isEmpty()) l.onPick(quick);
+            else if (more != null) more.run();
+        });
+        Button all = button(a, a.getString(R.string.chat_model_more), false);
+        LinearLayout.LayoutParams bp = full();
+        bp.topMargin = dp(a, 12);
+        c.addView(all, bp);
+        all.setOnClickListener(v -> {
+            d[0].dismiss();
+            if (more != null) more.run();
+        });
+        d[0] = bottomSheet(a, c);
+        d[0].show();
+    }
+
     /** services: also the API key services' models (not for runs outside a chat, like the reviewer's). */
     static void modelSheet(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
+        if (services) {
+            routePicker(a, backend, current, false, l,
+                    () -> modelSheetAdvanced(a, backend, current, defaultHint, services, l));
+            return;
+        }
+        modelSheetAdvanced(a, backend, current, defaultHint, services, l);
+    }
+
+    private static void modelSheetAdvanced(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
         final Dialog[] d = new Dialog[1];
         Models.refresh(a, () -> { // a service's list changed meanwhile: the sheet again, with it
             if (d[0] == null || !d[0].isShowing() || a.isFinishing()) return;
             d[0].dismiss();
-            modelSheet(a, backend, current, defaultHint, services, l);
+            modelSheetAdvanced(a, backend, current, defaultHint, services, l);
         });
         LinearLayout c = column(a);
         TextView h = title(a, a.getString(R.string.chat_model_title, Account.nameOf(backend)), 18);
