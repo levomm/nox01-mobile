@@ -50,7 +50,7 @@ class RubberSkinsRegression(unittest.TestCase):
     def test_surface_highlights_are_soft_rubber_not_chrome(self):
         ui = read("Ui.java")
         raise_block = ui.split("static Drawable neuSurface(", 1)[1].split("static Drawable neuInsetSurface(", 1)[0]
-        match = re.search(r'blend\(CARD, Color.WHITE, DARK \? ([0-9.]+)f', raise_block)
+        match = re.search(r'blend\(CARD, CARD2, DARK \? ([0-9.]+)f', raise_block)
         self.assertIsNotNone(match, "soft rim highlight must be palette-derived")
         self.assertLessEqual(float(match.group(1)), 0.10)
         self.assertIn("LayerDrawable", raise_block)
@@ -59,7 +59,7 @@ class RubberSkinsRegression(unittest.TestCase):
         self.assertIn("OvershootInterpolator", press)
         self.assertIn("ACTION_DOWN", press)
         fab = ui.split("static Drawable neuAccentSurface(", 1)[1].split("static void elasticPress(", 1)[0]
-        self.assertNotIn("Color.WHITE, 0.28f", fab)
+        self.assertNotIn("Color.WHITE", fab)
 
     def test_theme_is_only_colour_not_material(self):
         ui = read("Ui.java")
