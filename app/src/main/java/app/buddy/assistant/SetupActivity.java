@@ -1520,7 +1520,7 @@ public class SetupActivity extends Screen implements Account.Listener, RemoteSes
 
     private LinearLayout card() {
         LinearLayout c = column(this);
-        c.setBackground(rounded(this, CARD, 20));
+        c.setBackground(neu(this) ? neuSurface(this, 20) : rounded(this, CARD, 20));
         c.setClipToOutline(true);
         return c;
     }
