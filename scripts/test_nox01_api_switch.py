@@ -55,6 +55,19 @@ class ApiSwitchRegression(unittest.TestCase):
         self.assertIn("quickApiModel(", block)
         self.assertIn("chat_model_more", block)
 
+    def test_model_switch_resets_old_reasoning_effort(self):
+        hub = read("ChatHub.java")
+        switch = hub.split("void setModel(Sessions.Session ses, String model)", 1)[1].split("void setEffort", 1)[0]
+        self.assertIn('ses.effort = "";', switch)
+        self.assertIn('ses.actualModel = "";', switch)
+
+    def test_api_model_does_not_inherit_unsupported_reasoning(self):
+        models = read("Models.java")
+        self.assertIn("static String safeEffort(Sessions.Session s)", models)
+        self.assertIn("if (e == null || e.length() == 0)", models)
+        hub = read("ChatHub.java")
+        self.assertIn("Models.safeEffort(ses)", hub)
+
     def test_localized_label_and_version(self):
         et = read("BuildInfo.java")
         self.assertIn('VERSION = "2.3.18"', et)
