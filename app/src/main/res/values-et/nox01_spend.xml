@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spend_title">API kasutus ja maksumus</string>
+    <string name="spend_last">Viimane päring</string>
+    <string name="spend_chat">See vestlus</string>
+    <string name="spend_day">Täna (kõik vestlused)</string>
+    <string name="spend_month">See kuu (kõik vestlused)</string>
+    <string name="spend_input">Sisendtokenid (vahemäluta)</string>
+    <string name="spend_output">Väljundtokenid</string>
+    <string name="spend_cached">Vahemälust loetud tokenid</string>
+    <string name="spend_plan">Pakett</string>
+    <string name="spend_unknown">Hind teadmata</string>
+    <string name="spend_no_data">Andmeid veel pole</string>
+    <string name="spend_estimate">Hinnang avalike hindade ja viimase valuutakursi põhjal, mitte arve. Varasemate vestluste andmed võivad olla puudulikud.</string>
+    <string name="spend_turns">Salvestatud API-päringuid: %1$d</string>
+    <string name="spend_partial">%1$d päringul puudus kinnitatud hind, seega summa on osaline.</string>
+    <string name="spend_close">Sulge</string>
+    <string name="chat_prices_top_ten">10 soodsamat API-mudelit</string>
+    <string name="chat_prices_all">Kõik API-mudelid: odavamast kallimani</string>
+    <string name="chat_prices_source">Hinnad: models.dev ja USD/EUR, uuendatud %1$s</string>
+    <string name="chat_prices_unavailable">Mudelite hinnad pole saadaval. Hinnakirja laadimiseks ühenda internetiga.</string>
+    <string name="chat_prices_per_million">Sisend %1$s / M · väljund %2$s / M</string>
+    <string name="chat_prices_plan">Paketimudelid (eraldi API-tasu pole)</string>
+    <string name="chat_prices_explain">Järjestus: 1 miljon vahemäluta sisendtokenit + 1 miljon väljundtokenit, soodsaim ees.</string>
+</resources>
