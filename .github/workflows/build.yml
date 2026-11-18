@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [main, "feat/nox01-215-global-skins-doom-chat"]
+    branches: [main]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
