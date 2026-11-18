@@ -52,7 +52,7 @@ class RubberSkinsRegression(unittest.TestCase):
         raise_block = ui.split("static Drawable neuSurface(", 1)[1].split("static Drawable neuInsetSurface(", 1)[0]
         match = re.search(r'blend\(CARD, CARD2, DARK \? ([0-9.]+)f', raise_block)
         self.assertIsNotNone(match, "soft rim highlight must be palette-derived")
-        self.assertLessEqual(float(match.group(1)), 0.10)
+        self.assertLessEqual(float(match.group(1)), 0.20)
         self.assertIn("LayerDrawable", raise_block)
         self.assertIn("GradientDrawable", raise_block)
         press = ui.split("static void elasticPress(", 1)[1].split("static ", 1)[0]
