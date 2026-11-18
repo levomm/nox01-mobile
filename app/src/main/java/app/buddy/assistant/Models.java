@@ -192,6 +192,19 @@ final class Models {
         if (id != null && !id.isEmpty()) claudeDefault = id;
     }
 
+    /** Never pass a plan reasoning setting to an API model that has not advertised that effort. */
+    static String safeEffort(Sessions.Session s) {
+        if (s.effort.isEmpty()) return "";
+        Providers.P p = Providers.of(effective(s));
+        if (p == null) return s.effort;
+        org.json.JSONObject m = p.modelInfo(Providers.model(effective(s)));
+        org.json.JSONArray e = m == null ? null : m.optJSONArray("efforts");
+        if (e == null || e.length() == 0) return "";
+        for (int i = 0; i < e.length(); i++)
+            if (s.effort.equals(e.optString(i))) return s.effort;
+        return "";
+    }
+
     /**
      * Effort levels the chat's agent accepts ([value, label]; "" is the agent's default), or null if Buddy can't set it.
      * A service model that lists its levels (DeepSeek: low, high, max) keeps only those, besides Auto.
@@ -205,11 +218,10 @@ final class Models {
             levels = agentEfforts(s.backend);
             org.json.JSONObject m = p.modelInfo(Providers.model(ref));
             org.json.JSONArray e = m == null ? null : m.optJSONArray("efforts");
-            if (e != null && e.length() > 0) {
-                java.util.Set<String> has = new java.util.HashSet<>();
-                for (int j = 0; j < e.length(); j++) has.add(e.optString(j));
-                levels.retainAll(has);
-            }
+            if (e == null || e.length() == 0) return null;
+            java.util.Set<String> has = new java.util.HashSet<>();
+            for (int j = 0; j < e.length(); j++) has.add(e.optString(j));
+            levels.retainAll(has);
         } else {
             // the agent's own: the chat's model, or the one its default is (as far as it has said)
             String id = !ref.isEmpty() ? ref : !s.actualModel.isEmpty() ? s.actualModel : defaultId(s.backend);
