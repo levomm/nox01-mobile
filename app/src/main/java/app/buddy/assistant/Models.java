@@ -94,6 +94,50 @@ final class Models {
     }
 
     /**
+     * Eligible API chat models ranked by published price, cheapest first.
+     * Benchmark: 1M uncached input + 1M output tokens (same mix for everyone).
+     * Image/audio/transcribe/embedding-only entries are not text chat candidates.
+     * Unknown prices remain at the end of "All"; the top ten only includes priced entries.
+     *
+     * Rows: [reference, display name, per-million input/output label, benchmark in USD].
+     */
+    static java.util.List<String[]> pricedOptions(String backend, boolean topTen) {
+        android.content.Context c = BuddyApp.context();
+        java.util.List<String[]> rows = new java.util.ArrayList<>();
+        for (Providers.P p : Providers.forAgent(backend)) {
+            org.json.JSONArray offered = p.offered();
+            java.util.List<String> chat = Providers.chatModels(offered);
+            for (int i = 0; i < offered.length(); i++) {
+                org.json.JSONObject m = offered.optJSONObject(i);
+                if (m == null) continue;
+                String id = m.optString("id");
+                if (id.isEmpty() || !chat.contains(id)) continue;
+                String ref = Providers.ref(p, id);
+                ModelPrices.Price price = ModelPrices.price(c, ref);
+                String label = p.name + " · " + m.optString("name", id);
+                String detail = ModelPrices.costPerMillion(c, ref);
+                String rank = price == null ? "" : String.valueOf(price.compareUsd());
+                rows.add(new String[]{ref, label, detail, rank});
+            }
+        }
+        java.util.Comparator<String[]> cheapest = (a, b) -> {
+            double pa = a[3].isEmpty() ? Double.POSITIVE_INFINITY : Double.parseDouble(a[3]);
+            double pb = b[3].isEmpty() ? Double.POSITIVE_INFINITY : Double.parseDouble(b[3]);
+            int cmp = Double.compare(pa, pb);
+            return cmp != 0 ? cmp : a[1].compareToIgnoreCase(b[1]);
+        };
+        rows.sort(cheapest);
+        if (!topTen) return rows;
+        java.util.List<String[]> ten = new java.util.ArrayList<>();
+        for (String[] row : rows) {
+            if (row[3].isEmpty()) break;
+            if (ten.size() >= 10) break;
+            ten.add(row);
+        }
+        return ten;
+    }
+
+    /**
      * What a chat on Default uses with this agent, as the user set it (Settings → Chats on Default): "" (the agent's
      * own default), one of the agent's own models, or "@service/model".
      */
