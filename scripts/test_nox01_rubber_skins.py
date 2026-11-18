@@ -70,6 +70,28 @@ class RubberSkinsRegression(unittest.TestCase):
         self.assertIn("neuSurface(a, 34)", ui)
         self.assertIn("elasticPress(it)", ui)
 
+
+    def test_tactile_surfaces_in_all_subscreens(self):
+        # These pages previously bypassed the shared material and rendered flat blocks.
+        expected = {
+            "SetupActivity.java": "neuSurface(this, 20)",
+            "ApiKeysActivity.java": "neuSurface(this, 16)",
+            "McpServersActivity.java": "neuSurface(this, 16)",
+            "SkillsActivity.java": "neuSurface(this, 16)",
+            "MonitorActivity.java": "neuSurface(this, 20)",
+            "RulesActivity.java": "neuSurface(this, 12)",
+            "SchedulesActivity.java": "neuSurface(this, 16)",
+            "StepsActivity.java": "neuSurface(this, 12)",
+            "CheckActivity.java": "neuSurface(this, 16)",
+            "AppPermissionsActivity.java": "neuInsetSurface(this, 10)",
+            "TerminalActivity.java": "neuInsetSurface(this, 10)",
+        }
+        for file, token in expected.items():
+            self.assertIn(token, read(file), file + " missing shared rubber material")
+        ui = read("Ui.java")
+        self.assertIn("g.setBackground(neu(c) ? neuSurface(c, 20)", ui)
+        self.assertIn("box.setBackground(neu(c) ? neuInsetSurface(c, 14)", ui)
+
     def test_new_upgrade_version(self):
         build = read("BuildInfo.java")
         self.assertIn('VERSION = "2.3.16"', build)
