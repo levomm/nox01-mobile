@@ -107,7 +107,7 @@ public class StepsActivity extends Screen {
     private LinearLayout step(File dir, JSONObject s, long start) {
         LinearLayout r = row(this);
         r.setGravity(Gravity.TOP);
-        r.setBackground(outlined(this, CARD, 12, OUTLINE, 1));
+        r.setBackground(neu(this) ? neuSurface(this, 12) : outlined(this, CARD, 12, OUTLINE, 1));
         r.setPaddingRelative(dp(this, 8), dp(this, 8), dp(this, 10), dp(this, 8));
         File shot = new File(dir, s.optInt("n") + ".jpg");
         if (shot.isFile()) {
