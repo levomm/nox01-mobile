@@ -94,8 +94,8 @@ class RubberSkinsRegression(unittest.TestCase):
 
     def test_new_upgrade_version(self):
         build = read("BuildInfo.java")
-        self.assertIn('VERSION = "2.3.16"', build)
-        self.assertRegex(build, r"VERSION_CODE\s*=\s*215\s*;")
+        self.assertIn('VERSION = "2.3.17"', build)
+        self.assertRegex(build, r"VERSION_CODE\s*=\s*216\s*;")
 
 
 if __name__ == "__main__":
