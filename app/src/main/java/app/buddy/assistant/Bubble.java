@@ -349,7 +349,7 @@ final class Bubble implements ChatHub.Listener {
         pill.setLineSpacing(0, 1.05f);
         pill.setEllipsize(TextUtils.TruncateAt.END);
         pill.setPaddingRelative(dp(12), dp(8), dp(12), dp(8));
-        pill.setBackground(rounded(Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(Ui.BG));
         pill.setVisibility(View.GONE);
         LinearLayout.LayoutParams plp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -1150,7 +1150,7 @@ final class Bubble implements ChatHub.Listener {
         input.setText(draft);
         pill.setTextColor(Ui.TEXT);
         pill.setTypeface(Ui.sans(svc, 500));
-        pill.setBackground(rounded(Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(Ui.BG));
         thumb.restyle();
         renderedFor = null;
         if (showingList) renderSessionList();
@@ -2868,7 +2868,7 @@ final class Bubble implements ChatHub.Listener {
         ring.setCalm(background);
         // in control: a solid accent pill, so it's clear not to touch the phone
         pill.setTextColor(controlling ? Ui.ON_ACCENT : Ui.TEXT);
-        pill.setBackground(rounded(controlling ? Ui.ACCENT : Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(controlling ? Ui.ACCENT : Ui.BG));
         badge.setVisibility(!expanded && hub.anyUnread() ? View.VISIBLE : View.GONE);
         updateThumb();
         setWorking(!paused && (running || controlling || browsing));
@@ -3779,6 +3779,12 @@ final class Bubble implements ChatHub.Listener {
         b.setPaddingRelative(dp(16), dp(10), dp(16), dp(10));
         b.setBackground(rounded(color, 16, 0, 0));
         return b;
+    }
+
+    /** Palette-aware bubble border, separate from DOOM sprite selection. */
+    private GradientDrawable pillSurface(int fill) {
+        boolean minimal = "minimal".equals(Prefs.bubbleFrame(svc));
+        return rounded(fill, 18, minimal ? Ui.OUTLINE : Ui.ACCENT, minimal ? 0 : 1);
     }
 
     private GradientDrawable rounded(int fill, int radiusDp, int stroke, int strokeDp) {
