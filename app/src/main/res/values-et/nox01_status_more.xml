@@ -142,5 +142,5 @@
     <string name="voice_card_question">NOX01 küsib: %1$s Valikud: %2$s</string>
     <string name="voice_card_hint">Ütle „kinnita” või „keela”.</string>
     <string name="voice_card_yes">kinnita,kinnitatud,jah,okei,luba,tee ära,approve,approved,yes,okay,ok,go ahead,do it</string>
-    <string name="voice_card_no">keela,keelatud,ei,peata,tühista,deny,denied,no,stop,cancel,don\\'t</string>
+    <string name="voice_card_no">keela,keelatud,ei,peata,tühista,deny,denied,no,stop,cancel,don\'t</string>
 </resources>
