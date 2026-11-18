@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -30,9 +29,10 @@ final class ApiSpend {
     }
 
     static void record(Context c, Sessions.Session ses, JSONObject event) {
+        if (ses == null || ses.id.isEmpty() || event == null) return;
         String usageId = event.optString("id", "");
         String modelRef = event.optString("model", Models.effective(ses));
-        if (usageId.isEmpty() || ses == null || ses.id.isEmpty()) return;
+        if (usageId.isEmpty()) return;
         // Only API events count toward monetary estimates.
         if (Providers.of(modelRef) == null) return;
         long input = Math.max(0, event.optLong("input", 0));
