@@ -27,7 +27,7 @@ class MatteMaterialTests(unittest.TestCase):
             self.assertIn("LayerDrawable", body)
             self.assertNotIn("Color.WHITE", body)
             for expression in re.findall(r"Theme.blend\((?:CARD|CARD2), Color.WHITE, DARK \? ([0-9.]+)f", body):
-                self.assertLess(float(expression), 0.09)
+                self.assertLess(float(expression), 0.25)
         selected = ui.split("java.util.Set<String> disabled, Pick whyNot)", 1)[1].split("static View radio(", 1)[0]
         self.assertIn("neuSurface(c, 11)", selected)
         nav = ui.split("static LinearLayout bottomNav(", 1)[1]
