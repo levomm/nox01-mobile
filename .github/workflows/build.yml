@@ -28,6 +28,9 @@ jobs:
       - name: Test animated DOOM bubble
         run: python3 scripts/test_doom_bubble.py
 
+      - name: Test NOX01 2.3.15 live DOOM, global skins and chat
+        run: python3 scripts/test_nox01_live_skins.py
+
       - name: Test real Tactical Neu-Dark Android UI
         run: python3 scripts/test_neu_dark_ui.py
 
