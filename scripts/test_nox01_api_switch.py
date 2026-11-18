@@ -43,8 +43,8 @@ class ApiSwitchRegression(unittest.TestCase):
         chat = read("ChatActivity.java")
         block = chat.split("private void chooseModel()", 1)[1].split("// ------------------------------------------------------ helpers", 1)[0]
         self.assertIn("routePicker(", block)
-        self.assertIn("quickApiModel(", block)
-        self.assertIn("chat_model_more", block)
+        self.assertIn("quickApiModel(", read("Ui.java"))
+        self.assertIn("chat_model_more", read("Ui.java"))
         self.assertIn("chooseModel(true)", block)
         self.assertIn("setModel(ses,", block)
 
