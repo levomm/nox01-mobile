@@ -16,7 +16,11 @@ final class Theme {
             {"#D97757", "Coral"}, {"#4F8BFF", "Ocean"}, {"#3FB98A", "Mint"},
             {"#9A7CFF", "Violet"}, {"#E5678F", "Rose"}, {"#E0A43A", "Amber"},
     };
-    static final String[][] SURFACES = {{"neu", "Tactical Neu-Dark"}, {"warm", "Warm"}, {"neutral", "Neutral"}, {"black", "Black"}};
+    static final String[][] SURFACES = {
+            {"neu", "Tactical Neu-Dark"}, {"terminal", "Green Terminal"}, {"alert", "Red Alert"},
+            {"steel", "Cold Steel"}, {"mono", "Clean Mono"}, {"warm", "Warm"},
+            {"neutral", "Neutral"}, {"black", "Black"}
+    };
     static final String[][] MODES = {{"system", "System"}, {"light", "Light"}, {"dark", "Dark"}};
 
     private static String applied = "";
@@ -32,7 +36,10 @@ final class Theme {
 
     /** {@link #SURFACES} with labels in the user's language. */
     static String[][] surfaces(Context c) {
-        return labeled(c, SURFACES, R.string.prefs_surface_neu, R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
+        return labeled(c, SURFACES,
+                R.string.prefs_surface_neu, R.string.prefs_surface_terminal, R.string.prefs_surface_alert,
+                R.string.prefs_surface_steel, R.string.prefs_surface_mono,
+                R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
     }
 
     /** {@link #MODES} with labels in the user's language. */
@@ -60,7 +67,8 @@ final class Theme {
         boolean dark = isDark(c);
         int accent = Prefs.accent(c);
         String surface = Prefs.surface(c);
-        String key = dark + "|" + accent + "|" + surface + "|" + Prefs.uiFont(c);
+        String key = dark + "|" + accent + "|" + surface + "|" + Prefs.uiFont(c)
+                + "|" + Prefs.cardDepth(c) + "|" + Prefs.bubbleFrame(c);
         if (key.equals(applied)) return false;
         applied = key;
 
@@ -69,6 +77,18 @@ final class Theme {
             switch (surface) {
                 case "neu":
                     set(0xFF1B1D21, 0xFF25282E, 0xFF30343B, 0xFF22252A, 0xFF111419);
+                    break;
+                case "terminal":
+                    set(0xFF06120B, 0xFF0F2619, 0xFF173523, 0xFF0B2013, 0xFF030B05);
+                    break;
+                case "alert":
+                    set(0xFF180B0D, 0xFF281217, 0xFF361C21, 0xFF230E12, 0xFF0C0506);
+                    break;
+                case "steel":
+                    set(0xFF111922, 0xFF1C2A34, 0xFF293844, 0xFF162530, 0xFF0C151D);
+                    break;
+                case "mono":
+                    set(0xFF0C0D0E, 0xFF1A1B1C, 0xFF2A2C2E, 0xFF151617, 0xFF060607);
                     break;
                 case "neutral":
                     set(0xFF121212, 0xFF1D1D1C, 0xFF2A2A29, 0xFF242423, 0xFF0B0B0B);
@@ -79,21 +99,44 @@ final class Theme {
                 default: // warm, the original tone
                     set(0xFF121110, 0xFF1D1B19, 0xFF2A2724, 0xFF24221F, 0xFF0F0E0D);
             }
-            Ui.TEXT = 0xFFF3EFE8;
-            Ui.TEXT2 = 0xFFC9C3B9;
-            Ui.MUTED = 0xFFA39D93;
+            Ui.TEXT = "terminal".equals(surface) ? 0xFFE0F9E8
+                    : "steel".equals(surface) ? 0xFFE7F3FD
+                    : "mono".equals(surface) ? 0xFFF3F3F3 : 0xFFF3EFE8;
+            Ui.TEXT2 = "terminal".equals(surface) ? 0xFFB6D7C0
+                    : "steel".equals(surface) ? 0xFFB9CEDF
+                    : "mono".equals(surface) ? 0xFFCACACA : 0xFFC9C3B9;
+            Ui.MUTED = "terminal".equals(surface) ? 0xFF8DAF96
+                    : "steel".equals(surface) ? 0xFF93ABBC
+                    : "mono".equals(surface) ? 0xFF9FA0A1 : 0xFFA39D93;
             Ui.OK = 0xFF5CC08A;
             Ui.ERR = 0xFFF0A090;
             Ui.USER = blend(accent, Ui.BG, 0.32f);
         } else {
-            if ("neutral".equals(surface)) set(0xFFF4F4F3, 0xFFFFFFFF, 0xFFEAEAE8, 0xFFFFFFFF, 0xFF1C1C1C);
-            else set(0xFFF6F2EC, 0xFFFFFFFF, 0xFFEEE7DE, 0xFFFFFFFF, 0xFF24211E);
+            switch (surface) {
+                case "terminal":
+                    set(0xFFF1F8F2, 0xFFFFFFFF, 0xFFE4F2E7, 0xFFF7FCF8, 0xFF15281C);
+                    break;
+                case "alert":
+                    set(0xFFFCF2F3, 0xFFFFFFFF, 0xFFF6E4E6, 0xFFFFF7F8, 0xFF31171B);
+                    break;
+                case "steel":
+                    set(0xFFF0F5F8, 0xFFFFFFFF, 0xFFE4EDF4, 0xFFF8FCFE, 0xFF13222D);
+                    break;
+                case "mono":
+                    set(0xFFF7F7F7, 0xFFFFFFFF, 0xFFEAEAEA, 0xFFFFFFFF, 0xFF161616);
+                    break;
+                case "neutral":
+                    set(0xFFF4F4F3, 0xFFFFFFFF, 0xFFEAEAE8, 0xFFFFFFFF, 0xFF1C1C1C);
+                    break;
+                default:
+                    set(0xFFF6F2EC, 0xFFFFFFFF, 0xFFEEE7DE, 0xFFFFFFFF, 0xFF24211E);
+            }
             Ui.TEXT = 0xFF1F1B17;
             Ui.TEXT2 = 0xFF4A443D;
             Ui.MUTED = 0xFF6B635A;
             Ui.OK = 0xFF2F9E66;
             Ui.ERR = 0xFFC5483A;
-            Ui.USER = blend(accent, Ui.CARD, 0.22f);
+            Ui.USER = blend(accent, Ui.CARD, 0.16f);
         }
         Ui.ACCENT = accent;
         Ui.ON_ACCENT = luminance(accent) > 0.45 ? 0xFF1A1714 : 0xFFFFFFFF;
