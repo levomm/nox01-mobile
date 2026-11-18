@@ -705,6 +705,7 @@ final class Ui {
      */
     static void routePicker(Activity a, String backend, String current, boolean chat, Pick l, Runnable more) {
         Models.refresh(a);
+        ModelPrices.refresh(a, null);
         LinearLayout c = column(a);
         c.addView(title(a, a.getString(R.string.chat_source_title), 18));
         TextView hint = text(a, a.getString(R.string.chat_source_new_thread), 12, MUTED);
@@ -754,7 +755,7 @@ final class Ui {
             if (!quick.isEmpty()) l.onPick(quick);
             else if (more != null) more.run();
         });
-        Button all = button(a, a.getString(R.string.chat_model_more), false);
+        Button all = button(a, a.getString(R.string.chat_prices_top_ten), false);
         LinearLayout.LayoutParams bp = full();
         bp.topMargin = dp(a, 12);
         c.addView(all, bp);
@@ -777,18 +778,54 @@ final class Ui {
     }
 
     private static void modelSheetAdvanced(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
+        modelSheetAdvanced(a, backend, current, defaultHint, services, l, true);
+    }
+
+    private static void modelSheetAdvanced(Activity a, String backend, String current, String defaultHint,
+                                           boolean services, Pick l, boolean topTen) {
         final Dialog[] d = new Dialog[1];
         Models.refresh(a, () -> { // a service's list changed meanwhile: the sheet again, with it
             if (d[0] == null || !d[0].isShowing() || a.isFinishing()) return;
             d[0].dismiss();
-            modelSheetAdvanced(a, backend, current, defaultHint, services, l);
+            modelSheetAdvanced(a, backend, current, defaultHint, services, l, topTen);
+        });
+        if (services) ModelPrices.refresh(a, () -> {
+            if (d[0] == null || !d[0].isShowing() || a.isFinishing()) return;
+            d[0].dismiss();
+            modelSheetAdvanced(a, backend, current, defaultHint, services, l, topTen);
         });
         LinearLayout c = column(a);
         TextView h = title(a, a.getString(R.string.chat_model_title, Account.nameOf(backend)), 18);
         h.setPaddingRelative(0, 0, 0, dp(a, 8));
         c.addView(h);
+        java.util.List<String[]> priced = services ? Models.pricedOptions(backend, topTen)
+                : Models.options(backend, false);
+        if (services) {
+            TextView explanation = text(a, a.getString(R.string.chat_prices_explain), 12, MUTED);
+            explanation.setPaddingRelative(0, dp(a, 6), 0, dp(a, 8));
+            c.addView(explanation);
+            TextView source = text(a, ModelPrices.lastUpdate(a), 11, MUTED);
+            c.addView(source);
+            Button toggle = button(a, a.getString(topTen ? R.string.chat_prices_all : R.string.chat_prices_top_ten), false);
+            LinearLayout.LayoutParams tg = full();
+            tg.topMargin = dp(a, 10);
+            tg.bottomMargin = dp(a, 10);
+            c.addView(toggle, tg);
+            toggle.setOnClickListener(v -> {
+                d[0].dismiss();
+                modelSheetAdvanced(a, backend, current, defaultHint, services, l, !topTen);
+            });
+            if (topTen && priced.isEmpty()) {
+                c.addView(text(a, a.getString(R.string.chat_prices_unavailable), 13, MUTED));
+            }
+            // Plan models are not "free API models" and must never appear in price rankings.
+            java.util.List<String[]> combined = new java.util.ArrayList<>(priced);
+            combined.add(new String[]{null, a.getString(R.string.chat_prices_plan)});
+            combined.addAll(Models.options(backend, false));
+            priced = combined;
+        }
         boolean known = false;
-        for (final String[] o : Models.options(backend, services)) {
+        for (final String[] o : priced) {
             if (o[0] == null) { // an API key service's models
                 TextView sl = sectionLabel(a, o[1]);
                 sl.setPaddingRelative(0, dp(a, 14), 0, dp(a, 2));
@@ -804,7 +841,8 @@ final class Ui {
             LinearLayout t = column(a);
             t.setPaddingRelative(dp(a, 14), 0, 0, 0);
             t.addView(title(a, o[1], 15));
-            t.addView(single(monoText(a, Models.detail(backend, o[0], defaultHint), 12, MUTED)));
+            t.addView(single(monoText(a, o.length > 2 ? o[2]
+                    : Models.detail(backend, o[0], defaultHint), 12, MUTED)));
             r.addView(t, weight1());
             r.setOnClickListener(v -> {
                 d[0].dismiss();
