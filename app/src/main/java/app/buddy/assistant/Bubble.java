@@ -3419,13 +3419,22 @@ final class Bubble implements ChatHub.Listener {
         switch (kind) {
             case USER: {
                 TextView tv = Ui.text(svc, text, 15, Ui.TEXT);
-                tv.setText(Ui.markdown(text, this::collapse)); // the user's own Markdown, as in the app's chat
-                tv.setBackground(Ui.corners(svc, Ui.USER, 20, 20, 6, 20));
-                tv.setPaddingRelative(dp(14), dp(10), dp(14), dp(10));
+                tv.setText(Ui.markdown(text, this::collapse));
+                tv.setPaddingRelative(0, dp(7), 0, 0);
                 Ui.linkifyForService(tv, this::collapse);
+                LinearLayout card = new LinearLayout(svc);
+                card.setOrientation(LinearLayout.VERTICAL);
+                card.setBackground(Ui.userMessageSurface(svc));
+                card.setPaddingRelative(dp(14), dp(10), dp(14), dp(12));
+                TextView who = Ui.monoText(svc, Ui.userLabel(svc), 10, Ui.ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                card.addView(tv, new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 p.gravity = Gravity.END;
                 p.setMarginStart(dp(40));
-                v = tv;
+                v = card;
                 break;
             }
             case BUDDY: { // Buddy 3: replies read as plain text in the panel, as in the app's chat
@@ -3471,8 +3480,21 @@ final class Bubble implements ChatHub.Listener {
                 LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(dp(34), dp(34));
                 cp.setMarginStart(-dp(5)); // the icon itself in line with the text
                 whole.addView(copy, cp);
-                v = whole;
+                LinearLayout card = new LinearLayout(svc);
+                card.setOrientation(LinearLayout.VERTICAL);
+                card.setBackground(Ui.agentMessageSurface(svc));
+                card.setPaddingRelative(dp(14), dp(12), dp(12), dp(8));
+                card.addView(Ui.monoText(svc, Ui.agentLabel(svc), 10, Ui.ACCENT_TEXT),
+                        new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                contentParams.topMargin = dp(6);
+                card.addView(whole, contentParams);
+                v = card;
+                p.gravity = Gravity.START;
                 p.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                p.setMarginEnd(dp(20));
                 p.topMargin = dp(14);
                 break;
             }
