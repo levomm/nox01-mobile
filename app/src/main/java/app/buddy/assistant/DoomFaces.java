@@ -28,6 +28,7 @@ final class DoomFaces {
     static final int EYEBROW_LEFT = 8;
     static final int EYEBROW_RIGHT = 9;
     private static Bitmap mirroredEyebrow;
+    private static Bitmap whiteWorking;
 
     private static final int CELL_W = 64, CELL_H = 80, COLUMNS = 4;
     private static Bitmap[] frames;
@@ -55,7 +56,25 @@ final class DoomFaces {
             } catch (IOException | IllegalArgumentException e) {
                 android.util.Log.w("NOX01", "DOOM bubble sprites unavailable", e);
             }
+            // WORKING alone uses the white-eyed frame from the owner's original 001Doom.png.
+            // All other seven approved frames remain untouched in the existing atlas.
+            if (frames != null) {
+                try (InputStream stream = context.getAssets().open("nox01/doom_white_eyes.b64")) {
+                    ByteArrayOutputStream buffer = new ByteArrayOutputStream(8 * 1024);
+                    byte[] chunk = new byte[4096];
+                    int n;
+                    while ((n = stream.read(chunk)) != -1) buffer.write(chunk, 0, n);
+                    byte[] bytes = Base64.decode(buffer.toByteArray(), Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    if (bitmap != null && bitmap.getWidth() == CELL_W && bitmap.getHeight() == CELL_H) {
+                        whiteWorking = bitmap;
+                    }
+                } catch (IOException | IllegalArgumentException e) {
+                    android.util.Log.w("NOX01", "DOOM white-eyed working sprite unavailable", e);
+                }
+            }
         }
+        if (state == WORKING && whiteWorking != null) return whiteWorking;
         return frames == null ? null : frames[Math.max(0, Math.min(7, state))];
     }
 
