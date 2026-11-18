@@ -214,13 +214,13 @@ final class Ui {
      * All layers are native drawables and respect accessibility text scaling.
      */
     static Drawable neuSurface(Context c, int radiusDp) {
-        GradientDrawable low = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.40f : 0.08f), radiusDp);
-        GradientDrawable rim = rounded(c, Theme.blend(CARD, Color.WHITE, DARK ? 0.20f : 0.65f), radiusDp);
+        GradientDrawable low = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
+        GradientDrawable rim = rounded(c, Theme.blend(CARD, Color.WHITE, DARK ? 0.065f : 0.22f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{Theme.blend(CARD, Color.WHITE, DARK ? 0.09f : 0.28f),
-                        CARD, Theme.blend(CARD, Color.BLACK, DARK ? 0.12f : 0.04f)});
+                new int[]{Theme.blend(CARD, Color.WHITE, DARK ? 0.045f : 0.12f),
+                        CARD, Theme.blend(CARD, Color.BLACK, DARK ? 0.065f : 0.04f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x55));
+        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x26));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{low, rim, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), dp(c, 1), 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 3), dp(c, 4));
@@ -231,7 +231,7 @@ final class Ui {
     /** Inside-pressed counterpart for selected tabs and active controls. */
     static Drawable neuInsetSurface(Context c, int radiusDp) {
         GradientDrawable back = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.27f : 0.05f), radiusDp);
-        GradientDrawable edge = rounded(c, Theme.blend(CARD2, Color.WHITE, DARK ? 0.09f : 0.33f), radiusDp);
+        GradientDrawable edge = rounded(c, Theme.blend(CARD2, Color.WHITE, DARK ? 0.05f : 0.18f), radiusDp);
         GradientDrawable inset = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
                 new int[]{Theme.blend(CARD, Color.BLACK, DARK ? 0.14f : 0.05f),
                         Theme.blend(CARD2, BG, 0.25f)});
@@ -246,13 +246,13 @@ final class Ui {
 
     /** Slightly luminous green tactile FAB. Other accent choices remain supported. */
     static Drawable neuAccentSurface(Context c, int radiusDp, int accent) {
-        GradientDrawable shadow = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.40f : 0.08f), radiusDp);
-        GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.28f), radiusDp);
+        GradientDrawable shadow = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
+        GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.075f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{Theme.blend(accent, Color.WHITE, 0.16f), accent,
-                        Theme.darken(accent, 0.72f)});
+                new int[]{Theme.blend(accent, Color.WHITE, 0.075f), accent,
+                        Theme.darken(accent, 0.88f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), Theme.withAlpha(Color.WHITE, 0x5C));
+        face.setStroke(dp(c, 1), Theme.withAlpha(Color.WHITE, 0x29));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{shadow, glow, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), 0, 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 2), dp(c, 4));
@@ -328,7 +328,8 @@ final class Ui {
     static Button outlinedButton(Context c, String label, int color) {
         Button b = button(c, label, false);
         b.setTextColor(color);
-        b.setBackground(outlined(c, 0x00000000, 14, Theme.withAlpha(color, 0x80), 1));
+        b.setBackground(neu(c) ? neuSurface(c, 14)
+                : outlined(c, 0x00000000, 14, Theme.withAlpha(color, 0x80), 1));
         return b;
     }
 
@@ -382,7 +383,7 @@ final class Ui {
      */
     static LinearLayout group(Context c) {
         LinearLayout g = column(c);
-        g.setBackground(rounded(c, CARD, 20));
+        g.setBackground(neu(c) ? neuSurface(c, 20) : rounded(c, CARD, 20));
         g.setClipToOutline(true);
         return g;
     }
@@ -606,7 +607,7 @@ final class Ui {
                                   java.util.Set<String> disabled, Pick whyNot) {
         LinearLayout box = row(c);
         box.setPaddingRelative(dp(c, 3), dp(c, 3), dp(c, 3), dp(c, 3));
-        box.setBackground(rounded(c, BG, 14));
+        box.setBackground(neu(c) ? neuInsetSurface(c, 14) : rounded(c, BG, 14));
         for (String[] o : options) {
             boolean on = o[0].equals(selected);
             TextView t = text(c, o[1], 14, on ? TEXT : MUTED);
@@ -617,7 +618,7 @@ final class Ui {
             // one line; a label too long for its segment (often a translation) shrinks instead of wrapping
             t.setMaxLines(1);
             t.setAutoSizeTextTypeUniformWithConfiguration(10, 14, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
-            if (on) t.setBackground(rounded(c, CARD2, 11));
+            if (on) t.setBackground(neu(c) ? neuSurface(c, 11) : rounded(c, CARD2, 11));
             else t.setBackgroundResource(ripple(c, false));
             boolean off = !on && disabled != null && disabled.contains(o[0]);
             if (off) t.setAlpha(0.38f);
@@ -626,6 +627,7 @@ final class Ui {
                     if (whyNot != null) whyNot.onPick(o[0]);
                 } else if (!on) l.onPick(o[0]);
             });
+            if (neu(c)) elasticPress(t);
             box.addView(t, weight1());
         }
         return box;
