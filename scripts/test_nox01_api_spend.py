@@ -84,8 +84,8 @@ class ApiSpendTests(unittest.TestCase):
                     "spend_estimate","chat_prices_top_ten","chat_prices_all","chat_prices_source"):
             self.assertIn('name="'+key+'"',s)
         build=src("BuildInfo.java")
-        self.assertIn('VERSION = "2.3.19"',build)
-        self.assertIn('VERSION_CODE = 218',build)
+        self.assertIn('VERSION = "2.3.20"',build)
+        self.assertIn('VERSION_CODE = 219',build)
 
 if __name__=="__main__":
     unittest.main(verbosity=2)

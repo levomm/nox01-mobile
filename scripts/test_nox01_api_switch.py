@@ -70,8 +70,8 @@ class ApiSwitchRegression(unittest.TestCase):
 
     def test_localized_label_and_version(self):
         et = read("BuildInfo.java")
-        self.assertIn('VERSION = "2.3.19"', et)
-        self.assertIn("VERSION_CODE = 218", et)
+        self.assertIn('VERSION = "2.3.20"', et)
+        self.assertIn("VERSION_CODE = 219", et)
         strings = (ROOT / "app/src/main/res/values-et/nox01_api_switch.xml")
         self.assertTrue(strings.exists())
         s = strings.read_text(encoding="utf-8")

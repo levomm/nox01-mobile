@@ -39,7 +39,7 @@ final class Providers {
         /** Can this agent use it? */
         boolean fits(String agent) {
             if ("claude".equals(agent)) return !anthropic.isEmpty();
-            if ("codex".equals(agent)) return !openai.isEmpty(); // an OpenAI-style service is taken to have the Responses API; if not, the agent says so
+            if ("codex".equals(agent)) return !openai.isEmpty() && !isHive(openai); // Hive is Chat Completions only
             return "opencode".equals(agent) && (!anthropic.isEmpty() || !openai.isEmpty());
         }
 
@@ -77,6 +77,7 @@ final class Providers {
     /** Presets for the editor: name, Anthropic-style address, OpenAI-style address, Chat Completions only. */
     static final String[][] PRESETS = {
             {"DeepSeek", "https://api.deepseek.com/anthropic", "https://api.deepseek.com", ""},
+            {"TheHiveAI", "", "https://api-cdn.thehive.ai/api/v3", "chat"},
             {"OpenRouter", "https://openrouter.ai/api", "https://openrouter.ai/api/v1", "chat"},
             {"Anthropic", "https://api.anthropic.com", "", ""},
             {"OpenAI", "", "https://api.openai.com/v1", ""},
@@ -85,6 +86,14 @@ final class Providers {
             {"LM Studio", "", "http://localhost:1234/v1", ""},
             {"llama.cpp", "", "http://localhost:8080/v1", ""},
     };
+
+    /** Hive V3 offers Chat Completions, not Responses or a documented model-list endpoint. */
+    static boolean isHive(String base) {
+        if (base == null || base.isEmpty()) return false;
+        String host = android.net.Uri.parse(base).getHost();
+        return "api-cdn.thehive.ai".equals(host) || "api-va1.thehive.ai".equals(host)
+                || "api.thehive.ai".equals(host);
+    }
 
     /**
      * An address on this phone or on the user's own network (private IPv4 ranges, Tailscale's 100.64/10, *.local):
@@ -233,7 +242,7 @@ final class Providers {
             }
             Linux.write(new File(dir, p.id + ".json"), new JSONObject().put("name", p.name)
                     .put("anthropic", !p.anthropic.isEmpty())
-                    .put("openai", p.openai.isEmpty() ? "" : "responses")
+                    .put("openai", p.openai.isEmpty() ? "" : isHive(p.openai) ? "chat" : "responses")
                     .put("openai_own", !p.openai.isEmpty() && Relay.isOpenAi(p.openai)) // Codex keeps its extras there
                     .put("local", p.local()) // a model on the user's computer: the agents wait longer for it
                     .put("models", windows).toString());
@@ -257,6 +266,9 @@ final class Providers {
 
     /** The models at these addresses, with this key: straight from the app. */
     static JSONArray list(String key, String anthropic, String openai) throws Exception {
+        // Hive documents its chat models but not GET /models. The explicit Check now
+        // button verifies the API key with a minimal chat request.
+        if (isHive(openai)) return hiveModels();
         Exception first = null;
         if (!openai.isEmpty()) {
             try {
@@ -275,6 +287,17 @@ final class Providers {
         throw first != null ? first : new Exception(BuddyApp.str(R.string.signin_api_models_none));
     }
 
+    /** Chat models currently published for Hive V3; no undocumented /models call required. */
+    private static JSONArray hiveModels() throws Exception {
+        return new JSONArray()
+                .put(new JSONObject().put("id", "deepseek-ai/deepseek-v4.1-flash-1017")
+                        .put("name", "DeepSeek V4.1 Flash").put("window", 1_000_000L)
+                        .put("efforts", new JSONArray().put("none").put("low").put("high").put("max")))
+                .put(new JSONObject().put("id", "zai-org/glm-5.3-flash")
+                        .put("name", "GLM 5.3 Flash").put("window", 1_000_000L)
+                        .put("efforts", new JSONArray().put("low").put("high").put("max")));
+    }
+
     /**
      * The optional Check now, off the main thread: one very small request per address, reported in the service's own
      * words. Nothing depends on it: a problem it doesn't find shows as the agent's error on first use. Returns the
@@ -289,18 +312,25 @@ final class Providers {
             out.append(line(BuddyApp.str(R.string.api_keys_anthropic_hint), m, false));
         }
         if (!openai.isEmpty()) {
-            Relay.Probe r = null;
-            boolean chat = false;
-            for (String b : bases(openai)) {
-                r = ask(0, key, b, models);
-                chat = Relay.NO.equals(r.result) && !Relay.NO.equals(ask(1, key, b, models).result);
-                if (chat || !Relay.NO.equals(r.result)) {
-                    if (!b.equals(openai.replaceAll("/+$", ""))) better = b;
-                    break;
+            if (isHive(openai)) {
+                // Chat-only Hive: avoid probing a Responses API that does not exist.
+                Relay.Probe r = ask(1, key, openai, models);
+                if (out.length() > 0) out.append('\n');
+                out.append(line(BuddyApp.str(R.string.api_keys_openai_hint), r, false));
+            } else {
+                Relay.Probe r = null;
+                boolean chat = false;
+                for (String b : bases(openai)) {
+                    r = ask(0, key, b, models);
+                    chat = Relay.NO.equals(r.result) && !Relay.NO.equals(ask(1, key, b, models).result);
+                    if (chat || !Relay.NO.equals(r.result)) {
+                        if (!b.equals(openai.replaceAll("/+$", ""))) better = b;
+                        break;
+                    }
                 }
+                if (out.length() > 0) out.append('\n');
+                out.append(line(BuddyApp.str(R.string.api_keys_openai_hint), r, chat));
             }
-            if (out.length() > 0) out.append('\n');
-            out.append(line(BuddyApp.str(R.string.api_keys_openai_hint), r, chat));
         }
         return new String[]{out.toString(), better};
     }
