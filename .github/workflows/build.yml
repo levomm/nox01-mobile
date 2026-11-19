@@ -34,6 +34,9 @@ jobs:
       - name: Test Estonian agents, logos, skills and DOOM eyebrows
         run: python3 scripts/test_nox01_agent_expansion.py
 
+      - name: Test Hive OpenAI-compatible provider
+        run: python3 scripts/test_thehiveai_provider.py
+
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
