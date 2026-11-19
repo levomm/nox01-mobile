@@ -28,6 +28,21 @@ jobs:
       - name: Test animated DOOM bubble
         run: python3 scripts/test_doom_bubble.py
 
+      - name: Test NOX01 2.3.15 live DOOM, global skins and chat
+        run: python3 scripts/test_nox01_live_skins.py
+
+      - name: "Regression: global tactile rubber in every skin"
+        run: python3 scripts/test_nox01_rubber_skins.py
+
+      - name: "Regression: prevent white chrome and reversed blending"
+        run: python3 scripts/test_nox01_matte_material.py
+
+      - name: "Regression: one-tap API route and Codex provider switching"
+        run: python3 scripts/test_nox01_api_switch.py
+
+      - name: "Regression: honest EUR API spend and model prices"
+        run: python3 scripts/test_nox01_api_spend.py
+
       - name: Test real Tactical Neu-Dark Android UI
         run: python3 scripts/test_neu_dark_ui.py
 

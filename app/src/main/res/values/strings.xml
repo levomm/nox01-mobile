@@ -2294,4 +2294,20 @@
     <string name="nox_top_models_info">Only verified models of your connected agents. Tap to set a default.</string>
     <string name="nox_top_models_unavailable">Sign in and refresh agent models to see available models.</string>
     <string name="nox_top_model_selected">Default model set: %1$s</string>
+    <!-- Global NOX01 2.3.15 visual controls -->
+    <string name="prefs_surface_terminal">Green Terminal</string>
+    <string name="prefs_surface_alert">Red Alert</string>
+    <string name="prefs_surface_steel">Cold Steel</string>
+    <string name="prefs_surface_mono">Clean Mono</string>
+    <string name="preset_red_alert">Red Alert</string>
+    <string name="preset_cold_steel">Cold Steel</string>
+    <string name="preset_clean_mono">Clean Mono</string>
+    <string name="setup_card_depth">Card effect</string>
+    <string name="setup_card_flat">Flat</string>
+    <string name="setup_card_raised">Raised</string>
+    <string name="setup_bubble_frame">Bubble frame</string>
+    <string name="setup_bubble_normal">Normal</string>
+    <string name="setup_bubble_minimal">Minimal</string>
+    <string name="chat_message_you">YOU</string>
+    <string name="chat_message_agent">NOX01</string>
 </resources>

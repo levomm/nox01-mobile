@@ -465,6 +465,34 @@ final class Prefs {
         sp(c).edit().putString("surface", s).apply();
     }
 
+    /** Global card elevation: explicit user choice, or legacy Neu-Dark's raised default. */
+    static String cardDepth(Context c) {
+        android.content.SharedPreferences prefs = sp(c);
+        // v2.3.15 selected presets silently saved "flat" for every non-tactical skin.
+        // Repair those persisted values once; later explicit Flat choices remain respected.
+        if (!prefs.getBoolean("rubber_2026_migrated", false)) {
+            prefs.edit().putString("card_depth", "raised")
+                    .putBoolean("rubber_2026_migrated", true).apply();
+            return "raised";
+        }
+        return prefs.getString("card_depth", "raised");
+    }
+
+    static void setCardDepth(Context c, String value) {
+        if (!"raised".equals(value)) value = "flat";
+        sp(c).edit().putString("card_depth", value).apply();
+    }
+
+    /** Floating DOOM/status bubble rim; independent of the selected sprite and theme. */
+    static String bubbleFrame(Context c) {
+        return sp(c).getString("bubble_frame", "normal");
+    }
+
+    static void setBubbleFrame(Context c, String value) {
+        if (!"minimal".equals(value)) value = "normal";
+        sp(c).edit().putString("bubble_frame", value).apply();
+    }
+
     /** Agents that are signed in, as reported by the helper ("claude,codex", "none"), or null. */
     static String signedAgents(Context c) {
         return sp(c).getString("signed", null);

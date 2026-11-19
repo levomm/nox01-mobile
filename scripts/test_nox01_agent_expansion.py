@@ -27,5 +27,7 @@ assert 'editor(null, integration[0])' in mcp and 'suggestedName' in mcp
 setup=(base/'app/src/main/java/app/buddy/assistant/SetupActivity.java').read_text()
 assert 'Models.options(available.agent, true)' in setup and 'Prefs.setAgentDefault(this, selectedAgent, key)' in setup
 assert not any(fake in setup for fake in ['Prefs.setAgentDefault(this, backend, "gemini-4-carbon")'])
-assert 'VERSION_CODE = 213' in (base/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()
-print('PASS: dynamic models, editable skills, MCP templates, version 213')
+import re
+version = (base/'app/src/main/java/app/buddy/assistant/BuildInfo.java').read_text()
+assert int(re.search(r'VERSION_CODE\s*=\s*(\d+)', version).group(1)) >= 213
+print('PASS: dynamic models, editable skills, MCP templates, version >= 213')

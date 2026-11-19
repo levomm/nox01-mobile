@@ -248,7 +248,7 @@ public class RulesActivity extends Screen {
         LinearLayout pick = row(this);
         pick.setGravity(Gravity.CENTER_VERTICAL);
         pick.setPaddingRelative(dp(this, 12), dp(this, 10), dp(this, 12), dp(this, 10));
-        pick.setBackground(outlined(this, CARD, 12, OUTLINE, 1));
+        pick.setBackground(neu(this) ? neuSurface(this, 12) : outlined(this, CARD, 12, OUTLINE, 1));
         appIcon = new ImageView(this);
         pick.addView(appIcon, new LinearLayout.LayoutParams(dp(this, 28), dp(this, 28)));
         appName = text(this, "", 15, TEXT);
@@ -309,7 +309,7 @@ public class RulesActivity extends Screen {
             LinearLayout model = row(this);
             model.setGravity(Gravity.CENTER_VERTICAL);
             model.setPaddingRelative(dp(this, 12), dp(this, 10), dp(this, 12), dp(this, 10));
-            model.setBackground(outlined(this, CARD, 12, OUTLINE, 1));
+            model.setBackground(neu(this) ? neuSurface(this, 12) : outlined(this, CARD, 12, OUTLINE, 1));
             model.addView(text(this, getString(R.string.chat_model), 15, MUTED), weight1());
             model.addView(single(monoText(this, Models.label(draft.backend, draft.model), 13, TEXT)));
             model.addView(icon(this, R.drawable.ms_expand_more, MUTED, 20));

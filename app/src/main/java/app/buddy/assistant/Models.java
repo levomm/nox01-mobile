@@ -9,6 +9,8 @@ final class Models {
      */
     private static final java.util.Map<String, String[][]> live = new java.util.concurrent.ConcurrentHashMap<>();
     private static final String[][] NONE = {{"", "Default", ""}};
+    /** Explicitly use the agent's own plan even when the globally selected Default is an API model. */
+    static final String PLAN_DEFAULT = "~plan";
     /** The model Claude Code's own default is right now (an id), "" until it has said. */
     private static volatile String claudeDefault = "";
 
@@ -92,6 +94,50 @@ final class Models {
     }
 
     /**
+     * Eligible API chat models ranked by published price, cheapest first.
+     * Benchmark: 1M uncached input + 1M output tokens (same mix for everyone).
+     * Image/audio/transcribe/embedding-only entries are not text chat candidates.
+     * Unknown prices remain at the end of "All"; the top ten only includes priced entries.
+     *
+     * Rows: [reference, display name, per-million input/output label, benchmark in USD].
+     */
+    static java.util.List<String[]> pricedOptions(String backend, boolean topTen) {
+        android.content.Context c = BuddyApp.context();
+        java.util.List<String[]> rows = new java.util.ArrayList<>();
+        for (Providers.P p : Providers.forAgent(backend)) {
+            org.json.JSONArray offered = p.offered();
+            java.util.List<String> chat = Providers.chatModels(offered);
+            for (int i = 0; i < offered.length(); i++) {
+                org.json.JSONObject m = offered.optJSONObject(i);
+                if (m == null) continue;
+                String id = m.optString("id");
+                if (id.isEmpty() || !chat.contains(id)) continue;
+                String ref = Providers.ref(p, id);
+                ModelPrices.Price price = ModelPrices.price(c, ref);
+                String label = p.name + " · " + m.optString("name", id);
+                String detail = ModelPrices.costPerMillion(c, ref);
+                String rank = price == null ? "" : String.valueOf(price.compareUsd());
+                rows.add(new String[]{ref, label, detail, rank});
+            }
+        }
+        java.util.Comparator<String[]> cheapest = (a, b) -> {
+            double pa = a[3].isEmpty() ? Double.POSITIVE_INFINITY : Double.parseDouble(a[3]);
+            double pb = b[3].isEmpty() ? Double.POSITIVE_INFINITY : Double.parseDouble(b[3]);
+            int cmp = Double.compare(pa, pb);
+            return cmp != 0 ? cmp : a[1].compareToIgnoreCase(b[1]);
+        };
+        rows.sort(cheapest);
+        if (!topTen) return rows;
+        java.util.List<String[]> ten = new java.util.ArrayList<>();
+        for (String[] row : rows) {
+            if (row[3].isEmpty()) break;
+            if (ten.size() >= 10) break;
+            ten.add(row);
+        }
+        return ten;
+    }
+
+    /**
      * What a chat on Default uses with this agent, as the user set it (Settings → Chats on Default): "" (the agent's
      * own default), one of the agent's own models, or "@service/model".
      */
@@ -105,8 +151,27 @@ final class Models {
         return Providers.ref(p, m.isEmpty() ? p.defaultModel() : m);
     }
 
+    /** Cheap, general-purpose API model for one-tap switching. Never auto-pick a Pro model. */
+    static String quickApiModel(String backend) {
+        java.util.List<Providers.P> available = Providers.forAgent(backend);
+        String[] preferred = {"gpt-4.1-mini", "gpt-4o-mini", "gpt-5-mini",
+                "gpt-5.2-mini", "deepseek-chat", "deepseek-v4"};
+        for (String id : preferred) {
+            for (Providers.P p : available) {
+                if (Providers.chatModels(p.offered()).contains(id)) return Providers.ref(p, id);
+            }
+        }
+        // If the configured service offers one chat model, it is unambiguous.
+        for (Providers.P p : available) {
+            java.util.List<String> chat = Providers.chatModels(p.offered());
+            if (chat.size() == 1) return Providers.ref(p, chat.get(0));
+        }
+        return ""; // user picks from the advanced model list; no surprise expensive model
+    }
+
     /** The chat's model as it will run: the one picked, or the agent's default. */
     static String effective(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return "";
         return s.model.isEmpty() ? agentDefault(s.backend) : s.model;
     }
 
@@ -171,6 +236,19 @@ final class Models {
         if (id != null && !id.isEmpty()) claudeDefault = id;
     }
 
+    /** Never pass a plan reasoning setting to an API model that has not advertised that effort. */
+    static String safeEffort(Sessions.Session s) {
+        if (s.effort.isEmpty()) return "";
+        Providers.P p = Providers.of(effective(s));
+        if (p == null) return s.effort;
+        org.json.JSONObject m = p.modelInfo(Providers.model(effective(s)));
+        org.json.JSONArray e = m == null ? null : m.optJSONArray("efforts");
+        if (e == null || e.length() == 0) return "";
+        for (int i = 0; i < e.length(); i++)
+            if (s.effort.equals(e.optString(i))) return s.effort;
+        return "";
+    }
+
     /**
      * Effort levels the chat's agent accepts ([value, label]; "" is the agent's default), or null if Buddy can't set it.
      * A service model that lists its levels (DeepSeek: low, high, max) keeps only those, besides Auto.
@@ -184,11 +262,10 @@ final class Models {
             levels = agentEfforts(s.backend);
             org.json.JSONObject m = p.modelInfo(Providers.model(ref));
             org.json.JSONArray e = m == null ? null : m.optJSONArray("efforts");
-            if (e != null && e.length() > 0) {
-                java.util.Set<String> has = new java.util.HashSet<>();
-                for (int j = 0; j < e.length(); j++) has.add(e.optString(j));
-                levels.retainAll(has);
-            }
+            if (e == null || e.length() == 0) return null;
+            java.util.Set<String> has = new java.util.HashSet<>();
+            for (int j = 0; j < e.length(); j++) has.add(e.optString(j));
+            levels.retainAll(has);
         } else {
             // the agent's own: the chat's model, or the one its default is (as far as it has said)
             String id = !ref.isEmpty() ? ref : !s.actualModel.isEmpty() ? s.actualModel : defaultId(s.backend);
@@ -258,6 +335,7 @@ final class Models {
 
     /** The chat's model for display: the one picked, or what "Default" really is when the agent told us. */
     static String shownModel(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return BuddyApp.str(R.string.api_keys_own_default);
         String eff = effective(s);
         Providers.P p = Providers.of(eff);
         if (p != null) return BuddyApp.str(R.string.models_via, serviceModelName(p, Providers.model(eff)), p.name);
@@ -273,6 +351,7 @@ final class Models {
 
     /** What "Default" means for this chat, for the pickers. */
     static String defaultHint(Sessions.Session s) {
+        if (PLAN_DEFAULT.equals(s.model)) return defaultHint(s.backend);
         String d = agentDefault(s.backend);
         Providers.P p = Providers.of(d);
         if (p != null) return BuddyApp.str(R.string.models_via, Providers.model(d), p.name);

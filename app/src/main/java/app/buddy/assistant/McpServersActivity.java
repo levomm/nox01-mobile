@@ -112,7 +112,7 @@ public class McpServersActivity extends Screen {
     private LinearLayout serverRow(McpServers.S s) {
         LinearLayout r = row(this);
         r.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 10), dp(this, 12));
-        r.setBackground(outlined(this, CARD, 16, OUTLINE, 1));
+        r.setBackground(neu(this) ? neuSurface(this, 16) : outlined(this, CARD, 16, OUTLINE, 1));
         LinearLayout t = column(this);
         TextView nm = title(this, s.id, 15);
         if (!s.on) nm.setTextColor(MUTED);

@@ -98,8 +98,13 @@ final class Bubble implements ChatHub.Listener {
                 setDoomFrame(DoomFaces.BLOODY);
                 wait = doomBloodUntil - now + 50;
             } else if (doomRunning) {
-                setDoomFrame(now < doomAnnoyedUntil ? DoomFaces.ANNOYED : DoomFaces.WORKING);
+                // Real execution keeps the uploaded white-eye frame active through normal tool steps.
+                setDoomFrame(DoomFaces.WORKING);
                 wait = 700;
+            } else if (!ValueAnimator.areAnimatorsEnabled()) {
+                // Reduced-motion: stay neutral while idle, without eyebrow/pupil animation.
+                setDoomFrame(DoomFaces.NEUTRAL);
+                wait = 3000;
             } else if (now < doomGlanceUntil) {
                 wait = doomGlanceUntil - now + 50;
             } else if (now >= doomNextIdle) {
@@ -134,15 +139,16 @@ final class Bubble implements ChatHub.Listener {
         if (now - doomLastStep > 15_000) doomBurstSteps = 0;
         doomLastStep = now;
         doomBurstSteps++;
-        doomAnnoyedUntil = now + 1200;
-        if (doomBurstSteps >= 7 && now - doomLastBlood > 90_000) {
-            // A rare, short overdrive joke. Never a constant flashing/bloody UI.
-            doomBloodUntil = now + 800;
+        // The normal STEP event must never change white-eyed EXECUTING into ANNOYED.
+        // Only unusually sustained heavy activity earns a short overdrive frame.
+        if (doomRunning && doomBurstSteps >= 20
+                && now - doomLastBlood > 120_000 && ValueAnimator.areAnimatorsEnabled()) {
+            doomBloodUntil = now + 650;
             doomLastBlood = now;
             doomBurstSteps = 0;
             setDoomFrame(DoomFaces.BLOODY);
-        } else {
-            setDoomFrame(DoomFaces.ANNOYED);
+        } else if (doomRunning) {
+            setDoomFrame(DoomFaces.WORKING);
         }
     }
     private boolean noteListening;
@@ -343,7 +349,7 @@ final class Bubble implements ChatHub.Listener {
         pill.setLineSpacing(0, 1.05f);
         pill.setEllipsize(TextUtils.TruncateAt.END);
         pill.setPaddingRelative(dp(12), dp(8), dp(12), dp(8));
-        pill.setBackground(rounded(Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(Ui.BG));
         pill.setVisibility(View.GONE);
         LinearLayout.LayoutParams plp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -1144,7 +1150,7 @@ final class Bubble implements ChatHub.Listener {
         input.setText(draft);
         pill.setTextColor(Ui.TEXT);
         pill.setTypeface(Ui.sans(svc, 500));
-        pill.setBackground(rounded(Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(Ui.BG));
         thumb.restyle();
         renderedFor = null;
         if (showingList) renderSessionList();
@@ -2862,7 +2868,7 @@ final class Bubble implements ChatHub.Listener {
         ring.setCalm(background);
         // in control: a solid accent pill, so it's clear not to touch the phone
         pill.setTextColor(controlling ? Ui.ON_ACCENT : Ui.TEXT);
-        pill.setBackground(rounded(controlling ? Ui.ACCENT : Ui.BG, 18, Ui.ACCENT, 1));
+        pill.setBackground(pillSurface(controlling ? Ui.ACCENT : Ui.BG));
         badge.setVisibility(!expanded && hub.anyUnread() ? View.VISIBLE : View.GONE);
         updateThumb();
         setWorking(!paused && (running || controlling || browsing));
@@ -3302,7 +3308,7 @@ final class Bubble implements ChatHub.Listener {
         // keep the fired-up / bracing face while the bubble is being dragged
         if (force || !faceDragging()) showFace(on ? R.drawable.bubble_face_thinking
                 : svc.paused() ? R.drawable.bubble_face_paused : R.drawable.bubble_face);
-        if (on && breathing == null) {
+        if (on && breathing == null && ValueAnimator.areAnimatorsEnabled()) {
             breathing = ValueAnimator.ofFloat(1f, 0.9f);
             breathing.setDuration(750);
             breathing.setRepeatMode(ValueAnimator.REVERSE);
@@ -3413,13 +3419,22 @@ final class Bubble implements ChatHub.Listener {
         switch (kind) {
             case USER: {
                 TextView tv = Ui.text(svc, text, 15, Ui.TEXT);
-                tv.setText(Ui.markdown(text, this::collapse)); // the user's own Markdown, as in the app's chat
-                tv.setBackground(Ui.corners(svc, Ui.USER, 20, 20, 6, 20));
-                tv.setPaddingRelative(dp(14), dp(10), dp(14), dp(10));
+                tv.setText(Ui.markdown(text, this::collapse));
+                tv.setPaddingRelative(0, dp(7), 0, 0);
                 Ui.linkifyForService(tv, this::collapse);
+                LinearLayout card = new LinearLayout(svc);
+                card.setOrientation(LinearLayout.VERTICAL);
+                card.setBackground(Ui.userMessageSurface(svc));
+                card.setPaddingRelative(dp(14), dp(10), dp(14), dp(12));
+                TextView who = Ui.monoText(svc, Ui.userLabel(svc), 10, Ui.ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                card.addView(tv, new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 p.gravity = Gravity.END;
                 p.setMarginStart(dp(40));
-                v = tv;
+                v = card;
                 break;
             }
             case BUDDY: { // Buddy 3: replies read as plain text in the panel, as in the app's chat
@@ -3465,8 +3480,21 @@ final class Bubble implements ChatHub.Listener {
                 LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(dp(34), dp(34));
                 cp.setMarginStart(-dp(5)); // the icon itself in line with the text
                 whole.addView(copy, cp);
-                v = whole;
+                LinearLayout card = new LinearLayout(svc);
+                card.setOrientation(LinearLayout.VERTICAL);
+                card.setBackground(Ui.agentMessageSurface(svc));
+                card.setPaddingRelative(dp(14), dp(12), dp(12), dp(8));
+                card.addView(Ui.monoText(svc, Ui.agentLabel(svc), 10, Ui.ACCENT_TEXT),
+                        new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                contentParams.topMargin = dp(6);
+                card.addView(whole, contentParams);
+                v = card;
+                p.gravity = Gravity.START;
                 p.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                p.setMarginEnd(dp(20));
                 p.topMargin = dp(14);
                 break;
             }
@@ -3773,6 +3801,12 @@ final class Bubble implements ChatHub.Listener {
         b.setPaddingRelative(dp(16), dp(10), dp(16), dp(10));
         b.setBackground(rounded(color, 16, 0, 0));
         return b;
+    }
+
+    /** Palette-aware bubble border, separate from DOOM sprite selection. */
+    private GradientDrawable pillSurface(int fill) {
+        boolean minimal = "minimal".equals(Prefs.bubbleFrame(svc));
+        return rounded(fill, 18, minimal ? Ui.OUTLINE : Ui.ACCENT, minimal ? 0 : 1);
     }
 
     private GradientDrawable rounded(int fill, int radiusDp, int stroke, int strokeDp) {

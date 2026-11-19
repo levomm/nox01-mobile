@@ -1,2 +1,3 @@
 {"buddy_session":"fixture","message":{"content":[{"text":"hello","type":"text"}]},"type":"assistant"}
+{"buddy_session":"fixture","cached":12288,"id":"fixture:fixture","input":16077,"model":"","output":5,"type":"buddy_token_usage"}
 {"buddy_session":"fixture","result":"","subtype":"success","type":"result"}

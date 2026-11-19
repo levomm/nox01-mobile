@@ -188,21 +188,39 @@ final class Ui {
         return v;
     }
 
-    /** Tactile Neu-Dark is opt-in via Appearance and the new dark default. */
+    /** Raised treatment is an independent global setting, not hard-wired to the Neu-Dark skin. */
     static boolean neu(Context c) {
-        return DARK && "neu".equals(Prefs.surface(c));
+        return "raised".equals(Prefs.cardDepth(c));
+    }
+
+    /** Shared message treatments used by both the full chat and the floating overlay. */
+    static Drawable userMessageSurface(Context c) {
+        return outlined(c, USER, 18, Theme.withAlpha(ACCENT, 0x88), 1);
+    }
+
+    static Drawable agentMessageSurface(Context c) {
+        return outlined(c, CARD, 18, Theme.withAlpha(TEXT2, 0x55), 1);
+    }
+
+    static String userLabel(Context c) {
+        return c.getString(R.string.chat_message_you);
+    }
+
+    static String agentLabel(Context c) {
+        return c.getString(R.string.chat_message_agent);
     }
 
     /** Raised, three-layer graphite surface with highlight and recessed lower edge.
      * All layers are native drawables and respect accessibility text scaling.
      */
     static Drawable neuSurface(Context c, int radiusDp) {
-        GradientDrawable low = rounded(c, 0xFF0E1014, radiusDp);
-        GradientDrawable rim = rounded(c, 0xFF434951, radiusDp);
+        GradientDrawable low = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
+        GradientDrawable rim = rounded(c, Theme.blend(CARD, CARD2, DARK ? 0.16f : 0.22f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{0xFF2D3036, 0xFF22252B, 0xFF1E2127});
+                new int[]{Theme.blend(CARD, CARD2, DARK ? 0.11f : 0.12f),
+                        CARD, Theme.blend(CARD, Color.BLACK, DARK ? 0.065f : 0.04f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), 0x66555B64);
+        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x26));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{low, rim, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), dp(c, 1), 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 3), dp(c, 4));
@@ -212,12 +230,13 @@ final class Ui {
 
     /** Inside-pressed counterpart for selected tabs and active controls. */
     static Drawable neuInsetSurface(Context c, int radiusDp) {
-        GradientDrawable back = rounded(c, 0xFF15181C, radiusDp);
-        GradientDrawable edge = rounded(c, 0xFF32373D, radiusDp);
+        GradientDrawable back = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.27f : 0.05f), radiusDp);
+        GradientDrawable edge = rounded(c, Theme.blend(CARD2, CARD, DARK ? 0.25f : 0.18f), radiusDp);
         GradientDrawable inset = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{0xFF1B201C, 0xFF242D25});
+                new int[]{Theme.blend(CARD, Color.BLACK, DARK ? 0.14f : 0.05f),
+                        Theme.blend(CARD2, BG, 0.25f)});
         inset.setCornerRadius(dp(c, radiusDp));
-        inset.setStroke(dp(c, 1), 0x77434F40);
+        inset.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x44));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{back, edge, inset});
         layers.setLayerInset(0, dp(c, 1), dp(c, 1), dp(c, 1), dp(c, 1));
         layers.setLayerInset(1, dp(c, 3), dp(c, 4), dp(c, 1), dp(c, 1));
@@ -227,13 +246,13 @@ final class Ui {
 
     /** Slightly luminous green tactile FAB. Other accent choices remain supported. */
     static Drawable neuAccentSurface(Context c, int radiusDp, int accent) {
-        GradientDrawable shadow = rounded(c, 0xFF0E1010, radiusDp);
-        GradientDrawable glow = rounded(c, Theme.blend(accent, Color.WHITE, 0.28f), radiusDp);
+        GradientDrawable shadow = rounded(c, Theme.blend(BG, Color.BLACK, DARK ? 0.28f : 0.08f), radiusDp);
+        GradientDrawable glow = rounded(c, Theme.blend(accent, CARD2, 0.075f), radiusDp);
         GradientDrawable face = new GradientDrawable(GradientDrawable.Orientation.TL_BR,
-                new int[]{Theme.blend(accent, Color.WHITE, 0.16f), accent,
-                        Theme.darken(accent, 0.72f)});
+                new int[]{Theme.blend(accent, CARD2, 0.075f), accent,
+                        Theme.darken(accent, 0.88f)});
         face.setCornerRadius(dp(c, radiusDp));
-        face.setStroke(dp(c, 1), Theme.withAlpha(Color.WHITE, 0x5C));
+        face.setStroke(dp(c, 1), Theme.withAlpha(TEXT2, 0x29));
         LayerDrawable layers = new LayerDrawable(new Drawable[]{shadow, glow, face});
         layers.setLayerInset(0, dp(c, 3), dp(c, 5), 0, 0);
         layers.setLayerInset(1, dp(c, 1), 0, dp(c, 2), dp(c, 4));
@@ -309,7 +328,8 @@ final class Ui {
     static Button outlinedButton(Context c, String label, int color) {
         Button b = button(c, label, false);
         b.setTextColor(color);
-        b.setBackground(outlined(c, 0x00000000, 14, Theme.withAlpha(color, 0x80), 1));
+        b.setBackground(neu(c) ? neuSurface(c, 14)
+                : outlined(c, 0x00000000, 14, Theme.withAlpha(color, 0x80), 1));
         return b;
     }
 
@@ -363,7 +383,7 @@ final class Ui {
      */
     static LinearLayout group(Context c) {
         LinearLayout g = column(c);
-        g.setBackground(rounded(c, CARD, 20));
+        g.setBackground(neu(c) ? neuSurface(c, 20) : rounded(c, CARD, 20));
         g.setClipToOutline(true);
         return g;
     }
@@ -587,7 +607,7 @@ final class Ui {
                                   java.util.Set<String> disabled, Pick whyNot) {
         LinearLayout box = row(c);
         box.setPaddingRelative(dp(c, 3), dp(c, 3), dp(c, 3), dp(c, 3));
-        box.setBackground(rounded(c, BG, 14));
+        box.setBackground(neu(c) ? neuInsetSurface(c, 14) : rounded(c, BG, 14));
         for (String[] o : options) {
             boolean on = o[0].equals(selected);
             TextView t = text(c, o[1], 14, on ? TEXT : MUTED);
@@ -598,7 +618,7 @@ final class Ui {
             // one line; a label too long for its segment (often a translation) shrinks instead of wrapping
             t.setMaxLines(1);
             t.setAutoSizeTextTypeUniformWithConfiguration(10, 14, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
-            if (on) t.setBackground(rounded(c, CARD2, 11));
+            if (on) t.setBackground(neu(c) ? neuSurface(c, 11) : rounded(c, CARD2, 11));
             else t.setBackgroundResource(ripple(c, false));
             boolean off = !on && disabled != null && disabled.contains(o[0]);
             if (off) t.setAlpha(0.38f);
@@ -607,6 +627,7 @@ final class Ui {
                     if (whyNot != null) whyNot.onPick(o[0]);
                 } else if (!on) l.onPick(o[0]);
             });
+            if (neu(c)) elasticPress(t);
             box.addView(t, weight1());
         }
         return box;
@@ -678,20 +699,133 @@ final class Ui {
         modelSheet(a, backend, current, defaultHint, true, l);
     }
 
+    /**
+     * The primary route selector is intentionally two choices, not a 98-model API catalog.
+     * Advanced models remain one tap away and the service key never leaves Android.
+     */
+    static void routePicker(Activity a, String backend, String current, boolean chat, Pick l, Runnable more) {
+        Models.refresh(a);
+        ModelPrices.refresh(a, null);
+        LinearLayout c = column(a);
+        c.addView(title(a, a.getString(R.string.chat_source_title), 18));
+        TextView hint = text(a, a.getString(R.string.chat_source_new_thread), 12, MUTED);
+        hint.setPaddingRelative(0, dp(a, 3), 0, dp(a, 14));
+        c.addView(hint);
+        final Dialog[] d = new Dialog[1];
+        String planName = "codex".equals(backend) ? "ChatGPT"
+                : "claude".equals(backend) ? "Claude" : Account.nameOf(backend);
+        String planLabel = a.getString(R.string.chat_source_plan, planName);
+        boolean apiActive = Providers.of(current) != null;
+        LinearLayout plan = row(a);
+        plan.setGravity(Gravity.CENTER_VERTICAL);
+        plan.setPaddingRelative(dp(a, 8), dp(a, 12), dp(a, 8), dp(a, 12));
+        plan.setBackground(neu(a) ? neuSurface(a, 14) : rounded(a, CARD, 14));
+        plan.addView(radio(a, !apiActive));
+        LinearLayout pText = column(a);
+        pText.setPaddingRelative(dp(a, 12), 0, 0, 0);
+        pText.addView(title(a, planLabel, 16));
+        pText.addView(text(a, a.getString(R.string.chat_source_plan_hint), 12, MUTED));
+        plan.addView(pText, weight1());
+        plan.setOnClickListener(v -> {
+            d[0].dismiss();
+            l.onPick(chat ? Models.PLAN_DEFAULT : "");
+        });
+        c.addView(plan, full());
+
+        // If this chat already uses a particular API model, preserve that choice.
+        String quick = apiActive ? current : Models.quickApiModel(backend);
+        LinearLayout api = row(a);
+        api.setGravity(Gravity.CENTER_VERTICAL);
+        api.setPaddingRelative(dp(a, 8), dp(a, 12), dp(a, 8), dp(a, 12));
+        api.setBackground(neu(a) ? neuSurface(a, 14) : rounded(a, CARD, 14));
+        api.addView(radio(a, apiActive));
+        LinearLayout aText = column(a);
+        aText.setPaddingRelative(dp(a, 12), 0, 0, 0);
+        aText.addView(title(a, a.getString(R.string.chat_source_api), 16));
+        Providers.P provider = Providers.of(quick);
+        String details = provider == null ? a.getString(R.string.chat_source_api_missing)
+                : a.getString(R.string.chat_source_api_hint, provider.name, Providers.model(quick));
+        aText.addView(text(a, details, 12, MUTED));
+        api.addView(aText, weight1());
+        LinearLayout.LayoutParams ap = full();
+        ap.topMargin = dp(a, 8);
+        c.addView(api, ap);
+        api.setOnClickListener(v -> {
+            d[0].dismiss();
+            if (!quick.isEmpty()) l.onPick(quick);
+            else if (more != null) more.run();
+        });
+        Button all = button(a, a.getString(R.string.chat_prices_top_ten), false);
+        LinearLayout.LayoutParams bp = full();
+        bp.topMargin = dp(a, 12);
+        c.addView(all, bp);
+        all.setOnClickListener(v -> {
+            d[0].dismiss();
+            if (more != null) more.run();
+        });
+        d[0] = bottomSheet(a, c);
+        d[0].show();
+    }
+
     /** services: also the API key services' models (not for runs outside a chat, like the reviewer's). */
     static void modelSheet(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
+        if (services) {
+            routePicker(a, backend, current, false, l,
+                    () -> modelSheetAdvanced(a, backend, current, defaultHint, services, l));
+            return;
+        }
+        modelSheetAdvanced(a, backend, current, defaultHint, services, l);
+    }
+
+    private static void modelSheetAdvanced(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
+        modelSheetAdvanced(a, backend, current, defaultHint, services, l, true);
+    }
+
+    private static void modelSheetAdvanced(Activity a, String backend, String current, String defaultHint,
+                                           boolean services, Pick l, boolean topTen) {
         final Dialog[] d = new Dialog[1];
         Models.refresh(a, () -> { // a service's list changed meanwhile: the sheet again, with it
             if (d[0] == null || !d[0].isShowing() || a.isFinishing()) return;
             d[0].dismiss();
-            modelSheet(a, backend, current, defaultHint, services, l);
+            modelSheetAdvanced(a, backend, current, defaultHint, services, l, topTen);
+        });
+        if (services) ModelPrices.refresh(a, () -> {
+            if (d[0] == null || !d[0].isShowing() || a.isFinishing()) return;
+            d[0].dismiss();
+            modelSheetAdvanced(a, backend, current, defaultHint, services, l, topTen);
         });
         LinearLayout c = column(a);
         TextView h = title(a, a.getString(R.string.chat_model_title, Account.nameOf(backend)), 18);
         h.setPaddingRelative(0, 0, 0, dp(a, 8));
         c.addView(h);
+        java.util.List<String[]> priced = services ? Models.pricedOptions(backend, topTen)
+                : Models.options(backend, false);
+        if (services) {
+            TextView explanation = text(a, a.getString(R.string.chat_prices_explain), 12, MUTED);
+            explanation.setPaddingRelative(0, dp(a, 6), 0, dp(a, 8));
+            c.addView(explanation);
+            TextView source = text(a, ModelPrices.lastUpdate(a), 11, MUTED);
+            c.addView(source);
+            Button toggle = button(a, a.getString(topTen ? R.string.chat_prices_all : R.string.chat_prices_top_ten), false);
+            LinearLayout.LayoutParams tg = full();
+            tg.topMargin = dp(a, 10);
+            tg.bottomMargin = dp(a, 10);
+            c.addView(toggle, tg);
+            toggle.setOnClickListener(v -> {
+                d[0].dismiss();
+                modelSheetAdvanced(a, backend, current, defaultHint, services, l, !topTen);
+            });
+            if (topTen && priced.isEmpty()) {
+                c.addView(text(a, a.getString(R.string.chat_prices_unavailable), 13, MUTED));
+            }
+            // Plan models are not "free API models" and must never appear in price rankings.
+            java.util.List<String[]> combined = new java.util.ArrayList<>(priced);
+            combined.add(new String[]{null, a.getString(R.string.chat_prices_plan)});
+            combined.addAll(Models.options(backend, false));
+            priced = combined;
+        }
         boolean known = false;
-        for (final String[] o : Models.options(backend, services)) {
+        for (final String[] o : priced) {
             if (o[0] == null) { // an API key service's models
                 TextView sl = sectionLabel(a, o[1]);
                 sl.setPaddingRelative(0, dp(a, 14), 0, dp(a, 2));
@@ -707,7 +841,8 @@ final class Ui {
             LinearLayout t = column(a);
             t.setPaddingRelative(dp(a, 14), 0, 0, 0);
             t.addView(title(a, o[1], 15));
-            t.addView(single(monoText(a, Models.detail(backend, o[0], defaultHint), 12, MUTED)));
+            t.addView(single(monoText(a, o.length > 2 ? o[2]
+                    : Models.detail(backend, o[0], defaultHint), 12, MUTED)));
             r.addView(t, weight1());
             r.setOnClickListener(v -> {
                 d[0].dismiss();

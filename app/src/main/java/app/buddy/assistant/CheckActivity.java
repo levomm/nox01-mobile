@@ -235,7 +235,7 @@ public class CheckActivity extends Screen {
         sum.setPaddingRelative(0, dp(this, 8), 0, dp(this, 12));
         body.addView(sum, full());
         LinearLayout card = column(this);
-        card.setBackground(rounded(this, CARD, 16));
+        card.setBackground(neu(this) ? neuSurface(this, 16) : rounded(this, CARD, 16));
         for (int i = 0; i < results.size(); i++) {
             Result r = results.get(i);
             if (i > 0) card.addView(divider(), lineParams());

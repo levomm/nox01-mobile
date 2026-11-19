@@ -69,7 +69,7 @@ public class MonitorActivity extends Screen implements ChatHub.MonitorListener {
         // a shell in Buddy's Linux
         LinearLayout tc = row(this);
         tc.setPaddingRelative(dp(this, 16), dp(this, 14), dp(this, 12), dp(this, 14));
-        tc.setBackground(rounded(this, CARD, 20));
+        tc.setBackground(neu(this) ? neuSurface(this, 20) : rounded(this, CARD, 20));
         tc.setForeground(getDrawable(ripple(this, false)));
         android.widget.FrameLayout ti = new android.widget.FrameLayout(this);
         ti.setBackground(rounded(this, CODE, 12));
@@ -205,7 +205,7 @@ public class MonitorActivity extends Screen implements ChatHub.MonitorListener {
 
             LinearLayout card = column(this);
             card.setPaddingRelative(dp(this, 16), dp(this, 14), dp(this, 16), dp(this, 14));
-            card.setBackground(rounded(this, CARD, 20));
+            card.setBackground(neu(this) ? neuSurface(this, 20) : rounded(this, CARD, 20));
             LinearLayout first = row(this);
             first.addView(single(title(this, where, 15)), weight1());
             TextView el = monoText(this, DateUtils.formatElapsedTime(p.optLong("seconds")), 12, MUTED);

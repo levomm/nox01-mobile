@@ -454,8 +454,10 @@ run_codex() {
   if [ -n "$SVC" ]; then
     # another service than OpenAI's own: none of the ChatGPT plan's extras (apps, sub-agents, goals), which its
     # models weren't made for, and whose ~200 KB of tool descriptions swamp a local model
-    [ "$(jq -r '.openai_own // false' "$D/providers/$SVC.json" 2>/dev/null)" = true ] \
-      || cfg+=(-c features.apps=false -c features.multi_agent=false -c features.goals=false -c features.tool_suggest=false)
+    # The ChatGPT Apps tool set contains nested schemas (for example _search with oneOf at root)
+    # not accepted by the Responses API, including when the key belongs to OpenAI itself.
+    # Keep the user's phone MCP and configured MCP servers, only disable plan-only app tools.
+    cfg+=(-c features.apps=false -c features.multi_agent=false -c features.goals=false -c features.tool_suggest=false)
     # a model on the user's own computer can read for many minutes before its first word: 15, as Buddy waits
     local idle=""
     [ "$(jq -r '.local // false' "$D/providers/$SVC.json" 2>/dev/null)" = true ] && idle=',stream_idle_timeout_ms=900000'
@@ -467,6 +469,16 @@ run_codex() {
   fi
   [ -n "${MODEL:-}" ] && cfg+=(-m "${SVCM:-$MODEL}")
   [ -n "${EFFORT:-}" ] && cfg+=(-c "model_reasoning_effort=\"$EFFORT\"")
+  # Codex refuses to resume an existing thread under another model provider.
+  # A switch is a new native Codex thread; NOX01's chat messages remain on screen.
+  # Include the service ID: changing API providers must also start a fresh thread.
+  local expected_provider="openai" old_provider
+  [ -n "$SVC" ] && expected_provider="buddy-key:$SVC"
+  old_provider=$(cat "$S/codex-provider" 2>/dev/null || printf openai)
+  if [ -s "$S/codex-thread" ] && [ "$old_provider" != "$expected_provider" ]; then
+    rm -f "$S/codex-thread"
+  fi
+  printf '%s' "$expected_provider" > "$S/codex-provider"
   local img=() f
   for f in "${IMGS[@]}"; do img+=("--image=$f"); done
   cd "$W" || return 1
@@ -490,6 +502,18 @@ stream_codex() {
     [ "$line" = "$AGENT_END" ] && break
     tid=$(printf '%s' "$line" | jq -r 'select(.type=="thread.started") | .thread_id // empty' 2>/dev/null)
     [ -n "$tid" ] && printf '%s' "$tid" > "$S/codex-thread"
+    # Each completed Codex turn reports actual request tokens. Input includes cached input.
+    # The unique event id prevents duplicates if a message is delivered more than once.
+    if [ "$(printf '%s' "$line" | jq -r '.type // empty' 2>/dev/null)" = "turn.completed" ]; then
+      local usage_id
+      usage_id="$SID:$(date +%s):$RANDOM:$RANDOM"
+      [ -n "${BUDDY_TEST_STREAM:-}" ] && usage_id="$SID:fixture"
+      printf '%s' "$line" | jq -c --arg s "$SID" --arg id "$usage_id" --arg model "$MODEL" '
+        .usage // empty
+        | {type:"buddy_token_usage", id:$id, buddy_session:$s, model:$model,
+           input:(.input_tokens // 0), cached:(.cached_input_tokens // 0),
+           output:(.output_tokens // 0)}' 2>/dev/null | post
+    fi
     # Codex doesn't say which model it used; its session log does (shown when the chat is on "Default")
     if [ "$(printf '%s' "$line" | jq -r '.type // empty' 2>/dev/null)" = turn.completed ] && [ -s "$S/codex-thread" ]; then
       local log model

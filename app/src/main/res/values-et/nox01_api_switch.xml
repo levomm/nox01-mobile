@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chat_source_title">Kust NOX01 mudelit kasutab?</string>
+    <string name="chat_source_plan">%1$s pakett</string>
+    <string name="chat_source_plan_hint">Kasutab sisselogitud kontot ja selle kasutuspiiranguid</string>
+    <string name="chat_source_api">Minu API-võti</string>
+    <string name="chat_source_api_hint">%1$s · %2$s · API arveldus on eraldi</string>
+    <string name="chat_source_api_missing">Sobivat mudelit ei leitud. Ava rohkem mudeleid või lisa API-võti seadetes.</string>
+    <string name="chat_source_new_thread">Teenuse vahetamine alustab järgmisel sõnumil uut AI-sessiooni. Senine vestlus jääb nähtavaks.</string>
+    <string name="chat_model_more">Rohkem mudeleid ja seadeid</string>
+</resources>

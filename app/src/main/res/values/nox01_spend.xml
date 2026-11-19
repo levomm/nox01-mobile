@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spend_title">API usage and cost</string>
+    <string name="spend_last">Last request</string>
+    <string name="spend_chat">This chat</string>
+    <string name="spend_day">Today (all chats)</string>
+    <string name="spend_month">This month (all chats)</string>
+    <string name="spend_input">Uncached input tokens</string>
+    <string name="spend_output">Output tokens</string>
+    <string name="spend_cached">Cached input tokens</string>
+    <string name="spend_plan">Plan</string>
+    <string name="spend_unknown">Price unknown</string>
+    <string name="spend_no_data">No data yet</string>
+    <string name="spend_estimate">Estimate from published prices and the latest exchange rate, not a bill. Old sessions may be incomplete.</string>
+    <string name="spend_turns">%1$d recorded API requests</string>
+    <string name="spend_partial">%1$d requests had no verified price, so the total is partial.</string>
+    <string name="spend_close">Close</string>
+    <string name="chat_prices_top_ten">10 cheapest API models</string>
+    <string name="chat_prices_all">All API models, cheapest first</string>
+    <string name="chat_prices_source">Price sources: models.dev + USD/EUR, updated %1$s</string>
+    <string name="chat_prices_unavailable">Model prices unavailable. Connect to the internet to load prices.</string>
+    <string name="chat_prices_per_million">Input %1$s / M · Output %2$s / M</string>
+    <string name="chat_prices_plan">Subscription models (not per-token billed)</string>
+    <string name="chat_prices_explain">Ranking: 1M uncached input + 1M output tokens, lowest combined price first.</string>
+</resources>

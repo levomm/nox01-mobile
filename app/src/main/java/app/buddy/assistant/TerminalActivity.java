@@ -223,7 +223,7 @@ public class TerminalActivity extends Screen implements TermView.Callbacks {
             boolean on = s == session;
             LinearLayout tab = row(this);
             tab.setPaddingRelative(dp(this, 12), 0, dp(this, 12), 0);
-            tab.setBackground(rounded(this, on ? Theme.withAlpha(TermColors.CURSOR, 0x33) : Theme.withAlpha(fg, 0x0F), 10));
+            tab.setBackground(on ? neuInsetSurface(this, 10) : neuSurface(this, 10));
             if (!s.exited) {
                 View d = dot(this, on ? TermColors.CURSOR : OK, 6);
                 ((LinearLayout.LayoutParams) d.getLayoutParams()).setMarginEnd(dp(this, 7));
@@ -373,8 +373,8 @@ public class TerminalActivity extends Screen implements TermView.Callbacks {
 
     private void paintToggle(TextView k, boolean on) {
         if (k == null) return;
-        k.setBackground(rounded(this, on ? TermColors.CURSOR : Theme.withAlpha(TermColors.DEFAULT_FG, 0x14), 10));
-        k.setTextColor(on ? ON_ACCENT : TermColors.DEFAULT_FG);
+        k.setBackground(on ? neuInsetSurface(this, 10) : neuSurface(this, 10));
+        k.setTextColor(on ? TermColors.CURSOR : TermColors.DEFAULT_FG);
         k.setTypeface(mono(this, on ? 600 : 400));
     }
 

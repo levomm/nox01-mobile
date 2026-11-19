@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chat_source_title">Choose how NOX01 uses AI</string>
+    <string name="chat_source_plan">%1$s subscription</string>
+    <string name="chat_source_plan_hint">Uses your signed-in account and plan limits</string>
+    <string name="chat_source_api">Your API key</string>
+    <string name="chat_source_api_hint">%1$s · %2$s · separately billed API</string>
+    <string name="chat_source_api_missing">No suitable model found. Choose More models or add an API key in Settings.</string>
+    <string name="chat_source_new_thread">Changing providers starts a fresh AI thread on the next message. Your chat history stays visible.</string>
+    <string name="chat_model_more">More models and settings</string>
+</resources>

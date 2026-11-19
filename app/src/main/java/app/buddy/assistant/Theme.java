@@ -16,7 +16,11 @@ final class Theme {
             {"#D97757", "Coral"}, {"#4F8BFF", "Ocean"}, {"#3FB98A", "Mint"},
             {"#9A7CFF", "Violet"}, {"#E5678F", "Rose"}, {"#E0A43A", "Amber"},
     };
-    static final String[][] SURFACES = {{"neu", "Tactical Neu-Dark"}, {"warm", "Warm"}, {"neutral", "Neutral"}, {"black", "Black"}};
+    static final String[][] SURFACES = {
+            {"neu", "Tactical Neu-Dark"}, {"terminal", "Green Terminal"}, {"alert", "Red Alert"},
+            {"steel", "Cold Steel"}, {"mono", "Clean Mono"}, {"warm", "Warm"},
+            {"neutral", "Neutral"}, {"black", "Black"}
+    };
     static final String[][] MODES = {{"system", "System"}, {"light", "Light"}, {"dark", "Dark"}};
 
     private static String applied = "";
@@ -32,7 +36,10 @@ final class Theme {
 
     /** {@link #SURFACES} with labels in the user's language. */
     static String[][] surfaces(Context c) {
-        return labeled(c, SURFACES, R.string.prefs_surface_neu, R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
+        return labeled(c, SURFACES,
+                R.string.prefs_surface_neu, R.string.prefs_surface_terminal, R.string.prefs_surface_alert,
+                R.string.prefs_surface_steel, R.string.prefs_surface_mono,
+                R.string.prefs_surface_warm, R.string.prefs_surface_neutral, R.string.prefs_surface_black);
     }
 
     /** {@link #MODES} with labels in the user's language. */
@@ -60,15 +67,30 @@ final class Theme {
         boolean dark = isDark(c);
         int accent = Prefs.accent(c);
         String surface = Prefs.surface(c);
-        String key = dark + "|" + accent + "|" + surface + "|" + Prefs.uiFont(c);
+        String key = dark + "|" + accent + "|" + surface + "|" + Prefs.uiFont(c)
+                + "|" + Prefs.cardDepth(c) + "|" + Prefs.bubbleFrame(c);
         if (key.equals(applied)) return false;
         applied = key;
 
         if (dark) {
             // Buddy 3: soft layered surfaces (BG < CARD < CARD2); NAV is the floating nav pill
             switch (surface) {
+                // Same charcoal, matte rubber substrate in every skin.
+                // The selected accent controls the identity, not the whole surface tint.
                 case "neu":
                     set(0xFF1B1D21, 0xFF25282E, 0xFF30343B, 0xFF22252A, 0xFF111419);
+                    break;
+                case "terminal":
+                    set(0xFF1B1E1C, 0xFF252B28, 0xFF303631, 0xFF222823, 0xFF111814);
+                    break;
+                case "alert":
+                    set(0xFF1E1B1C, 0xFF292628, 0xFF343034, 0xFF252224, 0xFF171214);
+                    break;
+                case "steel":
+                    set(0xFF1B1E22, 0xFF252B30, 0xFF30363B, 0xFF22272C, 0xFF11161B);
+                    break;
+                case "mono":
+                    set(0xFF1C1C1E, 0xFF272729, 0xFF323234, 0xFF232325, 0xFF151516);
                     break;
                 case "neutral":
                     set(0xFF121212, 0xFF1D1D1C, 0xFF2A2A29, 0xFF242423, 0xFF0B0B0B);
@@ -79,25 +101,43 @@ final class Theme {
                 default: // warm, the original tone
                     set(0xFF121110, 0xFF1D1B19, 0xFF2A2724, 0xFF24221F, 0xFF0F0E0D);
             }
+            // All five skins share readable neutral text. No green/red paint wash.
             Ui.TEXT = 0xFFF3EFE8;
             Ui.TEXT2 = 0xFFC9C3B9;
             Ui.MUTED = 0xFFA39D93;
             Ui.OK = 0xFF5CC08A;
             Ui.ERR = 0xFFF0A090;
-            Ui.USER = blend(accent, Ui.BG, 0.32f);
+            Ui.USER = blend(Ui.BG, accent, 0.32f);
         } else {
-            if ("neutral".equals(surface)) set(0xFFF4F4F3, 0xFFFFFFFF, 0xFFEAEAE8, 0xFFFFFFFF, 0xFF1C1C1C);
-            else set(0xFFF6F2EC, 0xFFFFFFFF, 0xFFEEE7DE, 0xFFFFFFFF, 0xFF24211E);
+            switch (surface) {
+                case "terminal":
+                    set(0xFFF1F8F2, 0xFFFFFFFF, 0xFFE4F2E7, 0xFFF7FCF8, 0xFF15281C);
+                    break;
+                case "alert":
+                    set(0xFFFCF2F3, 0xFFFFFFFF, 0xFFF6E4E6, 0xFFFFF7F8, 0xFF31171B);
+                    break;
+                case "steel":
+                    set(0xFFF0F5F8, 0xFFFFFFFF, 0xFFE4EDF4, 0xFFF8FCFE, 0xFF13222D);
+                    break;
+                case "mono":
+                    set(0xFFF7F7F7, 0xFFFFFFFF, 0xFFEAEAEA, 0xFFFFFFFF, 0xFF161616);
+                    break;
+                case "neutral":
+                    set(0xFFF4F4F3, 0xFFFFFFFF, 0xFFEAEAE8, 0xFFFFFFFF, 0xFF1C1C1C);
+                    break;
+                default:
+                    set(0xFFF6F2EC, 0xFFFFFFFF, 0xFFEEE7DE, 0xFFFFFFFF, 0xFF24211E);
+            }
             Ui.TEXT = 0xFF1F1B17;
             Ui.TEXT2 = 0xFF4A443D;
             Ui.MUTED = 0xFF6B635A;
             Ui.OK = 0xFF2F9E66;
             Ui.ERR = 0xFFC5483A;
-            Ui.USER = blend(accent, Ui.CARD, 0.22f);
+            Ui.USER = blend(Ui.CARD, accent, 0.16f);
         }
         Ui.ACCENT = accent;
         Ui.ON_ACCENT = luminance(accent) > 0.45 ? 0xFF1A1714 : 0xFFFFFFFF;
-        Ui.ACCENT_TEXT = dark ? accent : darken(accent, luminance(accent) > 0.45 ? 0.62f : 0.85f);
+        Ui.ACCENT_TEXT = dark ? accent : darken(accent, luminance(accent) > 0.45 ? 0.48f : 0.85f);
         Ui.LINE = withAlpha(Ui.TEXT, 0x10);
         Ui.OUTLINE = withAlpha(Ui.TEXT, 0x22);
         Ui.ACCENT_SOFT = withAlpha(accent, 0x29);
@@ -160,9 +200,9 @@ final class Theme {
 
     static int blend(int a, int b, float t) {
         return Color.rgb(
-                Math.round(Color.red(b) + (Color.red(a) - Color.red(b)) * t),
-                Math.round(Color.green(b) + (Color.green(a) - Color.green(b)) * t),
-                Math.round(Color.blue(b) + (Color.blue(a) - Color.blue(b)) * t));
+                Math.round(Color.red(a) + (Color.red(b) - Color.red(a)) * t),
+                Math.round(Color.green(a) + (Color.green(b) - Color.green(a)) * t),
+                Math.round(Color.blue(a) + (Color.blue(b) - Color.blue(a)) * t));
     }
 
     static int darken(int c, float f) {

@@ -94,7 +94,7 @@ public class ApiKeysActivity extends Screen {
     private LinearLayout serviceRow(Providers.P p) {
         LinearLayout r = row(this);
         r.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 10), dp(this, 12));
-        r.setBackground(outlined(this, CARD, 16, OUTLINE, 1));
+        r.setBackground(neu(this) ? neuSurface(this, 16) : outlined(this, CARD, 16, OUTLINE, 1));
         LinearLayout t = column(this);
         TextView nm = title(this, p.name, 15);
         if (p.off) nm.setTextColor(MUTED);

@@ -31,6 +31,8 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
     private LinearLayout messages, strip, approval;
     private ScrollView scroll;
     private TextView title, chipText, stripText;
+    /** Small estimated EUR spend meter, aligned with the right edge above the composer. */
+    private TextView spendBadge;
     private UsageGauge usage;
     /** The Linux tools chip beside the model chip. */
     private LinearLayout linux;
@@ -250,6 +252,18 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         trayScroll.setVisibility(View.GONE);
         root.addView(trayScroll, full());
 
+        // Estimated API cost in the chat corner, not a context-window percentage.
+        // A tap opens real token counts and per-chat/day/month estimated EUR totals.
+        LinearLayout spendRow = row(this);
+        spendRow.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        spendRow.setPaddingRelative(dp(this, 12), dp(this, 3), dp(this, 12), 0);
+        spendBadge = single(monoText(this, "", 11, TEXT2));
+        spendBadge.setPaddingRelative(dp(this, 10), dp(this, 6), dp(this, 10), dp(this, 6));
+        spendBadge.setBackground(neu(this) ? neuInsetSurface(this, 12) : outlined(this, CARD, 12, OUTLINE, 1));
+        spendBadge.setOnClickListener(v -> showSpendDetails());
+        spendRow.addView(spendBadge, wrap());
+        root.addView(spendRow, full());
+
         // the message box: the text on top, and under it a bar with attach, the model chip, live voice, the mic and send
         pill = column(this);
         LinearLayout bar = row(this);
@@ -374,6 +388,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         frame.setFitsSystemWindows(true);
         frame.addView(root);
         setContentView(frame);
+        ModelPrices.refresh(this, () -> { if (!isFinishing()) refresh(); });
 
         // from Search: the message that has the words, shown and marked for a moment
         int find = state == null ? getIntent().getIntExtra("find", -1) : -1;
@@ -644,13 +659,39 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         }
     }
 
-    /** Pick this chat's model; the conversation continues with the new one. */
+    /** A single route choice: ChatGPT subscription or a connected API key. Advanced models are optional. */
     private void chooseModel() {
+        chooseModel(false);
+    }
+
+    private void chooseModel(boolean advanced) {
+        chooseModel(advanced, false);
+    }
+
+    private void chooseModel(boolean advanced, boolean allPrices) {
+        if (!advanced) {
+            routePicker(this, ses.backend, Models.effective(ses), true, selected -> {
+                String previous = Models.effective(ses);
+                boolean oldApi = Providers.of(previous) != null;
+                boolean nextApi = Providers.of(selected) != null;
+                if (!selected.equals(ses.model)) {
+                    hub.setModel(ses, selected);
+                    if ("codex".equals(ses.backend) && oldApi != nextApi)
+                        Toast.makeText(this, R.string.chat_source_new_thread, Toast.LENGTH_LONG).show();
+                }
+            }, () -> chooseModel(true));
+            return;
+        }
         final Dialog[] d = new Dialog[1];
+        ModelPrices.refresh(this, () -> {
+            if (d[0] == null || !d[0].isShowing() || isFinishing()) return;
+            d[0].dismiss();
+            chooseModel(true, allPrices);
+        });
         Models.refresh(this, () -> { // a service's list changed meanwhile (a model just pulled in Ollama): show it
             if (d[0] == null || !d[0].isShowing() || isFinishing()) return;
             d[0].dismiss();
-            chooseModel();
+            chooseModel(true, allPrices);
         });
         LinearLayout c = column(this);
         TextView h = title(this, getString(R.string.chat_model_title, ses.brainName()), 18);
@@ -693,8 +734,26 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             ml.setPaddingRelative(0, dp(this, 16), 0, dp(this, 4));
             c.addView(ml);
         }
+        c.addView(sectionLabel(this, getString(R.string.chat_prices_explain)));
+        TextView source = text(this, ModelPrices.lastUpdate(this), 11, MUTED);
+        c.addView(source);
+        Button switchPrices = button(this, getString(allPrices ? R.string.chat_prices_top_ten : R.string.chat_prices_all), false);
+        LinearLayout.LayoutParams swp = full();
+        swp.topMargin = dp(this, 10);
+        swp.bottomMargin = dp(this, 10);
+        c.addView(switchPrices, swp);
+        switchPrices.setOnClickListener(v -> {
+            d[0].dismiss();
+            chooseModel(true, !allPrices);
+        });
+        java.util.List<String[]> list = new java.util.ArrayList<>(Models.pricedOptions(ses.backend, !allPrices));
+        if (!allPrices && list.isEmpty()) {
+            c.addView(text(this, getString(R.string.chat_prices_unavailable), 13, MUTED));
+        }
+        list.add(new String[]{null, getString(R.string.chat_prices_plan)});
+        list.addAll(Models.options(ses.backend, false));
         boolean known = false;
-        for (final String[] o : Models.options(ses.backend, true)) {
+        for (final String[] o : list) {
             if (o[0] == null) { // an API key service's models
                 TextView sl = sectionLabel(this, o[1]);
                 sl.setPaddingRelative(0, dp(this, 14), 0, dp(this, 2));
@@ -710,7 +769,8 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             LinearLayout t = column(this);
             t.setPaddingRelative(dp(this, 14), 0, 0, 0);
             t.addView(title(this, o[1], 15));
-            t.addView(single(monoText(this, Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, MUTED)));
+            t.addView(single(monoText(this, o.length > 2 ? o[2]
+                    : Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, MUTED)));
             r.addView(t, weight1());
             r.setOnClickListener(v -> {
                 d[0].dismiss();
@@ -2014,6 +2074,17 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         }
     }
 
+    private void showSpendDetails() {
+        LinearLayout panel = column(this);
+        panel.setPaddingRelative(dp(this, 10), dp(this, 4), dp(this, 10), dp(this, 4));
+        panel.addView(title(this, getString(R.string.spend_title), 18));
+        TextView detail = text(this, ApiSpend.detail(this, ses), 13, TEXT);
+        detail.setPaddingRelative(0, dp(this, 14), 0, dp(this, 12));
+        panel.addView(detail, full());
+        final Dialog d = bottomSheet(this, panel);
+        d.show();
+    }
+
     private void refresh() {
         if (backgroundPanel != null) backgroundPanel.setShown(resumed);
         if (recheck != null) recheck.setVisibility(Triggers.canRecheck(this, ses) ? View.VISIBLE : View.GONE);
@@ -2022,6 +2093,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         speaker.setImageTintList(ColorStateList.valueOf(speak ? ACCENT : MUTED));
         title.setText(ses.label());
         chipText.setText(Models.chip(ses));
+        if (spendBadge != null) spendBadge.setText(ApiSpend.summary(this, ses));
         int used = Usage.peak(this, ses.backend);
         usage.set(used);
         usage.setContentDescription(Usage.shortLine(this, ses.backend));
@@ -2312,15 +2384,26 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
             }
             if (!m.text.isEmpty()) {
                 TextView tv = text(this, m.text, 15, TEXT);
+                tv.setText(Ui.markdown(m.text, null));
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackgroundColor(BG);
-                tv.setTypeface(sans(this, 400));
-                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
+                tv.setTypeface(mono(this, 400));
+                tv.setPaddingRelative(0, dp(this, 7), 0, 0);
                 copyOnLongPress(tv, m.text);
+                LinearLayout card = column(this);
+                card.setBackground(Ui.userMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 12));
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, full());
+                card.addView(tv, wrap());
                 LinearLayout.LayoutParams tp = wrap();
                 tp.gravity = Gravity.END;
-                col.addView(tv, tp);
+                col.addView(card, tp);
+            } else {
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                col.addView(who, wrap());
             }
             LinearLayout.LayoutParams p = full();
             p.topMargin = dp(this, 12);
@@ -2549,16 +2632,22 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
         switch (kind) {
             case USER: {
                 TextView tv = text(this, text, 15, TEXT);
-                tv.setText("> " + text); // NOX01 terminal prompt; user input remains copyable in full
+                tv.setText(Ui.markdown(text, null));
                 links(tv);
                 tv.setMaxWidth(maxBubble);
-                tv.setBackgroundColor(BG);
                 tv.setTypeface(mono(this, 400));
-                tv.setPaddingRelative(dp(this, 6), dp(this, 12), dp(this, 6), dp(this, 12));
+                tv.setPaddingRelative(0, dp(this, 7), 0, 0);
                 copyOnLongPress(tv, text);
-                p.gravity = Gravity.START;
-                p.width = LinearLayout.LayoutParams.MATCH_PARENT;
-                v = tv;
+                LinearLayout card = column(this);
+                card.setBackground(Ui.userMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 10), dp(this, 14), dp(this, 12));
+                TextView who = monoText(this, Ui.userLabel(this), 10, ACCENT_TEXT);
+                who.setGravity(Gravity.END);
+                card.addView(who, full());
+                card.addView(tv, wrap());
+                p.gravity = Gravity.END;
+                p.setMarginStart(dp(this, 42));
+                v = card;
                 break;
             }
             case BUDDY: { // Buddy 3: replies read as plain text on the page, no bubble
@@ -2605,8 +2694,18 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
                 LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(dp(this, 34), dp(this, 34));
                 cp.setMarginStart(-dp(this, 5)); // the icon itself in line with the text
                 whole.addView(copy, cp);
-                v = whole;
+                LinearLayout card = column(this);
+                card.setBackground(Ui.agentMessageSurface(this));
+                card.setPaddingRelative(dp(this, 14), dp(this, 12), dp(this, 12), dp(this, 8));
+                card.addView(monoText(this, Ui.agentLabel(this), 10, ACCENT_TEXT), wrap());
+                LinearLayout.LayoutParams contentParams = full();
+                contentParams.topMargin = dp(this, 6);
+                card.addView(whole, contentParams);
+                copyOnLongPress(card, text);
+                v = card;
+                p.gravity = Gravity.START;
                 p.width = LinearLayout.LayoutParams.MATCH_PARENT;
+                p.setMarginEnd(dp(this, 26));
                 p.topMargin = dp(this, 14);
                 break;
             }

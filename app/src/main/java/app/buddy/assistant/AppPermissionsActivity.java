@@ -239,7 +239,7 @@ public class AppPermissionsActivity extends Screen {
     private LinearLayout compact(String[][] options, String selected, Pick l) {
         LinearLayout box = row(this);
         box.setPaddingRelative(dp(this, 2), dp(this, 2), dp(this, 2), dp(this, 2));
-        box.setBackground(rounded(this, BG2(), 10));
+        box.setBackground(neu(this) ? neuInsetSurface(this, 10) : rounded(this, BG2(), 10));
         for (String[] o : options) {
             boolean on = o[0].equals(selected);
             TextView t = text(this, o[1], 12, on ? TEXT : MUTED);
@@ -247,7 +247,7 @@ public class AppPermissionsActivity extends Screen {
             t.setTypeface(sans(this, on ? 600 : 500));
             t.setGravity(Gravity.CENTER);
             t.setPaddingRelative(dp(this, 9), dp(this, 6), dp(this, 9), dp(this, 6));
-            if (on) t.setBackground(rounded(this, CARD2, 8));
+            if (on) t.setBackground(neu(this) ? neuSurface(this, 8) : rounded(this, CARD2, 8));
             else t.setBackgroundResource(ripple(this, false));
             t.setOnClickListener(v -> {
                 if (!on) l.onPick(o[0]);
