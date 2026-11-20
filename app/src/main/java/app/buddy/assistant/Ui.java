@@ -710,7 +710,7 @@ final class Ui {
         ModelPrices.refresh(a, null);
         LinearLayout content = column(a);
         content.addView(title(a, a.getString(R.string.chat_model_pick_one), 18));
-        content.addView(text(a, a.getString(R.string.chat_model_pick_help), 12, MUTED), gap(5));
+        content.addView(text(a, a.getString(R.string.chat_model_pick_help), 12, MUTED), full());
         String active = current.isEmpty() ? Models.agentDefault(backend) : current;
         if (active.isEmpty()) active = Models.PLAN_DEFAULT;
         // Preserve the price-ranked Top 10 without forcing another nested picker.
@@ -737,11 +737,13 @@ final class Ui {
         }
         showCheapest.setOnClickListener(v -> cheapestRows.setVisibility(
                 cheapestRows.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
-        content.addView(showCheapest, gap(12));
+        content.addView(showCheapest, full());
         content.addView(cheapestRows, full());
         for (String[] o : Models.selectableModels(backend)) {
             if (o[0] == null) {
-                content.addView(sectionLabel(a, o[1]), gap(16));
+                TextView section = sectionLabel(a, o[1]);
+                section.setPaddingRelative(0, dp(a, 16), 0, dp(a, 4));
+                content.addView(section, full());
                 continue;
             }
             boolean selected = o[0].equals(active);

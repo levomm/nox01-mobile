@@ -21,3 +21,6 @@ assert 'l.onPick(o[0])' in ui
 assert 'chat_model_pick_one' in ui
 assert 'Models.pricedOptions(backend, true)' in ui  # legacy Top 10 remains expandable in same sheet
 print('PASS: one-tap grouped service/model picker on both chat surfaces')
+
+# UI is a utility class; Screen.gap() is not available here.
+assert "gap(" not in ui.split("static void simpleModelPicker(Activity a, String backend, String current, Pick l)",1)[1].split("static void routePicker",1)[0]
