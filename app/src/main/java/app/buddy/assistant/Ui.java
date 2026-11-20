@@ -713,6 +713,32 @@ final class Ui {
         content.addView(text(a, a.getString(R.string.chat_model_pick_help), 12, MUTED), gap(5));
         String active = current.isEmpty() ? Models.agentDefault(backend) : current;
         if (active.isEmpty()) active = Models.PLAN_DEFAULT;
+        // Preserve the price-ranked Top 10 without forcing another nested picker.
+        Button showCheapest = button(a, a.getString(R.string.chat_prices_top_ten), false);
+        LinearLayout cheapestRows = column(a);
+        cheapestRows.setVisibility(View.GONE);
+        java.util.List<String[]> cheapest = Models.pricedOptions(backend, true);
+        if (cheapest.isEmpty()) {
+            cheapestRows.addView(text(a, a.getString(R.string.chat_prices_unavailable), 12, MUTED));
+        }
+        for (String[] cheap : cheapest) {
+            LinearLayout priceRow = row(a);
+            priceRow.setPaddingRelative(dp(a, 8), dp(a, 10), dp(a, 8), dp(a, 10));
+            priceRow.setGravity(Gravity.CENTER_VERTICAL);
+            priceRow.setBackgroundResource(ripple(a, false));
+            priceRow.addView(radio(a, cheap[0].equals(active)));
+            LinearLayout info = column(a);
+            info.setPaddingRelative(dp(a, 13), 0, 0, 0);
+            info.addView(title(a, cheap[1], 14));
+            info.addView(single(monoText(a, cheap[2], 11, MUTED)));
+            priceRow.addView(info, weight1());
+            priceRow.setOnClickListener(v -> { dialog[0].dismiss(); l.onPick(cheap[0]); });
+            cheapestRows.addView(priceRow, full());
+        }
+        showCheapest.setOnClickListener(v -> cheapestRows.setVisibility(
+                cheapestRows.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE));
+        content.addView(showCheapest, gap(12));
+        content.addView(cheapestRows, full());
         for (String[] o : Models.selectableModels(backend)) {
             if (o[0] == null) {
                 content.addView(sectionLabel(a, o[1]), gap(16));

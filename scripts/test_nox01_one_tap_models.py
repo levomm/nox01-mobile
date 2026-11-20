@@ -19,4 +19,5 @@ assert 'static void simpleModelPicker(Activity a, String backend, String current
 assert 'Models.selectableModels(backend)' in ui
 assert 'l.onPick(o[0])' in ui
 assert 'chat_model_pick_one' in ui
+assert 'Models.pricedOptions(backend, true)' in ui  # legacy Top 10 remains expandable in same sheet
 print('PASS: one-tap grouped service/model picker on both chat surfaces')
