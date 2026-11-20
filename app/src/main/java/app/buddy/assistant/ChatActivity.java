@@ -661,7 +661,9 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
 
     /** A single route choice: ChatGPT subscription or a connected API key. Advanced models are optional. */
     private void chooseModel() {
-        chooseModel(false);
+        Ui.simpleModelPicker(this, ses.backend, ses.model, selected -> {
+            if (!selected.equals(ses.model)) hub.setModel(ses, selected);
+        });
     }
 
     private void chooseModel(boolean advanced) {
@@ -670,16 +672,7 @@ public class ChatActivity extends Screen implements ChatHub.Listener, Browser.Li
 
     private void chooseModel(boolean advanced, boolean allPrices) {
         if (!advanced) {
-            routePicker(this, ses.backend, Models.effective(ses), true, selected -> {
-                String previous = Models.effective(ses);
-                boolean oldApi = Providers.of(previous) != null;
-                boolean nextApi = Providers.of(selected) != null;
-                if (!selected.equals(ses.model)) {
-                    hub.setModel(ses, selected);
-                    if ("codex".equals(ses.backend) && oldApi != nextApi)
-                        Toast.makeText(this, R.string.chat_source_new_thread, Toast.LENGTH_LONG).show();
-                }
-            }, () -> chooseModel(true));
+            chooseModel();
             return;
         }
         final Dialog[] d = new Dialog[1];

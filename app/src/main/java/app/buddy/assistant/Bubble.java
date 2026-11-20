@@ -108,22 +108,31 @@ final class Bubble implements ChatHub.Listener {
             } else if (now < doomGlanceUntil) {
                 wait = doomGlanceUntil - now + 50;
             } else if (now >= doomNextIdle) {
-                // Never sit staring motionless. A glance lasts under a second.
-                int n = doomRandom.nextInt(4);
-                doomEyebrowSide = !doomEyebrowSide;
-                // Every other idle expression is a left/right eyebrow reaction.
-                setDoomFrame(n < 2 ? (doomEyebrowSide ? DoomFaces.EYEBROW_LEFT : DoomFaces.EYEBROW_RIGHT)
-                        : n == 2 ? DoomFaces.LOOK_RIGHT : DoomFaces.LOOK_LEFT);
-                doomGlanceUntil = now + 700 + doomRandom.nextInt(500);
-                doomNextIdle = doomGlanceUntil + 4500 + doomRandom.nextInt(3500);
+                // Lively idle gaze: roughly 60% left, 20% right, 10% centre, 10% eyebrows.
+                // Gaze lasts about a second, with only a brief neutral pause before the next glance.
+                setDoomFrame(nextDoomGaze());
+                doomGlanceUntil = now + 950 + doomRandom.nextInt(650);
+                doomNextIdle = doomGlanceUntil + 250 + doomRandom.nextInt(650);
                 wait = doomGlanceUntil - now + 50;
             } else {
                 setDoomFrame(DoomFaces.NEUTRAL);
-                wait = Math.min(3000, doomNextIdle - now);
+                wait = Math.min(1000, doomNextIdle - now);
             }
             face.postDelayed(this, Math.max(250, wait));
         }
     };
+
+    private int nextDoomGaze() {
+        int n = doomRandom.nextInt(10);
+        int next = n < 6 ? DoomFaces.LOOK_LEFT
+                : n < 8 ? DoomFaces.LOOK_RIGHT : n == 8 ? DoomFaces.NEUTRAL
+                : (doomEyebrowSide ? DoomFaces.EYEBROW_LEFT : DoomFaces.EYEBROW_RIGHT);
+        doomEyebrowSide = !doomEyebrowSide;
+        // Avoid repeatedly drawing an identical face when the character is supposed to look around.
+        if (next == doomFrame && doomRandom.nextInt(3) == 0)
+            next = next == DoomFaces.LOOK_LEFT ? DoomFaces.LOOK_RIGHT : DoomFaces.LOOK_LEFT;
+        return next;
+    }
 
     private void setDoomFrame(int state) {
         if (doomFrame == state) return;
@@ -1952,14 +1961,15 @@ final class Bubble implements ChatHub.Listener {
         Models.refresh(svc, () -> { // a service's list changed meanwhile: the picker again, with it
             if (pickingModel) renderSessionList();
         });
-        for (final String[] o : Models.options(ses.backend, true)) {
+        for (final String[] o : Models.selectableModels(ses.backend)) {
             if (o[0] == null) { // an API key service's models
                 TextView sl = Ui.sectionLabel(svc, o[1]);
                 sl.setPaddingRelative(dp(8), dp(14), 0, dp(2));
                 sessionList.addView(sl);
                 continue;
             }
-            boolean on = o[0].equals(ses.model);
+            boolean on = o[0].equals(ses.model.isEmpty() ?
+                    (Models.agentDefault(ses.backend).isEmpty() ? Models.PLAN_DEFAULT : Models.agentDefault(ses.backend)) : ses.model);
             LinearLayout r = Ui.listRow(svc);
             r.setGravity(Gravity.CENTER_VERTICAL);
             r.setPaddingRelative(dp(8), dp(10), dp(8), dp(10));
@@ -1975,7 +1985,8 @@ final class Bubble implements ChatHub.Listener {
             t.setOrientation(LinearLayout.VERTICAL);
             t.setPaddingRelative(dp(14), 0, 0, 0);
             t.addView(Ui.title(svc, o[1], 15));
-            t.addView(Ui.single(Ui.monoText(svc, Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, Ui.MUTED)));
+            t.addView(Ui.single(Ui.monoText(svc, Models.PLAN_DEFAULT.equals(o[0]) ? Models.defaultHint(ses.backend)
+                    : Models.detail(ses.backend, o[0], Models.defaultHint(ses)), 12, Ui.MUTED)));
             r.addView(t, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
             r.setOnClickListener(v -> {
                 if (!o[0].equals(ses.model)) hub.setModel(ses, o[0]);

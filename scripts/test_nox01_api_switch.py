@@ -39,14 +39,13 @@ class ApiSwitchRegression(unittest.TestCase):
         self.assertIn("Providers.chatModels(", models)
         self.assertIn("Providers.forAgent(backend)", models)
 
-    def test_chat_model_sheet_has_one_tap_route_choice_and_short_list(self):
+    def test_chat_model_sheet_lists_services_and_models_directly(self):
         chat = read("ChatActivity.java")
         block = chat.split("private void chooseModel()", 1)[1].split("// ------------------------------------------------------ helpers", 1)[0]
-        self.assertIn("routePicker(", block)
-        self.assertIn("quickApiModel(", read("Ui.java"))
-        self.assertIn("chat_prices_top_ten", read("Ui.java"))
-        self.assertIn("chooseModel(true)", block)
-        self.assertIn("setModel(ses,", block)
+        self.assertIn("Ui.simpleModelPicker(this, ses.backend, ses.model,", block)
+        self.assertNotIn("routePicker(this,", block)
+        self.assertIn("Models.selectableModels(backend)", read("Ui.java"))
+        self.assertIn("hub.setModel(ses, selected)", block)
 
     def test_global_default_picker_supports_same_quick_choice(self):
         ui = read("Ui.java")
@@ -70,8 +69,8 @@ class ApiSwitchRegression(unittest.TestCase):
 
     def test_localized_label_and_version(self):
         et = read("BuildInfo.java")
-        self.assertIn('VERSION = "2.3.20"', et)
-        self.assertIn("VERSION_CODE = 219", et)
+        self.assertIn('VERSION = "2.3.21"', et)
+        self.assertIn("VERSION_CODE = 220", et)
         strings = (ROOT / "app/src/main/res/values-et/nox01_api_switch.xml")
         self.assertTrue(strings.exists())
         s = strings.read_text(encoding="utf-8")

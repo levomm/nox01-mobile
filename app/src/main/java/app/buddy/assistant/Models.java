@@ -93,6 +93,31 @@ final class Models {
         return out;
     }
 
+    /** One list for both chat surfaces: real configured API models grouped by provider, then agent models. */
+    static java.util.List<String[]> selectableModels(String backend) {
+        java.util.List<String[]> out = new java.util.ArrayList<>();
+        java.util.List<Providers.P> services = Providers.forAgent(backend);
+        // The key the user just configured must not be buried behind a GPT-mini quick default.
+        services.sort((a, b) -> Boolean.compare(!Providers.isHive(a.openai), !Providers.isHive(b.openai)));
+        for (Providers.P p : services) {
+            org.json.JSONArray offered = p.offered();
+            java.util.List<String> chat = Providers.chatModels(offered);
+            if (chat.isEmpty()) continue;
+            out.add(new String[]{null, p.name});
+            for (int i = 0; i < offered.length(); i++) {
+                org.json.JSONObject m = offered.optJSONObject(i);
+                if (m == null || !chat.contains(m.optString("id"))) continue;
+                out.add(new String[]{Providers.ref(p, m.optString("id")), m.optString("name", m.optString("id"))});
+            }
+        }
+        out.add(new String[]{null, BuddyApp.str(R.string.chat_prices_plan)});
+        out.add(new String[]{PLAN_DEFAULT, BuddyApp.str(R.string.api_keys_own_default)});
+        for (String[] m : options(backend, false)) {
+            if (m[0] != null && !m[0].isEmpty()) out.add(m);
+        }
+        return out;
+    }
+
     /**
      * Eligible API chat models ranked by published price, cheapest first.
      * Benchmark: 1M uncached input + 1M output tokens (same mix for everyone).

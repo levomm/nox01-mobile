@@ -40,8 +40,8 @@ class MatteMaterialTests(unittest.TestCase):
 
     def test_version_217(self):
         build = read("BuildInfo.java")
-        self.assertIn('VERSION = "2.3.20"', build)
-        self.assertRegex(build, r"VERSION_CODE\s*=\s*219\s*;")
+        self.assertIn('VERSION = "2.3.21"', build)
+        self.assertRegex(build, r"VERSION_CODE\s*=\s*220\s*;")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

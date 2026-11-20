@@ -699,6 +699,52 @@ final class Ui {
         modelSheet(a, backend, current, defaultHint, true, l);
     }
 
+    /** A single provider -> model sheet; no source picker and no implicit GPT-mini selection. */
+    static void simpleModelPicker(Activity a, String backend, String current, Pick l) {
+        final Dialog[] dialog = new Dialog[1];
+        Models.refresh(a, () -> {
+            if (dialog[0] == null || !dialog[0].isShowing() || a.isFinishing()) return;
+            dialog[0].dismiss();
+            simpleModelPicker(a, backend, current, l);
+        });
+        ModelPrices.refresh(a, null);
+        LinearLayout content = column(a);
+        content.addView(title(a, a.getString(R.string.chat_model_pick_one), 18));
+        content.addView(text(a, a.getString(R.string.chat_model_pick_help), 12, MUTED), gap(5));
+        String active = current.isEmpty() ? Models.agentDefault(backend) : current;
+        if (active.isEmpty()) active = Models.PLAN_DEFAULT;
+        for (String[] o : Models.selectableModels(backend)) {
+            if (o[0] == null) {
+                content.addView(sectionLabel(a, o[1]), gap(16));
+                continue;
+            }
+            boolean selected = o[0].equals(active);
+            LinearLayout row = row(a);
+            row.setGravity(Gravity.CENTER_VERTICAL);
+            row.setPaddingRelative(dp(a, 8), dp(a, 11), dp(a, 8), dp(a, 11));
+            row.setBackgroundResource(ripple(a, false));
+            row.addView(radio(a, selected));
+            LinearLayout names = column(a);
+            names.setPaddingRelative(dp(a, 13), 0, 0, 0);
+            names.addView(title(a, o[1], 15));
+            String description = Models.PLAN_DEFAULT.equals(o[0]) ? Models.defaultHint(backend)
+                    : Models.detail(backend, o[0], Models.defaultHint(backend));
+            if (Providers.of(o[0]) != null) {
+                String cost = ModelPrices.costPerMillion(a, o[0]);
+                if (cost != null && !cost.isEmpty()) description += " · " + cost;
+            }
+            names.addView(single(monoText(a, description, 11, MUTED)));
+            row.addView(names, weight1());
+            row.setOnClickListener(v -> {
+                dialog[0].dismiss();
+                l.onPick(o[0]);
+            });
+            content.addView(row, full());
+        }
+        dialog[0] = bottomSheet(a, content);
+        dialog[0].show();
+    }
+
     /**
      * The primary route selector is intentionally two choices, not a 98-model API catalog.
      * Advanced models remain one tap away and the service key never leaves Android.
@@ -770,8 +816,7 @@ final class Ui {
     /** services: also the API key services' models (not for runs outside a chat, like the reviewer's). */
     static void modelSheet(Activity a, String backend, String current, String defaultHint, boolean services, Pick l) {
         if (services) {
-            routePicker(a, backend, current, false, l,
-                    () -> modelSheetAdvanced(a, backend, current, defaultHint, services, l));
+            simpleModelPicker(a, backend, current, picked -> l.onPick(Models.PLAN_DEFAULT.equals(picked) ? "" : picked));
             return;
         }
         modelSheetAdvanced(a, backend, current, defaultHint, services, l);

@@ -11,7 +11,7 @@ ui=(base/'app/src/main/java/app/buddy/assistant/Ui.java').read_text()
 assert 'R.drawable.nox_brand_anthropic' in ui and 'R.drawable.nox_brand_openai' in ui
 assert 'setCompoundDrawables' in ui, 'Real logo must be rendered, not abbreviation'
 b=(base/'app/src/main/java/app/buddy/assistant/Bubble.java').read_text()
-assert 'doomEyebrowSide' in b and '4500 + doomRandom.nextInt(3500)' in b
+assert 'doomEyebrowSide' in b and 'doomNextIdle = doomGlanceUntil + 250 + doomRandom.nextInt(650)' in b
 et=ET.parse(base/'app/src/main/res/values-et/strings.xml')
 ids={x.attrib.get('name') for x in et.getroot() if x.tag=='string'}
 for key in ['setup_default_brain','setup_default_brain_info','setup_agent_not_installed','setup_agent_signed_in','setup_voice_input','setup_voice_output','setup_languages','setup_assist','setup_chat_bubble','setup_tap_panel','setup_tap_talk','setup_tap_app','setup_panel_full','setup_panel_compact','skills_title','mcp_title']:
