@@ -49,6 +49,9 @@ jobs:
       - name: Test Estonian agents, logos, skills and DOOM eyebrows
         run: python3 scripts/test_nox01_agent_expansion.py
 
+      - name: Test Fieldsmith voice CAD integration
+        run: python3 scripts/test_fieldsmith_bridge.py
+
       - name: Check permanent NOX01 signing policy
         run: python3 scripts/test_release_signing.py
 
