@@ -25,7 +25,7 @@ assert 'setInstanceFollowRedirects(false)' in BRIDGE, "No HTTP redirect out of l
 assert 'expected_revision' in BRIDGE, "Preserve workspace optimistic concurrency"
 assert 'getErrorStream()' in BRIDGE, "Surface HTTP error responses"
 assert 'MAX_RESPONSE_BYTES' in BRIDGE, "Bound server response sizes"
-assert re.search(r'^[ ]*static String run\\(', BRIDGE, re.M), "Single action entrypoint"
+assert 'static String run(' in BRIDGE, "Single action entrypoint"
 assert 'Fieldsmith' in GUIDE and 'NOX01' in GUIDE, "User-facing voice CAD documentation"
 
 print("PASS: Fieldsmith CAD tool is registered, scoped to loopback, and documented")
