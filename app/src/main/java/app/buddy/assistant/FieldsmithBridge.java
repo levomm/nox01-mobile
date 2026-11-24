@@ -26,8 +26,8 @@ final class FieldsmithBridge {
     private static final int MAX_TOOL_OUTPUT_CHARS = 24_000;
     private static final String NOT_READY =
             "Fieldsmith ei vasta telefonis aadressil 127.0.0.1:18789. "
-            + "Kui see on paigaldatud, ava see NOX01 open_app-tooriistaga "
-            + "(app: sh.fieldsmith.app), lase tal kaivituda ja proovi uuesti. "
+            + "Kui see on paigaldatud, ava see NOX01 open_app-tööriistaga "
+            + "(app: sh.fieldsmith.app), lase tal käivituda ja proovi uuesti. "
             + "Kui see puudub, tuleb Fieldsmith esmalt paigaldada.";
 
     private FieldsmithBridge() {}
@@ -67,7 +67,7 @@ final class FieldsmithBridge {
                 case "call": {
                     String tool = a.optString("tool", "").trim();
                     if (!tool.matches("[a-z][a-z0-9_]{0,63}")) {
-                        return "Anna Fieldsmithi tooriista nimi. Kusi neid action=tools abil.";
+                        return "Anna Fieldsmithi tööriista nimi. Küsi neid action=tools abil.";
                     }
                     JSONObject arguments = a.optJSONObject("arguments");
                     if (arguments == null) {
@@ -79,7 +79,7 @@ final class FieldsmithBridge {
                     JSONObject body = new JSONObject().put("tool", tool).put("arguments", arguments);
                     if (a.has("expected_revision") && !a.isNull("expected_revision")) {
                         long revision = a.optLong("expected_revision", -1);
-                        if (revision < 0) return "expected_revision peab olema 0 voi suurem.";
+                        if (revision < 0) return "expected_revision peab olema 0 või suurem.";
                         body.put("expected_revision", revision);
                     }
                     JSONObject response = request("POST", API_URL, body, 600_000);
@@ -90,7 +90,7 @@ final class FieldsmithBridge {
                             + workspace.optLong("revision", -1) + "\n";
                     JSONObject error = rpc.optJSONObject("error");
                     if (error != null) {
-                        return "Fieldsmith tooriista viga: " + revisionText + compact(error.toString());
+                        return "Fieldsmith tööriista viga: " + revisionText + compact(error.toString());
                     }
                     JSONObject result = rpc.optJSONObject("result");
                     if (result == null) return revisionText + compact(rpc.toString());
@@ -109,13 +109,13 @@ final class FieldsmithBridge {
                 }
 
                 default:
-                    return "Tundmatu Fieldsmithi tegevus. Kasuta status, tools voi call.";
+                    return "Tundmatu Fieldsmithi tegevus. Kasuta status, tools või call.";
             }
         } catch (java.net.ConnectException e) {
             return NOT_READY;
         } catch (java.net.SocketTimeoutException e) {
-            return "Fieldsmith ei vastanud oigeaegselt. Kontrolli, kas rakendus on avatud. "
-                    + "Ara korda solverit pimesi, vaid kusi esmalt status.";
+            return "Fieldsmith ei vastanud õigeaegselt. Kontrolli, kas rakendus on avatud. "
+                    + "Ära korda solverit pimesi, vaid küsi esmalt status.";
         } catch (java.io.IOException e) {
             return NOT_READY + " Tehniline viga: " + e.getMessage();
         }
