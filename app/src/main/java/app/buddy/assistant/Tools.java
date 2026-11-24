@@ -393,7 +393,7 @@ final class Tools {
             "reply_notification", "schedule_message", "clipboard_write", "phone_shell", "fieldsmith"));
     /** Of those, the ones that don't change the screen: listed without a picture. */
     private static final java.util.Set<String> UNSEEN = new java.util.HashSet<>(java.util.Arrays.asList(
-            "reply_notification", "schedule_message", "clipboard_write", "phone_shell"));
+            "reply_notification", "schedule_message", "clipboard_write", "phone_shell", "fieldsmith"));
 
     JSONObject call(String name, JSONObject a) throws Exception {
         JSONObject r = call0(name, a);
