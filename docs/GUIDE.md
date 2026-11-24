@@ -36,6 +36,18 @@ Kirjuta näiteks „ava Telegram ja koosta vastus”. NOX01 saab proovida rakend
 
 Ära eelda, et agent saab ilma kontrollita alati õigesse vestlusesse või kontaktini. Eriti tundlikes tegevustes kontrolli alati tulemust.
 
+## Häälega 3D-modelleerimine: NOX01 + Fieldsmith
+
+NOX01 saab kasutada eraldi [Fieldsmithi](https://github.com/GlassOnTin/fieldsmith) Androidi CAD- ja FEA-rakendust. Vajalik on Fieldsmithi paigaldus (pakett `sh.fieldsmith.app`); server käivitub, kui rakendus avada. NOX01-s pole vaja käsitsi MCP-serverit lisada, sest selleks on eraldi sisseehitatud telefonitööriist `fieldsmith`.
+
+Näiteks ütle või kirjuta NOX01-le:
+
+> „Tee PETG-st 80 mm lai kahe M5 kruviauguga kinnitus. Näita 3D-mudelit, kontrolli mõõtmeid ja valmista see 3D-printimiseks ette.”
+
+NOX01 kontrollib kõigepealt Fieldsmithi olemasolu. Kui server pole aktiivne, saab agent Fieldsmithi avada Androidi `open_app`-tööriistaga ning siis uuesti proovida. Seejärel loeb agent tööriistade tegelikud kirjeldused (`fieldsmith: tools`), loob või muudab mudelit (`fieldsmith: call`), kontrollib tulemust ja näitab Fieldsmithi 3D-eelvaadet. Vajaduse korral saab kasutada materjali- ja koormusarvutusi ning Fieldsmithi eksportimise võimalusi.
+
+**Piirangud:** Fieldsmith peab olema päriselt installitud ja selle kohalik MCP-server aadressil `127.0.0.1:18789` peab töötama. Kui port on hõivatud ja Fieldsmith avab muu pordi, tuleb ühendust kohandada. NOX01 ei modelleeri ega ekspordi üksi ilma Fieldsmithita. Olemasoleva projekti ülekirjutamine vajab luba; puuduvad kriitilised mõõdud tuleb täpsustada. FEA arvutus ei asenda füüsilist katsetamist ega konstruktsiooni sertifitseerimist. Enne STL/3MF olemasolu kinnitamist peab agent ekspordi tulemust kontrollima.
+
 ## Teavitused ja automaatika
 
 NOX01 saab valitud Androidi teavituste alusel käivitada juhiseid. Võid luua reegli konkreetse rakenduse, saatja või märksõnade jaoks. Teavituste lugemine eeldab eraldi Androidi teavitusjuurdepääsu.
