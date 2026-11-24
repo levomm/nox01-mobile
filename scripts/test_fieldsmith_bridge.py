@@ -4,7 +4,6 @@ This covers tool registration and safe transport wiring. Android compilation is
 checked separately by the APK job.
 """
 from pathlib import Path
-import re
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = (ROOT / "app/src/main/java/app/buddy/assistant/Tools.java").read_text()
@@ -19,7 +18,7 @@ assert '"status", "tools", "call"' in TOOLS, "Agent needs discover + execute ope
 assert 'http://127.0.0.1:18789/mcp' in BRIDGE, "Only localhost Fieldsmith MCP"
 assert 'http://127.0.0.1:18789/api/mcp' in BRIDGE, "Fieldsmith workspace API"
 assert 'McpServers.discover(' in BRIDGE, "List real Fieldsmith tools rather than invent schemas"
-assert 'new URL(API_URL)' in BRIDGE, "Use the fixed local API endpoint"
+assert 'request("POST", API_URL' in BRIDGE and 'new URL(url)' in BRIDGE, "Use the fixed local API endpoint"
 assert 'setConnectTimeout(' in BRIDGE and 'setReadTimeout(' in BRIDGE, "Network timeouts required"
 assert 'setInstanceFollowRedirects(false)' in BRIDGE, "No HTTP redirect out of loopback"
 assert 'expected_revision' in BRIDGE, "Preserve workspace optimistic concurrency"
