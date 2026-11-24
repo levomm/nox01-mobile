@@ -111,6 +111,28 @@ final class Tools {
                 "Open an installed app by its name (e.g. 'Messenger') or package name.",
                 props().put("app", strProp("App name or package")), "app"));
         t.put(tool("list_apps", "List launchable apps with their package names.", props()));
+        t.put(tool("fieldsmith",
+                "Build and analyse real 3D CAD models in the Fieldsmith Android app from the user's spoken or typed "
+                        + "description. NOX01 controls Fieldsmith via its local MCP API; the user never needs to type CAD. "
+                        + "Start with action=status. If the server is unavailable, call open_app with "
+                        + "app=sh.fieldsmith.app, let it start, then retry status. If the app is not installed, "
+                        + "tell the user it is required. Action=tools returns actual available Fieldsmith operations "
+                        + "in pages; read their descriptions before action=call. Call tools such as new_document, "
+                        + "upsert_shape, add_region, add_support, add_load, solve, inspect and export with JSON arguments "
+                        + "as documented by Fieldsmith. Dimensions default to millimetres. Check the current document "
+                        + "before overwriting it; ask before destructive replacement. Preserve workspace_revision as "
+                        + "expected_revision on subsequent edits to catch concurrent changes. Verify the result and "
+                        + "show the live 3D preview in Fieldsmith. Never assert a part is structurally safe based only "
+                        + "on one simulation. Do not claim an STL or 3MF exists until its export is verified.",
+                props().put("action", enumProp("status", "tools", "call"))
+                        .put("tool", strProp("For call: exact Fieldsmith tool name returned by action=tools"))
+                        .put("arguments", new JSONObject().put("type", "object")
+                                .put("description", "For call: JSON parameters as required by that Fieldsmith tool")
+                                .put("additionalProperties", true))
+                        .put("expected_revision", intProp("For call: last workspace_revision, to reject conflicting edits"))
+                        .put("offset", intProp("For tools: catalog page offset, default 0"))
+                        .put("limit", intProp("For tools: page size, default 20")),
+                "action"));
         t.put(tool("open_url",
                 "Open a link on the phone the way tapping it would: https:// pages open in the user's browser or "
                         + "in the app that handles them (a YouTube link in YouTube), and deep links open their app "
@@ -368,7 +390,7 @@ final class Tools {
     private static final java.util.Set<String> STEPPED = new java.util.HashSet<>(java.util.Arrays.asList(
             "tap", "long_press", "type_text", "scroll", "swipe", "press", "open_app", "open_url", "do_steps", "collect",
             "find", "take_photo", "set_alarm", "set_timer", "share", "save_to_downloads", "add_calendar_event", "media",
-            "reply_notification", "schedule_message", "clipboard_write", "phone_shell"));
+            "reply_notification", "schedule_message", "clipboard_write", "phone_shell", "fieldsmith"));
     /** Of those, the ones that don't change the screen: listed without a picture. */
     private static final java.util.Set<String> UNSEEN = new java.util.HashSet<>(java.util.Arrays.asList(
             "reply_notification", "schedule_message", "clipboard_write", "phone_shell"));
@@ -457,6 +479,12 @@ final class Tools {
             case "swipe": return text(swipe(a));
             case "press": return text(press(a.getString("button")));
             case "open_app": return text(openApp(a.getString("app")));
+            case "fieldsmith":
+                if (ruleRun()) return text("Fieldsmith CAD is unavailable to notification-rule tasks.");
+                if (Helpers.is(svc, McpServer.CALLER_CHAT.get())) {
+                    return text(Helpers.refuse("editing a CAD document"));
+                }
+                return text(FieldsmithBridge.run(a));
             case "list_apps": return text(listApps());
             case "open_url": {
                 // a rule's run works for someone else's message: a link could carry the user's data away
