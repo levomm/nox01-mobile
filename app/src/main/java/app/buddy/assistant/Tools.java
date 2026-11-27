@@ -1272,6 +1272,7 @@ final class Tools {
         String last = null;
         long stableSince = start;
         while (true) {
+            long observed = svc.uiChanges.version();
             List<String> now = visibleTexts();
             String joined = String.join("\n", now).toLowerCase(Locale.ROOT);
             boolean ok = true;
@@ -1294,7 +1295,7 @@ final class Tools {
                                 : !gone.isEmpty() && joined.contains(gone.toLowerCase(Locale.ROOT)) ? "\"" + gone + "\" is still there."
                                 : !app.isEmpty() ? app + " isn't in front (" + frontName() + " is)." : "the screen kept changing.");
             }
-            Thread.sleep(250);
+            svc.uiChanges.awaitChange(observed, Math.min(250, Math.max(0, timeout - (t - start))));
         }
     }
 
@@ -1574,15 +1575,21 @@ final class Tools {
      * waitMs (returning at once when it changes). Empty when the screen simply changed, or when it can't be read.
      */
     private String afterAction(String before, long waitMs) {
-        long end = android.os.SystemClock.elapsedRealtime() + waitMs;
+        long start = android.os.SystemClock.elapsedRealtime();
+        long end = start + waitMs;
         try {
-            while (before != null && before.equals(screenPrint()) && svc.peekToast() == null
-                    && android.os.SystemClock.elapsedRealtime() < end) {
-                Thread.sleep(150);
+            while (before != null) {
+                long observed = svc.uiChanges.version();
+                if (!before.equals(screenPrint()) || svc.peekToast() != null) break;
+                long remaining = end - android.os.SystemClock.elapsedRealtime();
+                if (remaining <= 0) break;
+                svc.uiChanges.awaitChange(observed, Math.min(150, remaining));
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             return "";
+        } finally {
+            android.util.Log.d("NOX01Latency", "action_verify_ms=" + (android.os.SystemClock.elapsedRealtime() - start));
         }
         String toast = svc.takeToast(TOAST_FRESH_MS);
         if (toast != null) return " A toast showed: \"" + clip(toast) + "\".";
