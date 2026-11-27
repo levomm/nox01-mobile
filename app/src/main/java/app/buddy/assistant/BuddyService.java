@@ -204,10 +204,19 @@ public class BuddyService extends AccessibilityService implements McpServer.Hand
         }
     };
 
+    final UiChangeSignal uiChanges = new UiChangeSignal();
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        if (bubble == null) return;
         int type = event.getEventType();
+        if (type == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+                || type == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
+                || type == AccessibilityEvent.TYPE_WINDOWS_CHANGED
+                || type == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
+            CharSequence pkg = event.getPackageName();
+            if (pkg == null || !getPackageName().contentEquals(pkg)) uiChanges.changed();
+        }
+        if (bubble == null) return;
         if (type == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) { // only toasts; notifications aren't read here
             noteToast(event);
             return;
